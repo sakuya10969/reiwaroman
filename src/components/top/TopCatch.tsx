@@ -1,6 +1,6 @@
 import PageLayout from "@/components/layouts/PageLayout";
 
-const HeroCatch = () => {
+const TopCatch = () => {
   return (
     <PageLayout>
       <section className="relative grid place-items-center min-h-[70vh] bg-black">
@@ -26,4 +26,4 @@ const HeroCatch = () => {
   );
 };
 
-export default HeroCatch;
+export default TopCatch;
