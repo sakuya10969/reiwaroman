@@ -1,23 +1,10 @@
 import { useEffect, useState } from "react";
 
-type NavItem = { label: string; href: string };
-
-const NAV: NavItem[] = [
-  { label: "TOPS", href: "#tops" },
-  { label: "INTRODUCTION", href: "#introduction" },
-  { label: "NEWS", href: "#news" },
-  { label: "CAST", href: "#cast" },
-  { label: "GOODS", href: "#goods" },
-];
-
-type HeaderProps = {
-  nav?: NavItem[];
-  ticketHref?: string;
-  Logo?: React.ComponentType;
-};
+import { NAV } from "@/constants";
+import type { HeaderProps } from "@/types";
 
 const Header = ({ nav = NAV, ticketHref = "#ticket", Logo }: HeaderProps) => {
-  const [scrolled, setScrolled] = useState(false);
+  const [scrolled, setScrolled] = useState<boolean>(false);
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 8);
