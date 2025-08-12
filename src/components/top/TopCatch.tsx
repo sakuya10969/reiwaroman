@@ -13,10 +13,10 @@ const TopCatch = () => {
           </p>
         </div>
 
-        {/* 下部センターロゴ（差し替え想定） */}
+        {/* 下部センターロゴ */}
         <div className="absolute bottom-8 w-full grid place-items-center">
           <img
-            src="/assets/logo-reiwaroman.svg"   // ←画像パスは差し替え
+            src="/assets/logo-reiwaroman.svg"
             alt="REIWAROMAN"
             className="w-40 h-auto"
           />
