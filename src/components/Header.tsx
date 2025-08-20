@@ -18,10 +18,10 @@ const Header = ({ nav = NAV, ticketHref = "#ticket", Logo }: HeaderProps) => {
       className={[
         "fixed inset-x-0 top-0 z-50",
         "transition-all duration-300",
-        // 初期から黒っぽく。スクロールで濃く＋境界線
+        // 初期は透明、スクロールで黒っぽく＋境界線
         scrolled
           ? "bg-black/80 backdrop-blur supports-backdrop-blur:border-b border-white/10"
-          : "bg-black/60",
+          : "bg-transparent",
       ].join(" ")}
     >
       <div className="w-full px-4">
