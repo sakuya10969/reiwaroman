@@ -1,6 +1,6 @@
 const TopCatch = () => {
   return (
-    <div className="relative flex flex-col items-center justify-center min-h-[70vh] w-full bg-black text-center">
+    <div className="relative flex flex-col items-center justify-center min-h-[100vh] w-full bg-black text-center">
       <div className="px-6">
         <h1 
           className="text-[clamp(40px,7vw,72px)] font-extrabold leading-tight tracking-[-0.05em]"
