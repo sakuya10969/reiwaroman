@@ -43,6 +43,7 @@ const IntroductionLive = () => {
                   lg:[writing-mode:vertical-rl] lg:[text-orientation:mixed]
                   lg:leading-7 lg:tracking-widest
                 "
+                style={{ fontFamily: '"dnp-shuei-shogomincho-std", serif' }}
               >
                 {text}
               </p>

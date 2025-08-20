@@ -46,7 +46,7 @@ const IntroductionCatch = ({
         </h1>
 
         {/* 説明文 */}
-        <div className="mt-6 space-y-3 text-[13px] sm:text-sm leading-relaxed text-white font-serif">
+        <div className="mt-6 space-y-3 text-[13px] sm:text-sm leading-relaxed text-white" style={{ fontFamily: '"dnp-shuei-shogomincho-std", serif' }}>
           <p>Restart(再出発)・Reborn(再誕)・Redefine(再定義)・Revival(再演)・Reunion(再会)</p>
           <p>
             M-1二連覇達成後、くるまの活動自粛と吉本興業退社という波乱万丈な人生に立ち向かっている漫才師「令和ロマン」。
