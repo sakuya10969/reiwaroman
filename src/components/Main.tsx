@@ -8,7 +8,7 @@ export default function Main() {
   return (
     <main className="w-full">
       {/* TOP */}
-      <section id="top" className="scroll-mt-[72px]">
+      <section id="top-catch" className="scroll-mt-[72px]">
         <TopCatch />
       </section>
 
