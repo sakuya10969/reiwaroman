@@ -8,3 +8,14 @@ export interface HeaderProps {
   ticketHref?: string;
   Logo?: React.ComponentType;
 }
+
+export interface SectionProps extends React.HTMLAttributes<HTMLElement> {
+  id?: string;
+}
+
+export interface IntroductionCatchProps {
+  /** 複数の背景画像を渡す */
+  bgSrcList?: string[];
+  /** 画像切替の間隔（ms） */
+  interval?: number;
+}
