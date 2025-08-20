@@ -36,17 +36,17 @@ const IntroductionCatch = ({
       {/* コンテンツ */}
       <div className="relative z-10 mx-auto max-w-[1100px] px-6 text-center">
         {/* 小見出し */}
-        <span className="text-xs sm:text-sm font-black tracking-[0.2em] uppercase underline underline-offset-5">
+        <span className="text-xs sm:text-sm font-black tracking-[0.2em] uppercase underline underline-offset-5" style={{ fontFamily: 'Prompt, sans-serif' }}>
           Introduction
         </span>
 
         {/* メイン見出し */}
-        <h1 className="mt-8 text-[clamp(36px,8vw,96px)] leading-[1.05] font-extrabold tracking-wider">
+        <h1 className="mt-8 text-[clamp(36px,8vw,96px)] leading-[1.05] font-extrabold tracking-wider" style={{ fontFamily: 'Prompt, sans-serif' }}>
           RE:IWAROMAN
         </h1>
 
         {/* 説明文 */}
-        <div className="mt-6 space-y-3 text-[13px] sm:text-sm leading-relaxed text-white/90">
+        <div className="mt-6 space-y-3 text-[13px] sm:text-sm leading-relaxed text-white font-serif">
           <p>Restart(再出発)・Reborn(再誕)・Redefine(再定義)・Revival(再演)・Reunion(再会)</p>
           <p>
             M-1二連覇達成後、くるまの活動自粛と吉本興業退社という波乱万丈な人生に立ち向かっている漫才師「令和ロマン」。

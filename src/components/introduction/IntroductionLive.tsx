@@ -58,10 +58,11 @@ const IntroductionLive = () => {
                   className="
                     font-extrabold
                     text-[clamp(28px,8vw,72px)]
-                    lg:[writing-mode:vertical-rl] lg:[text-orientation:mixed]
+                    lg:[writing-mode:vertical-rl] lg:[text-orientation:upright]
                     lg:leading-[1.15] tracking-tight
                     drop-shadow-[0_2px_6px_rgba(0,0,0,0.6)]
                   "
+                  style={{ fontFamily: '"dnp-shuei-shogomincho-std", serif' }}
                 >
                   {line}
                 </span>

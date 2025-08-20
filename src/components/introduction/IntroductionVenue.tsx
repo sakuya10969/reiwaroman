@@ -30,13 +30,13 @@ const IntroductionVenue = () => {
             tracking-wide
           "
         >
-          <span className="block text-red-700 text-[clamp(48px,12vw,140px)]">
+          <span className="block text-red-700 text-[clamp(48px,12vw,140px)] opacity-70 relative top-8" style={{ fontFamily: '"dnp-shuei-shogomincho-std", serif' }}>
             横
           </span>
-          K ARENA
+          <span style={{ fontFamily: 'Prompt, sans-serif' }}>K ARENA</span>
           <br />
-          YOKOHAMA
-          <span className="block text-red-700 text-[clamp(48px,12vw,140px)]">
+          <span style={{ fontFamily: 'Prompt, sans-serif' }}>YOKOHAMA</span>
+          <span className="block text-red-700 text-[clamp(48px,12vw,140px)] opacity-70 relative -top-8" style={{ fontFamily: '"dnp-shuei-shogomincho-std", serif' }}>
             浜
           </span>
         </h1>
