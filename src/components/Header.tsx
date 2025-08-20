@@ -1,29 +1,9 @@
-import { useEffect, useState } from "react";
-
 import { NAV } from "@/constants";
 import type { HeaderProps } from "@/types";
 
 const Header = ({ nav = NAV, ticketHref = "#ticket", Logo }: HeaderProps) => {
-  const [scrolled, setScrolled] = useState<boolean>(false);
-
-  useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 8);
-    onScroll();
-    window.addEventListener("scroll", onScroll);
-    return () => window.removeEventListener("scroll", onScroll);
-  }, []);
-
   return (
-    <header
-      className={[
-        "fixed inset-x-0 top-0 z-50",
-        "transition-all duration-300",
-        // 初期は透明、スクロールで黒っぽく＋境界線
-        scrolled
-          ? "bg-black/80 backdrop-blur supports-backdrop-blur:border-b border-white/10"
-          : "bg-transparent",
-      ].join(" ")}
-    >
+    <header className="fixed inset-x-0 top-0 z-50 bg-transparent">
       <div className="w-full px-4">
         <div className="relative h-16 flex items-center justify-between">
           {/* 左：ロゴ */}
