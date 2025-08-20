@@ -2,6 +2,7 @@ import TopCatch from "@/components/top/TopCatch";
 import IntroductionCatch from "@/components/introduction/IntroductionCatch";
 import IntroductionLive from "@/components/introduction/IntroductionLive";
 import IntroductionVenue from "@/components/introduction/IntroductionVenue";
+import NewsCatch from "@/components/news/NewsCatch";
 
 export default function Main() {
   return (
@@ -24,6 +25,11 @@ export default function Main() {
       {/* INTRODUCTION - VENUE */}
       <section id="introduction-venue" className="scroll-mt-[72px]">
         <IntroductionVenue />
+      </section>
+
+      {/* NEWS - CATCH */}
+      <section id="news-catch" className="scroll-mt-[72px]">
+        <NewsCatch />
       </section>
     </main>
   );
