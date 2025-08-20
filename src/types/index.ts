@@ -19,3 +19,9 @@ export interface IntroductionCatchProps {
   /** 画像切替の間隔（ms） */
   interval?: number;
 }
+
+export interface NewsCatchProps {
+  backgroundImageUrl?: string;
+  badgeText?: string;
+  titleLines?: string[];
+};
