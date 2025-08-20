@@ -1,21 +1,22 @@
-const BG = ""; // 例: "/assets/arena-venue.jpg"。空文字なら黒背景
+import reiwa6_blackwhite from "@/assets/reiwa_6_blackwhite.png";
+
+const BG = reiwa6_blackwhite; // 例: "/assets/arena-venue.jpg"。空文字なら黒背景
 const TINT = 0.55; // 黒の暗幕（0〜1）
 
 const IntroductionVenue = () => {
   return (
     <div
-      className="relative w-full flex items-center justify-center text-white overflow-hidden"
-      style={{ minHeight: "70vh" }}
+      className="relative w-full h-screen flex items-center justify-center text-white overflow-hidden"
     >
       {/* 背景 */}
       <div
-        className="absolute inset-0 bg-black bg-center bg-cover"
+        className="absolute inset-0 w-full h-full bg-black bg-center bg-cover"
         style={{ backgroundImage: BG ? `url(${BG})` : "none" }}
         aria-hidden="true"
       />
       {/* 黒幕 */}
       <div
-        className="absolute inset-0"
+        className="absolute inset-0 w-full h-full"
         style={{ background: `rgba(0,0,0,${TINT})` }}
         aria-hidden="true"
       />

@@ -1,9 +1,11 @@
 import { useEffect, useState } from "react";
 
 import type { IntroductionCatchProps } from "@/types";
+import reiwa4 from "@/assets/reiwa_4.png";
+import reiwa5 from "@/assets/reiwa_5.png";
 
 const IntroductionCatch = ({
-  bgSrcList = [],
+  bgSrcList = [reiwa4, reiwa5],
   interval = 5000,
 }: IntroductionCatchProps) => {
   const [index, setIndex] = useState<number>(0);
@@ -17,7 +19,7 @@ const IntroductionCatch = ({
   }, [bgSrcList, interval]);
 
   return (
-    <div className="relative w-full min-h-[70vh] flex items-center justify-center text-white overflow-hidden bg-black">
+    <div className="relative w-full min-h-[100vh] flex items-center justify-center text-white overflow-hidden bg-black">
       {/* 背景スライド */}
       {bgSrcList.length > 0 && bgSrcList.map((src, i) => (
         <img
@@ -25,7 +27,7 @@ const IntroductionCatch = ({
           src={src}
           alt=""
           className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-1000 ${
-            i === index ? "opacity-70" : "opacity-0"
+            i === index ? "opacity-100" : "opacity-0"
           }`}
         />
       ))}
