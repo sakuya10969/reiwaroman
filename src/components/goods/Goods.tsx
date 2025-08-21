@@ -23,6 +23,7 @@ const Goods = ({
   badgeText = "GOODS",
   goodsName = ["フェスTシャツ : 各4000円","オリジナルステッカーセット : 1000円","松尾のお薬ケース～復刻版～ : 1200円","オリジナルペンライト : 2500円","マフラータオル[全2種] : 2000円","チョコプラヘアバンド : セット 4200円 / 単品 各2200円","オリジナルエコバッグ : 1000円","チョコスタ[全2種] : 各1000円"],
   goodsImageUrl = [Goods1,Goods2,Goods3,Goods4,Goods5,Goods6,Goods7,Goods8],
+  goodsPurchaseUrl = "https://example.com",
 }: GoodsProps) => {
   return (
     <section className="relative w-full isolate">
@@ -45,8 +46,8 @@ const Goods = ({
             </span>
           </div>
         </div>
-        {/* キャスト一覧 */}
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-10">
+        {/* グッズ一覧 */}
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-5">
           {goodsImageUrl.map((photo, index) => (
             <div key={index} className="text-center">
               <img
@@ -56,6 +57,13 @@ const Goods = ({
               />
             </div>
           ))}
+        </div>
+        <div className="max-w-xl mx-auto mt-12 px-4 flex justify-center">
+          <a href={goodsPurchaseUrl} target="_blank" rel="noopener noreferrer">
+            <button className="text-white px-4 py-2 rounded tracking-wide text-[22px] focus:outline-none" style={{ backgroundColor: "#a01e22", fontFamily: 'momochidori, sans-serif', fontWeight: 500, borderRadius: "30px", fontSize:"1.2em"}}>
+              オンラインでの購入はこちら ＞
+            </button>
+          </a>
         </div>
       </div>
     </section>

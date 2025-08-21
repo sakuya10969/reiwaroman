@@ -36,4 +36,5 @@ export interface GoodsProps {
   badgeText?: string;
   goodsName?:string[];
   goodsImageUrl?: string[];
+  goodsPurchaseUrl?:string;
 }
