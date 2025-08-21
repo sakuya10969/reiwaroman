@@ -1,4 +1,4 @@
-const TopCatch = () => {
+const TopsCatch = () => {
   return (
     <div className="relative flex flex-col items-center justify-center min-h-[100vh] w-full bg-black text-center">
       <div className="px-6">
@@ -12,11 +12,11 @@ const TopCatch = () => {
           JAPAN&apos;S TOP MANZAI COMEDIANS, BREAKING ALL LIMITS.
         </p>
       </div>
-      <div className="absolute bottom-8 flex justify-center w-full">
-        <img src="/assets/logo-reiwaroman.svg" alt="REIWAROMAN" className="w-40 h-auto" />
+      <div className="absolute bottom-10 flex justify-center w-full">
+        <img src="src/assets/5.png" alt="REIWAROMAN" className="w-100 h-auto" />
       </div>
     </div>
   );
 };
 
-export default TopCatch;
+export default TopsCatch;
