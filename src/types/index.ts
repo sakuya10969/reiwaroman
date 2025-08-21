@@ -1,6 +1,7 @@
 export interface NavItem {
   label: string;
   href: string;
+  key: string;
 }
 
 export interface HeaderProps {
@@ -14,9 +15,7 @@ export interface SectionProps extends React.HTMLAttributes<HTMLElement> {
 }
 
 export interface IntroductionCatchProps {
-  /** 複数の背景画像を渡す */
   bgSrcList?: string[];
-  /** 画像切替の間隔（ms） */
   interval?: number;
 }
 
@@ -25,3 +24,13 @@ export interface NewsCatchProps {
   badgeText?: string;
   titleLines?: string[];
 };
+
+export interface Slide {
+  src: string;
+  alt: string;
+}
+
+export interface TopsVisualProps {
+  resetSignal?: number;
+  active?: boolean;
+}
