@@ -3,6 +3,8 @@ import IntroductionCatch from "@/components/introduction/IntroductionCatch";
 import IntroductionLive from "@/components/introduction/IntroductionLive";
 import IntroductionVenue from "@/components/introduction/IntroductionVenue";
 import NewsCatch from "@/components/news/NewsCatch";
+import NewsList from "@/components/news/NewsList";
+import { NEWS } from "@/constants";
 
 export default function Main() {
   return (
@@ -30,6 +32,11 @@ export default function Main() {
       {/* NEWS - CATCH */}
       <section id="news-catch" className="scroll-mt-[64px]">
         <NewsCatch />
+      </section>
+
+      {/* NEWS - LIST */}
+      <section id="news-list" className="scroll-mt-[64px]">
+        <NewsList items={NEWS} />
       </section>
     </main>
   );
