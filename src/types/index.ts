@@ -25,3 +25,15 @@ export interface NewsCatchProps {
   badgeText?: string;
   titleLines?: string[];
 };
+
+export interface CastProps {
+  badgeText?: string;
+  castName?:string[];
+  castImageUrl?: string[];
+}
+
+export interface GoodsProps {
+  badgeText?: string;
+  goodsName?:string[];
+  goodsImageUrl?: string[];
+}
