@@ -1,13 +1,12 @@
 export interface NavItem {
   label: string;
   href: string;
-  key: string;
+  sectionIds: string[];
 }
 
 export interface HeaderProps {
   nav?: NavItem[];
   ticketHref?: string;
-  Logo?: React.ComponentType;
 }
 
 export interface SectionProps extends React.HTMLAttributes<HTMLElement> {
@@ -34,3 +33,18 @@ export interface TopsVisualProps {
   resetSignal?: number;
   active?: boolean;
 }
+
+export interface NewsItem {
+  date: Date | string;
+  title: string;
+  href?: string;
+};
+
+export interface NewsListProps {
+  items: NewsItem[];
+  bgColorClass?: string;
+  pyClass?: string;
+};
+
+export type HeaderTheme = "dark" | "red";
+
