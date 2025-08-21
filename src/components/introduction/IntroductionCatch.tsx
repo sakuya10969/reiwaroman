@@ -6,7 +6,7 @@ import reiwa5 from "@/assets/reiwa_5.png";
 
 const IntroductionCatch = ({
   bgSrcList = [reiwa4, reiwa5],
-  interval = 5000,
+  interval = 10000,
 }: IntroductionCatchProps) => {
   const [index, setIndex] = useState<number>(0);
 
@@ -26,7 +26,7 @@ const IntroductionCatch = ({
           key={i}
           src={src}
           alt=""
-          className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-1000 ${
+          className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-1500 ease-in-out ${
             i === index ? "opacity-100" : "opacity-0"
           }`}
         />
