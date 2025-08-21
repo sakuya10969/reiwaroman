@@ -38,3 +38,8 @@ export interface GoodsProps {
   goodsImageUrl?: string[];
   goodsPurchaseUrl?:string;
 }
+
+export interface CautionProps {
+  badgeText?: string;
+  CautionText?: string[];
+}
