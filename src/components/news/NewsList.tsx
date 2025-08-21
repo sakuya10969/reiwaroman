@@ -21,8 +21,8 @@ const NewsList = ({
 
         {/* リスト */}
         <div className="mt-4 md:mt-8 space-y-1 md:space-y-2">
-          {items.map((it, i) => (
-            <NewsRow key={`${it.title}-${i}`} item={it} />
+          {items.map((item, i) => (
+            <NewsRow key={`${item.title}-${i}`} item={item} />
           ))}
         </div>
       </div>
