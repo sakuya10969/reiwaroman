@@ -1,4 +1,6 @@
 import { useEffect, useMemo, useState, useCallback } from "react";
+import { ChevronRight } from "lucide-react";
+
 import { NAV } from "@/constants";
 import type { HeaderProps } from "@/types";
 
@@ -87,8 +89,9 @@ const Header = ({ nav = NAV, ticketHref = "#ticket" }: HeaderProps) => {
           </a>
 
           {/* 右：ナビ + TICKET */}
-          <div className="flex items-center gap-7">
-            <nav className="hidden md:flex items-center gap-7">
+          <div className="flex items-center gap-3">
+            {/* ← 左基準で拡大 & 右に実余白を確保 */}
+            <nav className="hidden md:flex items-center gap-3 origin-left scale-x-[1.3] mr-8">
               {nav.map((item) => {
                 const id = (item.href || "").replace(/^#/, "");
                 const isActive = id && id === activeId;
@@ -102,8 +105,7 @@ const Header = ({ nav = NAV, ticketHref = "#ticket" }: HeaderProps) => {
                       "text-sm uppercase tracking-wider transition-opacity font-bold",
                       "hover:opacity-80",
                       isActive
-                        ? // アクティブ：赤文字＋赤下線（太め・オフセット広め）
-                          `text-[${ACTIVE_COLOR}] underline decoration-[${ACTIVE_COLOR}] underline-offset-8 decoration-4`
+                        ? `text-[${ACTIVE_COLOR}] underline decoration-[${ACTIVE_COLOR}] underline-offset-8 decoration-4`
                         : "text-white no-underline",
                     ].join(" ")}
                     style={{ fontFamily: "Prompt, sans-serif" }}
@@ -114,28 +116,16 @@ const Header = ({ nav = NAV, ticketHref = "#ticket" }: HeaderProps) => {
               })}
             </nav>
 
+            <div className="hidden md:block shrink-0 w-12 lg:w-16" aria-hidden />
+
             {/* TICKET */}
             <a
               href={ticketHref}
-              className="inline-flex items-center gap-2 rounded-full px-4 py-2 text-sm uppercase text-white bg-[#a01e22] hover:bg-[#b3272b] transition-colors font-bold"
+              className="inline-flex items-center gap-2 rounded-full pl-6 pr-2 py-2 text-sm uppercase text-white bg-[#a01e22] hover:bg-[#b3272b] transition-colors font-bold whitespace-nowrap"
               style={{ fontFamily: "Prompt, sans-serif" }}
             >
-              <span>TICKET</span>
-              <svg
-                width="14"
-                height="14"
-                viewBox="0 0 24 24"
-                fill="none"
-                aria-hidden
-              >
-                <path
-                  d="M5 12h14M13 5l7 7-7 7"
-                  stroke="currentColor"
-                  strokeWidth="2"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                />
-              </svg>
+              <span className="inline-block origin-center scale-x-[1.3]">TICKET</span>
+              <ChevronRight size={14} />
             </a>
           </div>
         </div>
