@@ -1,4 +1,4 @@
-import TopCatch from "@/components/top/TopCatch";
+import TopsRotator from "@/components/top/TopsRotator";
 import IntroductionCatch from "@/components/introduction/IntroductionCatch";
 import IntroductionLive from "@/components/introduction/IntroductionLive";
 import IntroductionVenue from "@/components/introduction/IntroductionVenue";
@@ -8,27 +8,27 @@ export default function Main() {
   return (
     <main className="w-full">
       {/* TOP */}
-      <section id="top-catch" className="scroll-mt-[72px]">
-        <TopCatch />
+      <section id="tops" className="scroll-mt-[64px]">
+        <TopsRotator />
       </section>
 
       {/* INTRODUCTION - CATCH */}
-      <section id="introduction-catch" className="scroll-mt-[72px]">
+      <section id="introduction-catch" className="scroll-mt-[64px]">
         <IntroductionCatch />
       </section>
 
       {/* INTRODUCTION - LIVE */}
-      <section id="introduction-live" className="scroll-mt-[72px]">
+      <section id="introduction-live" className="scroll-mt-[64px]">
         <IntroductionLive />
       </section>
 
       {/* INTRODUCTION - VENUE */}
-      <section id="introduction-venue" className="scroll-mt-[72px]">
+      <section id="introduction-venue" className="scroll-mt-[64px]">
         <IntroductionVenue />
       </section>
 
       {/* NEWS - CATCH */}
-      <section id="news-catch" className="scroll-mt-[72px]">
+      <section id="news-catch" className="scroll-mt-[64px]">
         <NewsCatch />
       </section>
     </main>
