@@ -10,13 +10,19 @@ import {
   getActiveLinkClassesByTheme,
   linkBaseClass,
   linkInactiveColor,
-  RED_HEX,
+  ticketButtonClass,
+  ticketFocusRingClass,
 } from "@/theme/headerTheme";
 
 const Header = ({ nav = NAV, ticketHref = "#ticket" }: HeaderProps) => {
   // 監視対象はセクションテーマのキーだけ
   const observeIds = useMemo(() => Object.keys(SECTION_THEMES), []);
   const activeId = useActiveSection(observeIds, 64);
+  const currentTheme = useMemo(() => {
+    const seedId = activeId || observeIds[0] || null;
+    if (!seedId) return "dark";
+    return SECTION_THEMES[seedId] ?? "dark";
+  }, [activeId, observeIds]);
 
   // どのナビ項目が担当か
   const activeNavIndex = useMemo(
@@ -89,11 +95,12 @@ const Header = ({ nav = NAV, ticketHref = "#ticket" }: HeaderProps) => {
             {/* TICKET（白文字×赤背景のまま。要件あればここも切替可能） */}
             <a
               href={ticketHref}
-              className="inline-flex items-center gap-2 rounded-full pl-6 pr-2 py-2 text-sm uppercase font-bold whitespace-nowrap transition-colors focus-visible:outline-none focus-visible:ring-2 text-white"
-              style={{
-                fontFamily: "Prompt, sans-serif",
-                backgroundColor: RED_HEX,
-              }}
+              className={[
+                "inline-flex items-center gap-2 rounded-full pl-6 pr-2 py-2 text-sm uppercase font-bold whitespace-nowrap transition-colors focus-visible:outline-none focus-visible:ring-2",
+                ticketButtonClass(currentTheme),
+                ticketFocusRingClass(currentTheme),
+              ].join(" ")}
+              style={{ fontFamily: "Prompt, sans-serif" }}
             >
               <span className="inline-block origin-center scale-x-[1.3]">TICKET</span>
               <ChevronRight size={14} />
