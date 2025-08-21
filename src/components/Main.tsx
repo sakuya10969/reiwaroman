@@ -6,6 +6,7 @@ import NewsCatch from "@/components/news/NewsCatch";
 import Cast from "@/components/cast/Cast"
 import Goods from "@/components/goods/Goods"
 import Caution from "@/components/caution/Caution"
+import Last from "@/components/last/Last"
 
 export default function Main() {
   return (
@@ -48,6 +49,11 @@ export default function Main() {
       {/* Caution */}
       <section id="caution" className="scroll-mt-[72px]">
         <Caution />
+      </section>
+
+      {/* Last */}
+      <section id="last" className="scroll-mt-[72px]">
+        <Last />
       </section>
 
     </main>

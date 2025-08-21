@@ -43,3 +43,8 @@ export interface CautionProps {
   badgeText?: string;
   CautionText?: string[];
 }
+
+export interface LastProps {
+  backgroundImageUrl?: string;
+  FooterText?: string;
+}
