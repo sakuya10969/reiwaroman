@@ -70,7 +70,7 @@ const TopsVisual = ({ resetSignal = 0, active = true }: TopsVisualProps) => {
       ))}
 
       <div className="absolute bottom-10 inset-x-0 flex justify-center">
-        <img src="src/assets/5.png" alt="REIWAROMAN" className="w-100 h-auto object-contain" />
+        <img src="src/assets/5.png" alt="REIWAROMAN" className="h-auto object-contain w-[35vw]" />
       </div>
     </div>
   );
