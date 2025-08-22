@@ -7,7 +7,7 @@ const NewsCatch = ({
   titleLines = ["REIWA", "REPORT"],
 }: NewsCatchProps) => {
   return (
-    <section
+    <div
       className="relative w-full min-h-[100vh] flex items-center"
       aria-label={`${badgeText} ${titleLines.join(" ")}`}
     >
@@ -68,7 +68,7 @@ const NewsCatch = ({
           />
         </div>
       </div>
-    </section>
+    </div>
   );
 }
 
