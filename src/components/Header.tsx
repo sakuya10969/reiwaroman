@@ -45,23 +45,17 @@ const Header = ({ nav = NAV, ticketHref = "#ticket" }: HeaderProps) => {
     history.replaceState(null, "", href);
   }, []);
 
-  // TICKET ボタンは従来どおり赤基調固定（ヘッダーは常に透明）
+  // TICKET ボタンは従来通り赤基調固定
   return (
     <header className="fixed inset-x-0 top-0 z-50 bg-transparent">
       <div className="w-full px-4">
         <div className="relative h-16 flex items-center justify-between">
           {/* 左：ロゴ */}
-          <a
-            href="#tops"
-            className="shrink-0 inline-flex items-center gap-2 group focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white rounded"
-          >
-            <img
-              src="src/assets/5.png"
-              alt="REIWAROMAN"
-              className="h-10 w-auto object-contain group-hover:scale-105 transition"
-            />
-            <span className="sr-only">REIWAROMAN</span>
-          </a>
+          <img
+            src="src/assets/5.png"
+            alt="REIWAROMAN"
+            className="h-10 w-auto object-contain pointer-events-none select-none"
+          />
 
           {/* 右：ナビ + TICKET */}
           <div className="flex items-center gap-3">
