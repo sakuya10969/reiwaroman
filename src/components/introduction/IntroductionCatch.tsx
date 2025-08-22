@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 
 import type { IntroductionCatchProps } from "@/types";
+import { INTRODUCTION_CATCH_CONTENTS } from "@/constants";
 import reiwa4 from "@/assets/reiwa_4.png";
 import reiwa5 from "@/assets/reiwa_5.png";
 
@@ -49,16 +50,9 @@ const IntroductionCatch = ({
 
         {/* 説明文 */}
         <div className="mt-6 space-y-3 text-[13px] sm:text-sm leading-relaxed text-white" style={{ fontFamily: '"a-otf-futo-min-a101-pr6n", serif' }}>
-          <p>Restart(再出発)・Reborn(再誕)・Redefine(再定義)・Revival(再演)・Reunion(再会)</p>
-          <p>
-            M-1二連覇達成後、くるまの活動自粛と吉本興業退社という波乱万丈な人生に立ち向かっている漫才師「令和ロマン」。
-          </p>
-          <p>
-            そんな彼らが出会って10年の節目にこれまでの活動の集大成とこれからの再スタートを誓い約6年ぶりの単独ライブを開催する。
-          </p>
-          <p>
-            その舞台は誰もお笑いをやったことは無い、国内最大級の音質空間を誇るKアリーナ横浜。約2万人！
-          </p>
+          {INTRODUCTION_CATCH_CONTENTS.map((content, i) => (
+            <p key={i}>{content}</p>
+          ))}
         </div>
       </div>
     </div>

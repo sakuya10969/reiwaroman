@@ -1,4 +1,5 @@
 import reiwa6 from "@/assets/reiwa_6.png";
+import { INTRODUCTION_LIVE_CONTENTS, INTRODUCTION_LIVE_TITLE_LINES } from "@/constants";
 
 const IntroductionLive = () => {
   return (
@@ -42,12 +43,12 @@ const IntroductionLive = () => {
               "
               style={{ fontFamily: '"a-otf-futo-min-a101-pr6n", serif' }}
             >
-              国内お笑い史上、最大キャパシティ2万人の単独ライブ。<br />
-              漫才だけでなく、演出・映像・体験・記録まで含めた複合プロジェクト。<br />
-              ポッドキャストでも活躍する令和ロマンならではの、<br />
-              「音・声」にこだわった構成。<br />
-              だれもお笑いをやったことのないステージで、<br />
-              誰もやったことの無い舞台に挑戦する。
+              {INTRODUCTION_LIVE_CONTENTS.map((content, i) => (
+                <span key={i}>
+                  {content}
+                  {i < INTRODUCTION_LIVE_CONTENTS.length - 1 && <br />}
+                </span>
+              ))}
             </p>
           </div>
 
@@ -66,9 +67,12 @@ const IntroductionLive = () => {
               "
               style={{ fontFamily: '"dnp-shuei-shogomincho-std", serif' }}
             >
-              2万人が体感する<br />
-              未だかつてない<br />
-              お笑いライブ
+              {INTRODUCTION_LIVE_TITLE_LINES.map((line, i) => (
+                <span key={i}>
+                  {line}
+                  {i < INTRODUCTION_LIVE_TITLE_LINES.length - 1 && <br />}
+                </span>
+              ))}
             </h2>
           </div>
         </div>
