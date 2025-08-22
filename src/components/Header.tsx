@@ -60,7 +60,7 @@ const Header = ({ nav = NAV, ticketHref = "#ticket" }: HeaderProps) => {
           {/* 右：ナビ + TICKET */}
           <div className="flex items-center gap-3">
             {/* スマホでも出したければ hidden を外す */}
-            <nav className="hidden md:flex items-center gap-3 origin-left scale-x-[1.3] mr-8">
+            <nav className="hidden md:flex items-center gap-3 origin-left scale-x-[1.4] mr-14">
               {nav.map((item, idx) => {
                 const isThisActive = idx === activeNavIndex;
                 // テーマに応じた「アクティブ色」を取り、無ければ何もしない
@@ -90,14 +90,14 @@ const Header = ({ nav = NAV, ticketHref = "#ticket" }: HeaderProps) => {
             <a
               href={ticketHref}
               className={[
-                "inline-flex items-center gap-2 rounded-full pl-6 pr-2 py-2 text-sm uppercase font-bold whitespace-nowrap transition-colors focus-visible:outline-none focus-visible:ring-2",
+                "inline-flex items-center gap-2 rounded-full pl-6 pr-2 py-1 text-sm uppercase font-bold whitespace-nowrap transition-colors focus-visible:outline-none focus-visible:ring-2",
                 ticketButtonClass(currentTheme),
                 ticketFocusRingClass(currentTheme),
               ].join(" ")}
               style={{ fontFamily: "Prompt, sans-serif" }}
             >
-              <span className="inline-block origin-center scale-x-[1.3]">TICKET</span>
-              <ChevronRight size={14} />
+              <span className="inline-block origin-center scale-x-[1.4]">TICKET</span>
+              <ChevronRight size={20} />
             </a>
           </div>
         </div>
