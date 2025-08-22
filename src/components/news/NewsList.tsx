@@ -1,8 +1,8 @@
 import NewsRow from "@/components/news/NewsRow";
 import type { NewsListProps } from "@/types";
+import { NEWS } from "@/constants";
 
 const NewsList = ({
-  items,
   bgColorClass = "bg-[#8f242b]",
   pyClass = "py-16 md:py-24",
 }: NewsListProps) => {
@@ -21,7 +21,7 @@ const NewsList = ({
 
         {/* リスト */}
         <div className="mt-4 md:mt-8 space-y-1 md:space-y-2">
-          {items.map((item, i) => (
+          {NEWS.map((item, i) => (
             <NewsRow key={`${item.title}-${i}`} item={item} />
           ))}
         </div>
