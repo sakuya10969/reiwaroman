@@ -1,6 +1,6 @@
 import type { HeaderTheme, NavItem } from "@/types";
 
-export const RED_HEX = "#a01e22";
+export const THEME_RED = "#a01e22";
 
 export const findNavIndexBySectionId = (nav: NavItem[], activeId?: string | null) => {
   if (!activeId) return -1;
@@ -10,7 +10,7 @@ export const findNavIndexBySectionId = (nav: NavItem[], activeId?: string | null
 /** アクティブ時の色（ダーク: 赤, レッド: 黒）。未マッチや未知テーマは null 返す */
 export const getActiveLinkClassesByTheme = (theme?: HeaderTheme | null) => {
   if (theme === "dark") {
-    return `text-[${RED_HEX}] underline decoration-[${RED_HEX}] underline-offset-6 decoration-1`;
+    return `text-[${THEME_RED}] underline decoration-[${THEME_RED}] underline-offset-6 decoration-1`;
   }
   if (theme === "red") {
     return `text-black underline decoration-black underline-offset-6 decoration-1`;
