@@ -4,7 +4,7 @@ import IntroductionLive from "@/components/introduction/IntroductionLive";
 import IntroductionVenue from "@/components/introduction/IntroductionVenue";
 import NewsCatch from "@/components/news/NewsCatch";
 import NewsList from "@/components/news/NewsList";
-import { NEWS } from "@/constants";
+import Caution from "@/components/caution/Caution";
 
 export default function Main() {
   return (
@@ -36,7 +36,12 @@ export default function Main() {
 
       {/* NEWS - LIST */}
       <section id="news-list" className="scroll-mt-[64px]">
-        <NewsList items={NEWS} />
+        <NewsList />
+      </section>
+
+      {/* CAUTION */}
+      <section id="caution" className="scroll-mt-[64px]">
+        <Caution />
       </section>
     </main>
   );
