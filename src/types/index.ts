@@ -41,7 +41,6 @@ export interface NewsItem {
 };
 
 export interface NewsListProps {
-  items: NewsItem[];
   bgColorClass?: string;
   pyClass?: string;
 };
