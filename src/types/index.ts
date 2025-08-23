@@ -1,12 +1,12 @@
 export interface NavItem {
   label: string;
   href: string;
+  sectionIds: string[];
 }
 
 export interface HeaderProps {
   nav?: NavItem[];
   ticketHref?: string;
-  Logo?: React.ComponentType;
 }
 
 export interface SectionProps extends React.HTMLAttributes<HTMLElement> {
@@ -14,9 +14,7 @@ export interface SectionProps extends React.HTMLAttributes<HTMLElement> {
 }
 
 export interface IntroductionCatchProps {
-  /** 複数の背景画像を渡す */
   bgSrcList?: string[];
-  /** 画像切替の間隔（ms） */
   interval?: number;
 }
 
@@ -25,6 +23,30 @@ export interface NewsCatchProps {
   badgeText?: string;
   titleLines?: string[];
 };
+
+export interface Slide {
+  src: string;
+  alt: string;
+}
+
+export interface TopsVisualProps {
+  resetSignal?: number;
+  active?: boolean;
+}
+
+export interface NewsItem {
+  date: Date | string;
+  title: string;
+  href?: string;
+};
+
+export interface NewsListProps {
+  bgColorClass?: string;
+  pyClass?: string;
+};
+
+export type HeaderTheme = "dark" | "red";
+
 
 export interface CastProps {
   badgeText?: string;
@@ -41,7 +63,6 @@ export interface GoodsProps {
 
 export interface CautionProps {
   badgeText?: string;
-  CautionText?: string[];
 }
 
 export interface LastProps {

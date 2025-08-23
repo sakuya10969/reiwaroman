@@ -18,7 +18,7 @@ const Last = ({
         aria-hidden="true"
       />
       <div className="w-full flex justify-center  absolute bottom-3">
-        <p className="text-[#828282]" style={{fontFamily: 'momochidori, sans-serif', fontWeight: 500, fontSize:"1em"}}>&copy;{FooterText}</p>
+        <p className="text-[#a3a1a1] tracking-wider" style={{fontFamily: 'momochidori, sans-serif', fontWeight: 700, fontSize:"1em"}}>&copy;{FooterText}</p>
       </div>
     </section>
   );

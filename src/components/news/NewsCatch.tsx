@@ -7,7 +7,7 @@ const NewsCatch = ({
   titleLines = ["REIWA", "REPORT"],
 }: NewsCatchProps) => {
   return (
-    <section
+    <div
       className="relative w-full min-h-[100vh] flex items-center"
       aria-label={`${badgeText} ${titleLines.join(" ")}`}
     >
@@ -38,8 +38,8 @@ const NewsCatch = ({
           {/* 内側レイアウト */}
           <div className="absolute inset-0 flex flex-col items-center justify-between text-center px-6 py-16">
             {/* BADGE - 上部 */}
-            <div className="text-xs tracking-[0.25em] text-white/90 md:text-sm flex-shrink-0 relative top-2" style={{ fontFamily: 'Prompt, sans-serif' }}>
-              <span className="inline-block border-b-2 border-white/80 pb-0.5 font-semibold">
+            <div className="text-sm sm:text-base md:text-lg lg:text-xl text-white/90 flex-shrink-0 relative top-2">
+              <span className="inline-block font-bold border-b-2 border-white/80 pb-0.5 scale-x-[1.3] scale-y-[0.8] origin-center" style={{ fontFamily: 'Prompt, sans-serif' }}>
                 {badgeText}
               </span>
             </div>
@@ -49,7 +49,7 @@ const NewsCatch = ({
               {titleLines.map((line, idx) => (
                 <span
                   key={idx}
-                  className="block font-extrabold uppercase text-white text-3xl sm:text-4xl md:text-5xl lg:text-6xl tracking-wide"
+                  className="block font-bold uppercase text-white text-3xl sm:text-4xl md:text-5xl lg:text-6xl scale-x-[1.3] scale-y-[0.8] origin-center leading-none"
                   style={{ fontFamily: 'Prompt, sans-serif' }}
                 >
                   {line}
@@ -68,7 +68,7 @@ const NewsCatch = ({
           />
         </div>
       </div>
-    </section>
+    </div>
   );
 }
 

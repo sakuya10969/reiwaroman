@@ -58,9 +58,22 @@ const Goods = ({
             </div>
           ))}
         </div>
-        <div className="max-w-xl mx-auto mt-12 px-4 flex justify-center">
+        <div className="max-w-xl mx-auto mt-12 px-4 flex justify-center  ">
           <a href={goodsPurchaseUrl} target="_blank" rel="noopener noreferrer">
-            <button className="text-white px-4 py-2 rounded tracking-wide text-[22px] focus:outline-none" style={{ backgroundColor: "#a01e22", fontFamily: 'momochidori, sans-serif', fontWeight: 500, borderRadius: "30px", fontSize:"1.2em"}}>
+            <button
+              className="text-white px-4 py-2 rounded tracking-wide transition-colors duration-200"
+              style={{
+                backgroundColor: "#a01e22",
+                fontFamily: 'momochidori, sans-serif',
+                fontWeight: 500,
+                borderRadius: "30px",
+                fontSize: "1.2em",
+                border: "2px solid transparent",
+                outline: "none"
+              }}
+              onMouseEnter={e => e.currentTarget.style.borderColor = "white"}
+              onMouseLeave={e => e.currentTarget.style.borderColor = "transparent"}
+            >
               オンラインでの購入はこちら ＞
             </button>
           </a>
