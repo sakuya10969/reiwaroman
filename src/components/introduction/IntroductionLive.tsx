@@ -3,7 +3,7 @@ import { INTRODUCTION_LIVE_CONTENTS, INTRODUCTION_LIVE_TITLE_LINES } from "@/con
 
 const IntroductionLive = () => {
   return (
-    <div className="relative w-full min-h-[100vh] text-white overflow-hidden">
+    <div className="relative w-full min-h-screen text-white overflow-hidden">
       {/* BG */}
       <div
         className="absolute inset-0 bg-center bg-cover"

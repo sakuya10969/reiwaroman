@@ -20,7 +20,7 @@ const IntroductionCatch = ({
   }, [bgSrcList, interval]);
 
   return (
-    <div className="relative w-full min-h-[100vh] flex items-center justify-center text-white overflow-hidden bg-black">
+    <div className="relative w-full min-h-screen flex items-center justify-center text-white overflow-hidden bg-black">
       {/* 背景スライド */}
       {bgSrcList.length > 0 && bgSrcList.map((src, i) => (
         <img
