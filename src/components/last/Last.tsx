@@ -6,7 +6,7 @@ const Last = ({
   FooterText= "RE:IWAROMAN作成委員会",
 }: LastProps) => {
   return (
-    <section
+    <div
       className="relative w-full h-[160vh] flex items-center"
     >
       {/* 背景 */}
@@ -20,7 +20,7 @@ const Last = ({
       <div className="w-full flex justify-center  absolute bottom-3">
         <p className="text-[#a3a1a1] tracking-wider" style={{fontFamily: 'momochidori, sans-serif', fontWeight: 700, fontSize:"1em"}}>&copy;{FooterText}</p>
       </div>
-    </section>
+    </div>
   );
 }
 

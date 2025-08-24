@@ -15,7 +15,7 @@ const Cast = ({
   castImageUrl = [CastReiwa, CastMayurika, CastNanamagari, CastMitorizu],
 }: CastProps) => {
   return (
-    <section className="relative w-full isolate">
+    <div className="relative w-full isolate">
       {/* 背景 */}
       <div
         className="absolute inset-0 bg-black -z-10"
@@ -52,7 +52,7 @@ const Cast = ({
           ))}
         </div>
       </div>
-    </section>
+    </div>
   );
 };
 
