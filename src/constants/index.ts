@@ -26,7 +26,7 @@ export const SECTION_THEMES: Record<string, HeaderTheme> = {
   "cast": "dark",
   "goods": "dark",
   "caution": "red",
-  "footer": "dark",
+  "last": "dark",
 };
 
 export const INTRODUCTION_CATCH_CONTENTS: string[] = [
