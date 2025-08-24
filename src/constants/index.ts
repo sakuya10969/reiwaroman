@@ -46,7 +46,7 @@ export const INTRODUCTION_LIVE_CONTENTS: string[] = [
 ];
 
 export const INTRODUCTION_LIVE_TITLE_LINES: string[] = [
-  "2万人が体感する",
+  "2万人が体感する、",
   "未だかつてない",
   "お笑いライブ",
 ];
