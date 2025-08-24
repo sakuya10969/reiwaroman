@@ -124,7 +124,7 @@ const Header = ({ nav = NAV, ticketHref = "#ticket" }: HeaderProps) => {
             isMobileMenuOpen ? "translate-x-0" : "translate-x-full"
           }`}
         >
-          <nav className="px-6 py-10 space-y-1">
+          <nav className="px-6 py-10">
             {nav.map((item, idx) => {
               const isThisActive = idx === activeNavIndex;
               const activeColorClass =
@@ -151,7 +151,7 @@ const Header = ({ nav = NAV, ticketHref = "#ticket" }: HeaderProps) => {
               href={ticketHref}
               onClick={() => setIsMobileMenuOpen(false)}
               className={[
-                "inline-flex items-center gap-2 rounded-full pl-6 pr-2 py-2 text-sm uppercase font-bold whitespace-nowrap transition-colors focus-visible:outline-none focus-visible:ring-2 mt-2",
+                "inline-flex items-center gap-2 rounded-full pl-6 pr-2 py-2 text-sm uppercase font-bold whitespace-nowrap transition-colors focus-visible:outline-none focus-visible:ring-2 mt-1",
                 ticketButtonClass(currentTheme),
                 ticketFocusRingClass(currentTheme),
               ].join(" ")}
