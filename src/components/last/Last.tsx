@@ -7,7 +7,7 @@ const Last = ({
 }: LastProps) => {
   return (
     <div
-      className="relative w-full h-[160vh] flex items-center"
+      className="relative w-full h-[180vh] flex items-center"
     >
       {/* 背景 */}
       <div
