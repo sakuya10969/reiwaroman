@@ -96,7 +96,7 @@ const Header = ({ nav = NAV, ticketHref = "#ticket" }: HeaderProps) => {
               ].join(" ")}
               style={{ fontFamily: "Prompt, sans-serif" }}
             >
-              <span className="inline-block origin-center scale-x-">TICKET</span>
+              <span className="inline-block origin-center scale-x-140">TICKET</span>
               <ChevronRight size={20} />
             </a>
           </div>
