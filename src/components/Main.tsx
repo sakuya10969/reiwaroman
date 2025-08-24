@@ -43,22 +43,22 @@ export default function Main() {
       </section>
 
       {/* Cast */}
-      <section id="cast" className="scroll-mt-[72px]">
+      <section id="cast" className="scroll-mt-[64px]">
         <Cast />
       </section>
 
       {/* Goods */}
-      <section id="goods" className="scroll-mt-[72px]">
+      <section id="goods" className="scroll-mt-[64px]">
         <Goods />
       </section>
 
       {/* Caution */}
-      <section id="caution" className="scroll-mt-[72px]">
+      <section id="caution" className="scroll-mt-[64px]">
         <Caution />
       </section>
 
       {/* Last */}
-      <section id="last" className="scroll-mt-[72px]">
+      <section id="last" className="scroll-mt-[64px]">
         <Last />
       </section>
 
