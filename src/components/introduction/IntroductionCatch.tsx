@@ -39,7 +39,7 @@ const IntroductionCatch = ({
       {/* コンテンツ */}
       <div className="relative z-10 mx-auto max-w-[1100px] px-6 text-center">
         {/* 小見出し */}
-        <span className="inline-block font-bold uppercase underline underline-offset-5 scale-x-[1.3] scale-y-[0.8]" style={{ fontFamily: 'Prompt, sans-serif' }}>
+        <span className="inline-block text-sm md:text-base font-bold uppercase underline underline-offset-5 scale-x-130 scale-y-80" style={{ fontFamily: 'Prompt, sans-serif' }}>
           Introduction
         </span>
 

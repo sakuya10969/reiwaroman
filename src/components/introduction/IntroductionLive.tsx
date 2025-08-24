@@ -39,7 +39,7 @@ const IntroductionLive = () => {
                 lg:[writing-mode:vertical-rl] lg:[text-orientation:upright]
                 lg:leading-7 lg:tracking-wider
                 lg:pr-10
-                scale-y-[0.8] origin-center
+                scale-y-80 origin-center
               "
               style={{ fontFamily: '"a-otf-futo-min-a101-pr6n", serif' }}
             >

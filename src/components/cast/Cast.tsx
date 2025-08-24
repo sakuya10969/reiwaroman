@@ -15,7 +15,7 @@ const Cast = ({
   castImageUrl = [CastReiwa, CastMayurika, CastNanamagari, CastMitorizu],
 }: CastProps) => {
   return (
-    <div className="relative w-full isolate">
+    <div className="relative w-full min-h-screen isolate flex items-center justify-center">
       {/* 背景 */}
       <div
         className="absolute inset-0 bg-black -z-10"
@@ -27,10 +27,10 @@ const Cast = ({
         {/* 上部のバッジ */}
         <div className="flex justify-center mb-10">
           <div
-            className="text-xs text-white/90 md:text-sm font-bold transform scale-x-180"
+            className="text-sm text-white/90 md:text-base font-bold transform scale-x-150"
             style={{ fontFamily: 'Prompt, sans-serif' }}
           >
-            <span className="inline-block border-b-2 border-white/80 pb-0.5 font-semibold">
+            <span className="inline-block font-bold uppercase underline underline-offset-5">
               {badgeText}
             </span>
           </div>

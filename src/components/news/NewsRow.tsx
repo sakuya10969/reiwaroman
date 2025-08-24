@@ -16,13 +16,13 @@ const NewsRow = ({ item }: { item: NewsItem }) => {
       <div className="flex items-center gap-6 md:gap-8 min-w-[200px] md:min-w-[240px]">
         <div className="leading-none">
           <div
-            className="text-lg md:text-base font-extrabold scale-x-[1.3]"
+            className="text-lg md:text-base font-extrabold scale-x-130"
             style={{ fontFamily: "Prompt, sans-serif" }}
           >
             {year}
           </div>
           <div
-            className="text-4xl md:text-5xl font-extrabold -mt-1 scale-x-[1.3]"
+            className="text-4xl md:text-5xl font-extrabold -mt-1 scale-x-130"
             style={{ fontFamily: "Prompt, sans-serif" }}
           >
             {md}

@@ -31,13 +31,13 @@ const IntroductionVenue = () => {
             tracking-wide
           "
         >
-          <span className="block text-red-700 text-[clamp(48px,10vw,110px)] opacity-70 relative top-8 z-10 scale-x-[1.3] origin-center" style={{ fontFamily: '"dnp-shuei-shogomincho-std", serif' }}>
+          <span className="block text-red-700 text-[clamp(48px,10vw,110px)] opacity-70 relative top-8 z-10 scale-x-130 origin-center" style={{ fontFamily: '"dnp-shuei-shogomincho-std", serif' }}>
             横
           </span>
-          <span className="inline-block text-[clamp(48px,10vw,100px)] relative z-0 leading-none scale-x-[1.3] origin-center" style={{ fontFamily: 'Prompt, sans-serif' }}>K ARENA</span>
+          <span className="inline-block text-[clamp(48px,10vw,100px)] relative z-0 leading-none scale-x-130 origin-center" style={{ fontFamily: 'Prompt, sans-serif' }}>K ARENA</span>
           <br />
-          <span className="inline-block text-[clamp(48px,10vw,100px)] leading-none scale-x-[1.3] origin-center" style={{ fontFamily: 'Prompt, sans-serif' }}>YOKOHAMA</span>
-          <span className="block text-red-700 text-[clamp(48px,10vw,110px)] opacity-70 relative -top-12 scale-x-[1.3] origin-center" style={{ fontFamily: '"dnp-shuei-shogomincho-std", serif' }}>
+          <span className="inline-block text-[clamp(48px,10vw,100px)] leading-none scale-x-130 origin-center" style={{ fontFamily: 'Prompt, sans-serif' }}>YOKOHAMA</span>
+          <span className="block text-red-700 text-[clamp(48px,10vw,110px)] opacity-70 relative -top-12 scale-x-130 origin-center" style={{ fontFamily: '"dnp-shuei-shogomincho-std", serif' }}>
             浜
           </span>
         </h1>
