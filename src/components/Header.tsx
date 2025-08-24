@@ -1,5 +1,5 @@
-import { useMemo, useCallback } from "react";
-import { ChevronRight } from "lucide-react";
+import { useMemo, useCallback, useState } from "react";
+import { ChevronRight, Menu, X } from "lucide-react";
 
 import { NAV } from "@/constants";
 import { SECTION_THEMES } from "@/constants";
@@ -15,6 +15,8 @@ import {
 } from "@/theme/headerTheme";
 
 const Header = ({ nav = NAV, ticketHref = "#ticket" }: HeaderProps) => {
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState<boolean>(false);
+  
   // 監視対象はセクションテーマのキーだけ
   const observeIds = useMemo(() => Object.keys(SECTION_THEMES), []);
   const activeId = useActiveSection(observeIds, 64);
@@ -43,6 +45,11 @@ const Header = ({ nav = NAV, ticketHref = "#ticket" }: HeaderProps) => {
     const y = el.getBoundingClientRect().top + window.scrollY;
     window.scrollTo({ top: y, behavior: "smooth" });
     history.replaceState(null, "", href);
+    setIsMobileMenuOpen(false); // モバイルメニューを閉じる
+  }, []);
+
+  const toggleMobileMenu = useCallback(() => {
+    setIsMobileMenuOpen(prev => !prev);
   }, []);
 
   // TICKET ボタンは従来通り赤基調固定
@@ -59,7 +66,7 @@ const Header = ({ nav = NAV, ticketHref = "#ticket" }: HeaderProps) => {
 
           {/* 右：ナビ + TICKET */}
           <div className="flex items-center gap-3">
-            {/* スマホでも出したければ hidden を外す */}
+            {/* デスクトップナビ */}
             <nav className="hidden md:flex items-center gap-3 origin-left scale-x-140 mr-14">
               {nav.map((item, idx) => {
                 const isThisActive = idx === activeNavIndex;
@@ -86,11 +93,11 @@ const Header = ({ nav = NAV, ticketHref = "#ticket" }: HeaderProps) => {
 
             <div className="hidden md:block shrink-0 w-12 lg:w-16" aria-hidden />
 
-            {/* TICKET（白文字×赤背景のまま。要件あればここも切替可能） */}
+            {/* デスクトップTICKET */}
             <a
               href={ticketHref}
               className={[
-                "inline-flex items-center gap-2 rounded-full pl-6 pr-2 py-1 text-sm uppercase font-bold whitespace-nowrap transition-colors focus-visible:outline-none focus-visible:ring-2",
+                "hidden md:inline-flex items-center gap-2 rounded-full pl-6 pr-2 py-1 text-sm uppercase font-bold whitespace-nowrap transition-colors focus-visible:outline-none focus-visible:ring-2",
                 ticketButtonClass(currentTheme),
                 ticketFocusRingClass(currentTheme),
               ].join(" ")}
@@ -99,8 +106,70 @@ const Header = ({ nav = NAV, ticketHref = "#ticket" }: HeaderProps) => {
               <span className="inline-block origin-center scale-x-140">TICKET</span>
               <ChevronRight size={20} />
             </a>
+
+            {/* モバイルメニューボタン */}
+            <button
+              onClick={toggleMobileMenu}
+              className="md:hidden p-2 transition-colors hover:text-gray-300 relative z-50"
+              aria-label="メニューを開く"
+            >
+              {isMobileMenuOpen ? <X size={16} /> : <Menu size={16} />}
+            </button>
           </div>
         </div>
+
+        {/* モバイルメニュー（右側スライドアウト） */}
+        <div
+          className={`md:hidden fixed top-0 right-0 h-screen w-50 bg-black/95 backdrop-blur-sm border-l border-white/10 transform transition-transform duration-300 ease-in-out z-40 ${
+            isMobileMenuOpen ? "translate-x-0" : "translate-x-full"
+          }`}
+        >
+          <nav className="px-6 py-10 space-y-1">
+            {nav.map((item, idx) => {
+              const isThisActive = idx === activeNavIndex;
+              const activeColorClass =
+                isThisActive ? getActiveLinkClassesByTheme(activeTheme) : null;
+
+              return (
+                <a
+                  key={item.href}
+                  href={item.href}
+                  onClick={onNavClick}
+                  className={[
+                    "block py-2 pl-2 text-sm font-bold transition-colors origin-left scale-x-130",
+                    activeColorClass || linkInactiveColor,
+                  ].join(" ")}
+                  style={{ fontFamily: "Prompt, sans-serif" }}
+                >
+                  {item.label}
+                </a>
+              );
+            })}
+            
+            {/* モバイルTICKET */}
+            <a
+              href={ticketHref}
+              onClick={() => setIsMobileMenuOpen(false)}
+              className={[
+                "inline-flex items-center gap-2 rounded-full pl-6 pr-2 py-2 text-sm uppercase font-bold whitespace-nowrap transition-colors focus-visible:outline-none focus-visible:ring-2 mt-2",
+                ticketButtonClass(currentTheme),
+                ticketFocusRingClass(currentTheme),
+              ].join(" ")}
+              style={{ fontFamily: "Prompt, sans-serif" }}
+            >
+              <span className="inline-block origin-center scale-x-130">TICKET</span>
+              <ChevronRight size={20} />
+            </a>
+          </nav>
+        </div>
+
+        {/* オーバーレイ（メニューが開いている時の背景） */}
+        {isMobileMenuOpen && (
+          <div
+            className="md:hidden fixed inset-0 bg-black/50 z-30"
+            onClick={() => setIsMobileMenuOpen(false)}
+          />
+        )}
       </div>
     </header>
   );
