@@ -1,3 +1,5 @@
+import { ChevronRight } from "lucide-react";
+
 import goods_1 from "@/assets/goods_1.png";
 import goods_2 from "@/assets/goods_2.png";
 import goods_3 from "@/assets/goods_3.png";
@@ -61,20 +63,22 @@ const Goods = ({
         <div className="max-w-xl mx-auto mt-12 px-4 flex justify-center  ">
           <a href={goodsPurchaseUrl} target="_blank" rel="noopener noreferrer">
             <button
-              className="text-white px-4 py-2 rounded tracking-wide transition-colors duration-200"
+              className="text-white rounded tracking-wide transition-colors duration-200"
               style={{
                 backgroundColor: "#a01e22",
                 fontFamily: 'momochidori, sans-serif',
                 fontWeight: 500,
                 borderRadius: "30px",
                 fontSize: "1.2em",
-                border: "2px solid transparent",
-                outline: "none"
+                border: "none"
               }}
-              onMouseEnter={e => e.currentTarget.style.borderColor = "white"}
-              onMouseLeave={e => e.currentTarget.style.borderColor = "transparent"}
+              onMouseEnter={e => e.currentTarget.style.backgroundColor = "#b3272b"}
+              onMouseLeave={e => e.currentTarget.style.backgroundColor = "#a01e22"}
             >
-              オンラインでの購入はこちら ＞
+              <span className="flex items-center justify-between">
+                オンラインでの購入はこちら
+                <ChevronRight size={24} />
+              </span>
             </button>
           </a>
         </div>
