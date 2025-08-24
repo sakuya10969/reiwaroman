@@ -50,7 +50,7 @@ const TopsVisual = ({ resetSignal = 0, active = true }: TopsVisualProps) => {
   return (
     <div
       className={[
-        "relative w-full min-h-[100vh]",
+        "relative w-full min-h-screen",
         // 準備完了まで完全透明（外側のクロスフェードより前に自分を隠す）
         primed ? "opacity-100" : "opacity-0",
         "transition-opacity duration-0", // ここは一瞬で切替（外側がフェードする）

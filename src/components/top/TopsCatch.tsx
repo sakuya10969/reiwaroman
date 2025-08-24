@@ -1,6 +1,6 @@
 const TopsCatch = () => {
   return (
-    <div className="relative grid min-h-svh w-full place-items-center bg-black text-white text-center">
+    <div className="relative grid w-full min-h-screen place-items-center bg-black text-white text-center">
       {/* テキストブロック */}
       <div className="px-4 sm:px-6 pt-16 pb-36 sm:pb-44 md:pb-52">
         <h1
