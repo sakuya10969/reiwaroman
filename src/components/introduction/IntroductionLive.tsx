@@ -25,21 +25,20 @@ const IntroductionLive = () => {
         aria-hidden
       />
 
-      {/* コンテンツ（← 右寄せ） */}
-      <div className="relative z-10 ml-auto w-full max-w-[1280px] px-6 lg:px-10 lg:pr-16 py-16 lg:py-24">
-        <div className="grid grid-cols-12 gap-6 lg:gap-10 items-start">
-          {/* 左のダミー余白は削除 */}
-
-          {/* 縦書き本文（左側） */}
-          <div className="col-span-12 lg:col-span-5 flex lg:justify-end">
+      {/* コンテンツ（右端に吸着） */}
+      <div className="relative z-10 ml-auto w-full min-h-screen px-6 lg:px-10 lg:pr-16 py-16 lg:py-24">
+        {/* PC: 横並び [本文][タイトル]、SP: 右寄せで縦並び（タイトルが上） */}
+        <div className="flex md:flex-row flex-col items-start justify-end gap-6 lg:gap-10 text-left">
+          
+          {/* 本文（左隣） */}
+          <div className="order-2 md:order-1 flex-shrink-0 self-start">
             <p
               className="
-                max-w-[22ch]
+                min-w-[40vw] md:max-w-none
                 text-base md:text-lg text-white/92
-                lg:[writing-mode:vertical-rl] lg:[text-orientation:upright]
-                lg:leading-7 lg:tracking-wider
-                lg:pr-10
-                scale-y-80 origin-center
+                md:[writing-mode:vertical-rl] md:[text-orientation:upright]
+                lg:leading-10 lg:tracking-wider
+                scale-y-80 origin-top
               "
               style={{ fontFamily: '"a-otf-futo-min-a101-pr6n", serif' }}
             >
@@ -52,32 +51,29 @@ const IntroductionLive = () => {
             </p>
           </div>
 
-          {/* 特大縦組み見出し（右側） */}
-          <div className="col-span-12 lg:col-span-7 flex lg:justify-end">
-            <h2
-              className="
-                font-extrabold
-                text-[clamp(28px,7.2vw,80px)]
-                text-white
-                lg:[writing-mode:vertical-rl] lg:[text-orientation:upright]
-                lg:leading-[1.08]
-                drop-shadow-[0_3px_12px_rgba(0,0,0,0.55)]
-                tracking-[0.04em]
-                scale-y-[0.7] origin-center
-              "
-              style={{ fontFamily: '"dnp-shuei-shogomincho-std", serif' }}
-            >
+          {/* タイトル（最右）— 各列を独立させて上端揃え */}
+          <div className="order-1 md:order-2 flex-shrink-0 self-start">
+            <div className="flex flex-col md:flex-row-reverse items-start gap-1 md:gap-3 lg:gap-4">
               {INTRODUCTION_LIVE_TITLE_LINES.map((line, i) => (
-                <span key={i}>
+                <span
+                  key={i}
+                  className="
+                    font-extrabold text-white
+                    text-[clamp(28px,7.2vw,80px)]
+                    drop-shadow-[0_3px_12px_rgba(0,0,0,0.55)]
+                    md:[writing-mode:vertical-rl] md:[text-orientation:upright]
+                    leading-[1.08]
+                    scale-y-70 origin-top
+                    whitespace-nowrap
+                  "
+                  style={{ fontFamily: '"dnp-shuei-shogomincho-std", serif' }}
+                >
                   {line}
-                  {i < INTRODUCTION_LIVE_TITLE_LINES.length - 1 && <br />}
                 </span>
               ))}
-            </h2>
+            </div>
           </div>
         </div>
-
-        <div className="mt-10 lg:mt-0" />
       </div>
     </div>
   );

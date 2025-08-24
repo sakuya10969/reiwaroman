@@ -22,7 +22,7 @@ const IntroductionVenue = () => {
       />
 
       {/* コンテンツ */}
-      <div className="relative z-10 text-center">
+      <div className="relative z-10 text-center max-w-[70vw]">
         <h1
           className="
             font-extrabold 
