@@ -47,7 +47,6 @@ export interface NewsListProps {
 
 export type HeaderTheme = "dark" | "red";
 
-
 export interface CastProps {
   badgeText?: string;
   castName?:string[];
