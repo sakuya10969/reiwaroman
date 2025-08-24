@@ -13,7 +13,7 @@ const NewsRow = ({ item }: { item: NewsItem }) => {
       className="group relative grid w-full items-center grid-cols-[auto_1fr_auto] gap-x-6 md:gap-x-8 rounded-lg px-2 md:px-4 py-2 md:py-3 transition-colors hover:bg-white/5"
     >
       {/* 日付 */}
-      <div className="flex items-center gap-6 md:gap-8 min-w-[200px] md:min-w-[240px]">
+      <div className="flex items-center gap-6 md:gap-8 min-w-[100px] md:min-w-[150px]">
         <div className="leading-none">
           <div
             className="text-lg md:text-base font-extrabold scale-x-130"
@@ -22,7 +22,7 @@ const NewsRow = ({ item }: { item: NewsItem }) => {
             {year}
           </div>
           <div
-            className="text-4xl md:text-5xl font-extrabold -mt-1 scale-x-130"
+            className="text-3xl md:text-5xl font-extrabold -mt-1 scale-x-130"
             style={{ fontFamily: "Prompt, sans-serif" }}
           >
             {md}

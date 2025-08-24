@@ -8,7 +8,7 @@ const NewsCatch = ({
 }: NewsCatchProps) => {
   return (
     <div
-      className="relative w-full min-h-[100vh] flex items-center"
+      className="relative w-full min-h-screen flex items-center"
       aria-label={`${badgeText} ${titleLines.join(" ")}`}
     >
       {/* 背景 */}
@@ -31,7 +31,7 @@ const NewsCatch = ({
       <div className="mx-auto flex w-full max-w-[1400px] items-center justify-center px-4 sm:px-6 lg:px-8">
         {/* 円形パネル */}
         <div
-          className="relative aspect-square w-[70vw] max-w-[400px] min-w-[400px] rounded-full shadow-2xl bg-[#a1252b]"
+          className="relative aspect-square w-[70vw] max-w-[400px] min-w-[200px] max-h-[400px] min-h-[200px] rounded-full shadow-2xl bg-[#a1252b]"
           role="img"
           aria-label={`${titleLines.join(" ")}`}
         >
@@ -56,9 +56,6 @@ const NewsCatch = ({
                 </span>
               ))}
             </h1>
-
-            {/* 下部スペース */}
-            <div className="flex-shrink-0"></div>
           </div>
 
           {/* 装飾: 外周の微妙なハイライト */}
