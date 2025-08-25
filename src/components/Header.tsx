@@ -120,7 +120,7 @@ const Header = ({ nav = NAV, ticketHref = "#ticket" }: HeaderProps) => {
 
         {/* モバイルメニュー（右側スライドアウト） */}
         <div
-          className={`md:hidden fixed top-0 right-0 h-screen w-50 bg-black/95 backdrop-blur-sm border-l border-white/10 transform transition-transform duration-300 ease-in-out z-40 ${
+          className={`md:hidden fixed top-0 right-0 h-screen w-45 bg-black/95 backdrop-blur-sm border-l border-white/10 transform transition-transform duration-300 ease-in-out z-40 ${
             isMobileMenuOpen ? "translate-x-0" : "translate-x-full"
           }`}
         >
@@ -136,7 +136,7 @@ const Header = ({ nav = NAV, ticketHref = "#ticket" }: HeaderProps) => {
                   href={item.href}
                   onClick={onNavClick}
                   className={[
-                    "block py-2 pl-2 text-sm font-bold transition-colors origin-left scale-x-130",
+                    "block py-2 pl-2 text-xs font-bold transition-colors origin-left scale-x-130",
                     activeColorClass || linkInactiveColor,
                   ].join(" ")}
                   style={{ fontFamily: "Prompt, sans-serif" }}
@@ -151,7 +151,7 @@ const Header = ({ nav = NAV, ticketHref = "#ticket" }: HeaderProps) => {
               href={ticketHref}
               onClick={() => setIsMobileMenuOpen(false)}
               className={[
-                "inline-flex items-center gap-2 rounded-full pl-6 pr-2 py-2 text-sm uppercase font-bold whitespace-nowrap transition-colors focus-visible:outline-none focus-visible:ring-2 mt-1",
+                "inline-flex items-center gap-2 rounded-full pl-5 pr-1 py-1 text-xs uppercase font-bold whitespace-nowrap transition-colors focus-visible:outline-none focus-visible:ring-2 mt-1",
                 ticketButtonClass(currentTheme),
                 ticketFocusRingClass(currentTheme),
               ].join(" ")}
