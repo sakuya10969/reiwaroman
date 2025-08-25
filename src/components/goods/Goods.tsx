@@ -1,4 +1,4 @@
-import { ChevronRight } from "lucide-react";
+// import { ChevronRight } from "lucide-react";
 
 // import goods_1 from "@/assets/goods_1.png";
 // import goods_2 from "@/assets/goods_2.png";
