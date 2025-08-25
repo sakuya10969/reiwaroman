@@ -25,7 +25,8 @@ export interface NewsCatchProps {
 };
 
 export interface Slide {
-  src: string;
+  srcDesktop: string;
+  srcMobile?: string;
   alt: string;
 }
 
