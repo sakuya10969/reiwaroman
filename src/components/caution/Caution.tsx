@@ -26,7 +26,7 @@ const Caution = ({
             className="text-sm text-white/90 md:text-sm font-bold transform scale-x-150"
             style={{ fontFamily: 'Prompt, sans-serif' }}
           >
-            <span className="inline-block font-bold uppercase underline underline-offset-5">
+            <span className="inline-block uppercase underline underline-offset-4">
               {badgeText}
             </span>
           </div>

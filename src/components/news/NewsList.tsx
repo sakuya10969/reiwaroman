@@ -14,7 +14,7 @@ const NewsList = ({
           className="w-full text-center text-sm md:text-base font-bold"
           style={{ fontFamily: "Prompt, sans-serif" }}
         >
-          <span className="inline-block underline underline-offset-8 decoration-2 scale-x-130 scale-y-80">
+          <span className="inline-block underline underline-offset-4 scale-x-150" style={{ fontFamily: "Prompt, sans-serif" }}>
             NEWS
           </span>
         </p>

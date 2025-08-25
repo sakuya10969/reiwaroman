@@ -27,7 +27,7 @@ const IntroductionCatch = ({
   }, [interval]);
 
   return (
-    <div className="relative w-full max-h-screen flex items-center justify-center text-white overflow-hidden bg-black pt-4 pb-8">
+    <div className="relative w-full max-h-screen flex items-center justify-center text-white overflow-hidden bg-black pt-8 pb-8">
       {/* 背景スライド - レスポンシブ対応 */}
       {slides.map((slide, i) => (
         <picture key={i} className="absolute inset-0">
@@ -52,7 +52,7 @@ const IntroductionCatch = ({
       {/* コンテンツ */}
       <div className="relative z-10 mx-auto max-w-[90vw] md:max-w-[70vw] px-6 flex flex-col justify-center items-center">
         {/* 小見出し */}
-        <span className="inline-block text-sm md:text-base font-bold uppercase underline underline-offset-4 scale-x-130 scale-y-80" style={{ fontFamily: 'Prompt, sans-serif' }}>
+        <span className="inline-block text-sm md:text-base font-bold uppercase underline underline-offset-4 scale-x-150" style={{ fontFamily: 'Prompt, sans-serif' }}>
           Introduction
         </span>
 
