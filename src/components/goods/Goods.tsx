@@ -65,13 +65,13 @@ const Goods = ({
             href={goodsPurchaseUrl} 
             target="_blank" 
             rel="noopener noreferrer"
-            className="inline-flex items-center justify-between text-white rounded tracking-wide transition-colors duration-200 leading-none py-2 px-6"
+            className="inline-flex items-center justify-between text-white rounded tracking-wide transition-colors duration-200 leading-none py-2 px-6 whitespace-nowrap"
             style={{
               backgroundColor: "#a01e22",
               fontFamily: 'momochidori, sans-serif',
               fontWeight: 500,
               borderRadius: "30px",
-              fontSize: "1.2em",
+              fontSize: "1.1em",
             }}
             onMouseEnter={e => e.currentTarget.style.backgroundColor = "#b3272b"}
             onMouseLeave={e => e.currentTarget.style.backgroundColor = "#a01e22"}
