@@ -15,7 +15,7 @@ const Cast = ({
   castImageUrl = [CastReiwa, CastMayurika, CastNanamagari, CastMitorizu],
 }: CastProps) => {
   return (
-    <div className="relative w-full min-h-screen isolate flex items-center justify-center">
+    <div className="relative w-full isolate flex items-center justify-center">
       {/* 背景 */}
       <div
         className="absolute inset-0 bg-black -z-10"
@@ -23,7 +23,7 @@ const Cast = ({
       />
 
       {/* コンテンツ */}
-      <div className="max-w-6xl mx-auto py-20 px-4">
+      <div className="max-w-6xl mx-auto pt-12 px-4">
         {/* 上部のバッジ */}
         <div className="flex justify-center mb-10">
           <div
