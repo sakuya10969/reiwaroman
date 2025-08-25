@@ -62,7 +62,7 @@ const Goods = ({
               className="text-white/90 text-base md:text-lg lg:text-xl leading-relaxed mb-10"
               style={{ fontFamily: '"dnp-shuei-shogomincho-std", serif' }}
             >
-              REIWAROMAN関連グッズの詳細情報は現在準備中です。<br />
+              令和ロマン関連グッズの詳細情報は現在準備中です。<br />
               オリジナルTシャツ、ステッカー、タオル、ペンライトなど、<br />
               様々なアイテムをご用意予定です。<br />
               販売開始時期や価格、デザインなどの詳細が決まり次第、<br />
