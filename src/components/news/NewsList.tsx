@@ -7,7 +7,7 @@ const NewsList = ({
   pyClass = "py-16 md:py-24",
 }: NewsListProps) => {
   return (
-    <div className={`relative text-white w-full min-h-screen flex items-center justify-center ${bgColorClass}`}>
+    <div className={`relative text-white w-full max-h-screen flex items-center justify-center ${bgColorClass}`}>
       <div className={`mx-auto max-w-[80vw] px-4 ${pyClass}`}>
         {/* 見出し */}
         <h2

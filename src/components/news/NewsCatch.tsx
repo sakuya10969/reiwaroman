@@ -8,7 +8,7 @@ const NewsCatch = ({
 }: NewsCatchProps) => {
   return (
     <div
-      className="relative w-full min-h-screen flex items-center"
+      className="relative w-full max-h-screen flex items-center py-16"
       aria-label={`${badgeText} ${titleLines.join(" ")}`}
     >
       {/* 背景 */}
