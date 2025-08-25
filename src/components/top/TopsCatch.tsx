@@ -3,7 +3,7 @@ import logo_5 from "@/assets/logo_5.png";
 
 const TopsCatch = () => {
   return (
-    <div className="relative grid w-full min-h-screen place-items-center bg-black text-white text-center">
+    <div className="relative grid w-full min-h-[80vh] place-items-center bg-black text-white text-center">
       {/* テキストブロック */}
       <div className="px-4 sm:px-6 w-[70vw] max-w-[70vw] flex flex-col items-center">
         {TOPS_CATCH_TITLE_LINES.map((line, index) => (
