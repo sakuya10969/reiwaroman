@@ -59,11 +59,13 @@ const Header = ({ nav = NAV, ticketHref = "#ticket" }: HeaderProps) => {
       <div className="w-full px-4">
         <div className="relative h-16 flex items-center justify-between">
           {/* 左：ロゴ */}
-          <img
-            src={logo_5}
-            alt="REIWAROMAN"
-            className="h-10 w-auto object-contain pointer-events-none select-none"
-          />
+          <div className="flex-shrink-0 w-[15vw]">
+            <img
+              src={logo_5}
+              alt="REIWAROMAN"
+              className="h-10 w-full object-contain object-left pointer-events-none select-none"
+            />
+          </div>
 
           {/* 右：ナビ + TICKET */}
           <div className="flex items-center gap-3">
