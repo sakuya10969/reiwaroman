@@ -33,7 +33,7 @@ const TopsRotator = () => {
     <div className="relative w-full min-h-screen overflow-hidden">
       <div
         className={[
-          "absolute inset-0 transition-opacity duration-1500 ease-out",
+          "absolute inset-0 transition-opacity duration-1500 ease-linear",
           isCatch ? "opacity-100" : "opacity-0",
         ].join(" ")}
       >
@@ -42,7 +42,7 @@ const TopsRotator = () => {
 
       <div
         className={[
-          "absolute inset-0 transition-opacity duration-1500 ease-out",
+          "absolute inset-0 transition-opacity duration-1500 ease-linear",
           isVisual ? "opacity-100" : "opacity-0",
         ].join(" ")}
       >
