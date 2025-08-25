@@ -60,26 +60,24 @@ const Goods = ({
             </div>
           ))}
         </div>
-        <div className="max-w-xl mx-auto mt-12 px-4 flex justify-center  ">
-          <a href={goodsPurchaseUrl} target="_blank" rel="noopener noreferrer">
-            <button
-              className="text-white rounded tracking-wide transition-colors duration-200"
-              style={{
-                backgroundColor: "#a01e22",
-                fontFamily: 'momochidori, sans-serif',
-                fontWeight: 500,
-                borderRadius: "30px",
-                fontSize: "1.2em",
-                border: "none"
-              }}
-              onMouseEnter={e => e.currentTarget.style.backgroundColor = "#b3272b"}
-              onMouseLeave={e => e.currentTarget.style.backgroundColor = "#a01e22"}
-            >
-              <span className="flex items-center justify-between">
-                オンラインでの購入はこちら
-                <ChevronRight size={24} />
-              </span>
-            </button>
+        <div className="max-w-xl mx-auto mt-12 px-4 flex justify-center">
+          <a 
+            href={goodsPurchaseUrl} 
+            target="_blank" 
+            rel="noopener noreferrer"
+            className="inline-flex items-center justify-between text-white rounded tracking-wide transition-colors duration-200 leading-none py-2 px-6"
+            style={{
+              backgroundColor: "#a01e22",
+              fontFamily: 'momochidori, sans-serif',
+              fontWeight: 500,
+              borderRadius: "30px",
+              fontSize: "1.2em",
+            }}
+            onMouseEnter={e => e.currentTarget.style.backgroundColor = "#b3272b"}
+            onMouseLeave={e => e.currentTarget.style.backgroundColor = "#a01e22"}
+          >
+            オンラインでの購入はこちら
+            <ChevronRight size={24} />
           </a>
         </div>
       </div>
