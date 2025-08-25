@@ -38,7 +38,7 @@ const NewsCatch = ({
           {/* 内側レイアウト */}
           <div className="absolute inset-0 flex flex-col items-center justify-between text-center px-6 py-16">
             {/* BADGE - 上部 */}
-            <div className="text-sm sm:text-base md:text-lg lg:text-xl text-white/90 flex-shrink-0 relative top-2">
+            <div className="text-sm md:text-lg lg:text-xl text-white/90 flex-shrink-0 relative top-2">
               <span className="inline-block font-bold border-b-2 border-white/80 pb-0.5 scale-x-130 scale-y-80 origin-center" style={{ fontFamily: 'Prompt, sans-serif' }}>
                 {badgeText}
               </span>

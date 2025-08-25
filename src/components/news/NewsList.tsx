@@ -10,14 +10,14 @@ const NewsList = ({
     <div className={`relative text-white w-full max-h-screen flex items-center justify-center ${bgColorClass}`}>
       <div className={`mx-auto max-w-[80vw] px-4 ${pyClass}`}>
         {/* 見出し */}
-        <h2
-          className="w-full text-center text-2xl md:text-3xl font-bold"
+        <p
+          className="w-full text-center text-sm md:text-base font-bold"
           style={{ fontFamily: "Prompt, sans-serif" }}
         >
           <span className="inline-block underline underline-offset-8 decoration-2 scale-x-130 scale-y-80">
             NEWS
           </span>
-        </h2>
+        </p>
 
         {/* リスト */}
         <div className="mt-4 md:mt-8 space-y-1 md:space-y-2">
