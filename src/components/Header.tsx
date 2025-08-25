@@ -13,6 +13,7 @@ import {
   ticketButtonClass,
   ticketFocusRingClass,
 } from "@/theme/headerTheme";
+import logo_5 from "@/assets/logo_5.png";
 
 const Header = ({ nav = NAV, ticketHref = "#ticket" }: HeaderProps) => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState<boolean>(false);
@@ -59,7 +60,7 @@ const Header = ({ nav = NAV, ticketHref = "#ticket" }: HeaderProps) => {
         <div className="relative h-16 flex items-center justify-between">
           {/* 左：ロゴ */}
           <img
-            src="src/assets/5.png"
+            src={logo_5}
             alt="REIWAROMAN"
             className="h-10 w-auto object-contain pointer-events-none select-none"
           />

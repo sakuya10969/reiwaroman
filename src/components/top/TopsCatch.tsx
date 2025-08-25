@@ -1,4 +1,5 @@
 import { TOPS_CATCH_TITLE_LINES, TOPS_CATCH_SUBTITLE } from "@/constants";
+import logo_5 from "@/assets/logo_5.png";
 
 const TopsCatch = () => {
   return (
@@ -32,7 +33,7 @@ const TopsCatch = () => {
       <div className="pointer-events-none select-none absolute inset-x-0
                       flex justify-center bottom-10">
         <img
-          src="src/assets/5.png"
+          src={logo_5}
           alt="REIWAROMAN"
           className="h-auto object-contain w-[35vw]"
         />
