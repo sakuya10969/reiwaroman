@@ -23,9 +23,9 @@ import type { GoodsProps } from "@/types";
 
 const Goods = ({
   badgeText = "GOODS",
-  goodsName = ["フェスTシャツ : 各4000円","オリジナルステッカーセット : 1000円","松尾のお薬ケース～復刻版～ : 1200円","オリジナルペンライト : 2500円","マフラータオル[全2種] : 2000円","チョコプラヘアバンド : セット 4200円 / 単品 各2200円","オリジナルエコバッグ : 1000円","チョコスタ[全2種] : 各1000円"],
-  goodsImageUrl = [],
-  goodsPurchaseUrl = "https://example.com",
+  // goodsName = ["フェスTシャツ : 各4000円","オリジナルステッカーセット : 1000円","松尾のお薬ケース～復刻版～ : 1200円","オリジナルペンライト : 2500円","マフラータオル[全2種] : 2000円","チョコプラヘアバンド : セット 4200円 / 単品 各2200円","オリジナルエコバッグ : 1000円","チョコスタ[全2種] : 各1000円"],
+  // goodsImageUrl = [],
+  // goodsPurchaseUrl = "https://example.com",
 }: GoodsProps) => {
   return (
     <div className="relative w-full isolate">
