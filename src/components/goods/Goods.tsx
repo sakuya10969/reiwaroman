@@ -1,30 +1,30 @@
 import { ChevronRight } from "lucide-react";
 
-import goods_1 from "@/assets/goods_1.png";
-import goods_2 from "@/assets/goods_2.png";
-import goods_3 from "@/assets/goods_3.png";
-import goods_4 from "@/assets/goods_4.png";
-import goods_5 from "@/assets/goods_5.png";
-import goods_6 from "@/assets/goods_6.png";
-import goods_7 from "@/assets/goods_7.png";
-import goods_8 from "@/assets/goods_8.png";
+// import goods_1 from "@/assets/goods_1.png";
+// import goods_2 from "@/assets/goods_2.png";
+// import goods_3 from "@/assets/goods_3.png";
+// import goods_4 from "@/assets/goods_4.png";
+// import goods_5 from "@/assets/goods_5.png";
+// import goods_6 from "@/assets/goods_6.png";
+// import goods_7 from "@/assets/goods_7.png";
+// import goods_8 from "@/assets/goods_8.png";
 
 import type { GoodsProps } from "@/types";
 
-const Goods1 = goods_1;
-const Goods2 = goods_2;
-const Goods3 = goods_3;
-const Goods4 = goods_4;
-const Goods5 = goods_5;
-const Goods6 = goods_6;
-const Goods7 = goods_7;
-const Goods8 = goods_8;
+// const Goods1 = goods_1;
+// const Goods2 = goods_2;
+// const Goods3 = goods_3;
+// const Goods4 = goods_4;
+// const Goods5 = goods_5;
+// const Goods6 = goods_6;
+// const Goods7 = goods_7;
+// const Goods8 = goods_8;
 
 
 const Goods = ({
   badgeText = "GOODS",
   goodsName = ["フェスTシャツ : 各4000円","オリジナルステッカーセット : 1000円","松尾のお薬ケース～復刻版～ : 1200円","オリジナルペンライト : 2500円","マフラータオル[全2種] : 2000円","チョコプラヘアバンド : セット 4200円 / 単品 各2200円","オリジナルエコバッグ : 1000円","チョコスタ[全2種] : 各1000円"],
-  goodsImageUrl = [Goods1,Goods2,Goods3,Goods4,Goods5,Goods6,Goods7,Goods8],
+  goodsImageUrl = [],
   goodsPurchaseUrl = "https://example.com",
 }: GoodsProps) => {
   return (
@@ -38,7 +38,7 @@ const Goods = ({
       {/* コンテンツ */}
       <div className="max-w-6xl mx-auto py-20 px-4">
         {/* 上部のバッジ */}
-        <div className="flex justify-center mb-10">
+        <div className="flex justify-center">
           <div
             className="text-sm text-white/90 md:text-base font-bold transform scale-x-150"
             style={{ fontFamily: 'Prompt, sans-serif' }}
@@ -48,8 +48,31 @@ const Goods = ({
             </span>
           </div>
         </div>
-        {/* グッズ一覧 */}
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-5">
+
+        {/* 準備中メッセージ */}
+        <div className="flex flex-col items-center justify-center py-20 px-4">
+          <div className="text-center max-w-2xl">
+            <h2 
+              className="text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-8"
+              style={{ fontFamily: '"dnp-shuei-shogomincho-std", serif' }}
+            >
+              グッズ詳細準備中
+            </h2>
+            <p 
+              className="text-white/90 text-base md:text-lg lg:text-xl leading-relaxed mb-10"
+              style={{ fontFamily: '"dnp-shuei-shogomincho-std", serif' }}
+            >
+              REIWAROMAN関連グッズの詳細情報は現在準備中です。<br />
+              オリジナルTシャツ、ステッカー、タオル、ペンライトなど、<br />
+              様々なアイテムをご用意予定です。<br />
+              販売開始時期や価格、デザインなどの詳細が決まり次第、<br />
+              こちらのページでお知らせいたします。
+            </p>
+          </div>
+        </div>
+
+        {/* グッズ一覧（コメントアウト） */}
+        {/* <div className="grid grid-cols-2 md:grid-cols-4 gap-5">
           {goodsImageUrl.map((photo, index) => (
             <div key={index} className="text-center">
               <img
@@ -59,8 +82,10 @@ const Goods = ({
               />
             </div>
           ))}
-        </div>
-        <div className="max-w-xl mx-auto mt-12 px-4 flex justify-center">
+        </div> */}
+
+        {/* 購入ボタン（コメントアウト） */}
+        {/* <div className="max-w-xl mx-auto mt-12 px-4 flex justify-center">
           <a 
             href={goodsPurchaseUrl}
             target="_blank" 
@@ -79,7 +104,7 @@ const Goods = ({
             オンラインでの購入はこちら
             <ChevronRight size={24} />
           </a>
-        </div>
+        </div> */}
       </div>
     </div>
   );
