@@ -120,9 +120,9 @@ const Header = ({ nav = NAV, ticketHref = "#ticket" }: HeaderProps) => {
 
         {/* モバイルメニュー（右側スライドアウト） */}
         <div
-          className={`md:hidden fixed top-0 right-0 h-screen w-45 bg-black/95 backdrop-blur-sm border-l border-white/10 transform transition-transform duration-300 ease-in-out z-40 ${
+          className={`md:hidden fixed top-0 right-0 h-screen w-45 backdrop-blur-sm border-l border-white/10 transform transition-transform duration-300 ease-in-out z-40 ${
             isMobileMenuOpen ? "translate-x-0" : "translate-x-full"
-          }`}
+          } ${currentTheme === "red" ? "bg-[#8f242b]/95" : "bg-black/95"}`}
         >
           <nav className="px-6 py-10">
             {nav.map((item, idx) => {
