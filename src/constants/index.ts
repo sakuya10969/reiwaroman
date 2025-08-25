@@ -10,6 +10,14 @@ export const NAV: NavItem[] = [
   { label: "GOODS",         href: "#goods",             sectionIds: ["goods"] },
 ];
 
+export const TOPS_CATCH_TITLE_LINES: string[] = [
+  "日本一の漫才師、","限界突破へ。",
+];
+
+export const TOPS_CATCH_SUBTITLE: string[] = [
+  "JAPAN'S TOP MANZAI COMEDIANS,", "BREAKING ALL LIMITS.",
+];
+
 export const NEWS: NewsItem[] = [
   { date: "2025-09-13", title: "応援グッズに関して", href: "/news/20250913" },
   { date: "2025-09-01", title: "「RE:IWAROMAN」プレミアムチケット特典引換・特典会の詳細が決定！", href: "/news/20250901" },
