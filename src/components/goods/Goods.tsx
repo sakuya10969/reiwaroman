@@ -36,9 +36,9 @@ const Goods = ({
       />
 
       {/* コンテンツ */}
-      <div className="max-w-6xl mx-auto py-20 px-4">
+      <div className="max-w-6xl mx-auto pt-10 pb-6 px-4">
         {/* 上部のバッジ */}
-        <div className="flex justify-center">
+        <div className="flex justify-center mb-8">
           <div
             className="text-sm text-white/90 md:text-base font-bold transform scale-x-150"
             style={{ fontFamily: 'Prompt, sans-serif' }}
@@ -50,16 +50,16 @@ const Goods = ({
         </div>
 
         {/* 準備中メッセージ */}
-        <div className="flex flex-col items-center justify-center py-20 px-4">
+        <div className="flex flex-col items-center justify-center pb-8">
           <div className="text-center max-w-2xl">
             <h2 
-              className="text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-8"
+              className="text-2xl md:text-3xl lg:text-4xl font-bold text-white mb-6"
               style={{ fontFamily: '"dnp-shuei-shogomincho-std", serif' }}
             >
               グッズ詳細準備中
             </h2>
-            <p 
-              className="text-white/90 text-base md:text-lg lg:text-xl leading-relaxed mb-10"
+            <p
+              className="text-white/90 text-sm md:text-base lg:text-lg leading-relaxed"
               style={{ fontFamily: '"dnp-shuei-shogomincho-std", serif' }}
             >
               令和ロマン関連グッズの詳細情報は現在準備中です。<br />
