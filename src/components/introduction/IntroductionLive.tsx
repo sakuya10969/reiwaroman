@@ -35,7 +35,7 @@ const IntroductionLive = () => {
             <p
               className="
                 min-w-[40vw] md:max-w-none
-                text-base md:text-lg text-white/92
+                text-sm md:text-base text-white/92
                 md:[writing-mode:vertical-rl] md:[text-orientation:upright]
                 lg:leading-10 lg:tracking-wider
               "
@@ -58,7 +58,7 @@ const IntroductionLive = () => {
                   key={i}
                   className="
                     font-extrabold text-white
-                    text-[clamp(28px,7.2vw,70px)]
+                    text-3xl md:text-6xl
                     drop-shadow-[0_3px_12px_rgba(0,0,0,0.55)]
                     md:[writing-mode:vertical-rl] md:[text-orientation:upright]
                     leading-[1.08]

@@ -50,14 +50,14 @@ const IntroductionCatch = ({
       <div className="absolute inset-0 bg-black/70" />
 
       {/* コンテンツ */}
-      <div className="relative z-10 mx-auto max-w-[70vw] px-6 flex flex-col justify-center items-center">
+      <div className="relative z-10 mx-auto max-w-[90vw] md:max-w-[70vw] px-6 flex flex-col justify-center items-center">
         {/* 小見出し */}
         <span className="inline-block text-sm md:text-base font-bold uppercase underline underline-offset-4 scale-x-130 scale-y-80" style={{ fontFamily: 'Prompt, sans-serif' }}>
           Introduction
         </span>
 
         {/* メイン見出し */}
-        <p className="mt-8 text-[clamp(28px,6.5vw,80px)] leading-[1.05] font-extrabold scale-x-150 tracking-[0.03em]" style={{ fontFamily: 'Prompt, sans-serif' }}>
+        <p className="mt-8 text-2xl md:text-4xl leading-[1.05] font-extrabold scale-x-150 tracking-[0.03em]" style={{ fontFamily: 'Prompt, sans-serif' }}>
           RE:IWAROMAN
         </p>
 
