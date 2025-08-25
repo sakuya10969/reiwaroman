@@ -59,7 +59,7 @@ const Header = ({ nav = NAV, ticketHref = "https://example.com" }: HeaderProps) 
       <div className="w-full">
         <div className="relative h-16 flex items-start justify-between pt-2 px-2">
           {/* 左：ロゴ */}
-          <div className="flex-shrink-0">
+          <div className="flex-shrink-0 mt-1 ml-1">
             <img
               src={logo_5}
               alt="REIWAROMAN"
@@ -118,14 +118,14 @@ const Header = ({ nav = NAV, ticketHref = "https://example.com" }: HeaderProps) 
               className="md:hidden p-2 transition-colors hover:text-gray-300 relative z-50"
               aria-label="メニューを開く"
             >
-              {isMobileMenuOpen ? <X size={16} /> : <Menu size={16} />}
+              {isMobileMenuOpen ? <X size={20} /> : <Menu size={20} />}
             </button>
           </div>
         </div>
 
         {/* モバイルメニュー（右側スライドアウト） */}
         <div
-          className={`md:hidden fixed top-0 right-0 w-45 backdrop-blur-sm border-l border-white/10 transform transition-transform duration-300 ease-in-out z-40 ${
+          className={`md:hidden fixed top-0 right-0 w-50 backdrop-blur-sm border-l border-white/10 transform transition-transform duration-300 ease-in-out z-40 ${
             isMobileMenuOpen ? "translate-x-0" : "translate-x-full"
           } ${currentTheme === "red" ? "bg-[#8f242b]/95" : "bg-black/95"}`}
         >
@@ -141,7 +141,7 @@ const Header = ({ nav = NAV, ticketHref = "https://example.com" }: HeaderProps) 
                   href={item.href}
                   onClick={onNavClick}
                   className={[
-                    "block py-2 pl-2 text-xs font-bold transition-colors origin-left scale-x-130",
+                    "block py-2 pl-2 text-sm font-bold transition-colors origin-left scale-x-130",
                     activeColorClass || linkInactiveColor,
                   ].join(" ")}
                   style={{ fontFamily: "Prompt, sans-serif" }}
@@ -158,7 +158,7 @@ const Header = ({ nav = NAV, ticketHref = "https://example.com" }: HeaderProps) 
               rel="noopener noreferrer"
               onClick={() => setIsMobileMenuOpen(false)}
               className={[
-                "inline-flex items-center gap-2 rounded-full pl-5 pr-1 py-1 text-xs uppercase font-bold whitespace-nowrap transition-colors focus-visible:outline-none focus-visible:ring-2 mt-1",
+                "inline-flex items-center gap-2 rounded-full pl-6 pr-2 py-1 text-sm uppercase font-bold whitespace-nowrap transition-colors focus-visible:outline-none focus-visible:ring-2 mt-1",
                 ticketButtonClass(currentTheme),
                 ticketFocusRingClass(currentTheme),
               ].join(" ")}

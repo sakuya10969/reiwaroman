@@ -53,12 +53,12 @@ const TopsVisual = ({ resetSignal = 0, active = true }: TopsVisualProps) => {
       ].join(" ")}
     >
       {/* 1) ヘッダーと重ならないための 64px スペーサー（黒帯） */}
-      {/* <div className="w-full h-4 bg-black" aria-hidden /> */}
+      {/* <div className="w-full h-2 bg-black" aria-hidden /> */}
 
       {/* 2) 画像ステージ（ここから画像が始まる） */}
       <div className="relative w-full min-h-[50vh]">
         {/* 背景画像をステージ全面に敷く */}
-        <div className="absolute inset-0 z-0">
+        <div className="absolute inset-0 z-0 mt-2">
           {slides.map((s, i) => (
             <picture key={i} className="absolute inset-0">
               <source media="(max-width: 400px)" srcSet={s.srcMobile ?? s.srcDesktop} />
