@@ -56,14 +56,14 @@ const Header = ({ nav = NAV, ticketHref = "https://example.com" }: HeaderProps) 
   // TICKET ボタンは従来通り赤基調固定
   return (
     <header className="fixed inset-x-0 top-0 z-50 bg-transparent">
-      <div className="w-full px-4">
-        <div className="relative h-16 flex items-center justify-between">
+      <div className="w-full">
+        <div className="relative h-16 flex items-start justify-between pt-2 px-2">
           {/* 左：ロゴ */}
           <div className="flex-shrink-0">
             <img
               src={logo_5}
               alt="REIWAROMAN"
-              className="h-12 w-32 object-contain object-left pointer-events-none select-none"
+              className="h-8 w-24 object-contain object-left pointer-events-none select-none"
             />
           </div>
 
@@ -125,7 +125,7 @@ const Header = ({ nav = NAV, ticketHref = "https://example.com" }: HeaderProps) 
 
         {/* モバイルメニュー（右側スライドアウト） */}
         <div
-          className={`md:hidden fixed top-0 right-0 h-screen w-45 backdrop-blur-sm border-l border-white/10 transform transition-transform duration-300 ease-in-out z-40 ${
+          className={`md:hidden fixed top-0 right-0 w-45 backdrop-blur-sm border-l border-white/10 transform transition-transform duration-300 ease-in-out z-40 ${
             isMobileMenuOpen ? "translate-x-0" : "translate-x-full"
           } ${currentTheme === "red" ? "bg-[#8f242b]/95" : "bg-black/95"}`}
         >
