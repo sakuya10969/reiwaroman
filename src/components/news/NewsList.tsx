@@ -8,7 +8,7 @@ const NewsList = ({
 }: NewsListProps) => {
   return (
     <div className={`relative text-white w-full min-h-screen flex items-center justify-center ${bgColorClass}`}>
-      <div className={`mx-auto max-w-[70vw] px-4 ${pyClass}`}>
+      <div className={`mx-auto max-w-[80vw] px-4 ${pyClass}`}>
         {/* 見出し */}
         <h2
           className="w-full text-center text-2xl md:text-3xl font-bold"
