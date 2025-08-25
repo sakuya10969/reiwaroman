@@ -27,7 +27,7 @@ const IntroductionCatch = ({
   }, [interval]);
 
   return (
-    <div className="relative w-full min-h-screen sm:min-h-screen max-sm:min-h-[80vh] flex items-center justify-center text-white overflow-hidden bg-black">
+    <div className="relative w-full max-h-screen flex items-center justify-center text-white overflow-hidden bg-black pt-4 pb-8">
       {/* 背景スライド - レスポンシブ対応 */}
       {slides.map((slide, i) => (
         <picture key={i} className="absolute inset-0">
