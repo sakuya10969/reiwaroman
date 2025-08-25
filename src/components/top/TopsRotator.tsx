@@ -30,7 +30,7 @@ const TopsRotator = () => {
   const isVisual = current.key === "visual";
 
   return (
-    <div className="relative w-full min-h-screen overflow-hidden">
+    <div className="relative w-full h-[50vh] overflow-hidden">
       <div
         className={[
           "absolute inset-0 transition-opacity duration-1500 ease-linear",

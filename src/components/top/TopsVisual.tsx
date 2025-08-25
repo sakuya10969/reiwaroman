@@ -1,5 +1,4 @@
 import { useEffect, useLayoutEffect, useRef, useState } from "react";
-
 import type { Slide, TopsVisualProps } from "@/types";
 import reiwa2 from "@/assets/reiwa_2.png";
 import reiwa2_mobile from "@/assets/reiwa_2_mobile.png";
@@ -14,24 +13,18 @@ const slides: Slide[] = [
 
 const TopsVisual = ({ resetSignal = 0, active = true }: TopsVisualProps) => {
   const [index, setIndex] = useState<number>(0);
-  const [primed, setPrimed] = useState<boolean>(false); // 初期化完了フラグ
+  const [primed, setPrimed] = useState<boolean>(false);
   const timeoutRef = useRef<number | null>(null);
   const raf1 = useRef<number | null>(null);
   const raf2 = useRef<number | null>(null);
 
-  // コンポーネントがアクティブになった際の初期化処理
   useLayoutEffect(() => {
     if (!active) return;
     setPrimed(false);
     setIndex(0);
-
-    // 2フレーム待機してから表示開始（状態変更の安定化）
     raf1.current = window.requestAnimationFrame(() => {
-      raf2.current = window.requestAnimationFrame(() => {
-        setPrimed(true); // フェードイン開始
-      });
+      raf2.current = window.requestAnimationFrame(() => setPrimed(true));
     });
-
     return () => {
       if (raf1.current) cancelAnimationFrame(raf1.current);
       if (raf2.current) cancelAnimationFrame(raf2.current);
@@ -39,10 +32,8 @@ const TopsVisual = ({ resetSignal = 0, active = true }: TopsVisualProps) => {
     };
   }, [resetSignal, active]);
 
-  // スライド自動切り替えタイマー
   useEffect(() => {
-    if (!active) return;
-    if (!primed) return; // 初期化完了まで待機
+    if (!active || !primed) return;
     timeoutRef.current = window.setTimeout(() => {
       setIndex(1);
       timeoutRef.current = null;
@@ -56,30 +47,43 @@ const TopsVisual = ({ resetSignal = 0, active = true }: TopsVisualProps) => {
   return (
     <div
       className={[
-        "relative w-full min-h-screen bg-black",
-        // 初期化完了まで非表示（外部フェードより早い隠し）
+        "relative w-full bg-black",
         primed ? "opacity-100" : "opacity-0",
-        "transition-opacity duration-0", // 瞬時切替（外部がフェード制御）
+        "transition-opacity duration-0",
       ].join(" ")}
     >
-      {slides.map((s, i) => (
-        <picture key={i} className="absolute inset-0">
-          {/* モバイル用画像切り替え閾値 */}
-          <source media="(max-width: 400px)" srcSet={s.srcMobile ?? s.srcDesktop} />
+      {/* 1) ヘッダーと重ならないための 64px スペーサー（黒帯） */}
+      {/* <div className="w-full h-4 bg-black" aria-hidden /> */}
+
+      {/* 2) 画像ステージ（ここから画像が始まる） */}
+      <div className="relative w-full min-h-[50vh]">
+        {/* 背景画像をステージ全面に敷く */}
+        <div className="absolute inset-0 z-0">
+          {slides.map((s, i) => (
+            <picture key={i} className="absolute inset-0">
+              <source media="(max-width: 400px)" srcSet={s.srcMobile ?? s.srcDesktop} />
+              <img
+                src={s.srcDesktop}
+                alt={s.alt}
+                className={[
+                  "w-full h-full",
+                  "object-cover sm:object-cover max-sm:object-contain max-sm:object-center",
+                  "transition-opacity duration-1500 ease-linear",
+                  i === index ? "opacity-100" : "opacity-0",
+                ].join(" ")}
+              />
+            </picture>
+          ))}
+        </div>
+
+        {/* 3) ロゴ：画像の“下部あたり”に重ねる（中央下寄せ） */}
+        <div className="absolute left-1/2 -translate-x-1/2 bottom-10 z-10">
           <img
-            src={s.srcDesktop} // デスクトップ・タブレット用
-            alt={s.alt}
-            className={[
-              "w-full h-full transition-opacity duration-1500 ease-linear",
-              // レスポンシブ表示制御：デスクトップは画面全体カバー、モバイルは画像全体表示
-              "object-cover sm:object-cover max-sm:object-contain max-sm:object-center",
-              i === index ? "opacity-100" : "opacity-0",
-            ].join(" ")}
+            src={logo_5}
+            alt="REIWAROMAN"
+            className="w-44 md:w-48 h-auto object-contain"
           />
-        </picture>
-      ))}
-      <div className="absolute bottom-10 inset-x-0 flex justify-center">
-        <img src={logo_5} alt="REIWAROMAN" className="h-24 sm:h-28 md:h-32 lg:h-36 object-contain min-w-[35vw] max-w-[60vw]" />
+        </div>
       </div>
     </div>
   );
