@@ -19,7 +19,7 @@ const Caution = ({
       <div className="absolute inset-0 bg-[#e12027]/50 -z-18" aria-hidden="true" />
 
       {/* コンテンツ */}
-      <div className="max-w-6xl mx-auto py-20 px-4 flex flex-col items-center">
+      <div className="max-w-6xl mx-auto py-12 px-4 flex flex-col items-center">
         {/* 上部のバッジ */}
         <div className="flex justify-center mb-10">
           <div
