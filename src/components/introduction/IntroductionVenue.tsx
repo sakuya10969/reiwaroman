@@ -1,6 +1,5 @@
 import reiwa6_blackwhite from "@/assets/reiwa_6_blackwhite.png";
 
-const BG = reiwa6_blackwhite; // 例: "/assets/arena-venue.jpg"。空文字なら黒背景
 const TINT = 0.55; // 黒の暗幕（0〜1）
 
 const IntroductionVenue = () => {
@@ -11,7 +10,7 @@ const IntroductionVenue = () => {
       {/* 背景 */}
       <div
         className="absolute inset-0 w-full h-full bg-black bg-center bg-cover"
-        style={{ backgroundImage: BG ? `url(${BG})` : "none" }}
+        style={{ backgroundImage: `url(${reiwa6_blackwhite})` }}
         aria-hidden="true"
       />
       {/* 黒幕 */}
