@@ -31,7 +31,7 @@ const TopsCatch = () => {
 
       {/* 下部画像 */}
       <div className="pointer-events-none select-none absolute inset-x-0
-                      flex justify-center bottom-10">
+                      flex justify-center bottom-20 md:bottom-10">
         <img
           src={logo_5}
           alt="REIWAROMAN"

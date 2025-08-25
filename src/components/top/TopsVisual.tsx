@@ -5,6 +5,7 @@ import reiwa2 from "@/assets/reiwa_2.png";
 import reiwa2_mobile from "@/assets/reiwa_2_mobile.png";
 import reiwa3 from "@/assets/reiwa_3.png";
 import reiwa3_mobile from "@/assets/reiwa_3_mobile.png";
+import logo_5 from "@/assets/logo_5.png";
 
 const slides: Slide[] = [
   { srcDesktop: reiwa2, srcMobile: reiwa2_mobile, alt: "Top Visual" },
@@ -78,7 +79,7 @@ const TopsVisual = ({ resetSignal = 0, active = true }: TopsVisualProps) => {
         </picture>
       ))}
       <div className="absolute bottom-10 inset-x-0 flex justify-center">
-        <img src="src/assets/5.png" alt="REIWAROMAN" className="h-auto object-contain w-[35vw]" />
+        <img src={logo_5} alt="REIWAROMAN" className="h-24 sm:h-28 md:h-32 lg:h-36 object-contain min-w-[35vw] max-w-[60vw]" />
       </div>
     </div>
   );
