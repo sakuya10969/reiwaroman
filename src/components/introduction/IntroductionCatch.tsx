@@ -44,9 +44,9 @@ const IntroductionCatch = ({
         </span>
 
         {/* メイン見出し */}
-        <h1 className="mt-8 text-[clamp(28px,6.5vw,80px)] leading-[1.05] font-extrabold scale-x-150 tracking-[0.03em]" style={{ fontFamily: 'Prompt, sans-serif' }}>
+        <p className="mt-8 text-[clamp(28px,6.5vw,80px)] leading-[1.05] font-extrabold scale-x-150 tracking-[0.03em]" style={{ fontFamily: 'Prompt, sans-serif' }}>
           RE:IWAROMAN
-        </h1>
+        </p>
 
         {/* 説明文 */}
         <div className="mt-5 space-y-2 text-[11px] sm:text-xs leading-relaxed text-white text-center" style={{ fontFamily: '"a-otf-futo-min-a101-pr6n", serif' }}>

@@ -25,10 +25,10 @@ const IntroductionLive = () => {
         aria-hidden
       />
 
-      {/* コンテンツ（右端に吸着） */}
-      <div className="relative z-10 ml-auto w-full min-h-screen px-6 lg:px-10 lg:pr-16 py-16 lg:py-24">
-        {/* PC: 横並び [本文][タイトル]、SP: 右寄せで縦並び（タイトルが上） */}
-        <div className="flex md:flex-row flex-col items-start justify-end gap-6 lg:gap-10 text-left">
+      {/* コンテンツ */}
+      <div className="relative z-10 w-full h-screen px-6 lg:px-10 lg:pr-16 py-16 lg:py-24 flex items-center md:items-start md:justify-end">
+        {/* PC: 横並び [本文][タイトル]、SP: 左寄せで縦並び（タイトルが上）、中央配置 */}
+        <div className="flex md:flex-row flex-col items-start md:justify-end gap-6 lg:gap-10 text-left w-full md:w-auto">
           
           {/* 本文（左隣） */}
           <div className="order-2 md:order-1 flex-shrink-0 self-start">
@@ -59,11 +59,11 @@ const IntroductionLive = () => {
                   key={i}
                   className="
                     font-extrabold text-white
-                    text-[clamp(28px,7.2vw,80px)]
+                    text-[clamp(28px,7.2vw,70px)]
                     drop-shadow-[0_3px_12px_rgba(0,0,0,0.55)]
                     md:[writing-mode:vertical-rl] md:[text-orientation:upright]
                     leading-[1.08]
-                    scale-y-70 origin-top
+                    scale-y-80 origin-top
                     whitespace-nowrap
                   "
                   style={{ fontFamily: '"dnp-shuei-shogomincho-std", serif' }}
