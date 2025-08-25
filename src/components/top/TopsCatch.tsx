@@ -1,24 +1,31 @@
+import { TOPS_CATCH_TITLE_LINES, TOPS_CATCH_SUBTITLE } from "@/constants";
+
 const TopsCatch = () => {
   return (
     <div className="relative grid w-full min-h-screen place-items-center bg-black text-white text-center">
       {/* テキストブロック */}
-      <div className="px-4 sm:px-6 pt-16 pb-36 sm:pb-44 md:pb-52">
-        <h1
-          className="mx-auto max-w-[92vw] sm:max-w-3xl [text-wrap:balance]
-                     text-4xl sm:text-5xl md:text-6xl lg:text-7xl
-                     font-extrabold leading-[1.1] tracking-tight"
-          style={{ fontFamily: '"dnp-shuei-shogomincho-std", serif' }}
-        >
-          日本一の漫才師、限界突破へ。
-        </h1>
+      <div className="px-4 sm:px-6 w-[70vw] max-w-[70vw] flex flex-col items-center">
+        {TOPS_CATCH_TITLE_LINES.map((line, index) => (
+          <p
+            key={index}
+            className="mx-auto text-3xl sm:text-5xl md:text-6xl lg:text-7xl
+                       font-extrabold leading-[1.1] tracking-tight whitespace-nowrap"
+            style={{ fontFamily: '"dnp-shuei-shogomincho-std", serif' }}
+          >
+            {line}
+          </p>
+        ))}
 
+        {TOPS_CATCH_SUBTITLE.map((line, index) => (
         <p
+          key={index}
           className="mt-3 sm:mt-4 text-xs sm:text-sm md:text-base font-extrabold
-                     uppercase tracking-[0.2em]"
+                     uppercase tracking-[0.2em] whitespace-nowrap"
           style={{ fontFamily: 'Prompt, sans-serif' }}
         >
-          JAPAN&apos;S TOP MANZAI COMEDIANS, BREAKING ALL LIMITS.
-        </p>
+            {line}
+          </p>
+        ))}
       </div>
 
       {/* 下部画像 */}
