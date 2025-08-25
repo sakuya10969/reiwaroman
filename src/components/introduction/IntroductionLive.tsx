@@ -38,9 +38,8 @@ const IntroductionLive = () => {
                 text-base md:text-lg text-white/92
                 md:[writing-mode:vertical-rl] md:[text-orientation:upright]
                 lg:leading-10 lg:tracking-wider
-                scale-y-80 origin-top
               "
-              style={{ fontFamily: '"a-otf-futo-min-a101-pr6n", serif' }}
+              style={{ fontFamily: '"momochidori", serif' }}
             >
               {INTRODUCTION_LIVE_CONTENTS.map((content, i) => (
                 <span key={i}>

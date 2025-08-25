@@ -62,7 +62,7 @@ const IntroductionCatch = ({
         </p>
 
         {/* 説明文 */}
-        <div className="mt-4 space-y-2 text-[11px] sm:text-xs leading-relaxed text-white text-center" style={{ fontFamily: '"a-otf-futo-min-a101-pr6n", serif' }}>
+        <div className="mt-4 space-y-2 text-xs md:text-sm leading-relaxed text-white text-center" style={{ fontFamily: '"momochidori", serif' }}>
           {INTRODUCTION_CATCH_CONTENTS.map((content, i) => (
             <p key={i}>{content}</p>
           ))}
