@@ -62,7 +62,7 @@ const Goods = ({
         </div>
         <div className="max-w-xl mx-auto mt-12 px-4 flex justify-center">
           <a 
-            href={goodsPurchaseUrl} 
+            href={goodsPurchaseUrl}
             target="_blank" 
             rel="noopener noreferrer"
             className="inline-flex items-center justify-between text-white rounded tracking-wide transition-colors duration-200 leading-none py-2 px-6 whitespace-nowrap"
