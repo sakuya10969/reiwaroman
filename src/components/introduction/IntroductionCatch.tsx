@@ -52,7 +52,7 @@ const IntroductionCatch = ({
       {/* コンテンツ */}
       <div className="relative z-10 mx-auto max-w-[70vw] px-6 flex flex-col justify-center items-center">
         {/* 小見出し */}
-        <span className="inline-block text-xs md:text-sm font-bold uppercase underline underline-offset-4 scale-x-130 scale-y-80" style={{ fontFamily: 'Prompt, sans-serif' }}>
+        <span className="inline-block text-sm md:text-base font-bold uppercase underline underline-offset-4 scale-x-130 scale-y-80" style={{ fontFamily: 'Prompt, sans-serif' }}>
           Introduction
         </span>
 
@@ -62,7 +62,7 @@ const IntroductionCatch = ({
         </p>
 
         {/* 説明文 */}
-        <div className="mt-5 space-y-2 text-[11px] sm:text-xs leading-relaxed text-white text-center" style={{ fontFamily: '"a-otf-futo-min-a101-pr6n", serif' }}>
+        <div className="mt-4 space-y-2 text-[11px] sm:text-xs leading-relaxed text-white text-center" style={{ fontFamily: '"a-otf-futo-min-a101-pr6n", serif' }}>
           {INTRODUCTION_CATCH_CONTENTS.map((content, i) => (
             <p key={i}>{content}</p>
           ))}
