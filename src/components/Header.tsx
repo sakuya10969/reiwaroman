@@ -97,7 +97,7 @@ const Header = ({ nav = NAV, ticketHref = "#ticket" }: HeaderProps) => {
             <a
               href={ticketHref}
               className={[
-                "hidden md:inline-flex items-center gap-2 rounded-full pl-6 pr-2 py-1 text-sm uppercase font-bold whitespace-nowrap transition-colors focus-visible:outline-none focus-visible:ring-2",
+                "hidden md:inline-flex items-center gap-2 rounded-full pl-6 pr-2 py-1 md:ml-2 lg:ml-0 text-sm uppercase font-bold whitespace-nowrap transition-colors focus-visible:outline-none focus-visible:ring-2",
                 ticketButtonClass(currentTheme),
                 ticketFocusRingClass(currentTheme),
               ].join(" ")}
