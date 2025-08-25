@@ -5,7 +5,7 @@ const TINT = 0.55; // 黒の暗幕（0〜1）
 const IntroductionVenue = () => {
   return (
     <div
-      className="relative w-full min-h-screen flex items-center justify-center text-white overflow-hidden"
+      className="relative w-full max-h-screen flex items-center justify-center text-white overflow-hidden py-12"
     >
       {/* 背景 */}
       <div

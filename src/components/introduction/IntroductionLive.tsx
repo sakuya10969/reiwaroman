@@ -3,7 +3,7 @@ import { INTRODUCTION_LIVE_CONTENTS, INTRODUCTION_LIVE_TITLE_LINES } from "@/con
 
 const IntroductionLive = () => {
   return (
-    <div className="relative w-full min-h-screen text-white overflow-hidden">
+    <div className="relative w-full text-white overflow-hidden py-6 md:py-12">
       {/* BG */}
       <div
         className="absolute inset-0 bg-center bg-cover"
@@ -26,9 +26,9 @@ const IntroductionLive = () => {
       />
 
       {/* コンテンツ */}
-      <div className="relative z-10 w-full h-screen px-6 lg:px-10 lg:pr-16 py-16 lg:py-24 flex items-center md:items-start md:justify-end">
+      <div className="relative z-10 w-full md:h-screen px-6 lg:px-10 lg:pr-16 py-4 md:py-16 lg:py-24 flex items-center md:items-start md:justify-end">
         {/* PC: 横並び [本文][タイトル]、SP: 左寄せで縦並び（タイトルが上）、中央配置 */}
-        <div className="flex md:flex-row flex-col items-start md:justify-end gap-6 lg:gap-10 text-left w-full md:w-auto">
+        <div className="flex md:flex-row flex-col items-start md:justify-end gap-4 md:gap-6 lg:gap-10 text-left w-full md:w-auto">
           
           {/* 本文（左隣） */}
           <div className="order-2 md:order-1 flex-shrink-0 self-start">
