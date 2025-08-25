@@ -15,7 +15,7 @@ import {
 } from "@/theme/headerTheme";
 import logo_5 from "@/assets/logo_5.png";
 
-const Header = ({ nav = NAV, ticketHref = "#ticket" }: HeaderProps) => {
+const Header = ({ nav = NAV, ticketHref = "https://example.com" }: HeaderProps) => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState<boolean>(false);
   
   // 監視対象はセクションテーマのキーだけ
@@ -63,7 +63,7 @@ const Header = ({ nav = NAV, ticketHref = "#ticket" }: HeaderProps) => {
             <img
               src={logo_5}
               alt="REIWAROMAN"
-              className="h-10 w-full object-contain object-left pointer-events-none select-none"
+              className="h-12 w-full object-contain object-left pointer-events-none select-none"
             />
           </div>
 
@@ -99,6 +99,8 @@ const Header = ({ nav = NAV, ticketHref = "#ticket" }: HeaderProps) => {
             {/* デスクトップTICKET */}
             <a
               href={ticketHref}
+              target="_blank"
+              rel="noopener noreferrer"
               className={[
                 "hidden md:inline-flex items-center gap-2 rounded-full pl-6 pr-2 py-1 md:ml-2 lg:ml-0 text-sm uppercase font-bold whitespace-nowrap transition-colors focus-visible:outline-none focus-visible:ring-2",
                 ticketButtonClass(currentTheme),
@@ -152,6 +154,8 @@ const Header = ({ nav = NAV, ticketHref = "#ticket" }: HeaderProps) => {
             {/* モバイルTICKET */}
             <a
               href={ticketHref}
+              target="_blank"
+              rel="noopener noreferrer"
               onClick={() => setIsMobileMenuOpen(false)}
               className={[
                 "inline-flex items-center gap-2 rounded-full pl-5 pr-1 py-1 text-xs uppercase font-bold whitespace-nowrap transition-colors focus-visible:outline-none focus-visible:ring-2 mt-1",
