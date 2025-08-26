@@ -1,11 +1,12 @@
+import { useLayoutEffect, useRef } from "react";
+import { gsap } from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+
 import cast_reiwa from "@/assets/cast_reiwa_edit.png";
 import cast_mayurika from "@/assets/cast_mayurika_edit.png";
 import cast_nanamagari from "@/assets/cast_nanamagari_edit.png";
 import cast_mitorizu from "@/assets/cast_mitori_edit.png";
 import type { CastProps } from "@/types";
-import { useLayoutEffect, useRef } from "react";
-import { gsap } from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
 
 gsap.registerPlugin(ScrollTrigger);
 

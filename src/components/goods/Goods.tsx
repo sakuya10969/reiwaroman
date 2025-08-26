@@ -1,4 +1,7 @@
 // import { ChevronRight } from "lucide-react";
+import { useLayoutEffect, useRef } from "react";
+import { gsap } from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
 
 // import goods_1 from "@/assets/goods_1.png";
 // import goods_2 from "@/assets/goods_2.png";
@@ -10,9 +13,6 @@
 // import goods_8 from "@/assets/goods_8.png";
 
 import type { GoodsProps } from "@/types";
-import { useLayoutEffect, useRef } from "react";
-import { gsap } from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
 
 gsap.registerPlugin(ScrollTrigger);
 

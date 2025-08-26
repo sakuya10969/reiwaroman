@@ -1,8 +1,9 @@
-import reiwa6_blackwhite from "@/assets/reiwa_6_blackwhite.png";
-import type { NewsCatchProps } from "@/types";
 import { useLayoutEffect, useRef } from "react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+import reiwa6_blackwhite from "@/assets/reiwa_6_blackwhite.png";
+import type { NewsCatchProps } from "@/types";
 
 gsap.registerPlugin(ScrollTrigger);
 

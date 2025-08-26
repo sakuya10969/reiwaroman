@@ -1,9 +1,10 @@
-import NewsRow from "@/components/news/NewsRow";
-import type { NewsListProps } from "@/types";
-import { NEWS } from "@/constants";
 import { useLayoutEffect, useRef } from "react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+import NewsRow from "@/components/news/NewsRow";
+import type { NewsListProps } from "@/types";
+import { NEWS } from "@/constants";
 
 gsap.registerPlugin(ScrollTrigger);
 
