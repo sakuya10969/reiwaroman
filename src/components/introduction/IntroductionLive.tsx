@@ -1,9 +1,72 @@
+import { useLayoutEffect, useRef } from "react";
+import { gsap } from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+
 import reiwa6 from "@/assets/reiwa_6.png";
 import { INTRODUCTION_LIVE_CONTENTS, INTRODUCTION_LIVE_TITLE_LINES } from "@/constants";
 
+gsap.registerPlugin(ScrollTrigger);
+
 const IntroductionLive = () => {
+  const containerRef = useRef<HTMLDivElement>(null);
+  const contentRef = useRef<HTMLDivElement>(null);
+  const titleRef = useRef<HTMLDivElement>(null);
+
+  useLayoutEffect(() => {
+    const container = containerRef.current;
+    const content = contentRef.current;
+    const title = titleRef.current;
+    
+    if (!container || !content || !title) return;
+
+    const ctx = gsap.context(() => {
+      // 本文を初期状態で下に移動、透明にする
+      gsap.set(content, {
+        y: 80,
+        opacity: 0,
+      });
+
+      // タイトルの各行を初期状態で下に移動、透明にする
+      const titleLines = title.children;
+      gsap.set(titleLines, {
+        y: 100,
+        opacity: 0,
+      });
+
+      // スクロールトリガーでアニメーション実行
+      const tl = gsap.timeline({
+        scrollTrigger: {
+          trigger: container,
+          start: "top 80%",
+          end: "bottom 20%",
+          toggleActions: "play none none reverse",
+        },
+      });
+
+      // タイトルから先にアニメーション（右から左へ順番に）
+      tl.to(titleLines, {
+        y: 0,
+        opacity: 1,
+        duration: 0.8,
+        stagger: 0.2,
+        ease: "power2.out",
+      });
+
+      // その後、本文をアニメーション
+      tl.to(content, {
+        y: 0,
+        opacity: 1,
+        duration: 0.6,
+        ease: "power2.out",
+      }, "-=0.4");
+
+    }, container);
+
+    return () => ctx.revert();
+  }, []);
+
   return (
-    <div className="relative w-full text-white overflow-hidden py-6 md:py-8">
+    <div ref={containerRef} className="relative w-full text-white overflow-hidden py-6 md:py-8">
       {/* BG */}
       <div
         className="absolute inset-0 bg-top bg-cover"
@@ -31,7 +94,7 @@ const IntroductionLive = () => {
         <div className="flex md:flex-row flex-col items-start md:justify-end gap-4 md:gap-6 lg:gap-10 text-left w-full md:w-auto">
 
           {/* 本文（左隣） */}
-          <div className="order-2 md:order-1 flex-shrink-0 self-start mt-3 md:mt-0">
+          <div ref={contentRef} className="order-2 md:order-1 flex-shrink-0 self-start mt-3 md:mt-0">
             <p
               className="
                 min-w-[40vw] md:max-w-none
@@ -52,7 +115,7 @@ const IntroductionLive = () => {
 
           {/* タイトル（最右）— 各列を独立させて上端揃え */}
           <div className="order-1 md:order-2 flex-shrink-0 self-start mt-8 md:mt-0">
-            <div className="flex flex-col md:flex-row-reverse items-start gap-1 md:gap-3 lg:gap-4">
+            <div ref={titleRef} className="flex flex-col md:flex-row-reverse items-start gap-1 md:gap-3 lg:gap-4">
               {INTRODUCTION_LIVE_TITLE_LINES.map((line, i) => (
                 <span
                   key={i}
