@@ -3,7 +3,7 @@ import logo_5 from "@/assets/logo_5.png";
 
 const TopsCatch = () => {
   return (
-    <div className="flex relative w-full h-full bg-black text-white text-center pt-4 flex-col justify-center">
+    <div className="flex relative w-full h-full bg-black text-white text-center pt-30 flex-col justify-center">
       {/* テキストブロック */}
       <div className="pb-4 sm:px-6 w-[90vw] mx-auto flex flex-col items-center">
         <div>

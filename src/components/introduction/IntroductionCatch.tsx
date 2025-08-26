@@ -37,7 +37,7 @@ const IntroductionCatch = ({
             src={slide.srcDesktop} // デスクトップ・タブレット用
             alt={slide.alt}
             className={[
-              "absolute inset-0 w-full transition-opacity duration-1500 ease-linear block",
+              "w-full transition-opacity duration-1500 ease-linear block",
               i === index ? "opacity-100" : "opacity-0",
               "sm:object-contain sm:object-top sm:h-auto",
               "max-sm:object-contain max-sm:object-top",

@@ -61,14 +61,13 @@ const TopsVisual = ({ resetSignal = 0, active = true }: TopsVisualProps) => {
         <div className="absolute inset-0 z-0 mt-0 pt-0">
           {slides.map((s, i) => (
             <picture key={i} className="absolute inset-0">
-              <source media="(max-width: 400px)" srcSet={s.srcMobile ?? s.srcDesktop} />
+              <source media="(max-width: 440px)" srcSet={s.srcMobile ?? s.srcDesktop} />
               <img
                 src={s.srcDesktop}
                 alt={s.alt}
                 className={[
-                  "absolute inset-0 w-full h-full transition-opacity duration-1500 ease-linear",
-                  "max-sm:object-top",            // モバイルは既存通り
-                  "sm:object-contain sm:object-top sm:w-full sm:h-auto", // デスクトップだけ
+                  "w-full h-auto transition-opacity duration-1500 ease-linear object-contain",
+                  "sm:object-top",
                   i === index ? "opacity-100" : "opacity-0",
                 ].join(" ")}
               />

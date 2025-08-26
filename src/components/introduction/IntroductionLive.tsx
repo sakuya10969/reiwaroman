@@ -62,8 +62,7 @@ const IntroductionLive = () => {
                     drop-shadow-[0_3px_12px_rgba(0,0,0,0.55)]
                     md:[writing-mode:vertical-rl] md:[text-orientation:upright]
                     leading-[0.8] md:leading-[1.08]
-                    scale-y-20
-                    md: scale-y-60
+                    md: scale-y-80
                     origin-top
                     whitespace-nowrap
                   "
