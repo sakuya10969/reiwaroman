@@ -76,7 +76,7 @@ const TopsVisual = ({ resetSignal = 0, active = true }: TopsVisualProps) => {
         </div>
 
         {/* 3) ロゴ：画像の“下部あたり”に重ねる（中央下寄せ） */}
-      <div className="absolute left-1/2 -translate-x-1/2 bottom-15 md:bottom-50 z-10">
+      <div className="absolute left-1/2 -translate-x-1/2 bottom-15 md:bottom-0 z-10">
           <img
             src={logo_5}
             alt="REIWAROMAN"
