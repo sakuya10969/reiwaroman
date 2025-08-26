@@ -18,6 +18,10 @@ export interface IntroductionCatchProps {
   interval?: number;
 }
 
+export interface IntroductionVideoProps {
+  videoId?: string;
+}
+
 export interface NewsCatchProps {
   backgroundImageUrl?: string;
   badgeText?: string;

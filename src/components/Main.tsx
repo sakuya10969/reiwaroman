@@ -2,6 +2,7 @@ import TopsRotator from "@/components/top/TopsRotator";
 import IntroductionCatch from "@/components/introduction/IntroductionCatch";
 import IntroductionLive from "@/components/introduction/IntroductionLive";
 import IntroductionVenue from "@/components/introduction/IntroductionVenue";
+import IntroductionVideo from "@/components/introduction/IntroductionVideo";
 import NewsCatch from "@/components/news/NewsCatch";
 // import Cast from "@/components/cast/Cast"
 import Goods from "@/components/goods/Goods"
@@ -30,6 +31,11 @@ export default function Main() {
       {/* INTRODUCTION - VENUE */}
       <section id="introduction-venue" className="scroll-mt-[64px]">
         <IntroductionVenue />
+      </section>
+
+      {/* INTRODUCTION - VIDEO */}
+      <section id="introduction-video" className="scroll-mt-[64px]">
+        <IntroductionVideo />
       </section>
 
       {/* NEWS - CATCH */}
