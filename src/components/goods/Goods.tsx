@@ -10,6 +10,11 @@
 // import goods_8 from "@/assets/goods_8.png";
 
 import type { GoodsProps } from "@/types";
+import { useLayoutEffect, useRef } from "react";
+import { gsap } from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+gsap.registerPlugin(ScrollTrigger);
 
 // const Goods1 = goods_1;
 // const Goods2 = goods_2;
@@ -27,8 +32,65 @@ const Goods = ({
   // goodsImageUrl = [],
   // goodsPurchaseUrl = "https://example.com",
 }: GoodsProps) => {
+  const containerRef = useRef<HTMLDivElement>(null);
+  const badgeRef = useRef<HTMLDivElement>(null);
+  const messageRef = useRef<HTMLDivElement>(null);
+
+  useLayoutEffect(() => {
+    const container = containerRef.current;
+    const badge = badgeRef.current;
+    const message = messageRef.current;
+    
+    if (!container || !badge || !message) return;
+
+    const ctx = gsap.context(() => {
+      // バッジを初期状態で下に移動、透明にする
+      gsap.set(badge, {
+        y: 50,
+        opacity: 0,
+      });
+
+      // メッセージ内の要素を初期状態で下に移動、透明にする
+      const messageElements = message.children;
+      gsap.set(messageElements, {
+        y: 80,
+        opacity: 0,
+      });
+
+      // スクロールトリガーでアニメーション実行
+      const tl = gsap.timeline({
+        scrollTrigger: {
+          trigger: container,
+          start: "top 80%",
+          end: "bottom 20%",
+          toggleActions: "play none none reverse",
+        },
+      });
+
+      // バッジから先にアニメーション
+      tl.to(badge, {
+        y: 0,
+        opacity: 1,
+        duration: 0.8,
+        ease: "power2.out",
+      });
+
+      // その後、メッセージ要素を順番にアニメーション
+      tl.to(messageElements, {
+        y: 0,
+        opacity: 1,
+        duration: 0.6,
+        stagger: 0.2,
+        ease: "power2.out",
+      }, "-=0.4");
+
+    }, container);
+
+    return () => ctx.revert();
+  }, []);
+
   return (
-    <div className="relative w-full isolate">
+    <div ref={containerRef} className="relative w-full isolate">
       {/* 背景 */}
       <div
         className="absolute inset-0 bg-black -z-10"
@@ -38,7 +100,7 @@ const Goods = ({
       {/* コンテンツ */}
       <div className="max-w-6xl mx-auto pt-10 pb-6 px-4">
         {/* 上部のバッジ */}
-        <div className="flex justify-center mb-8">
+        <div ref={badgeRef} className="flex justify-center mb-8">
           <div
             className="text-sm text-white md:text-base font-bold transform scale-x-150"
             style={{ fontFamily: 'Prompt, sans-serif' }}
@@ -50,7 +112,7 @@ const Goods = ({
         </div>
 
         {/* 準備中メッセージ */}
-        <div className="flex flex-col items-center justify-center pb-8">
+        <div ref={messageRef} className="flex flex-col items-center justify-center pb-8">
           <div className="text-center max-w-2xl">
             <h2
               className="text-2xl md:text-3xl lg:text-4xl font-bold text-white mb-6"
