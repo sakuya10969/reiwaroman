@@ -15,11 +15,15 @@ const NewsCatch = ({
   const wrapperRef = useRef<HTMLDivElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
   const circleRef = useRef<HTMLDivElement>(null);
+  const badgeRef = useRef<HTMLDivElement>(null);
+  const titleRef = useRef<HTMLDivElement>(null);
 
   useLayoutEffect(() => {
     const wrapper = wrapperRef.current!;
     const container = containerRef.current!;
     const circle = circleRef.current!;
+    const badge = badgeRef.current;
+    const title = titleRef.current;
     if (!wrapper || !container || !circle) return;
 
     // 画面を完全に覆うのに必要なスケールを算出（毎回リサイズで再計算）
@@ -40,6 +44,23 @@ const NewsCatch = ({
         force3D: true,
       });
 
+      // バッジを初期状態で下に移動、透明にする
+      if (badge) {
+        gsap.set(badge, {
+          y: 50,
+          opacity: 0,
+        });
+      }
+
+      // タイトルの各行を初期状態で下に移動、透明にする
+      if (title) {
+        const titleLines = title.children;
+        gsap.set(titleLines, {
+          y: 80,
+          opacity: 0,
+        });
+      }
+
       const tl = gsap.timeline({
         scrollTrigger: {
           trigger: wrapper,         // 縦に長いラッパー
@@ -57,6 +78,38 @@ const NewsCatch = ({
         scale: computeCoverScale, 
         ease: "none" 
       });
+
+      // 文字のアニメーション用のタイムライン
+      const textTl = gsap.timeline({
+        scrollTrigger: {
+          trigger: container,
+          start: "top 80%",
+          end: "bottom 20%",
+          toggleActions: "play none none reverse",
+        },
+      });
+
+      // バッジから先にアニメーション
+      if (badge) {
+        textTl.to(badge, {
+          y: 0,
+          opacity: 1,
+          duration: 0.8,
+          ease: "power2.out",
+        });
+      }
+
+      // その後、タイトル行を順番にアニメーション
+      if (title) {
+        const titleLines = title.children;
+        textTl.to(titleLines, {
+          y: 0,
+          opacity: 1,
+          duration: 0.6,
+          stagger: 0.2,
+          ease: "power2.out",
+        }, "-=0.4");
+      }
 
       // 画像読み込みやフォント適用後に正しく採寸するため
       const onReady = () => ScrollTrigger.refresh();
@@ -116,14 +169,14 @@ const NewsCatch = ({
               {/* 内側レイアウト */}
               <div className="absolute inset-0 flex flex-col items-center justify-between text-center px-6 py-16">
                 {/* BADGE - 上部 */}
-                <div className="text-sm md:text-lg lg:text-xl text-white/90 flex-shrink-0 relative top-2">
+                <div ref={badgeRef} className="text-sm md:text-lg lg:text-xl text-white/90 flex-shrink-0 relative top-2">
                   <span className="inline-block font-bold underline underline-offset-4 scale-x-150 origin-center" style={{ fontFamily: 'Prompt, sans-serif' }}>
                     {badgeText}
                   </span>
                 </div>
 
                 {/* タイトル行 - 真ん中 */}
-                <h1 className="leading-none flex-grow flex flex-col items-center justify-center">
+                <h1 ref={titleRef} className="leading-none flex-grow flex flex-col items-center justify-center">
                   {titleLines.map((line, idx) => (
                     <span
                       key={idx}
