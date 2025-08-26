@@ -3,10 +3,10 @@ import IntroductionCatch from "@/components/introduction/IntroductionCatch";
 import IntroductionLive from "@/components/introduction/IntroductionLive";
 import IntroductionVenue from "@/components/introduction/IntroductionVenue";
 import NewsCatch from "@/components/news/NewsCatch";
-import Cast from "@/components/cast/Cast"
+// import Cast from "@/components/cast/Cast"
 import Goods from "@/components/goods/Goods"
 import Caution from "@/components/caution/Caution"
-import Last from "@/components/last/Last"
+// import Last from "@/components/last/Last"
 import NewsList from "@/components/news/NewsList";
 
 export default function Main() {
@@ -43,9 +43,9 @@ export default function Main() {
       </section>
 
       {/* Cast */}
-      <section id="cast" className="scroll-mt-[64px]">
+      {/* <section id="cast" className="scroll-mt-[64px]">
         <Cast />
-      </section>
+      </section> */}
 
       {/* Goods */}
       <section id="goods" className="scroll-mt-[64px]">
@@ -58,9 +58,9 @@ export default function Main() {
       </section>
 
       {/* Last */}
-      <section id="last" className="scroll-mt-[64px]">
+      {/* <section id="last" className="scroll-mt-[64px]">
         <Last />
-      </section>
+      </section> */}
 
     </main>
 
