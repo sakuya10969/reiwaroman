@@ -3,15 +3,15 @@ import logo_5 from "@/assets/logo_5.png";
 
 const TopsCatch = () => {
   return (
-    <div className="relative w-full h-full bg-black text-white text-center pt-20 pb-10 md:py-24">
+    <div className="flex relative w-full h-full bg-black text-white text-center pt-4 flex-col justify-center">
       {/* テキストブロック */}
-      <div className="px-4 sm:px-6 w-[70vw] max-w-[70vw] mx-auto flex flex-col items-center">
+      <div className="pb-4 sm:px-6 w-[90vw] mx-auto flex flex-col items-center">
         <div>
           {TOPS_CATCH_TITLE_LINES.map((line, index) => (
             <p
               key={index}
               className="mx-auto text-2xl md:text-5xl lg:text-6xl
-                         font-extrabold leading-[1.1] tracking-tight whitespace-nowrap"
+                         font-extrabold leading-[1.1] tracking-tight whitespace-nowrap scale-x-70"
               style={{ fontFamily: '"dnp-shuei-shogomincho-std", serif' }}
             >
               {line}

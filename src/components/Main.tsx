@@ -13,7 +13,7 @@ export default function Main() {
   return (
     <main className="w-full">
       {/* TOP */}
-      <section id="tops" className="scroll-mt-[64px]">
+      <section id="tops" className="scroll-mt-[64px] h-auto">
         <TopsRotator />
       </section>
 

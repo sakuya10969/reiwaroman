@@ -11,7 +11,7 @@ export const NAV: NavItem[] = [
 ];
 
 export const TOPS_CATCH_TITLE_LINES: string[] = [
-  "日本一の漫才師、","限界突破へ。",
+  "日本一の漫才師、限界突破へ。",
 ];
 
 export const TOPS_CATCH_SUBTITLE: string[] = [

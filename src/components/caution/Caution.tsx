@@ -23,7 +23,7 @@ const Caution = ({
         {/* 上部のバッジ */}
         <div className="flex justify-center mb-6">
           <div
-            className="text-sm text-white/90 md:text-sm font-bold transform scale-x-150"
+            className="text-sm text-white md:text-base font-bold transform scale-x-150"
             style={{ fontFamily: 'Prompt, sans-serif' }}
           >
             <span className="inline-block uppercase underline underline-offset-4">
@@ -32,7 +32,7 @@ const Caution = ({
           </div>
         </div>
         {/* 注意事項リスト */}
-        <ul className="mt-4 text-xs md:text-sm leading-relaxed wm-[85%]">
+        <ul className="mt-4 text-xs md:text-sm leading-relaxed scale-y-100 text-white wm-[70%]">
           {CAUTION_CONTENTS.map((line, i) => (
             <li key={i} className="relative pl-5" style={{ fontFamily: '"momochidori", serif' ,fontWeight: 500}}>
               <span className="absolute left-0">※</span>

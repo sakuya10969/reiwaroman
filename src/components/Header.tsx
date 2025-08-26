@@ -17,7 +17,7 @@ import logo_5 from "@/assets/logo_5.png";
 
 const Header = ({ nav = NAV, ticketHref = "https://example.com" }: HeaderProps) => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState<boolean>(false);
-  
+
   // 監視対象はセクションテーマのキーだけ
   const observeIds = useMemo(() => Object.keys(SECTION_THEMES), []);
   const activeId = useActiveSection(observeIds, 64);
@@ -150,7 +150,7 @@ const Header = ({ nav = NAV, ticketHref = "https://example.com" }: HeaderProps) 
                 </a>
               );
             })}
-            
+
             {/* モバイルTICKET */}
             <a
               href={ticketHref}

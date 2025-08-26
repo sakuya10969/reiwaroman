@@ -27,42 +27,42 @@ const IntroductionCatch = ({
   }, [interval]);
 
   return (
-    <div className="relative w-full max-h-screen flex items-center justify-center text-white overflow-hidden bg-black pt-8 pb-8">
+    <div className="relative w-full  h-[30vh] sm:h-[100vh] flex items-center justify-center text-white overflow-hidden bg-black">
       {/* 背景スライド - レスポンシブ対応 */}
       {slides.map((slide, i) => (
         <picture key={i} className="absolute inset-0">
           {/* モバイル用画像切り替え閾値 */}
-          <source media="(max-width: 400px)" srcSet={slide.srcMobile ?? slide.srcDesktop} />
+          <source media="(max-width: 440px)" srcSet={slide.srcMobile ?? slide.srcDesktop} />
           <img
             src={slide.srcDesktop} // デスクトップ・タブレット用
             alt={slide.alt}
             className={[
-              "absolute inset-0 w-full h-full transition-opacity duration-1500 ease-linear",
-              // レスポンシブ表示制御：デスクトップは画面全体カバー、モバイルは画像全体表示
-              "object-cover sm:object-cover max-sm:object-contain max-sm:object-center",
+              "absolute inset-0 w-full transition-opacity duration-1500 ease-linear block",
               i === index ? "opacity-100" : "opacity-0",
+              "sm:object-contain sm:object-top sm:h-auto",
+              "max-sm:object-contain max-sm:object-top",
             ].join(" ")}
           />
         </picture>
       ))}
 
       {/* オーバーレイ */}
-      <div className="absolute inset-0 bg-black/70" />
+      <div className="absolute inset-0 bg-black/55" />
 
       {/* コンテンツ */}
-      <div className="relative z-10 mx-auto max-w-[90vw] md:max-w-[70vw] px-6 flex flex-col justify-center items-center">
+      <div className="relative z-10 max-w-[90vw] flex flex-col items-center py-5">
         {/* 小見出し */}
         <span className="inline-block text-sm md:text-base font-bold uppercase underline underline-offset-4 scale-x-150" style={{ fontFamily: 'Prompt, sans-serif' }}>
           Introduction
         </span>
 
         {/* メイン見出し */}
-        <p className="mt-8 text-2xl md:text-4xl leading-[1.05] font-extrabold scale-x-150 tracking-[0.03em]" style={{ fontFamily: 'Prompt, sans-serif' }}>
+        <p className="mt-4 sm:mt-6 text-2xl md:text-5xl leading-[0.9] md:leading-[1.05] font-extrabold scale-x-150 tracking-[0.03em]" style={{ fontFamily: 'Prompt, sans-serif' ,fontWeight:700}}>
           RE:IWAROMAN
         </p>
 
         {/* 説明文 */}
-        <div className="mt-4 space-y-2 text-xs md:text-sm leading-relaxed text-white text-center" style={{ fontFamily: '"momochidori", serif' }}>
+        <div className="mt-2 sm:mt-4 space-y-2 text-[0.67em] sm:text-xs md:text-sm leading-[1] sm:leading-[1.2] text-white text-center" style={{ fontFamily: '"momochidori", serif' ,fontWeight:500}}>
           {INTRODUCTION_CATCH_CONTENTS.map((content, i) => (
             <p key={i}>{content}</p>
           ))}

@@ -47,7 +47,7 @@ const TopsVisual = ({ resetSignal = 0, active = true }: TopsVisualProps) => {
   return (
     <div
       className={[
-        "relative w-full bg-black",
+        "relative w-full bg-black h-auto",
         primed ? "opacity-100" : "opacity-0",
         "transition-opacity duration-0",
       ].join(" ")}
@@ -56,9 +56,9 @@ const TopsVisual = ({ resetSignal = 0, active = true }: TopsVisualProps) => {
       {/* <div className="w-full h-2 bg-black" aria-hidden /> */}
 
       {/* 2) 画像ステージ（ここから画像が始まる） */}
-      <div className="relative w-full min-h-[50vh]">
+      <div className="relative w-full  min-h-[50vh]">
         {/* 背景画像をステージ全面に敷く */}
-        <div className="absolute inset-0 z-0 mt-2">
+        <div className="absolute inset-0 z-0 mt-0 pt-0">
           {slides.map((s, i) => (
             <picture key={i} className="absolute inset-0">
               <source media="(max-width: 400px)" srcSet={s.srcMobile ?? s.srcDesktop} />
@@ -66,9 +66,9 @@ const TopsVisual = ({ resetSignal = 0, active = true }: TopsVisualProps) => {
                 src={s.srcDesktop}
                 alt={s.alt}
                 className={[
-                  "w-full h-full",
-                  "object-cover sm:object-cover max-sm:object-contain max-sm:object-center",
-                  "transition-opacity duration-1500 ease-linear",
+                  "absolute inset-0 w-full h-full transition-opacity duration-1500 ease-linear",
+                  "max-sm:object-top",            // モバイルは既存通り
+                  "sm:object-contain sm:object-top sm:w-full sm:h-auto", // デスクトップだけ
                   i === index ? "opacity-100" : "opacity-0",
                 ].join(" ")}
               />
@@ -77,7 +77,7 @@ const TopsVisual = ({ resetSignal = 0, active = true }: TopsVisualProps) => {
         </div>
 
         {/* 3) ロゴ：画像の“下部あたり”に重ねる（中央下寄せ） */}
-        <div className="absolute left-1/2 -translate-x-1/2 bottom-10 z-10">
+      <div className="absolute left-1/2 -translate-x-1/2 bottom-30 sm:-bottom-50 z-10">
           <img
             src={logo_5}
             alt="REIWAROMAN"

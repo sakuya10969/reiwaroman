@@ -40,7 +40,7 @@ const Goods = ({
         {/* 上部のバッジ */}
         <div className="flex justify-center mb-8">
           <div
-            className="text-sm text-white/90 md:text-base font-bold transform scale-x-150"
+            className="text-sm text-white md:text-base font-bold transform scale-x-150"
             style={{ fontFamily: 'Prompt, sans-serif' }}
           >
             <span className="inline-block font-bold uppercase underline underline-offset-4">
@@ -52,7 +52,7 @@ const Goods = ({
         {/* 準備中メッセージ */}
         <div className="flex flex-col items-center justify-center pb-8">
           <div className="text-center max-w-2xl">
-            <h2 
+            <h2
               className="text-2xl md:text-3xl lg:text-4xl font-bold text-white mb-6"
               style={{ fontFamily: '"dnp-shuei-shogomincho-std", serif' }}
             >
@@ -86,9 +86,9 @@ const Goods = ({
 
         {/* 購入ボタン（コメントアウト） */}
         {/* <div className="max-w-xl mx-auto mt-12 px-4 flex justify-center">
-          <a 
+          <a
             href={goodsPurchaseUrl}
-            target="_blank" 
+            target="_blank"
             rel="noopener noreferrer"
             className="inline-flex items-center justify-between text-white rounded tracking-wide transition-colors duration-200 leading-none py-2 px-6 whitespace-nowrap"
             style={{

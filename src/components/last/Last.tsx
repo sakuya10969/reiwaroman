@@ -21,7 +21,7 @@ const Last = ({
         />
       </picture>
       <div className="w-full flex justify-center absolute bottom-3">
-        <p className="text-[#a3a1a1] tracking-wider" style={{fontFamily: 'momochidori, sans-serif', fontWeight: 700, fontSize:"1em"}}>&copy;{FooterText}</p>
+        <p className="text-[#a3a1a1] tracking-wider" style={{fontFamily: 'momochidori, sans-serif', fontWeight: 700, fontSize:"0.8em"}}>&copy;{FooterText}</p>
       </div>
     </div>
   );
