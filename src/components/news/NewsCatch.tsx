@@ -37,7 +37,9 @@ const NewsCatch = ({
       return (diag / d) * 1.1;
     };
 
-    const ctx = gsap.context(() => {
+    let ctx: gsap.Context | null = null;
+
+    ctx = gsap.context(() => {
       gsap.set(circle, {
         transformOrigin: "50% 50%",
         willChange: "transform",
@@ -70,6 +72,7 @@ const NewsCatch = ({
           pin: container,           // containerを固定（sticky使わない）
           anticipatePin: 1,
           invalidateOnRefresh: true,
+          refreshPriority: -1,      // 他のScrollTriggerが処理された後に実行
         },
       });
 
@@ -86,6 +89,8 @@ const NewsCatch = ({
           start: "top 80%",
           end: "bottom 20%",
           toggleActions: "play none none reverse",
+          invalidateOnRefresh: true,
+          refreshPriority: -1,
         },
       });
 
@@ -119,22 +124,27 @@ const NewsCatch = ({
 
     }, wrapper);
 
-    return () => { ctx.revert(); };
+    // クリーンアップ関数
+    return () => {
+      ctx?.revert(); // GSAP アニメーションを破棄
+      // ScrollTriggerの再計算を促す
+      ScrollTrigger.refresh();
+    };
   }, []);
 
   return (
     <div
       ref={wrapperRef}
-      className="w-full h-[350vh] overflow-hidden"
+      className="w-full h-[350vh] relative isolate"
     >
       <div
         ref={containerRef}
-        className="w-full h-screen flex items-center justify-center sticky top-0"
+        className="w-full h-screen flex items-center justify-center relative isolate"
         aria-label={`${badgeText} ${titleLines.join(" ")}`}
       >
         {/* 背景 */}
         <div
-          className="absolute inset-0 bg-black bg-center bg-cover"
+          className="absolute inset-0 bg-black bg-center bg-cover -z-10"
           style={{
             backgroundImage: `url(${backgroundImageUrl})`,
             filter: "grayscale(100%)",
@@ -144,7 +154,7 @@ const NewsCatch = ({
 
         {/* 暗幕オーバーレイ */}
         <div
-          className="absolute inset-0 bg-black/70"
+          className="absolute inset-0 bg-black/70 -z-10"
           aria-hidden="true"
         />
 
