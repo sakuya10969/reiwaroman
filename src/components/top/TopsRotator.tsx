@@ -30,12 +30,12 @@ const TopsRotator = () => {
   const isVisual = current.key === "visual";
 
   return (
-    <div className="relative w-full min-h-[45vw] md:min-h-[40vw]">
+    <div className="relative w-full min-h-[45vw] md:min-h-[100vh]">
       <div className={[ "absolute inset-0 transition-opacity duration-1500 ease-linear", isCatch ? "opacity-100" : "opacity-0"].join(" ")}>
         <TopsCatch />
       </div>
 
-      <div className={[ "relative w-full min-h-[45vw] md:min-h-[45vw] transition-opacity duration-1500 ease-linear", isVisual ? "opacity-100" : "opacity-0"].join(" ")}>
+      <div className={[ "relative w-full min-h-[45vw] md:min-h-[100vh] transition-opacity duration-1500 ease-linear", isVisual ? "opacity-100" : "opacity-0"].join(" ")}>
         <TopsVisual key={visualCycle} resetSignal={visualCycle} active={isVisual} />
       </div>
     </div>
