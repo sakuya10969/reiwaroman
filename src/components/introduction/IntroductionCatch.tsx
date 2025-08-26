@@ -37,7 +37,7 @@ const IntroductionCatch = ({
             src={slide.srcDesktop} // デスクトップ・タブレット用
             alt={slide.alt}
             className={[
-              "w-full transition-opacity duration-1500 ease-linear block",
+              "absolute inset-0 w-full transition-opacity duration-1500 ease-linear block",
               i === index ? "opacity-100" : "opacity-0",
               "sm:object-contain sm:object-top sm:h-auto",
               "max-sm:object-contain max-sm:object-top",
@@ -62,7 +62,7 @@ const IntroductionCatch = ({
         </p>
 
         {/* 説明文 */}
-        <div className="mt-2 sm:mt-4 space-y-2 text-[0.67em] sm:text-xs md:text-sm leading-[1] sm:leading-[1.2] text-white text-center" style={{ fontFamily: '"momochidori", serif' ,fontWeight:500}}>
+        <div className="mt-3 sm:mt-4 space-y-2 text-[0.5em] sm:text-xs md:text-sm leading-[1] sm:leading-[1.2] text-white text-center" style={{ fontFamily: '"momochidori", serif' ,fontWeight:500}}>
           {INTRODUCTION_CATCH_CONTENTS.map((content, i) => (
             <p key={i}>{content}</p>
           ))}
