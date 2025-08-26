@@ -94,8 +94,8 @@ const NewsCatch = ({
           aria-hidden="true"
         />
 
-        {/* コンテンツラッパー */}
-        <div className="mx-auto flex w-full max-w-[1400px] items-center justify-center px-4 sm:px-6 lg:px-8">
+        {/* 絶対中央配置コンテナ */}
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
           {/* 円形パネル */}
           <div className="relative">
             {/* 拡大する円形背景 */}
