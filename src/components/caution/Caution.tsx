@@ -96,7 +96,7 @@ const Caution = ({
         {/* 注意事項リスト */}
         <ul ref={listRef} className="mt-4 text-xs md:text-sm leading-relaxed scale-y-100 text-white wm-[70%]">
           {CAUTION_CONTENTS.map((line, i) => (
-            <li key={i} className="relative pl-5" style={{ fontFamily: '"momochidori", serif' ,fontWeight: 500}}>
+            <li key={i} className="relative pl-5 mb-1" style={{ fontFamily: '"momochidori", serif' ,fontWeight: 500}}>
               <span className="absolute left-0">※</span>
               {line}
             </li>
