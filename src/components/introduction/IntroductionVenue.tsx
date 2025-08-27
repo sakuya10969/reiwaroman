@@ -15,7 +15,7 @@ const IntroductionVenue = () => {
   useLayoutEffect(() => {
     const container = containerRef.current;
     const title = titleRef.current;
-    
+
     if (!container || !title) return;
 
     const ctx = gsap.context(() => {
@@ -53,7 +53,7 @@ const IntroductionVenue = () => {
   return (
     <div
       ref={containerRef}
-      className="relative w-full h-[50vh] lg:h-screen flex items-center justify-center text-white overflow-hidden py-12"
+      className="relative w-full h-[50vh] lg:h-screen landscape:h-screen flex items-center justify-center text-white overflow-hidden py-12"
     >
       {/* 背景 */}
       <div

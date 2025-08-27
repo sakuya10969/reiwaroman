@@ -32,7 +32,7 @@ const TopsRotator = () => {
   const isVisual = current.key === "visual";
 
   return (
-    <div className="relative w-screen h-[50vh] sm:h-[60vh] md:h-[70vh] lg:h-screen">
+    <div className="relative w-screen h-[50vh] sm:h-[60vh] md:h-[70vh] lg:h-screen landscape:h-screen">
       <div className={[ "absolute inset-0 transition-opacity duration-1500 ease-linear", isCatch ? "opacity-100" : "opacity-0"].join(" ")}>
         <TopsCatch />
       </div>
@@ -43,8 +43,8 @@ const TopsRotator = () => {
 
       {/* ロゴを下部に配置 */}
       <div className="absolute bottom-10 sm:bottom-15 md:bottom-20 lg:bottom-25 left-1/2 transform -translate-x-1/2 z-10">
-        <img 
-          src={logo5} 
+        <img
+          src={logo5}
           alt="Logo"
           className="h-18 w-40 md:h-20 md:w-48 lg:h-40 lg:w-80"
         />

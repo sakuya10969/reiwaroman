@@ -23,7 +23,7 @@ const Goods = ({
     const badge = badgeRef.current;
     const message = messageRef.current;
     const goodsGrid = goodsGridRef.current;
-    
+
     if (!container || !badge || !message || !goodsGrid) return;
 
     const ctx = gsap.context(() => {
@@ -117,7 +117,7 @@ const Goods = ({
         <div ref={messageRef} className="flex flex-col items-center justify-center pb-8">
           <div className="text-center max-w-2xl">
             <h2
-              className="text-2xl md:text-3xl lg:text-4xl font-bold text-white mb-2"
+              className="text-2xl md:text-3xl lg:text-4xl font-bold text-white mb-4"
               style={{ fontFamily: '"dnp-shuei-shogomincho-std", serif' }}
             >
               グッズ詳細準備中
@@ -126,7 +126,7 @@ const Goods = ({
         </div>
 
         {/* グッズ一覧 - モバイル: 横2×縦4、PC: 横4×縦2 */}
-        <div ref={goodsGridRef} className="grid grid-cols-2 md:grid-cols-4 gap-5">
+        <div ref={goodsGridRef} className="grid grid-cols-2 md:grid-cols-4 gap-5 px-5 sm:px-3">
           {preparationImages.map((photo, index) => (
             <div key={index} className="text-center">
               <img

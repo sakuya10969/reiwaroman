@@ -87,7 +87,7 @@ const IntroductionVideo = ({ videoId = "S6hol1r6xSc" }: IntroductionVideoProps) 
   return (
     <div
       ref={containerRef}
-      className="relative w-full isolate min-h-[50vh] lg:h-screen pt-16 md:pt-24 overflow-hidden"
+      className="relative w-full isolate min-h-[50vh] lg:h-screen landscape:h-screen pt-16 md:pt-24 overflow-hidden"
       aria-hidden // 背景演出なら支援技術から隠す
     >
       {/* 背景レイヤ（全面） */}
