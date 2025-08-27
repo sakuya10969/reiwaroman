@@ -2,9 +2,9 @@ import { TOPS_CATCH_TITLE_LINES, TOPS_CATCH_SUBTITLE } from "@/constants";
 
 const TopsCatch = () => {
   return (
-    <div className="flex relative w-full h-full bg-black text-white text-center pt-0 flex-col justify-center">
+    <div className="flex relative w-full h-full bg-black text-white text-center flex-col justify-center items-center">
       {/* テキストブロック */}
-      <div className="pb-4 sm:px-6 w-[90vw] mx-auto flex flex-col items-center justify-center">
+      <div className="w-[90vw] flex flex-col items-center justify-center">
         <div>
           {TOPS_CATCH_TITLE_LINES.map((line, index) => (
             <p
