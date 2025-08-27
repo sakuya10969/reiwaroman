@@ -63,14 +63,14 @@ const Header = ({ nav = NAV, ticketHref = TICKET_URL }: HeaderProps) => {
           <img
             src={logo_5}
             alt="REIWAROMAN"
-            className="h-14 w-28 object-contain object-left pointer-events-none select-none opacity-80"
+            className="h-14 w-28 lg:h-20 lg:w-40 object-contain object-left pointer-events-none select-none opacity-80"
           />
         </div>
 
         {/* 右：ナビ + TICKET */}
         <div className="flex items-center gap-3">
           {/* デスクトップナビ */}
-          <nav className="hidden md:flex items-center gap-3 origin-left scale-x-140 mr-14 lg:pt-2">
+          <nav className="hidden md:flex items-center gap-3 origin-left scale-x-140 mr-14 lg:pt-4">
             {nav.map((item, idx) => {
               const isThisActive = idx === activeNavIndex;
               // テーマに応じた「アクティブ色」を取り、無ければ何もしない
@@ -102,7 +102,7 @@ const Header = ({ nav = NAV, ticketHref = TICKET_URL }: HeaderProps) => {
             target="_blank"
             rel="noopener noreferrer"
             className={[
-              "hidden md:inline-flex items-center gap-2 rounded-full pl-6 pr-2 py-1 lg:mt-2 mr-4 md:ml-2 lg:ml-0 text-sm uppercase font-bold whitespace-nowrap transition-colors focus-visible:outline-none focus-visible:ring-2",
+              "hidden md:inline-flex items-center gap-2 rounded-full pl-6 pr-2 py-1 mr-4 md:ml-2 lg:mt-4 lg:ml-0 lg:mr-6 text-sm uppercase font-bold whitespace-nowrap transition-colors focus-visible:outline-none focus-visible:ring-2",
               ticketButtonClass(currentTheme),
               ticketFocusRingClass(currentTheme),
             ].join(" ")}
