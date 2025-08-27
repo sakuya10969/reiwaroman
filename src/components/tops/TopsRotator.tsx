@@ -32,17 +32,17 @@ const TopsRotator = () => {
   const isVisual = current.key === "visual";
 
   return (
-    <div className="relative w-screen min-h-[40vh] sm:min-h-[60vh] md:min-h-[70vh] lg:h-screen">
+    <div className="relative w-screen min-h-[50vh] sm:min-h-[60vh] md:min-h-[70vh] lg:h-screen">
       <div className={[ "absolute inset-0 transition-opacity duration-1500 ease-linear", isCatch ? "opacity-100" : "opacity-0"].join(" ")}>
         <TopsCatch />
       </div>
 
-      <div className={[ "relative w-screen min-h-[40vh] sm:min-h-[60vh] md:min-h-[70vh] lg:h-screen transition-opacity duration-1500 ease-linear", isVisual ? "opacity-100" : "opacity-0"].join(" ")}>
+      <div className={[ "relative transition-opacity duration-1500 ease-linear", isVisual ? "opacity-100" : "opacity-0"].join(" ")}>
         <TopsVisual key={visualCycle} resetSignal={visualCycle} active={isVisual} />
       </div>
 
       {/* ロゴを下部に配置 */}
-      <div className="absolute bottom-5 sm:bottom-10 md:bottom-15 lg:bottom-30 left-1/2 transform -translate-x-1/2 z-10">
+      <div className="absolute bottom-10 sm:bottom-15 md:bottom-20 lg:bottom-30 left-1/2 transform -translate-x-1/2 z-10">
         <img 
           src={logo5} 
           alt="Logo"

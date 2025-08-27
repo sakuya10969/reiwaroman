@@ -47,7 +47,7 @@ const TopsVisual = ({ resetSignal = 0, active = true }: TopsVisualProps) => {
   return (
     <div
       className={[
-        "relative w-full bg-black h-[40vh] sm:h-[60vh] md:h-[70vh] lg:h-screen",
+        "relative w-full bg-black h-[50vh] sm:h-[60vh] md:h-[70vh] lg:h-screen",
         primed ? "opacity-100" : "opacity-0",
         "transition-opacity duration-0",
       ].join(" ")}
