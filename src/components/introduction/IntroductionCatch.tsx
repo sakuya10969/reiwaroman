@@ -1,5 +1,6 @@
 import { useEffect, useState, useLayoutEffect, useRef } from "react";
 import { gsap } from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
 
 import type { IntroductionCatchProps } from "@/types";
 import { INTRODUCTION_CATCH_CONTENTS } from "@/constants";
@@ -7,6 +8,8 @@ import reiwa4 from "@/assets/reiwa_4.png";
 import reiwa5 from "@/assets/reiwa_5.png";
 import reiwa4_mobile from "@/assets/reiwa_4_mobile.png";
 import reiwa5_mobile from "@/assets/reiwa_5_mobile.png";
+
+gsap.registerPlugin(ScrollTrigger);
 
 // スライドデータを定義
 const slides = [
@@ -18,9 +21,11 @@ const IntroductionCatch = ({
   interval = 10000,
 }: IntroductionCatchProps) => {
   const [index, setIndex] = useState<number>(0);
+  const [isMobile, setIsMobile] = useState<boolean>(false);
   const subtitleRef = useRef<HTMLHeadingElement>(null);
   const titleRef = useRef<HTMLHeadingElement>(null);
   const contentRef = useRef<HTMLDivElement>(null);
+  const containerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     if (slides.length <= 1) return; // 1枚以下なら切り替え不要
@@ -30,47 +35,124 @@ const IntroductionCatch = ({
     return () => clearInterval(timer);
   }, [interval]);
 
-  useLayoutEffect(() => {
-    const tl = gsap.timeline();
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth <= 768);
+    };
+    
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
 
-    // 小見出しのアニメーション
+  useLayoutEffect(() => {
+    // 即座に要素を非表示にする
     if (subtitleRef.current) {
       gsap.set(subtitleRef.current, { y: 30, opacity: 0 });
-      tl.to(subtitleRef.current, {
-        y: 0,
-        opacity: 1,
-        duration: 0.8,
-        ease: "power2.out"
-      });
     }
-
-    // メイン見出しのアニメーション
+    
     if (titleRef.current) {
       gsap.set(titleRef.current, { y: 50, opacity: 0 });
-      tl.to(titleRef.current, {
-        y: 0,
-        opacity: 1,
-        duration: 0.8,
-        ease: "power2.out"
-      }, "-=0.4");
     }
-
-    // 説明文のアニメーション
+    
     if (contentRef.current) {
       const contentLines = contentRef.current.querySelectorAll('p');
       gsap.set(contentLines, { y: 30, opacity: 0 });
-      tl.to(contentLines, {
-        y: 0,
-        opacity: 1,
-        duration: 0.6,
-        stagger: 0.1,
-        ease: "power2.out"
-      }, "-=0.2");
     }
-  }, []);
+
+    if (isMobile) {
+      // モバイル: TopsCatchと同様に0.5秒後にアニメーション開始
+      const timer = setTimeout(() => {
+        const tl = gsap.timeline();
+
+        // 小見出しのアニメーション
+        if (subtitleRef.current) {
+          tl.to(subtitleRef.current, {
+            y: 0,
+            opacity: 1,
+            duration: 0.8,
+            ease: "power2.out"
+          });
+        }
+
+        // メイン見出しのアニメーション
+        if (titleRef.current) {
+          tl.to(titleRef.current, {
+            y: 0,
+            opacity: 1,
+            duration: 0.8,
+            ease: "power2.out"
+          }, "-=0.4");
+        }
+
+        // 説明文のアニメーション
+        if (contentRef.current) {
+          const contentLines = contentRef.current.querySelectorAll('p');
+          tl.to(contentLines, {
+            y: 0,
+            opacity: 1,
+            duration: 0.6,
+            stagger: 0.1,
+            ease: "power2.out"
+          }, "-=0.2");
+        }
+      }, 500);
+
+      return () => clearTimeout(timer);
+    } else {
+      // PC: スクロールトリガーでアニメーション
+      const container = containerRef.current;
+      if (!container) return;
+
+      const ctx = gsap.context(() => {
+        const tl = gsap.timeline({
+          scrollTrigger: {
+            trigger: container,
+            start: "top 80%",
+            end: "bottom 20%",
+            toggleActions: "play none none reverse",
+          },
+        });
+
+        // 小見出しのアニメーション
+        if (subtitleRef.current) {
+          tl.to(subtitleRef.current, {
+            y: 0,
+            opacity: 1,
+            duration: 0.8,
+            ease: "power2.out"
+          });
+        }
+
+        // メイン見出しのアニメーション
+        if (titleRef.current) {
+          tl.to(titleRef.current, {
+            y: 0,
+            opacity: 1,
+            duration: 0.8,
+            ease: "power2.out"
+          }, "-=0.4");
+        }
+
+        // 説明文のアニメーション
+        if (contentRef.current) {
+          const contentLines = contentRef.current.querySelectorAll('p');
+          tl.to(contentLines, {
+            y: 0,
+            opacity: 1,
+            duration: 0.6,
+            stagger: 0.1,
+            ease: "power2.out"
+          }, "-=0.2");
+        }
+      }, container);
+
+      return () => ctx.revert();
+    }
+  }, [isMobile]);
 
   return (
-    <div className="relative w-full h-[50vh] md:h-screen flex items-center justify-center text-white overflow-hidden bg-black">
+    <div ref={containerRef} className="relative w-full h-[50vh] md:h-screen flex items-center justify-center text-white overflow-hidden bg-black">
       {/* 背景スライド - レスポンシブ対応 */}
       {slides.map((slide, i) => (
         <picture key={i} className="absolute inset-0">

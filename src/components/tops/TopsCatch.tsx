@@ -8,35 +8,49 @@ const TopsCatch = () => {
   const subtitleRef = useRef<HTMLDivElement>(null);
 
   useLayoutEffect(() => {
-    const tl = gsap.timeline();
-
-    // タイトル行のアニメーション
+    // 即座に要素を非表示にする
     if (titleRef.current) {
       const titleLines = titleRef.current.querySelectorAll('p');
       gsap.set(titleLines, { y: 50, opacity: 0 });
-      
-      tl.to(titleLines, {
-        y: 0,
-        opacity: 1,
-        duration: 0.8,
-        stagger: 0.2,
-        ease: "power2.out"
-      });
     }
-
-    // サブタイトル行のアニメーション
+    
     if (subtitleRef.current) {
       const subtitleLines = subtitleRef.current.querySelectorAll('p');
       gsap.set(subtitleLines, { y: 30, opacity: 0 });
-      
-      tl.to(subtitleLines, {
-        y: 0,
-        opacity: 1,
-        duration: 0.6,
-        stagger: 0.1,
-        ease: "power2.out"
-      }, "-=0.2");
     }
+
+    // 1秒待ってからアニメーション開始
+    const timer = setTimeout(() => {
+      const tl = gsap.timeline();
+
+      // タイトル行のアニメーション
+      if (titleRef.current) {
+        const titleLines = titleRef.current.querySelectorAll('p');
+        
+        tl.to(titleLines, {
+          y: 0,
+          opacity: 1,
+          duration: 0.8,
+          stagger: 0.2,
+          ease: "power2.out"
+        });
+      }
+
+      // サブタイトル行のアニメーション
+      if (subtitleRef.current) {
+        const subtitleLines = subtitleRef.current.querySelectorAll('p');
+        
+        tl.to(subtitleLines, {
+          y: 0,
+          opacity: 1,
+          duration: 0.6,
+          stagger: 0.1,
+          ease: "power2.out"
+        }, "-=0.2");
+      }
+    }, 500);
+
+    return () => clearTimeout(timer);
   }, []);
 
   return (
