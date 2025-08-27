@@ -29,7 +29,7 @@ export const SECTION_THEMES: Record<string, HeaderTheme> = {
   "introduction-catch": "dark",
   "introduction-live": "dark",
   "introduction-venue": "dark",
-  "news-catch": "dark",
+  "news-catch": "red",
   "news-list": "red",
   "cast": "dark",
   "goods": "dark",
