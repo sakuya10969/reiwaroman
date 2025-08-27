@@ -9,7 +9,7 @@ const TopsCatch = () => {
           {TOPS_CATCH_TITLE_LINES.map((line, index) => (
             <p
               key={index}
-              className="mx-auto text-3xl md:text-5xl lg:text-6xl
+              className="mx-auto text-2xl md:text-5xl lg:text-6xl
                          font-extrabold leading-[1.1] tracking-tighter whitespace-nowrap scale-x-90"
               style={{ fontFamily: '"dnp-shuei-shogomincho-std", serif' }}
             >
