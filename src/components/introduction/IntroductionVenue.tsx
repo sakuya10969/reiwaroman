@@ -71,7 +71,7 @@ const IntroductionVenue = () => {
       {/* コンテンツ */}
       <div className="relative z-10 text-center max-w-[70vw]">
         <h1 ref={titleRef} className="font-extrabold leading-[1.1] tracking-wide">
-          <p className="block text-red-800 text-[clamp(48px,10vw,110px)] opacity-70 relative top-8 z-10 scale-x-130 origin-center" style={{ fontFamily: '"dnp-shuei-shogomincho-std", serif' }}>
+          <p className="block text-red-800 text-[clamp(48px,10vw,110px)] opacity-70 relative top-4 md:top-8 z-10 scale-x-130 origin-center" style={{ fontFamily: '"dnp-shuei-shogomincho-std", serif' }}>
             横
           </p>
           <p className="inline-block text-[clamp(36px,10vw,100px)] relative z-0 leading-none scale-x-140 origin-center" style={{ fontFamily: 'Prompt, sans-serif' }}>K ARENA</p>
