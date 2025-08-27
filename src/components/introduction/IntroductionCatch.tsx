@@ -39,7 +39,7 @@ const IntroductionCatch = ({
     const checkMobile = () => {
       setIsMobile(window.innerWidth <= 768);
     };
-    
+
     checkMobile();
     window.addEventListener('resize', checkMobile);
     return () => window.removeEventListener('resize', checkMobile);
@@ -50,11 +50,11 @@ const IntroductionCatch = ({
     if (subtitleRef.current) {
       gsap.set(subtitleRef.current, { y: 30, opacity: 0 });
     }
-    
+
     if (titleRef.current) {
       gsap.set(titleRef.current, { y: 50, opacity: 0 });
     }
-    
+
     if (contentRef.current) {
       const contentLines = contentRef.current.querySelectorAll('p');
       gsap.set(contentLines, { y: 30, opacity: 0 });
@@ -152,7 +152,7 @@ const IntroductionCatch = ({
   }, [isMobile]);
 
   return (
-    <div ref={containerRef} className="relative w-full h-[50vh] md:h-screen flex items-center justify-center text-white overflow-hidden bg-black">
+    <div ref={containerRef} className="relative w-full h-[50vh] md:h-screen landscape:h-screen  flex items-center justify-center text-white overflow-hidden bg-black">
       {/* 背景スライド - レスポンシブ対応 */}
       {slides.map((slide, i) => (
         <picture key={i} className="absolute inset-0">
