@@ -19,9 +19,9 @@ export const TOPS_CATCH_SUBTITLE: string[] = [
 ];
 
 export const NEWS: NewsItem[] = [
-  { date: "2025-09-13", title: "応援グッズに関して", href: "/news/20250913" },
-  { date: "2025-09-01", title: "「RE:IWAROMAN」プレミアムチケット特典引換・特典会の詳細が決定！", href: "/news/20250901" },
-  { date: "2025-08-28", title: "「RE:IWAROMAN」オフィシャルグッズ販売決定！", href: "/news/20250828" },
+  { date: "2025-09-13", title: "応援グッズに関して", href: "" },
+  { date: "2025-09-01", title: "「RE:IWAROMAN」プレミアムチケット特典引換・特典会の詳細が決定！", href: "" },
+  { date: "2025-08-28", title: "「RE:IWAROMAN」オフィシャルグッズ販売決定！", href: "" },
 ];
 
 export const SECTION_THEMES: Record<string, HeaderTheme> = {
