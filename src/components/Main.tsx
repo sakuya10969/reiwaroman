@@ -28,14 +28,14 @@ export default function Main() {
         <IntroductionLive />
       </section>
 
-      {/* INTRODUCTION - VENUE */}
-      <section id="introduction-venue" className="scroll-mt-[64px]">
-        <IntroductionVenue />
-      </section>
-
       {/* INTRODUCTION - VIDEO */}
       <section id="introduction-video" className="scroll-mt-[64px]">
         <IntroductionVideo />
+      </section>
+      
+      {/* INTRODUCTION - VENUE */}
+      <section id="introduction-venue" className="scroll-mt-[64px]">
+        <IntroductionVenue />
       </section>
 
       {/* NEWS - CATCH */}
