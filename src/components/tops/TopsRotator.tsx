@@ -1,4 +1,5 @@
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useState, useLayoutEffect, useRef } from "react";
+import { gsap } from "gsap";
 
 import TopsCatch from "@/components/tops/TopsCatch";
 import TopsVisual from "@/components/tops/TopsVisual";
@@ -17,7 +18,38 @@ const SLOTS: Slot[] = [
 const TopsRotator = () => {
   const [idx, setIdx] = useState<number>(0);
   const [visualCycle, setVisualCycle] = useState<number>(0);
+  const logoRef = useRef<HTMLDivElement>(null);
   const current = useMemo(() => SLOTS[idx], [idx]);
+
+  useLayoutEffect(() => {
+    // ロゴを初期状態で画面外（左から）に配置
+    if (logoRef.current) {
+      gsap.set(logoRef.current, {
+        x: "-300%",
+        y: "-150%",
+        opacity: 0,
+        scale: 0.3,
+        rotation: -90,
+      });
+    }
+
+    // 2秒待ってからロゴアニメーション開始
+    const timer = setTimeout(() => {
+      if (logoRef.current) {
+        gsap.to(logoRef.current, {
+          x: "0%",
+          y: "0%",
+          opacity: 1,
+          scale: 1,
+          rotation: 0,
+          duration: 1.5,
+          ease: "expo.out",
+        });
+      }
+    }, 2000);
+
+    return () => clearTimeout(timer);
+  }, []);
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -42,9 +74,18 @@ const TopsRotator = () => {
       </div>
 
       {/* ロゴを下部に配置 */}
+<<<<<<< HEAD
       <div className="absolute bottom-10 sm:bottom-15 md:bottom-20 lg:bottom-25 left-1/2 transform -translate-x-1/2 z-10">
         <img
           src={logo5}
+=======
+      <div 
+        ref={logoRef}
+        className="absolute bottom-10 sm:bottom-15 md:bottom-20 lg:bottom-25 left-1/2 transform -translate-x-1/2 z-10"
+      >
+        <img 
+          src={logo5} 
+>>>>>>> bbcf6257342bb1e66c098bf2f5931ce149d37468
           alt="Logo"
           className="h-18 w-40 md:h-20 md:w-48 lg:h-40 lg:w-80"
         />

@@ -40,7 +40,7 @@ const IntroductionVenue = () => {
       tl.to(titleElements, {
         y: 0,
         opacity: 1,
-        duration: 0.8,
+        duration: 0.6,
         stagger: 0.15,
         ease: "power2.out",
       });

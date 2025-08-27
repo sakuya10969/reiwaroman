@@ -47,7 +47,7 @@ const IntroductionLive = () => {
       tl.to(titleLines, {
         y: 0,
         opacity: 1,
-        duration: 0.8,
+        duration: 0.6,
         stagger: 0.2,
         ease: "power2.out",
       });
@@ -56,7 +56,7 @@ const IntroductionLive = () => {
       tl.to(content, {
         y: 0,
         opacity: 1,
-        duration: 0.6,
+        duration: 0.4,
         ease: "power2.out",
       }, "-=0.4");
 

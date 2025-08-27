@@ -94,13 +94,8 @@ const IntroductionVideo = ({ videoId = "S6hol1r6xSc" }: IntroductionVideoProps) 
       <div className="absolute inset-0 -z-10">
         <div
           ref={shellRef}
-          className="absolute inset-0 pointer-events-none scale-110" // 少し拡大してトリミング
+          className="absolute inset-0 pointer-events-none w-full h-full object-cover" // 横いっぱいに動画を埋め尽くす
         />
-      </div>
-
-      {/* 必要なら上に文言やUIを重ねる */}
-      <div className="relative z-10 max-w-6xl mx-auto px-4">
-        {/* ...前景コンテンツ... */}
       </div>
     </div>
   );
