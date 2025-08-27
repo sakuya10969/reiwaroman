@@ -173,23 +173,23 @@ const NewsCatch = ({
           <div className="absolute inset-0 flex flex-col items-center justify-between text-center px-6 py-16">
             {/* BADGE - 上部 */}
             <div ref={badgeRef} className="text-sm md:text-lg lg:text-xl text-white/90 flex-shrink-0 relative -top-4">
-              <span className="inline-block font-bold underline underline-offset-4 scale-x-150 origin-center" style={{ fontFamily: 'Prompt, sans-serif' }}>
+              <p className="inline-block font-bold underline underline-offset-4 scale-x-150 origin-center" style={{ fontFamily: 'Prompt, sans-serif' }}>
                 {badgeText}
-              </span>
+              </p>
             </div>
 
             {/* タイトル行 - 真ん中 */}
-            <h1 ref={titleRef} className="leading-none flex-grow flex flex-col items-center justify-center">
+            <div ref={titleRef} className="leading-none flex-grow flex flex-col items-center justify-center">
               {titleLines.map((line, idx) => (
-                <span
+                <h1
                   key={idx}
                   className="block font-bold uppercase text-white text-3xl md:text-5xl scale-x-150 origin-center"
                   style={{ fontFamily: 'Prompt, sans-serif' }}
                 >
                   {line}
-                </span>
+                </h1>
               ))}
-            </h1>
+            </div>
           </div>
         </div>
       </div>

@@ -76,15 +76,13 @@ const NewsList = ({
     >
       <div className={`mx-auto max-w-[80vw] px-4 ${pyClass}`}>
         {/* 見出し */}
-        <p
+        <h1
           ref={headingRef}
-          className="w-full text-center text-sm md:text-base font-bold"
+          className="w-full text-center text-sm md:text-base font-bold inline-block underline underline-offset-4 scale-x-150"
           style={{ fontFamily: "Prompt, sans-serif" }}
         >
-          <span className="inline-block underline underline-offset-4 scale-x-150" style={{ fontFamily: "Prompt, sans-serif" }}>
-            NEWS
-          </span>
-        </p>
+          NEWS
+        </h1>
 
         {/* リスト */}
         <div ref={listRef} className="mt-4 md:mt-8 space-y-1 md:space-y-2">
