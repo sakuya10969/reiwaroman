@@ -25,26 +25,28 @@ const TopsRotator = () => {
     // ロゴを初期状態で画面外（左から）に配置
     if (logoRef.current) {
       gsap.set(logoRef.current, {
-        x: "-200%",
+        x: "-300%",
+        y: "-100%",
         opacity: 0,
-        scale: 0.5,
-        rotation: -45,
+        scale: 0.3,
+        rotation: -90,
       });
     }
 
-    // 1秒待ってからロゴアニメーション開始
+    // 2秒待ってからロゴアニメーション開始
     const timer = setTimeout(() => {
       if (logoRef.current) {
         gsap.to(logoRef.current, {
           x: "0%",
+          y: "0%",
           opacity: 1,
           scale: 1,
           rotation: 0,
-          duration: 1.2,
-          ease: "back.out(1.7)",
+          duration: 1.5,
+          ease: "power4.out",
         });
       }
-    }, 1000);
+    }, 2000);
 
     return () => clearTimeout(timer);
   }, []);
