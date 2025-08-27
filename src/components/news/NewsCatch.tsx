@@ -135,11 +135,11 @@ const NewsCatch = ({
   return (
     <div
       ref={wrapperRef}
-      className="w-full h-[350vh] relative isolate"
+      className="w-full h-[350vh] relative"
     >
       <div
         ref={containerRef}
-        className="w-full h-screen flex items-center justify-center relative isolate"
+        className="w-full h-screen flex items-center justify-center relative overflow-hidden"
         aria-label={`${badgeText} ${titleLines.join(" ")}`}
       >
         {/* 背景 */}
@@ -162,12 +162,14 @@ const NewsCatch = ({
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
           {/* 円形パネル */}
           <div className="relative">
-            {/* 拡大する円形背景 */}
-            <div
-              ref={circleRef}
-              className="absolute top-1/2 left-1/2 w-[70vw] max-w-[400px] min-w-[200px] max-h-[400px] min-h-[200px] aspect-square rounded-full bg-[#8f242b] -translate-x-1/2 -translate-y-1/2 origin-center"
-              style={{ zIndex: 1 }}
-            />
+            {/* 拡大する円形背景 - クリッピングコンテナで包む */}
+            <div className="absolute top-1/2 left-1/2 w-[70vw] max-w-[400px] min-w-[200px] max-h-[400px] min-h-[200px] aspect-square -translate-x-1/2 -translate-y-1/2 overflow-hidden">
+              <div
+                ref={circleRef}
+                className="w-full h-full rounded-full bg-[#8f242b] origin-center"
+                style={{ zIndex: 1 }}
+              />
+            </div>
             
             {/* 文字コンテンツ */}
             <div
