@@ -1,11 +1,49 @@
+import { useLayoutEffect, useRef } from "react";
+import { gsap } from "gsap";
+
 import { TOPS_CATCH_TITLE_LINES, TOPS_CATCH_SUBTITLE } from "@/constants";
 
 const TopsCatch = () => {
+  const titleRef = useRef<HTMLDivElement>(null);
+  const subtitleRef = useRef<HTMLDivElement>(null);
+
+  useLayoutEffect(() => {
+    const tl = gsap.timeline();
+
+    // タイトル行のアニメーション
+    if (titleRef.current) {
+      const titleLines = titleRef.current.querySelectorAll('p');
+      gsap.set(titleLines, { y: 50, opacity: 0 });
+      
+      tl.to(titleLines, {
+        y: 0,
+        opacity: 1,
+        duration: 0.8,
+        stagger: 0.2,
+        ease: "power2.out"
+      });
+    }
+
+    // サブタイトル行のアニメーション
+    if (subtitleRef.current) {
+      const subtitleLines = subtitleRef.current.querySelectorAll('p');
+      gsap.set(subtitleLines, { y: 30, opacity: 0 });
+      
+      tl.to(subtitleLines, {
+        y: 0,
+        opacity: 1,
+        duration: 0.6,
+        stagger: 0.1,
+        ease: "power2.out"
+      }, "-=0.2");
+    }
+  }, []);
+
   return (
     <div className="flex relative w-full h-full bg-black text-white text-center pt-0 flex-col justify-center">
       {/* テキストブロック */}
       <div className="pb-4 sm:px-6 w-[90vw] mx-auto flex flex-col items-center justify-center">
-        <div>
+        <div ref={titleRef}>
           {TOPS_CATCH_TITLE_LINES.map((line, index) => (
             <p
               key={index}
@@ -18,7 +56,7 @@ const TopsCatch = () => {
           ))}
         </div>
 
-        <div className="mt-2">
+        <div ref={subtitleRef} className="mt-2">
           {TOPS_CATCH_SUBTITLE.map((line, index) => (
           <p
             key={index}
