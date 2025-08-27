@@ -161,7 +161,7 @@ const NewsCatch = ({
         {/* 拡大する円形背景 - 外部にも広がるよう制限なし */}
         <div
           ref={circleRef}
-          className="absolute top-1/2 left-1/2 w-[70vw] max-w-[400px] min-w-[200px] max-h-[400px] min-h-[200px] aspect-square -translate-x-1/2 -translate-y-1/2 rounded-full bg-[#8f242b] origin-center"
+          className="absolute top-1/2 left-1/2 w-[70vw] max-w-[400px] min-w-[200px] max-h-[400px] min-h-[200px] aspect-square -translate-x-1/2 -translate-y-1/2 rounded-full bg-red-900 origin-center"
           style={{ zIndex: 1 }}
         />
 

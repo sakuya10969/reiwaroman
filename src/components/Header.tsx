@@ -125,9 +125,9 @@ const Header = ({ nav = NAV, ticketHref = "https://example.com" }: HeaderProps) 
 
         {/* モバイルメニュー（右側スライドアウト） */}
         <div
-          className={`md:hidden fixed top-0 right-0 w-50 h-screen backdrop-blur-sm border-l border-white/10 transform transition-transform duration-300 ease-in-out z-40 ${
+          className={`md:hidden fixed top-0 right-0 w-60 h-screen backdrop-blur-sm border-l border-white/10 transform transition-transform duration-300 ease-in-out z-40 ${
             isMobileMenuOpen ? "translate-x-0" : "translate-x-full"
-          } ${currentTheme === "red" ? "bg-[#8f242b]/95" : "bg-black/95"}`}
+          } ${currentTheme === "red" ? "bg-red-900" : "bg-black/50"}`}
         >
           <nav className="px-6 py-10">
             {nav.map((item, idx) => {
@@ -141,7 +141,7 @@ const Header = ({ nav = NAV, ticketHref = "https://example.com" }: HeaderProps) 
                   href={item.href}
                   onClick={onNavClick}
                   className={[
-                    "block py-2 pl-2 text-sm font-bold transition-colors origin-left scale-x-130",
+                    "block py-2 pl-2 text-base font-bold transition-colors origin-left scale-x-150",
                     activeColorClass || linkInactiveColor,
                   ].join(" ")}
                   style={{ fontFamily: "Prompt, sans-serif" }}
@@ -158,13 +158,13 @@ const Header = ({ nav = NAV, ticketHref = "https://example.com" }: HeaderProps) 
               rel="noopener noreferrer"
               onClick={() => setIsMobileMenuOpen(false)}
               className={[
-                "inline-flex items-center gap-2 rounded-full pl-6 pr-2 py-1 text-sm uppercase font-bold whitespace-nowrap transition-colors focus-visible:outline-none focus-visible:ring-2 mt-1",
+                "inline-flex items-center gap-2 rounded-full pl-8 pr-4 py-1 mt-1 text-base uppercase font-bold whitespace-nowrap transition-colors focus-visible:outline-none focus-visible:ring-2",
                 ticketButtonClass(currentTheme),
                 ticketFocusRingClass(currentTheme),
               ].join(" ")}
               style={{ fontFamily: "Prompt, sans-serif" }}
             >
-              <span className="inline-block origin-center scale-x-130">TICKET</span>
+              <span className="inline-block origin-center scale-x-150">TICKET</span>
               <ChevronRight size={20} />
             </a>
           </nav>

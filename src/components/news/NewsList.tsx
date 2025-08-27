@@ -9,7 +9,7 @@ import { NEWS } from "@/constants";
 gsap.registerPlugin(ScrollTrigger);
 
 const NewsList = ({
-  bgColorClass = "bg-[#8f242b]",
+  bgColorClass = "bg-red-900",
   pyClass = "py-16 md:py-24",
 }: NewsListProps) => {
   const containerRef = useRef<HTMLDivElement>(null);
