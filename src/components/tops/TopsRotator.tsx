@@ -74,18 +74,12 @@ const TopsRotator = () => {
       </div>
 
       {/* ロゴを下部に配置 */}
-<<<<<<< HEAD
-      <div className="absolute bottom-10 sm:bottom-15 md:bottom-20 lg:bottom-25 left-1/2 transform -translate-x-1/2 z-10">
-        <img
-          src={logo5}
-=======
-      <div 
+      <div
         ref={logoRef}
         className="absolute bottom-10 sm:bottom-15 md:bottom-20 lg:bottom-25 left-1/2 transform -translate-x-1/2 z-10"
       >
-        <img 
-          src={logo5} 
->>>>>>> bbcf6257342bb1e66c098bf2f5931ce149d37468
+        <img
+          src={logo5}
           alt="Logo"
           className="h-18 w-40 md:h-20 md:w-48 lg:h-40 lg:w-80"
         />
