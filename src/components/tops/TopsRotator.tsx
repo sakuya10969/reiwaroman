@@ -32,7 +32,7 @@ const TopsRotator = () => {
   const isVisual = current.key === "visual";
 
   return (
-    <div className="relative w-screen min-h-[50vh] sm:min-h-[60vh] md:min-h-[70vh] lg:h-screen">
+    <div className="relative w-screen h-[50vh] sm:h-[60vh] md:h-[70vh] lg:h-screen">
       <div className={[ "absolute inset-0 transition-opacity duration-1500 ease-linear", isCatch ? "opacity-100" : "opacity-0"].join(" ")}>
         <TopsCatch />
       </div>
