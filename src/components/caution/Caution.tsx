@@ -69,7 +69,7 @@ const Caution = ({
   }, []);
 
   return (
-    <div ref={containerRef} className="relative w-full isolate">
+    <div ref={containerRef} className="relative w-full isolate lg:min-h-screen">
       {/* 背景 */}
       <div
         className="absolute inset-0 bg-black -z-20"

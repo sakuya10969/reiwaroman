@@ -115,7 +115,7 @@ const IntroductionVideo = ({ videoId = "S6hol1r6xSc" }: IntroductionVideoProps) 
   }, [videoId]); // videoId が変わったらエフェクトを再実行
 
   return (
-    <div ref={containerRef} className="relative w-full isolate flex items-center justify-center min-h-[50vh] pt-16 md:pt-24">
+    <div ref={containerRef} className="relative w-full isolate flex items-center justify-center min-h-[50vh] lg:h-screen pt-16 md:pt-24">
       {/* 黒背景 */}
       <div className="absolute inset-0 bg-black -z-10" aria-hidden="true" />
 

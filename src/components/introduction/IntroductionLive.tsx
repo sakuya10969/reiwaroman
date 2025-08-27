@@ -89,26 +89,28 @@ const IntroductionLive = () => {
       />
 
       {/* コンテンツ */}
-      <div className="relative z-10 w-full md:max-h-[70vh] px-6 lg:px-10 lg:pr-16 py-4 md:py-16 lg:py-24 flex items-center md:items-center md:justify-end">
+      <div className="relative z-10 w-full md:h-[60vh] lg:h-screen px-6 lg:px-10 lg:pr-16 py-4 md:py-16 lg:py-24 flex items-center md:items-center md:justify-end">
         {/* PC: 横並び [本文][タイトル]、SP: 左寄せで縦並び（タイトルが上）、中央配置 */}
-        <div className="flex md:flex-row flex-col items-start md:justify-end gap-4 md:gap-6 lg:gap-10 text-left w-full md:w-auto">
+        <div className="flex md:flex-row flex-col items-start md:justify-end gap-4 md:gap-6 lg:gap-10 text-left w-full md:w-[50vw] mr-10">
 
           {/* 本文（左隣） */}
           <div ref={contentRef} className="order-2 md:order-1 flex-shrink-0 self-start mt-3 md:mt-0">
-            {INTRODUCTION_LIVE_CONTENTS.map((content, i) => (
-              <p
-                key={i}
-                className="
-                  min-w-[40vw] md:max-w-none
-                  text-xs md:text-sm text-white/92
-                  md:[writing-mode:vertical-rl] md:[text-orientation:upright]
-                  leading-relaxed lg:leading-10 lg:tracking-wider
-                "
-                style={{ fontFamily: '"momochidori", serif', fontWeight: 500 }}
-              >
-                {content}
-              </p>
-            ))}
+            <div
+              className="
+                min-w-[40vw] md:w-[45vw] lg:w-[50vw]
+                text-xs md:text-sm text-white/92
+                md:[writing-mode:vertical-rl] md:[text-orientation:upright]
+                leading-relaxed lg:leading-10 lg:tracking-wider
+              "
+              style={{ fontFamily: '"momochidori", serif'  , fontWeight:500}}
+            >
+              {INTRODUCTION_LIVE_CONTENTS.map((content, i) => (
+                <p key={i}>
+                  {content}
+                  {i < INTRODUCTION_LIVE_CONTENTS.length - 1 && <br />}
+                </p>
+              ))}
+            </div>
           </div>
 
           {/* タイトル（最右）— 各列を独立させて上端揃え */}
@@ -119,7 +121,7 @@ const IntroductionLive = () => {
                   key={i}
                   className="
                     font-extrabold text-white
-                    text-4xl md:text-5xl
+                    text-4xl md:text-5xl lg:text-7xl
                     drop-shadow-[0_3px_12px_rgba(0,0,0,0.55)]
                     md:[writing-mode:vertical-rl] md:[text-orientation:upright]
                     leading-[0.8] md:leading-[1.08]

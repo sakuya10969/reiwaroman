@@ -53,7 +53,7 @@ const IntroductionVenue = () => {
   return (
     <div
       ref={containerRef}
-      className="relative w-full max-h-screen flex items-center justify-center text-white overflow-hidden py-12"
+      className="relative w-full max-h-screen lg:h-screen flex items-center justify-center text-white overflow-hidden py-12"
     >
       {/* 背景 */}
       <div

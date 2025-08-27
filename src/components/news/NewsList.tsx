@@ -72,7 +72,7 @@ const NewsList = ({
   return (
     <div 
       ref={containerRef}
-      className={`relative text-white w-full max-h-screen flex items-center justify-center ${bgColorClass}`}
+      className={`relative text-white w-full max-h-screen lg:h-screen flex items-center justify-center ${bgColorClass}`}
     >
       <div className={`mx-auto max-w-[80vw] px-4 ${pyClass}`}>
         {/* 見出し */}
