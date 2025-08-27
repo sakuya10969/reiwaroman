@@ -158,49 +158,38 @@ const NewsCatch = ({
           aria-hidden="true"
         />
 
-        {/* 絶対中央配置コンテナ */}
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
-          {/* 円形パネル */}
-          <div className="relative">
-            {/* 拡大する円形背景 - クリッピングコンテナで包む */}
-            <div className="absolute top-1/2 left-1/2 w-[70vw] max-w-[400px] min-w-[200px] max-h-[400px] min-h-[200px] aspect-square -translate-x-1/2 -translate-y-1/2 overflow-hidden">
-              <div
-                ref={circleRef}
-                className="w-full h-full rounded-full bg-[#8f242b] origin-center"
-                style={{ zIndex: 1 }}
-              />
-            </div>
-            
-            {/* 文字コンテンツ */}
-            <div
-              className="relative aspect-square w-[70vw] max-w-[400px] min-w-[200px] max-h-[400px] min-h-[200px] rounded-full"
-              role="img"
-              aria-label={`${titleLines.join(" ")}`}
-              style={{ zIndex: 2 }}
-            >
-              {/* 内側レイアウト */}
-              <div className="absolute inset-0 flex flex-col items-center justify-between text-center px-6 py-16">
-                {/* BADGE - 上部 */}
-                <div ref={badgeRef} className="text-sm md:text-lg lg:text-xl text-white/90 flex-shrink-0 relative top-2">
-                  <span className="inline-block font-bold underline underline-offset-4 scale-x-150 origin-center" style={{ fontFamily: 'Prompt, sans-serif' }}>
-                    {badgeText}
-                  </span>
-                </div>
+        {/* 拡大する円形背景 - 外部にも広がるよう制限なし */}
+        <div
+          ref={circleRef}
+          className="absolute top-1/2 left-1/2 w-[70vw] max-w-[400px] min-w-[200px] max-h-[400px] min-h-[200px] aspect-square -translate-x-1/2 -translate-y-1/2 rounded-full bg-[#8f242b] origin-center"
+          style={{ zIndex: 1 }}
+        />
 
-                {/* タイトル行 - 真ん中 */}
-                <h1 ref={titleRef} className="leading-none flex-grow flex flex-col items-center justify-center">
-                  {titleLines.map((line, idx) => (
-                    <span
-                      key={idx}
-                      className="block font-bold uppercase text-white text-3xl md:text-5xl scale-x-150 origin-center leading-none"
-                      style={{ fontFamily: 'Prompt, sans-serif' }}
-                    >
-                      {line}
-                    </span>
-                  ))}
-                </h1>
-              </div>
+        {/* 文字コンテンツ - 固定サイズ、拡大しない */}
+        <div
+          className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[70vw] max-w-[400px] min-w-[200px] max-h-[400px] min-h-[200px] aspect-square"
+          style={{ zIndex: 2 }}
+        >
+          <div className="absolute inset-0 flex flex-col items-center justify-between text-center px-6 py-16">
+            {/* BADGE - 上部 */}
+            <div ref={badgeRef} className="text-sm md:text-lg lg:text-xl text-white/90 flex-shrink-0 relative top-2">
+              <span className="inline-block font-bold underline underline-offset-4 scale-x-150 origin-center" style={{ fontFamily: 'Prompt, sans-serif' }}>
+                {badgeText}
+              </span>
             </div>
+
+            {/* タイトル行 - 真ん中 */}
+            <h1 ref={titleRef} className="leading-none flex-grow flex flex-col items-center justify-center">
+              {titleLines.map((line, idx) => (
+                <span
+                  key={idx}
+                  className="block font-bold uppercase text-white text-3xl md:text-5xl scale-x-150 origin-center leading-none"
+                  style={{ fontFamily: 'Prompt, sans-serif' }}
+                >
+                  {line}
+                </span>
+              ))}
+            </h1>
           </div>
         </div>
       </div>
