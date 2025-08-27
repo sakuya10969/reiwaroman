@@ -6,7 +6,7 @@ export const NAV: NavItem[] = [
   { label: "TOPS",          href: "#tops",         sectionIds: ["tops"] },
   { label: "INTRODUCTION",  href: "#introduction-catch", sectionIds: ["introduction-catch", "introduction-live", "introduction-venue"] },
   { label: "NEWS",          href: "#news-catch",        sectionIds: ["news-catch", "news-list"] },
-  { label: "CAST",          href: "#cast",              sectionIds: ["cast"] },
+  // { label: "CAST",          href: "#cast",              sectionIds: ["cast"] },
   { label: "GOODS",         href: "#goods",             sectionIds: ["goods"] },
 ];
 
