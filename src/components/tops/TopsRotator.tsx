@@ -1,7 +1,7 @@
 import { useEffect, useMemo, useState } from "react";
 
-import TopsCatch from "@/components/top/TopsCatch";
-import TopsVisual from "@/components/top/TopsVisual";
+import TopsCatch from "@/components/tops/TopsCatch";
+import TopsVisual from "@/components/tops/TopsVisual";
 import logo5 from "@/assets/logo_5.png";
 
 interface Slot {
