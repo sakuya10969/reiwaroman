@@ -104,7 +104,7 @@ const Goods = ({
         {/* 上部のバッジ */}
         <div ref={badgeRef} className="flex justify-center mb-8">
           <div
-            className="text-sm text-white md:text-base font-bold transform scale-x-150"
+            className="text-sm text-white md:text-base font-bold scale-x-150"
             style={{ fontFamily: 'Prompt, sans-serif' }}
           >
             <span className="inline-block font-bold uppercase underline underline-offset-4">
