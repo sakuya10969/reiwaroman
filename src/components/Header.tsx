@@ -56,13 +56,13 @@ const Header = ({ nav = NAV, ticketHref = "https://example.com" }: HeaderProps) 
   // TICKET ボタンは従来通り赤基調固定
   return (
     <header className="fixed inset-x-0 top-0 z-50 bg-transparent w-screen">
-      <div className="relative h-16 flex items-start justify-between pt-2 px-2">
+      <div className="relative h-16 flex items-start justify-between pt-0 px-2">
         {/* 左：ロゴ */}
         <div className="flex-shrink-0">
           <img
             src={logo_5}
             alt="REIWAROMAN"
-            className="h-10 w-28 object-contain object-left pointer-events-none select-none"
+            className="h-14 w-28 object-contain object-left pointer-events-none select-none"
           />
         </div>
 
@@ -114,7 +114,7 @@ const Header = ({ nav = NAV, ticketHref = "https://example.com" }: HeaderProps) 
           {/* モバイルメニューボタン */}
           <button
             onClick={toggleMobileMenu}
-            className="md:hidden pr-1 transition-colors hover:text-gray-300 relative z-50"
+            className="md:hidden pt-2 pr-1 transition-colors hover:text-gray-300 relative z-50"
             aria-label="メニューを開く"
           >
             {isMobileMenuOpen ? <X size={28} /> : <Menu size={28} />}
