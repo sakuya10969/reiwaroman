@@ -51,7 +51,7 @@ const NewsList = ({
       tl.to(heading, {
         y: 0,
         opacity: 1,
-        duration: 0.8,
+        duration: 0.6,
         ease: "power2.out",
       });
 
@@ -59,7 +59,7 @@ const NewsList = ({
       tl.to(newsRows, {
         y: 0,
         opacity: 1,
-        duration: 0.6,
+        duration: 0.4,
         stagger: 0.1,
         ease: "power2.out",
       }, "-=0.4");

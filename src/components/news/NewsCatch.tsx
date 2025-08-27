@@ -99,7 +99,7 @@ const NewsCatch = ({
         textTl.to(badge, {
           y: 0,
           opacity: 1,
-          duration: 0.8,
+          duration: 0.6,
           ease: "power2.out",
         });
       }
@@ -110,8 +110,8 @@ const NewsCatch = ({
         textTl.to(titleLines, {
           y: 0,
           opacity: 1,
-          duration: 0.6,
-          stagger: 0.2,
+          duration: 0.4,
+          stagger: 0.1,
           ease: "power2.out",
         }, "-=0.4");
       }

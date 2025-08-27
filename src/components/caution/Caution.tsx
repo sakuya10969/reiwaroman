@@ -25,14 +25,14 @@ const Caution = ({
     const ctx = gsap.context(() => {
       // バッジを初期状態で下に移動、透明にする
       gsap.set(badge, {
-        y: 50,
+        y: 60,
         opacity: 0,
       });
 
       // リストの各アイテムを初期状態で下に移動、透明にする
       const listItems = list.children;
       gsap.set(listItems, {
-        y: 80,
+        y: 100,
         opacity: 0,
       });
 
@@ -50,7 +50,7 @@ const Caution = ({
       tl.to(badge, {
         y: 0,
         opacity: 1,
-        duration: 0.8,
+        duration: 0.6,
         ease: "power2.out",
       });
 
@@ -58,8 +58,8 @@ const Caution = ({
       tl.to(listItems, {
         y: 0,
         opacity: 1,
-        duration: 0.6,
-        stagger: 0.15,
+        duration: 0.4,
+        stagger: 0.1,
         ease: "power2.out",
       }, "-=0.4");
 
