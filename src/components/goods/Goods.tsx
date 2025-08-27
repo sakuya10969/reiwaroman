@@ -92,7 +92,7 @@ const Goods = ({
   const preparationImages = Array(8).fill(preparation);
 
   return (
-    <div ref={containerRef} className="relative w-full isolate lg:max-h-screen">
+    <div ref={containerRef} className="relative w-full isolate lg:min-h-screen">
       {/* 背景 */}
       <div
         className="absolute inset-0 bg-black -z-10"
@@ -100,7 +100,7 @@ const Goods = ({
       />
 
       {/* コンテンツ */}
-      <div className="max-w-6xl mx-auto pt-10 pb-6 px-4">
+      <div className="max-w-6xl mx-auto py-16 px-4">
         {/* 上部のバッジ */}
         <div ref={badgeRef} className="flex justify-center mb-8">
           <div
