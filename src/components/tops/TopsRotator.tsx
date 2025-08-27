@@ -26,7 +26,7 @@ const TopsRotator = () => {
     if (logoRef.current) {
       gsap.set(logoRef.current, {
         x: "-300%",
-        y: "-100%",
+        y: "-150%",
         opacity: 0,
         scale: 0.3,
         rotation: -90,
@@ -43,7 +43,7 @@ const TopsRotator = () => {
           scale: 1,
           rotation: 0,
           duration: 1.5,
-          ease: "power4.out",
+          ease: "expo.out",
         });
       }
     }, 2000);
