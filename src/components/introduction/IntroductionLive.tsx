@@ -66,7 +66,7 @@ const IntroductionLive = () => {
   }, []);
 
   return (
-    <div ref={containerRef} className="relative w-full text-white overflow-hidden py-6 md:py-8">
+    <div ref={containerRef} className="relative w-full min-h-[50vh] lg:h-screen text-white overflow-hidden py-6 md:py-8">
       {/* BG */}
       <div
         className="absolute inset-0 bg-top bg-cover"
@@ -89,7 +89,7 @@ const IntroductionLive = () => {
       />
 
       {/* コンテンツ */}
-      <div className="relative z-10 w-full md:h-[60vh] lg:h-screen px-6 lg:px-10 lg:pr-16 py-4 md:py-16 lg:py-24 flex items-center md:items-center md:justify-end">
+      <div className="relative z-10 w-full lg:h-screen px-6 lg:px-10 lg:pr-16 py-4 md:py-16 lg:py-24 flex items-center md:items-center md:justify-end">
         {/* PC: 横並び [本文][タイトル]、SP: 左寄せで縦並び（タイトルが上）、中央配置 */}
         <div className="flex md:flex-row flex-col items-start md:justify-end gap-4 md:gap-6 lg:gap-10 text-left w-full md:w-[50vw] mr-10">
 
