@@ -135,7 +135,7 @@ const NewsCatch = ({
   return (
     <div
       ref={wrapperRef}
-      className="w-full h-[350vh] relative"
+      className="w-full h-[330vh] relative"
     >
       <div
         ref={containerRef}
