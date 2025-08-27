@@ -52,14 +52,14 @@ const IntroductionCatch = ({
       {/* コンテンツ */}
       <div className="relative z-10 max-w-[90vw] flex flex-col items-center py-5">
         {/* 小見出し */}
-        <span className="inline-block text-sm md:text-base font-bold uppercase underline underline-offset-4 scale-x-150" style={{ fontFamily: 'Prompt, sans-serif' }}>
+        <h2 className="inline-block text-sm md:text-base font-bold uppercase underline underline-offset-4 scale-x-150" style={{ fontFamily: 'Prompt, sans-serif' }}>
           Introduction
-        </span>
+        </h2>
 
         {/* メイン見出し */}
-        <p className="mt-6 sm:mt-10 text-3xl md:text-5xl leading-[0.9] md:leading-[1.05] font-extrabold scale-x-150 tracking-[0.03em]" style={{ fontFamily: 'Prompt, sans-serif' ,fontWeight:700}}>
+        <h1 className="mt-6 sm:mt-10 text-3xl md:text-5xl leading-[0.9] md:leading-[1.05] font-extrabold scale-x-150 tracking-[0.03em]" style={{ fontFamily: 'Prompt, sans-serif' ,fontWeight:700}}>
           RE:IWAROMAN
-        </p>
+        </h1>
 
         {/* 説明文 */}
         <div className="mt-4 md:mt-8 space-y-2 text-xs md:text-sm leading-[1] sm:leading-[1.2] text-white text-center" style={{ fontFamily: '"momochidori", serif' ,fontWeight:500}}>

@@ -95,29 +95,27 @@ const IntroductionLive = () => {
 
           {/* 本文（左隣） */}
           <div ref={contentRef} className="order-2 md:order-1 flex-shrink-0 self-start mt-3 md:mt-0">
-            <p
-              className="
-                min-w-[40vw] md:max-w-none
-                text-xs md:text-sm text-white/92
-                md:[writing-mode:vertical-rl] md:[text-orientation:upright]
-                leading-relaxed lg:leading-10 lg:tracking-wider
-              "
-              style={{ fontFamily: '"momochidori", serif'  , fontWeight:500}}
-            >
-              {INTRODUCTION_LIVE_CONTENTS.map((content, i) => (
-                <span key={i}>
-                  {content}
-                  {i < INTRODUCTION_LIVE_CONTENTS.length - 1 && <br />}
-                </span>
-              ))}
-            </p>
+            {INTRODUCTION_LIVE_CONTENTS.map((content, i) => (
+              <p
+                key={i}
+                className="
+                  min-w-[40vw] md:max-w-none
+                  text-xs md:text-sm text-white/92
+                  md:[writing-mode:vertical-rl] md:[text-orientation:upright]
+                  leading-relaxed lg:leading-10 lg:tracking-wider
+                "
+                style={{ fontFamily: '"momochidori", serif', fontWeight: 500 }}
+              >
+                {content}
+              </p>
+            ))}
           </div>
 
           {/* タイトル（最右）— 各列を独立させて上端揃え */}
           <div className="order-1 md:order-2 flex-shrink-0 self-start mt-8 md:mt-0">
             <div ref={titleRef} className="flex flex-col md:flex-row-reverse items-start gap-1 md:gap-3 lg:gap-4">
               {INTRODUCTION_LIVE_TITLE_LINES.map((line, i) => (
-                <span
+                <h1
                   key={i}
                   className="
                     font-extrabold text-white
@@ -129,10 +127,10 @@ const IntroductionLive = () => {
                     origin-top
                     whitespace-nowrap
                   "
-                  style={{ fontFamily: '"dnp-shuei-shogomincho-std", serif' ,fontWeight:900}}
+                  style={{ fontFamily: '"dnp-shuei-shogomincho-std", serif', fontWeight: 900 }}
                 >
                   {line}
-                </span>
+                </h1>
               ))}
             </div>
           </div>
