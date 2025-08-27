@@ -75,3 +75,5 @@ export const CAUTION_CONTENTS: string[] = [
   "出演者は変更になる場合がございます。予めご了承ください。尚、変更による払戻は行いません。",
   "車椅子でご観覧の方は、チケット購入後FANYチケットへ要申請。車椅子席をご利用の方は、チケット購入時にFANYチケット[TEL]0570(550)100 (10時~19時/年中無休) までお問合せください。",
 ];
+
+export const TICKET_URL: string = "https://eplus.jp/reiwaroman/";

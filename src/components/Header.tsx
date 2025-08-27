@@ -14,8 +14,9 @@ import {
   ticketFocusRingClass,
 } from "@/theme/headerTheme";
 import logo_5 from "@/assets/logo_5.png";
+import { TICKET_URL } from "@/constants";
 
-const Header = ({ nav = NAV, ticketHref = "https://example.com" }: HeaderProps) => {
+const Header = ({ nav = NAV, ticketHref = TICKET_URL }: HeaderProps) => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState<boolean>(false);
 
   // 監視対象はセクションテーマのキーだけ
