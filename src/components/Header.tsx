@@ -62,7 +62,7 @@ const Header = ({ nav = NAV, ticketHref = "https://example.com" }: HeaderProps) 
           <img
             src={logo_5}
             alt="REIWAROMAN"
-            className="h-14 w-28 object-contain object-left pointer-events-none select-none"
+            className="h-14 w-28 object-contain object-left pointer-events-none select-none opacity-80"
           />
         </div>
 

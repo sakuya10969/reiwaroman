@@ -47,7 +47,7 @@ const TopsVisual = ({ resetSignal = 0, active = true }: TopsVisualProps) => {
   return (
     <div
       className={[
-        "relative w-full bg-black h-[40vh]",
+        "relative w-full bg-black h-[40vh] sm:h-[60vh] md:h-[70vh] lg:h-screen",
         primed ? "opacity-100" : "opacity-0",
         "transition-opacity duration-0",
       ].join(" ")}
@@ -56,9 +56,9 @@ const TopsVisual = ({ resetSignal = 0, active = true }: TopsVisualProps) => {
       {/* <div className="w-full h-2 bg-black" aria-hidden /> */}
 
       {/* 2) 画像ステージ（ここから画像が始まる） */}
-      <div className="relative w-full">
+      <div className="relative w-full h-full">
         {/* 背景画像をステージ全面に敷く */}
-        <div className="absolute inset-0 z-0 mt-0 pt-0">
+        <div className="absolute inset-0 z-0">
           {slides.map((s, i) => (
             <picture key={i} className="absolute inset-0">
               <source media="(max-width: 440px)" srcSet={s.srcMobile ?? s.srcDesktop} />
@@ -66,8 +66,7 @@ const TopsVisual = ({ resetSignal = 0, active = true }: TopsVisualProps) => {
                 src={s.srcDesktop}
                 alt={s.alt}
                 className={[
-                  "w-full h-auto transition-opacity duration-1500 ease-linear object-contain",
-                  "sm:object-top",
+                  "w-full h-full transition-opacity duration-1500 ease-linear object-cover",
                   i === index ? "opacity-100" : "opacity-0",
                 ].join(" ")}
               />
