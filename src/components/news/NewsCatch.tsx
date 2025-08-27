@@ -172,7 +172,7 @@ const NewsCatch = ({
         >
           <div className="absolute inset-0 flex flex-col items-center justify-between text-center px-6 py-16">
             {/* BADGE - 上部 */}
-            <div ref={badgeRef} className="text-base md:text-lg lg:text-xl text-white/90 flex-shrink-0 relative -top-2">
+            <div ref={badgeRef} className="text-sm md:text-lg lg:text-xl text-white/90 flex-shrink-0 relative -top-2">
               <p className="inline-block font-bold underline underline-offset-4 scale-x-150 origin-center" style={{ fontFamily: 'Prompt, sans-serif' }}>
                 {badgeText}
               </p>
