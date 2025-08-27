@@ -161,18 +161,18 @@ const NewsCatch = ({
         {/* 拡大する円形背景 - 外部にも広がるよう制限なし */}
         <div
           ref={circleRef}
-          className="absolute top-1/2 left-1/2 w-[70vw] max-w-[400px] min-w-[200px] max-h-[400px] min-h-[200px] aspect-square -translate-x-1/2 -translate-y-1/2 rounded-full bg-red-900 origin-center"
+          className="absolute top-1/2 left-1/2 w-60 h-60 md:w-80 md:h-80 lg:w-96 lg:h-96 -translate-x-1/2 -translate-y-1/2 rounded-full bg-red-900 origin-center"
           style={{ zIndex: 1 }}
         />
 
         {/* 文字コンテンツ - 固定サイズ、拡大しない */}
         <div
-          className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[70vw] max-w-[400px] min-w-[200px] max-h-[400px] min-h-[200px] aspect-square"
+          className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-60 h-60 md:w-80 md:h-80 lg:w-96 lg:h-96"
           style={{ zIndex: 2 }}
         >
           <div className="absolute inset-0 flex flex-col items-center justify-between text-center px-6 py-16">
             {/* BADGE - 上部 */}
-            <div ref={badgeRef} className="text-sm md:text-lg lg:text-xl text-white/90 flex-shrink-0 relative top-2">
+            <div ref={badgeRef} className="text-sm md:text-lg lg:text-xl text-white/90 flex-shrink-0 relative -top-4">
               <span className="inline-block font-bold underline underline-offset-4 scale-x-150 origin-center" style={{ fontFamily: 'Prompt, sans-serif' }}>
                 {badgeText}
               </span>
@@ -183,7 +183,7 @@ const NewsCatch = ({
               {titleLines.map((line, idx) => (
                 <span
                   key={idx}
-                  className="block font-bold uppercase text-white text-3xl md:text-5xl scale-x-150 origin-center leading-none"
+                  className="block font-bold uppercase text-white text-3xl md:text-5xl scale-x-150 origin-center"
                   style={{ fontFamily: 'Prompt, sans-serif' }}
                 >
                   {line}
