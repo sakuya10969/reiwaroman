@@ -3,45 +3,28 @@ import { useLayoutEffect, useRef } from "react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
-// import goods_1 from "@/assets/goods_1.png";
-// import goods_2 from "@/assets/goods_2.png";
-// import goods_3 from "@/assets/goods_3.png";
-// import goods_4 from "@/assets/goods_4.png";
-// import goods_5 from "@/assets/goods_5.png";
-// import goods_6 from "@/assets/goods_6.png";
-// import goods_7 from "@/assets/goods_7.png";
-// import goods_8 from "@/assets/goods_8.png";
-
 import type { GoodsProps } from "@/types";
+import preparation from "@/assets/preparation.png";
 
 gsap.registerPlugin(ScrollTrigger);
 
-// const Goods1 = goods_1;
-// const Goods2 = goods_2;
-// const Goods3 = goods_3;
-// const Goods4 = goods_4;
-// const Goods5 = goods_5;
-// const Goods6 = goods_6;
-// const Goods7 = goods_7;
-// const Goods8 = goods_8;
-
-
 const Goods = ({
   badgeText = "GOODS",
-  // goodsName = ["フェスTシャツ : 各4000円","オリジナルステッカーセット : 1000円","松尾のお薬ケース～復刻版～ : 1200円","オリジナルペンライト : 2500円","マフラータオル[全2種] : 2000円","チョコプラヘアバンド : セット 4200円 / 単品 各2200円","オリジナルエコバッグ : 1000円","チョコスタ[全2種] : 各1000円"],
   // goodsImageUrl = [],
   // goodsPurchaseUrl = "https://example.com",
 }: GoodsProps) => {
   const containerRef = useRef<HTMLDivElement>(null);
   const badgeRef = useRef<HTMLDivElement>(null);
   const messageRef = useRef<HTMLDivElement>(null);
+  const goodsGridRef = useRef<HTMLDivElement>(null);
 
   useLayoutEffect(() => {
     const container = containerRef.current;
     const badge = badgeRef.current;
     const message = messageRef.current;
+    const goodsGrid = goodsGridRef.current;
     
-    if (!container || !badge || !message) return;
+    if (!container || !badge || !message || !goodsGrid) return;
 
     const ctx = gsap.context(() => {
       // バッジを初期状態で下に移動、透明にする
@@ -54,6 +37,13 @@ const Goods = ({
       const messageElements = message.children;
       gsap.set(messageElements, {
         y: 80,
+        opacity: 0,
+      });
+
+      // グッズ画像を初期状態で下に移動、透明にする
+      const goodsItems = goodsGrid.children;
+      gsap.set(goodsItems, {
+        y: 60,
         opacity: 0,
       });
 
@@ -84,10 +74,22 @@ const Goods = ({
         ease: "power2.out",
       }, "-=0.4");
 
+      // 最後にグッズ画像を順番にアニメーション
+      tl.to(goodsItems, {
+        y: 0,
+        opacity: 1,
+        duration: 0.6,
+        stagger: 0.1,
+        ease: "power2.out",
+      }, "-=0.2");
+
     }, container);
 
     return () => ctx.revert();
   }, []);
+
+  // preparation.pngを表示するために8つの要素を作成
+  const preparationImages = Array(8).fill(preparation);
 
   return (
     <div ref={containerRef} className="relative w-full isolate lg:max-h-screen">
@@ -115,36 +117,26 @@ const Goods = ({
         <div ref={messageRef} className="flex flex-col items-center justify-center pb-8">
           <div className="text-center max-w-2xl">
             <h2
-              className="text-2xl md:text-3xl lg:text-4xl font-bold text-white mb-6"
+              className="text-2xl md:text-3xl lg:text-4xl font-bold text-white mb-2"
               style={{ fontFamily: '"dnp-shuei-shogomincho-std", serif' }}
             >
               グッズ詳細準備中
             </h2>
-            <p
-              className="text-white/90 text-sm md:text-base lg:text-lg leading-relaxed"
-              style={{ fontFamily: '"dnp-shuei-shogomincho-std", serif' }}
-            >
-              令和ロマン関連グッズの詳細情報は現在準備中です。<br />
-              オリジナルTシャツ、ステッカー、タオル、ペンライトなど、<br />
-              様々なアイテムをご用意予定です。<br />
-              販売開始時期や価格、デザインなどの詳細が決まり次第、<br />
-              こちらのページでお知らせいたします。
-            </p>
           </div>
         </div>
 
-        {/* グッズ一覧（コメントアウト） */}
-        {/* <div className="grid grid-cols-2 md:grid-cols-4 gap-5">
-          {goodsImageUrl.map((photo, index) => (
+        {/* グッズ一覧 - モバイル: 横2×縦4、PC: 横4×縦2 */}
+        <div ref={goodsGridRef} className="grid grid-cols-2 md:grid-cols-4 gap-5">
+          {preparationImages.map((photo, index) => (
             <div key={index} className="text-center">
               <img
                 src={photo}
-                alt={`Goods Photo ${index + 1}: ${goodsName[index]}`}
+                alt={`準備中グッズ ${index + 1}`}
                 className="w-full h-auto"
               />
             </div>
           ))}
-        </div> */}
+        </div>
 
         {/* 購入ボタン（コメントアウト） */}
         {/* <div className="max-w-xl mx-auto mt-12 px-4 flex justify-center">
