@@ -103,6 +103,11 @@ const Caution = ({
           ))}
         </ul>
       </div>
+      
+      {/* コピーライト */}
+      <div className="w-full flex justify-center absolute bottom-3">
+        <p className="text-white/80 text-sm tracking-wider" style={{fontFamily: 'momochidori, sans-serif', fontWeight: 700}}>&copy;RE:IWAROMAN制作委員会</p>
+      </div>
     </div>
   );
 };
