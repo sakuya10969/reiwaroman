@@ -59,11 +59,11 @@ const Header = ({ nav = NAV, ticketHref = "https://example.com" }: HeaderProps) 
       <div className="w-full">
         <div className="relative h-16 flex items-start justify-between pt-2 px-2">
           {/* 左：ロゴ */}
-          <div className="flex-shrink-0 mt-1 ml-1">
+          <div className="flex-shrink-0">
             <img
               src={logo_5}
               alt="REIWAROMAN"
-              className="h-8 w-24 object-contain object-left pointer-events-none select-none"
+              className="h-10 w-28 object-contain object-left pointer-events-none select-none"
             />
           </div>
 
@@ -115,17 +115,17 @@ const Header = ({ nav = NAV, ticketHref = "https://example.com" }: HeaderProps) 
             {/* モバイルメニューボタン */}
             <button
               onClick={toggleMobileMenu}
-              className="md:hidden p-2 transition-colors hover:text-gray-300 relative z-50"
+              className="md:hidden pr-1 transition-colors hover:text-gray-300 relative z-50"
               aria-label="メニューを開く"
             >
-              {isMobileMenuOpen ? <X size={20} /> : <Menu size={20} />}
+              {isMobileMenuOpen ? <X size={28} /> : <Menu size={28} />}
             </button>
           </div>
         </div>
 
         {/* モバイルメニュー（右側スライドアウト） */}
         <div
-          className={`md:hidden fixed top-0 right-0 w-50 backdrop-blur-sm border-l border-white/10 transform transition-transform duration-300 ease-in-out z-40 ${
+          className={`md:hidden fixed top-0 right-0 w-50 h-screen backdrop-blur-sm border-l border-white/10 transform transition-transform duration-300 ease-in-out z-40 ${
             isMobileMenuOpen ? "translate-x-0" : "translate-x-full"
           } ${currentTheme === "red" ? "bg-[#8f242b]/95" : "bg-black/95"}`}
         >
