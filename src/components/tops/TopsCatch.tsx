@@ -18,7 +18,7 @@ const TopsCatch = () => {
           ))}
         </div>
 
-        <div className="mt-2">
+        <div className="my-2">
           {TOPS_CATCH_SUBTITLE.map((line, index) => (
           <p
             key={index}
