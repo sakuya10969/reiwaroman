@@ -10,19 +10,30 @@ const TINT = 0.55; // 黒の暗幕（0〜1）
 
 const IntroductionVenue = () => {
   const containerRef = useRef<HTMLDivElement>(null);
-  const titleRef = useRef<HTMLDivElement>(null);
+  const yokoRef = useRef<HTMLParagraphElement>(null);
+  const karenaRef = useRef<HTMLParagraphElement>(null);
+  const yokohamaRef = useRef<HTMLParagraphElement>(null);
+  const hamaRef = useRef<HTMLParagraphElement>(null);
 
   useLayoutEffect(() => {
     const container = containerRef.current;
-    const title = titleRef.current;
+    const yoko = yokoRef.current;
+    const karena = karenaRef.current;
+    const yokohama = yokohamaRef.current;
+    const hama = hamaRef.current;
 
-    if (!container || !title) return;
+    if (!container || !yoko || !karena || !yokohama || !hama) return;
 
     const ctx = gsap.context(() => {
-      // タイトルの各文字要素を初期状態で下に移動、透明にする
-      const titleElements = title.children;
-      gsap.set(titleElements, {
+      // 横・浜・YOKOHAMAを初期状態で下に移動、透明にする
+      gsap.set([yoko, hama, yokohama], {
         y: 100,
+        opacity: 0,
+      });
+
+      // K ARENAを初期状態で上に移動、透明にする
+      gsap.set(karena, {
+        y: -100,
         opacity: 0,
       });
 
@@ -36,14 +47,21 @@ const IntroductionVenue = () => {
         },
       });
 
-      // 文字要素を順番にアニメーション（下から浮かび上がるように）
-      tl.to(titleElements, {
+      // 横、YOKOHAMA、浜を同時に下からフェードイン
+      tl.to([yoko, yokohama, hama], {
         y: 0,
         opacity: 1,
         duration: 0.6,
-        stagger: 0.15,
         ease: "power2.out",
       });
+
+      // K ARENAを上からフェードイン
+      tl.to(karena, {
+        y: 0,
+        opacity: 1,
+        duration: 0.6,
+        ease: "power2.out",
+      }, "+=0.2");
 
     }, container);
 
@@ -70,14 +88,14 @@ const IntroductionVenue = () => {
 
       {/* コンテンツ */}
       <div className="relative z-10 text-center max-w-[70vw]">
-        <h1 ref={titleRef} className="font-extrabold leading-[1.1] tracking-wide">
-          <p className="block text-red-800 text-[clamp(48px,10vw,110px)] opacity-70 relative top-4 md:top-8 z-10 scale-x-130 origin-center" style={{ fontFamily: '"dnp-shuei-shogomincho-std", serif' }}>
+        <h1 className="font-extrabold leading-[1.1] tracking-wide">
+          <p ref={yokoRef} className="block text-red-800 text-[clamp(48px,10vw,110px)] opacity-70 relative top-4 md:top-8 z-10 scale-x-130 origin-center" style={{ fontFamily: '"dnp-shuei-shogomincho-std", serif' }}>
             横
           </p>
-          <p className="inline-block text-[clamp(36px,10vw,100px)] relative z-0 leading-none scale-x-140 origin-center" style={{ fontFamily: 'Prompt, sans-serif' }}>K ARENA</p>
+          <p ref={karenaRef} className="inline-block text-[clamp(36px,10vw,100px)] relative z-0 leading-none scale-x-140 origin-center" style={{ fontFamily: 'Prompt, sans-serif' }}>K ARENA</p>
           <br />
-          <p className="inline-block text-[clamp(36px,10vw,100px)] leading-none scale-x-140 origin-center" style={{ fontFamily: 'Prompt, sans-serif' }}>YOKOHAMA</p>
-          <p className="block text-red-800 text-[clamp(48px,10vw,110px)] opacity-70 relative -top-6 md:-top-12 scale-x-130 origin-center" style={{ fontFamily: '"dnp-shuei-shogomincho-std", serif' }}>
+          <p ref={yokohamaRef} className="inline-block text-[clamp(36px,10vw,100px)] leading-none scale-x-140 origin-center" style={{ fontFamily: 'Prompt, sans-serif' }}>YOKOHAMA</p>
+          <p ref={hamaRef} className="block text-red-800 text-[clamp(48px,10vw,110px)] opacity-70 relative -top-6 md:-top-12 scale-x-130 origin-center" style={{ fontFamily: '"dnp-shuei-shogomincho-std", serif' }}>
             浜
           </p>
         </h1>
