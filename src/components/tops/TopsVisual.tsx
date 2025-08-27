@@ -37,7 +37,7 @@ const TopsVisual = ({ resetSignal = 0, active = true }: TopsVisualProps) => {
     timeoutRef.current = window.setTimeout(() => {
       setIndex(1);
       timeoutRef.current = null;
-    }, 10000);
+    }, 5000);
     return () => {
       if (timeoutRef.current) window.clearTimeout(timeoutRef.current);
       timeoutRef.current = null;

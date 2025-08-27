@@ -10,8 +10,8 @@ interface Slot {
 }
 
 const SLOTS: Slot[] = [
-  { key: "catch",  durationMs: 10000 },
-  { key: "visual", durationMs: 20000 },
+  { key: "catch",  durationMs: 5000 },
+  { key: "visual", durationMs: 10000 },
 ];
 
 const TopsRotator = () => {

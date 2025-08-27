@@ -18,7 +18,7 @@ const slides = [
 ];
 
 const IntroductionCatch = ({
-  interval = 10000,
+  interval = 5000,
 }: IntroductionCatchProps) => {
   const [index, setIndex] = useState<number>(0);
   const [isMobile, setIsMobile] = useState<boolean>(false);
