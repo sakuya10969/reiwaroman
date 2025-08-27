@@ -70,7 +70,7 @@ const Header = ({ nav = NAV, ticketHref = TICKET_URL }: HeaderProps) => {
         {/* 右：ナビ + TICKET */}
         <div className="flex items-center gap-3">
           {/* デスクトップナビ */}
-          <nav className="hidden md:flex items-center gap-3 origin-left scale-x-140 mr-14">
+          <nav className="hidden md:flex items-center gap-3 origin-left scale-x-140 mr-14 lg:pt-2">
             {nav.map((item, idx) => {
               const isThisActive = idx === activeNavIndex;
               // テーマに応じた「アクティブ色」を取り、無ければ何もしない
@@ -102,7 +102,7 @@ const Header = ({ nav = NAV, ticketHref = TICKET_URL }: HeaderProps) => {
             target="_blank"
             rel="noopener noreferrer"
             className={[
-              "hidden md:inline-flex items-center gap-2 rounded-full pl-6 pr-2 py-1 mr-4 md:ml-2 lg:ml-0 text-sm uppercase font-bold whitespace-nowrap transition-colors focus-visible:outline-none focus-visible:ring-2",
+              "hidden md:inline-flex items-center gap-2 rounded-full pl-6 pr-2 py-1 lg:mt-2 mr-4 md:ml-2 lg:ml-0 text-sm uppercase font-bold whitespace-nowrap transition-colors focus-visible:outline-none focus-visible:ring-2",
               ticketButtonClass(currentTheme),
               ticketFocusRingClass(currentTheme),
             ].join(" ")}
