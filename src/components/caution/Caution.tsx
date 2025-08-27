@@ -25,14 +25,14 @@ const Caution = ({
     const ctx = gsap.context(() => {
       // バッジを初期状態で下に移動、透明にする
       gsap.set(badge, {
-        y: 60,
+        y: 50,
         opacity: 0,
       });
 
       // リストの各アイテムを初期状態で下に移動、透明にする
       const listItems = list.children;
       gsap.set(listItems, {
-        y: 100,
+        y: 80,
         opacity: 0,
       });
 
