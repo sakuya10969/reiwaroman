@@ -55,83 +55,24 @@ const Header = ({ nav = NAV, ticketHref = "https://example.com" }: HeaderProps) 
 
   // TICKET ボタンは従来通り赤基調固定
   return (
-    <header className="fixed inset-x-0 top-0 z-50 bg-transparent">
-      <div className="w-full">
-        <div className="relative h-16 flex items-start justify-between pt-2 px-2">
-          {/* 左：ロゴ */}
-          <div className="flex-shrink-0">
-            <img
-              src={logo_5}
-              alt="REIWAROMAN"
-              className="h-10 w-28 object-contain object-left pointer-events-none select-none"
-            />
-          </div>
-
-          {/* 右：ナビ + TICKET */}
-          <div className="flex items-center gap-3">
-            {/* デスクトップナビ */}
-            <nav className="hidden md:flex items-center gap-3 origin-left scale-x-140 mr-14">
-              {nav.map((item, idx) => {
-                const isThisActive = idx === activeNavIndex;
-                // テーマに応じた「アクティブ色」を取り、無ければ何もしない
-                const activeColorClass =
-                  isThisActive ? getActiveLinkClassesByTheme(activeTheme) : null;
-
-                return (
-                  <a
-                    key={item.href}
-                    href={item.href}
-                    onClick={onNavClick}
-                    className={[
-                      linkBaseClass,
-                      activeColorClass || linkInactiveColor, // テーマ未該当やナビ未登録なら白のまま
-                    ].join(" ")}
-                    style={{ fontFamily: "Prompt, sans-serif" }}
-                  >
-                    {item.label}
-                  </a>
-                );
-              })}
-            </nav>
-
-            <div className="hidden md:block shrink-0 w-12 lg:w-16" aria-hidden />
-
-            {/* デスクトップTICKET */}
-            <a
-              href={ticketHref}
-              target="_blank"
-              rel="noopener noreferrer"
-              className={[
-                "hidden md:inline-flex items-center gap-2 rounded-full pl-6 pr-2 py-1 md:ml-2 lg:ml-0 text-sm uppercase font-bold whitespace-nowrap transition-colors focus-visible:outline-none focus-visible:ring-2",
-                ticketButtonClass(currentTheme),
-                ticketFocusRingClass(currentTheme),
-              ].join(" ")}
-              style={{ fontFamily: "Prompt, sans-serif" }}
-            >
-              <span className="inline-block origin-center scale-x-140">TICKET</span>
-              <ChevronRight size={20} />
-            </a>
-
-            {/* モバイルメニューボタン */}
-            <button
-              onClick={toggleMobileMenu}
-              className="md:hidden pr-1 transition-colors hover:text-gray-300 relative z-50"
-              aria-label="メニューを開く"
-            >
-              {isMobileMenuOpen ? <X size={28} /> : <Menu size={28} />}
-            </button>
-          </div>
+    <header className="fixed inset-x-0 top-0 z-50 bg-transparent w-screen">
+      <div className="relative h-16 flex items-start justify-between pt-2 px-2">
+        {/* 左：ロゴ */}
+        <div className="flex-shrink-0">
+          <img
+            src={logo_5}
+            alt="REIWAROMAN"
+            className="h-10 w-28 object-contain object-left pointer-events-none select-none"
+          />
         </div>
 
-        {/* モバイルメニュー（右側スライドアウト） */}
-        <div
-          className={`md:hidden fixed top-0 right-0 w-60 h-screen backdrop-blur-sm border-l border-white/10 transform transition-transform duration-300 ease-in-out z-40 ${
-            isMobileMenuOpen ? "translate-x-0" : "translate-x-full"
-          } ${currentTheme === "red" ? "bg-red-900" : "bg-black/50"}`}
-        >
-          <nav className="px-6 py-10">
+        {/* 右：ナビ + TICKET */}
+        <div className="flex items-center gap-3">
+          {/* デスクトップナビ */}
+          <nav className="hidden md:flex items-center gap-3 origin-left scale-x-140 mr-14">
             {nav.map((item, idx) => {
               const isThisActive = idx === activeNavIndex;
+              // テーマに応じた「アクティブ色」を取り、無ければ何もしない
               const activeColorClass =
                 isThisActive ? getActiveLinkClassesByTheme(activeTheme) : null;
 
@@ -141,8 +82,8 @@ const Header = ({ nav = NAV, ticketHref = "https://example.com" }: HeaderProps) 
                   href={item.href}
                   onClick={onNavClick}
                   className={[
-                    "block py-2 pl-2 text-base font-bold transition-colors origin-left scale-x-150",
-                    activeColorClass || linkInactiveColor,
+                    linkBaseClass,
+                    activeColorClass || linkInactiveColor, // テーマ未該当やナビ未登録なら白のまま
                   ].join(" ")}
                   style={{ fontFamily: "Prompt, sans-serif" }}
                 >
@@ -150,34 +91,91 @@ const Header = ({ nav = NAV, ticketHref = "https://example.com" }: HeaderProps) 
                 </a>
               );
             })}
-
-            {/* モバイルTICKET */}
-            <a
-              href={ticketHref}
-              target="_blank"
-              rel="noopener noreferrer"
-              onClick={() => setIsMobileMenuOpen(false)}
-              className={[
-                "inline-flex items-center gap-2 rounded-full pl-8 pr-4 py-1 mt-1 text-base uppercase font-bold whitespace-nowrap transition-colors focus-visible:outline-none focus-visible:ring-2",
-                ticketButtonClass(currentTheme),
-                ticketFocusRingClass(currentTheme),
-              ].join(" ")}
-              style={{ fontFamily: "Prompt, sans-serif" }}
-            >
-              <span className="inline-block origin-center scale-x-150">TICKET</span>
-              <ChevronRight size={20} />
-            </a>
           </nav>
-        </div>
 
-        {/* オーバーレイ（メニューが開いている時の背景） */}
-        {isMobileMenuOpen && (
-          <div
-            className="md:hidden fixed inset-0 bg-black/50 z-30"
-            onClick={() => setIsMobileMenuOpen(false)}
-          />
-        )}
+          <div className="hidden md:block shrink-0 w-8 lg:w-10" aria-hidden />
+
+          {/* デスクトップTICKET */}
+          <a
+            href={ticketHref}
+            target="_blank"
+            rel="noopener noreferrer"
+            className={[
+              "hidden md:inline-flex items-center gap-2 rounded-full pl-6 pr-2 py-1 md:ml-2 lg:ml-0 text-sm uppercase font-bold whitespace-nowrap transition-colors focus-visible:outline-none focus-visible:ring-2",
+              ticketButtonClass(currentTheme),
+              ticketFocusRingClass(currentTheme),
+            ].join(" ")}
+            style={{ fontFamily: "Prompt, sans-serif" }}
+          >
+            <span className="inline-block origin-center scale-x-140">TICKET</span>
+            <ChevronRight size={20} />
+          </a>
+
+          {/* モバイルメニューボタン */}
+          <button
+            onClick={toggleMobileMenu}
+            className="md:hidden pr-1 transition-colors hover:text-gray-300 relative z-50"
+            aria-label="メニューを開く"
+          >
+            {isMobileMenuOpen ? <X size={28} /> : <Menu size={28} />}
+          </button>
+        </div>
       </div>
+
+      {/* モバイルメニュー（右側スライドアウト） */}
+      <div
+        className={`md:hidden fixed top-0 right-0 w-60 h-screen backdrop-blur-sm border-l border-white/10 transform transition-transform duration-300 ease-in-out z-40 ${
+          isMobileMenuOpen ? "translate-x-0" : "translate-x-full"
+        } ${currentTheme === "red" ? "bg-red-900" : "bg-black/50"}`}
+      >
+        <nav className="px-6 py-10">
+          {nav.map((item, idx) => {
+            const isThisActive = idx === activeNavIndex;
+            const activeColorClass =
+              isThisActive ? getActiveLinkClassesByTheme(activeTheme) : null;
+
+            return (
+              <a
+                key={item.href}
+                href={item.href}
+                onClick={onNavClick}
+                className={[
+                  "block py-2 pl-2 text-base font-bold transition-colors origin-left scale-x-150",
+                  activeColorClass || linkInactiveColor,
+                ].join(" ")}
+                style={{ fontFamily: "Prompt, sans-serif" }}
+              >
+                {item.label}
+              </a>
+            );
+          })}
+
+          {/* モバイルTICKET */}
+          <a
+            href={ticketHref}
+            target="_blank"
+            rel="noopener noreferrer"
+            onClick={() => setIsMobileMenuOpen(false)}
+            className={[
+              "inline-flex items-center gap-2 rounded-full pl-8 pr-4 py-1 mt-1 text-base uppercase font-bold whitespace-nowrap transition-colors focus-visible:outline-none focus-visible:ring-2",
+              ticketButtonClass(currentTheme),
+              ticketFocusRingClass(currentTheme),
+            ].join(" ")}
+            style={{ fontFamily: "Prompt, sans-serif" }}
+          >
+            <span className="inline-block origin-center scale-x-150">TICKET</span>
+            <ChevronRight size={20} />
+          </a>
+        </nav>
+      </div>
+
+      {/* オーバーレイ（メニューが開いている時の背景） */}
+      {isMobileMenuOpen && (
+        <div
+          className="md:hidden fixed inset-0 bg-black/50 z-30"
+          onClick={() => setIsMobileMenuOpen(false)}
+        />
+      )}
     </header>
   );
 };
