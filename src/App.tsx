@@ -3,7 +3,7 @@ import Main from '@/components/Main'
 
 function App() {
   return (
-    <div className="w-full">
+    <div className="w-screen">
       <Header />
       <Main />
     </div>

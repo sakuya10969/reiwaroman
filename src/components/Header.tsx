@@ -101,7 +101,7 @@ const Header = ({ nav = NAV, ticketHref = "https://example.com" }: HeaderProps) 
             target="_blank"
             rel="noopener noreferrer"
             className={[
-              "hidden md:inline-flex items-center gap-2 rounded-full pl-6 pr-2 py-1 md:ml-2 lg:ml-0 text-sm uppercase font-bold whitespace-nowrap transition-colors focus-visible:outline-none focus-visible:ring-2",
+              "hidden md:inline-flex items-center gap-2 rounded-full pl-6 pr-2 py-1 mr-4 md:ml-2 lg:ml-0 text-sm uppercase font-bold whitespace-nowrap transition-colors focus-visible:outline-none focus-visible:ring-2",
               ticketButtonClass(currentTheme),
               ticketFocusRingClass(currentTheme),
             ].join(" ")}
@@ -124,7 +124,7 @@ const Header = ({ nav = NAV, ticketHref = "https://example.com" }: HeaderProps) 
 
       {/* モバイルメニュー（右側スライドアウト） */}
       <div
-        className={`md:hidden fixed top-0 right-0 w-60 h-screen backdrop-blur-sm border-l border-white/10 transform transition-transform duration-300 ease-in-out z-40 ${
+        className={`md:hidden fixed top-0 right-0 w-65 h-screen backdrop-blur-sm border-l border-white/10 transform transition-transform duration-300 ease-in-out z-40 ${
           isMobileMenuOpen ? "translate-x-0" : "translate-x-full"
         } ${currentTheme === "red" ? "bg-red-900" : "bg-black/50"}`}
       >

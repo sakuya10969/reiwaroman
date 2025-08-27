@@ -1,4 +1,4 @@
-import TopsRotator from "@/components/top/TopsRotator";
+import TopsRotator from "@/components/tops/TopsRotator";
 import IntroductionCatch from "@/components/introduction/IntroductionCatch";
 import IntroductionLive from "@/components/introduction/IntroductionLive";
 import IntroductionVenue from "@/components/introduction/IntroductionVenue";
@@ -12,7 +12,7 @@ import NewsList from "@/components/news/NewsList";
 
 export default function Main() {
   return (
-    <main className="w-full">
+    <main className="w-screen">
       {/* TOP */}
       <section id="tops" className="scroll-mt-[64px] h-auto">
         <TopsRotator />
