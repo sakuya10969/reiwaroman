@@ -79,54 +79,31 @@ const IntroductionVideo = ({ videoId = "S6hol1r6xSc" }: IntroductionVideoProps) 
           autoplay: 1, 
           controls: 0, 
           rel: 0, 
-          modestbranding: 1, 
           playsinline: 1, 
           loop: 1, 
           playlist: videoId, 
-          fs: 0, 
+          mute: 1,
           disablekb: 1, 
           iv_load_policy: 3,
-          mute: 1,
-          start: 0,
-          enablejsapi: 1,
-          origin: window.location.origin,
-          showinfo: 0,
-          cc_load_policy: 0,
-          end: 999999,
-          hl: 'ja'
+          cc_load_policy: 0
         },
         events: {
           onReady: (e: any) => {
-            try { 
-              if (isMuted) e.target.mute(); 
-              e.target.playVideo(); 
-              const iframe: HTMLIFrameElement = e.target.getIframe(); 
-              iframe.setAttribute("allow", "autoplay; encrypted-media; picture-in-picture"); 
-              iframe.setAttribute("tabindex", "-1"); 
-              iframe.setAttribute("title", ""); 
-              iframe.style.pointerEvents = "none";
-              iframe.style.width = "100%";
-              iframe.style.height = "100%";
-              iframe.style.position = "absolute";
-              iframe.style.top = "0";
-              iframe.style.left = "0";
-              // YouTube UIを完全に隠すためのCSS追加
-              iframe.style.filter = "contrast(1.1) saturate(1.1)";
-              iframe.style.overflow = "hidden";
-            } catch (error) {
-              console.error("Error in onReady:", error);
-            }
+            e.target.mute(); 
+            e.target.playVideo(); 
+            const iframe: HTMLIFrameElement = e.target.getIframe(); 
+            iframe.style.pointerEvents = "none";
+            iframe.style.width = "100%";
+            iframe.style.height = "100%";
+            iframe.style.position = "absolute";
+            iframe.style.top = "0";
+            iframe.style.left = "0";
           },
           onStateChange: (e: any) => { 
             if (e.data === window.YT.PlayerState.ENDED) { 
-              try { 
-                e.target.seekTo(0); 
-                e.target.playVideo(); 
-              } catch {} 
+              e.target.seekTo(0); 
+              e.target.playVideo(); 
             } 
-          },
-          onError: (e: any) => {
-            console.error("YouTube Player Error:", e);
           }
         }
       });
