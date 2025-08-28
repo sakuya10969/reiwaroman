@@ -1,4 +1,5 @@
 import { useLayoutEffect, useRef, useState } from "react";
+import { Volume2, VolumeX } from "lucide-react";
 import type { IntroductionVideoProps } from "@/types";
 
 declare global {
@@ -62,7 +63,6 @@ const IntroductionVideo = ({ videoId = "S6hol1r6xSc" }: IntroductionVideoProps) 
     }
   };
 
-
   useLayoutEffect(() => {
     const shell = shellRef.current;
     if (!shell) return;
@@ -72,14 +72,62 @@ const IntroductionVideo = ({ videoId = "S6hol1r6xSc" }: IntroductionVideoProps) 
       if (destroyed) return;
       shell.innerHTML = "";
       const p = new window.YT.Player(shell, {
-        width: "100%", height: "100%",
-        host: "https://www.youtube-nocookie.com", videoId,
-        playerVars: { autoplay: 1, controls: 0, rel: 0, modestbranding: 1, playsinline: 1, loop: 1, playlist: videoId, fs: 0, disablekb: 1, iv_load_policy: 3, },
+        width: "100%", 
+        height: "100%",
+        videoId,
+        playerVars: { 
+          autoplay: 1, 
+          controls: 0, 
+          rel: 0, 
+          modestbranding: 1, 
+          playsinline: 1, 
+          loop: 1, 
+          playlist: videoId, 
+          fs: 0, 
+          disablekb: 1, 
+          iv_load_policy: 3,
+          mute: 1,
+          start: 0,
+          enablejsapi: 1,
+          origin: window.location.origin,
+          showinfo: 0,
+          cc_load_policy: 0,
+          end: 999999,
+          hl: 'ja'
+        },
         events: {
           onReady: (e: any) => {
-            try { if (isMuted) e.target.mute(); e.target.playVideo(); const iframe: HTMLIFrameElement = e.target.getIframe(); iframe.setAttribute("allow", "autoplay; encrypted-media; picture-in-picture"); iframe.setAttribute("tabindex", "-1"); iframe.setAttribute("title", ""); } catch {}
+            try { 
+              if (isMuted) e.target.mute(); 
+              e.target.playVideo(); 
+              const iframe: HTMLIFrameElement = e.target.getIframe(); 
+              iframe.setAttribute("allow", "autoplay; encrypted-media; picture-in-picture"); 
+              iframe.setAttribute("tabindex", "-1"); 
+              iframe.setAttribute("title", ""); 
+              iframe.style.pointerEvents = "none";
+              iframe.style.width = "100%";
+              iframe.style.height = "100%";
+              iframe.style.position = "absolute";
+              iframe.style.top = "0";
+              iframe.style.left = "0";
+              // YouTube UIを完全に隠すためのCSS追加
+              iframe.style.filter = "contrast(1.1) saturate(1.1)";
+              iframe.style.overflow = "hidden";
+            } catch (error) {
+              console.error("Error in onReady:", error);
+            }
           },
-          onStateChange: (e: any) => { if (e.data === window.YT.PlayerState.ENDED) { try { e.target.seekTo(0); e.target.playVideo(); } catch {} } }
+          onStateChange: (e: any) => { 
+            if (e.data === window.YT.PlayerState.ENDED) { 
+              try { 
+                e.target.seekTo(0); 
+                e.target.playVideo(); 
+              } catch {} 
+            } 
+          },
+          onError: (e: any) => {
+            console.error("YouTube Player Error:", e);
+          }
         }
       });
       playerRef.current = p;
@@ -93,7 +141,7 @@ const IntroductionVideo = ({ videoId = "S6hol1r6xSc" }: IntroductionVideoProps) 
   return (
     <div
       ref={containerRef}
-      className="relative w-full isolate min-h-[50vh] lg:h-screen landscape:h-screen pt-16 md:pt-24 overflow-hidden"
+      className="relative w-full isolate min-h-[50vh] lg:h-screen landscape:h-screen pt-16 md:pt-24 overflow-hidden bg-black"
       aria-hidden
       onMouseMove={showControls}
       onMouseLeave={hideControls}
@@ -101,23 +149,20 @@ const IntroductionVideo = ({ videoId = "S6hol1r6xSc" }: IntroductionVideoProps) 
     >
       <button
         onClick={toggleMute}
-        className={`absolute bottom-4 right-5 md:bottom-6 md:right-10 z-10 p-2 bg-opacity-50 text-white rounded-full hover:bg-opacity-75 transition-opacity duration-300 ${isControlsVisible ? 'opacity-100' : 'opacity-0'}`}
+        className={`absolute bottom-12 right-0 lg:bottom-4 lg:right-4 z-10 p-2 bg-black bg-opacity-50 text-white rounded-full hover:bg-opacity-75 transition-opacity duration-300 cursor-pointer ${
+          isControlsVisible ? 'opacity-100' : 'opacity-0'
+        }`}
         aria-label={isMuted ? "音声オンにする" : "音声オフにする"}
       >
         {isMuted ? (
-          <svg xmlns="http://www.w3.org/2000/svg" className="h-7 w-7 sm:h-10 sm:w-10 md:w-16 md:h-16" fill="none" viewBox="0 0 24 24" stroke="#A0A0A0">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15z" clipRule="evenodd" />
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2" />
-          </svg>
+          <VolumeX size={48} className="h-6 w-6 md:h-8 md:w-8 lg:h-10 lg:w-10" color="#A0A0A0" />
         ) : (
-          <svg xmlns="http://www.w3.org/2000/svg" className="h-7 w-7 sm:h-10 sm:w-10 md:w-16 md:h-16" fill="none" viewBox="0 0 24 24" stroke="#A0A0A0">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15.536 8.464a5 5 0 010 7.072m2.828-9.9a9 9 0 010 12.728M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15z" />
-          </svg>
+          <Volume2 size={48} className="h-6 w-6 md:h-8 md:w-8 lg:h-10 lg:w-10" color="#A0A0A0" />
         )}
       </button>
 
-      <div className="absolute inset-0 -z-10">
-        <div ref={shellRef} className="absolute inset-0 pointer-events-none w-full h-full object-cover" />
+      <div className="absolute inset-0 w-full h-full">
+        <div ref={shellRef} className="w-full h-full" />
       </div>
     </div>
   );
