@@ -24,9 +24,9 @@ const IntroductionVideo = ({ videoId = "S6hol1r6xSc" }: IntroductionVideoProps) 
   const containerRef = useRef<HTMLDivElement>(null);
   const shellRef = useRef<HTMLDivElement>(null);
   const playerRef = useRef<any>(null);
-  const [isMuted, setIsMuted] = useState(true);
+  const [isMuted, setIsMuted] = useState<boolean>(true);
 
-  const [isControlsVisible, setIsControlsVisible] = useState(false);
+  const [isControlsVisible, setIsControlsVisible] = useState<boolean>(false);
   const hideControlsTimeoutRef = useRef<number | null>(null);
 
   const toggleMute = () => {
