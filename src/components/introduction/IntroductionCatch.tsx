@@ -24,6 +24,7 @@ const IntroductionCatch = ({
   const [isMobile, setIsMobile] = useState<boolean>(false);
   const subtitleRef = useRef<HTMLHeadingElement>(null);
   const titleRef = useRef<HTMLHeadingElement>(null);
+  const rePrefixRef = useRef<HTMLSpanElement>(null);
   const contentRef = useRef<HTMLDivElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
 
@@ -55,50 +56,60 @@ const IntroductionCatch = ({
       gsap.set(titleRef.current, { y: 50, opacity: 0 });
     }
 
+    if (rePrefixRef.current) {
+      gsap.set(rePrefixRef.current, { x: -300, opacity: 0 });
+    }
+
     if (contentRef.current) {
       const contentLines = contentRef.current.querySelectorAll('p');
       gsap.set(contentLines, { y: 30, opacity: 0 });
     }
 
     if (isMobile) {
-      // モバイル: TopsCatchと同様に0.5秒後にアニメーション開始
-      const timer = setTimeout(() => {
-        const tl = gsap.timeline();
+      // モバイル: アニメーション開始
+      const tl = gsap.timeline();
 
-        // 小見出しのアニメーション
-        if (subtitleRef.current) {
-          tl.to(subtitleRef.current, {
-            y: 0,
-            opacity: 1,
-            duration: 0.8,
-            ease: "power2.out"
-          });
-        }
+      // 小見出しのアニメーション
+      if (subtitleRef.current) {
+        tl.to(subtitleRef.current, {
+          y: 0,
+          opacity: 1,
+          duration: 0.8,
+          ease: "power2.out"
+        });
+      }
 
-        // メイン見出しのアニメーション
-        if (titleRef.current) {
-          tl.to(titleRef.current, {
-            y: 0,
-            opacity: 1,
-            duration: 0.8,
-            ease: "power2.out"
-          }, "-=0.4");
-        }
+      // メイン見出しのアニメーション（RE:以外の部分）
+      if (titleRef.current) {
+        tl.to(titleRef.current, {
+          y: 0,
+          opacity: 1,
+          duration: 0.8,
+          ease: "power2.out"
+        }, "-=0.4");
+      }
 
-        // 説明文のアニメーション
-        if (contentRef.current) {
-          const contentLines = contentRef.current.querySelectorAll('p');
-          tl.to(contentLines, {
-            y: 0,
-            opacity: 1,
-            duration: 0.6,
-            stagger: 0.1,
-            ease: "power2.out"
-          }, "-=0.2");
-        }
-      }, 500);
+      // 説明文のアニメーション
+      if (contentRef.current) {
+        const contentLines = contentRef.current.querySelectorAll('p');
+        tl.to(contentLines, {
+          y: 0,
+          opacity: 1,
+          duration: 0.6,
+          stagger: 0.1,
+          ease: "power2.out"
+        }, "-=0.2");
+      }
 
-      return () => clearTimeout(timer);
+      // RE:のアニメーション（最後に左から飛び込み）
+      if (rePrefixRef.current) {
+        tl.to(rePrefixRef.current, {
+          x: 0,
+          opacity: 1,
+          duration: 0.4,
+          ease: "expo.out"
+        }, "+=0.4");
+      }
     } else {
       // PC: スクロールトリガーでアニメーション
       const container = containerRef.current;
@@ -124,7 +135,7 @@ const IntroductionCatch = ({
           });
         }
 
-        // メイン見出しのアニメーション
+        // メイン見出しのアニメーション（RE:以外の部分）
         if (titleRef.current) {
           tl.to(titleRef.current, {
             y: 0,
@@ -144,6 +155,16 @@ const IntroductionCatch = ({
             stagger: 0.1,
             ease: "power2.out"
           }, "-=0.2");
+        }
+
+        // RE:のアニメーション（最後に左から飛び込み）
+        if (rePrefixRef.current) {
+          tl.to(rePrefixRef.current, {
+            x: 0,
+            opacity: 1,
+            duration: 0.4,
+            ease: "expo.out"
+          }, "+=0.4");
         }
       }, container);
 
@@ -182,8 +203,8 @@ const IntroductionCatch = ({
         </h2>
 
         {/* メイン見出し */}
-        <h1 ref={titleRef} className="mt-6 sm:mt-10 text-3xl md:text-5xl leading-[0.9] md:leading-[1.05] font-extrabold scale-x-150 tracking-[0.03em]" style={{ fontFamily: 'Prompt, sans-serif' ,fontWeight:700}}>
-          RE:IWAROMAN
+        <h1 ref={titleRef} className="mt-6 sm:mt-10 text-3xl md:text-5xl leading-[0.9] md:leading-[1.05] font-extrabold scale-x-150 tracking-[0.03em] relative" style={{ fontFamily: 'Prompt, sans-serif' ,fontWeight:700}}>
+          <span ref={rePrefixRef} className="inline-block">RE:</span>IWAROMAN
         </h1>
 
         {/* 説明文 */}
