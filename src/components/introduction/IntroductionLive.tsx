@@ -122,7 +122,6 @@ const IntroductionLive = () => {
                   className="
                     font-extrabold text-white
                     text-4xl md:text-5xl lg:text-7xl
-                    drop-shadow-[0_3px_12px_rgba(0,0,0,0.55)]
                     md:[writing-mode:vertical-rl] md:[text-orientation:upright]
                     md: scale-y-80
                     origin-top
