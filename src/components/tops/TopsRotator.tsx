@@ -46,7 +46,7 @@ const TopsRotator = () => {
           ease: "expo.out",
         });
       }
-    }, 2000);
+    }, 1500);
 
     return () => clearTimeout(timer);
   }, []);
