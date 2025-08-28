@@ -26,10 +26,11 @@ const IntroductionLive = () => {
         opacity: 0,
       });
 
-      // タイトルの各行を初期状態で下に移動、透明にする
+      // タイトルの各行を初期状態で左斜め上に移動、透明にする
       const titleLines = title.children;
       gsap.set(titleLines, {
-        y: 100,
+        x: 300,
+        y: -300,
         opacity: 0,
       });
 
@@ -43,22 +44,23 @@ const IntroductionLive = () => {
         },
       });
 
-      // タイトルから先にアニメーション（右から左へ順番に）
+      // タイトルから先にアニメーション（左斜め上から猛烈なスピードで飛び込み）
       tl.to(titleLines, {
+        x: 0,
         y: 0,
         opacity: 1,
-        duration: 0.6,
-        stagger: 0.2,
-        ease: "power2.out",
+        duration: 1,
+        stagger: 0.1,
+        ease: "expo.out",
       });
 
       // その後、本文をアニメーション
       tl.to(content, {
         y: 0,
         opacity: 1,
-        duration: 0.4,
+        duration: 0.6,
         ease: "power2.out",
-      }, "-=0.4");
+      }, "-=0.6");
 
     }, container);
 
