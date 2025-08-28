@@ -115,7 +115,7 @@ const IntroductionLive = () => {
 
           {/* タイトル（最右）— 各列を独立させて上端揃え */}
           <div className="order-1 md:order-2 flex-shrink-0 self-start mt-8 md:mt-0">
-            <div ref={titleRef} className="flex flex-col md:flex-row-reverse items-start gap-1 md:gap-3 lg:gap-4">
+            <div ref={titleRef} className="flex flex-col md:flex-row-reverse items-start md:gap-3 lg:gap-4">
               {INTRODUCTION_LIVE_TITLE_LINES.map((line, i) => (
                 <h1
                   key={i}
@@ -124,7 +124,6 @@ const IntroductionLive = () => {
                     text-4xl md:text-5xl lg:text-7xl
                     drop-shadow-[0_3px_12px_rgba(0,0,0,0.55)]
                     md:[writing-mode:vertical-rl] md:[text-orientation:upright]
-                    leading-[0.8] md:leading-[1.08]
                     md: scale-y-80
                     origin-top
                     whitespace-nowrap
