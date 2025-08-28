@@ -152,7 +152,7 @@ const IntroductionCatch = ({
   }, [isMobile]);
 
   return (
-    <div ref={containerRef} className="relative w-full h-[50vh] md:h-screen landscape:h-screen  flex items-center justify-center text-white overflow-hidden bg-black">
+    <div ref={containerRef} className="relative w-full h-[50vh] md:h-screen landscape:h-screen flex items-center justify-center text-white overflow-hidden bg-black">
       {/* 背景スライド - レスポンシブ対応 */}
       {slides.map((slide, i) => (
         <picture key={i} className="absolute inset-0">
@@ -175,7 +175,7 @@ const IntroductionCatch = ({
       <div className="absolute inset-0 bg-black/55" />
 
       {/* コンテンツ */}
-      <div className="relative z-10 max-w-[90vw] flex flex-col items-center py-5">
+      <div className="relative z-10 max-w-[80vw] flex flex-col items-center py-5">
         {/* 小見出し */}
         <h2 ref={subtitleRef} className="inline-block text-sm md:text-base font-bold uppercase underline underline-offset-4 scale-x-150" style={{ fontFamily: 'Prompt, sans-serif' }}>
           Introduction
