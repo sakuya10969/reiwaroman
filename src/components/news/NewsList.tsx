@@ -83,7 +83,7 @@ const NewsList = ({
         y: 0,
         opacity: 1,
         duration: 1,
-        stagger: 0.1,
+        stagger: 0.15,
         ease: "power2.out",
       }, "-=0.4");
 

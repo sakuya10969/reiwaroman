@@ -108,7 +108,7 @@ const Goods = ({
         duration: 0.6,
         stagger: 0.1,
         ease: "power2.out",
-      }, "-=0.2");
+      }, "-=0.4");
 
     }, container);
 
