@@ -158,7 +158,7 @@ const Header = ({ nav = NAV, ticketHref = TICKET_URL }: HeaderProps) => {
             rel="noopener noreferrer"
             onClick={() => setIsMobileMenuOpen(false)}
             className={[
-              "inline-flex items-center gap-2 rounded-full pl-8 pr-4 py-1 mt-1 text-base uppercase font-bold whitespace-nowrap transition-colors focus-visible:outline-none focus-visible:ring-2",
+              "inline-flex items-center gap-4 rounded-full pl-8 pr-2 py-1 mt-1 text-base uppercase font-bold whitespace-nowrap transition-colors focus-visible:outline-none focus-visible:ring-2",
               ticketButtonClass(currentTheme),
               ticketFocusRingClass(currentTheme),
             ].join(" ")}
