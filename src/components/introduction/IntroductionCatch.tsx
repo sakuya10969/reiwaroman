@@ -144,7 +144,7 @@ const IntroductionCatch = ({
           duration: 1,
           stagger: 0.2,
           ease: "power2.out"
-        }, "+=0.2");
+        }, "+=0.1");
       }
 
       // RE:のアニメーション（左から猛烈なスピードで飛び込み）
