@@ -25,6 +25,7 @@ const IntroductionCatch = ({
   const subtitleRef = useRef<HTMLHeadingElement>(null);
   const titleRef = useRef<HTMLHeadingElement>(null);
   const rePrefixRef = useRef<HTMLSpanElement>(null);
+  const iwaromaRef = useRef<HTMLSpanElement>(null);
   const contentRef = useRef<HTMLDivElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
 
@@ -59,6 +60,18 @@ const IntroductionCatch = ({
       });
     }
 
+    // IWAROMANの各文字をspan要素に分割
+    if (iwaromaRef.current) {
+      const text = "IWAROMAN";
+      iwaromaRef.current.innerHTML = "";
+      text.split("").forEach((char) => {
+        const span = document.createElement("span");
+        span.textContent = char;
+        span.className = "inline-block";
+        iwaromaRef.current?.appendChild(span);
+      });
+    }
+
     // 即座に要素を非表示にする
     if (subtitleRef.current) {
       const chars = subtitleRef.current.querySelectorAll('span');
@@ -71,6 +84,11 @@ const IntroductionCatch = ({
 
     if (rePrefixRef.current) {
       gsap.set(rePrefixRef.current, { x: -300, opacity: 0 });
+    }
+
+    if (iwaromaRef.current) {
+      const chars = iwaromaRef.current.querySelectorAll('span');
+      gsap.set(chars, { x: -50, y: 50, opacity: 0 });
     }
 
     if (contentRef.current) {
@@ -95,17 +113,28 @@ const IntroductionCatch = ({
         });
       }
 
-      // メイン見出しのアニメーション（RE:以外の部分）
+      // IWAROMAN, メイン見出し（RE:以外の部分）, 説明文を同時スタート
+      if (iwaromaRef.current) {
+        const chars = iwaromaRef.current.querySelectorAll('span');
+        tl.to(chars, {
+          x: 0,
+          y: 0,
+          opacity: 1,
+          duration: 1,
+          stagger: 0.05,
+          ease: "power2.out"
+        }, "-=0.4");
+      }
+
       if (titleRef.current) {
         tl.to(titleRef.current, {
           y: 0,
           opacity: 1,
           duration: 1.2,
           ease: "power2.out"
-        }, "-=0.4");
+        }, "<"); // 同じタイミングでスタート
       }
 
-      // 説明文のアニメーション（段落ごとに左斜め下から）
       if (contentRef.current) {
         const contentLines = contentRef.current.querySelectorAll('p');
         tl.to(contentLines, {
@@ -115,17 +144,17 @@ const IntroductionCatch = ({
           duration: 1,
           stagger: 0.2,
           ease: "power2.out"
-        }, "-=0.2");
+        }, "<"); // 同じタイミングでスタート
       }
 
-      // RE:のアニメーション（最後に左から飛び込み）
+      // RE:のアニメーション（左から猛烈なスピードで飛び込み）
       if (rePrefixRef.current) {
         tl.to(rePrefixRef.current, {
           x: 0,
           opacity: 1,
-          duration: 1,
+          duration: 0.3,
           ease: "expo.out"
-        }, "+=0.4");
+        }, "+=0.3");
       }
     } else {
       // PC: スクロールトリガーでアニメーション
@@ -150,22 +179,33 @@ const IntroductionCatch = ({
             y: 0,
             opacity: 1,
             duration: 0.8,
-            stagger: 0.05,
+            stagger: 0.1,
             ease: "power2.out"
           });
         }
 
-        // メイン見出しのアニメーション（RE:以外の部分）
-        if (titleRef.current) {
-          tl.to(titleRef.current, {
+        // IWAROMAN, メイン見出し（RE:以外の部分）, 説明文を同時スタート
+        if (iwaromaRef.current) {
+          const chars = iwaromaRef.current.querySelectorAll('span');
+          tl.to(chars, {
+            x: 0,
             y: 0,
             opacity: 1,
-            duration: 1.2,
+            duration: 1,
+            stagger: 0.1,
             ease: "power2.out"
           }, "-=0.4");
         }
 
-        // 説明文のアニメーション（段落ごとに左斜め下から）
+        if (titleRef.current) {
+          tl.to(titleRef.current, {
+            y: 0,
+            opacity: 1,
+            duration: 1,
+            ease: "power2.out"
+          }, "<"); // 同じタイミングでスタート
+        }
+
         if (contentRef.current) {
           const contentLines = contentRef.current.querySelectorAll('p');
           tl.to(contentLines, {
@@ -173,19 +213,19 @@ const IntroductionCatch = ({
             y: 0,
             opacity: 1,
             duration: 1,
-            stagger: 0.2,
+            stagger: 0.1,
             ease: "power2.out"
-          }, "-=0.2");
+          }, "<"); // 同じタイミングでスタート
         }
 
-        // RE:のアニメーション（最後に左から飛び込み）
+        // RE:のアニメーション（左から猛烈なスピードで飛び込み）
         if (rePrefixRef.current) {
           tl.to(rePrefixRef.current, {
             x: 0,
             opacity: 1,
-            duration: 0.4,
+            duration: 0.2,
             ease: "expo.out"
-          }, "+=0.4");
+          }, "+=0.3");
         }
       }, container);
 
@@ -233,7 +273,7 @@ const IntroductionCatch = ({
 
         {/* メイン見出し */}
         <h1 ref={titleRef} className="mt-6 sm:mt-10 text-3xl md:text-5xl leading-[0.9] md:leading-[1.05] font-extrabold scale-x-150 tracking-[0.03em] relative" style={{ fontFamily: 'Prompt, sans-serif' ,fontWeight:700}}>
-          <span ref={rePrefixRef} className="inline-block">RE:</span>IWAROMAN
+          <span ref={rePrefixRef} className="inline-block">RE:</span><span ref={iwaromaRef} className="inline-block">IWAROMAN</span>
         </h1>
 
         {/* 説明文 */}
