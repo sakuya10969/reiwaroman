@@ -13,7 +13,7 @@ import {
   ticketButtonClass,
   ticketFocusRingClass,
 } from "@/theme/headerTheme";
-import logo_5 from "@/assets/logo_5.png";
+import logo from "@/assets/logo.png";
 import { TICKET_URL } from "@/constants";
 
 const Header = ({ nav = NAV, ticketHref = TICKET_URL }: HeaderProps) => {
@@ -61,7 +61,7 @@ const Header = ({ nav = NAV, ticketHref = TICKET_URL }: HeaderProps) => {
         {/* 左：ロゴ */}
         <div className="flex-shrink-0 ml-1">
           <img
-            src={logo_5}
+            src={logo}
             alt="REIWAROMAN"
             className="h-14 w-28 lg:h-20 lg:w-40 object-contain object-left pointer-events-none select-none opacity-80"
           />
