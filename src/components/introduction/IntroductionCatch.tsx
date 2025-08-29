@@ -47,9 +47,22 @@ const IntroductionCatch = ({
   }, []);
 
   useLayoutEffect(() => {
+    // Introductionの各文字をspan要素に分割
+    if (subtitleRef.current) {
+      const text = "Introduction";
+      subtitleRef.current.innerHTML = "";
+      text.split("").forEach((char) => {
+        const span = document.createElement("span");
+        span.textContent = char;
+        span.className = "inline-block";
+        subtitleRef.current?.appendChild(span);
+      });
+    }
+
     // 即座に要素を非表示にする
     if (subtitleRef.current) {
-      gsap.set(subtitleRef.current, { y: 30, opacity: 0 });
+      const chars = subtitleRef.current.querySelectorAll('span');
+      gsap.set(chars, { x: -50, y: 50, opacity: 0 });
     }
 
     if (titleRef.current) {
@@ -62,19 +75,22 @@ const IntroductionCatch = ({
 
     if (contentRef.current) {
       const contentLines = contentRef.current.querySelectorAll('p');
-      gsap.set(contentLines, { y: 30, opacity: 0 });
+      gsap.set(contentLines, { x: -50, y: 50, opacity: 0 });
     }
 
     if (isMobile) {
       // モバイル: アニメーション開始
       const tl = gsap.timeline();
 
-      // 小見出しのアニメーション
+      // Introductionの文字を一文字ずつ左斜め下からアニメーション
       if (subtitleRef.current) {
-        tl.to(subtitleRef.current, {
+        const chars = subtitleRef.current.querySelectorAll('span');
+        tl.to(chars, {
+          x: 0,
           y: 0,
           opacity: 1,
-          duration: 0.8,
+          duration: 1,
+          stagger: 0.05,
           ease: "power2.out"
         });
       }
@@ -84,19 +100,20 @@ const IntroductionCatch = ({
         tl.to(titleRef.current, {
           y: 0,
           opacity: 1,
-          duration: 0.8,
+          duration: 1.2,
           ease: "power2.out"
         }, "-=0.4");
       }
 
-      // 説明文のアニメーション
+      // 説明文のアニメーション（段落ごとに左斜め下から）
       if (contentRef.current) {
         const contentLines = contentRef.current.querySelectorAll('p');
         tl.to(contentLines, {
+          x: 0,
           y: 0,
           opacity: 1,
-          duration: 0.6,
-          stagger: 0.1,
+          duration: 1,
+          stagger: 0.2,
           ease: "power2.out"
         }, "-=0.2");
       }
@@ -106,7 +123,7 @@ const IntroductionCatch = ({
         tl.to(rePrefixRef.current, {
           x: 0,
           opacity: 1,
-          duration: 0.4,
+          duration: 1,
           ease: "expo.out"
         }, "+=0.4");
       }
@@ -125,12 +142,15 @@ const IntroductionCatch = ({
           },
         });
 
-        // 小見出しのアニメーション
+        // Introductionの文字を一文字ずつ左斜め下からアニメーション
         if (subtitleRef.current) {
-          tl.to(subtitleRef.current, {
+          const chars = subtitleRef.current.querySelectorAll('span');
+          tl.to(chars, {
+            x: 0,
             y: 0,
             opacity: 1,
-            duration: 0.6,
+            duration: 0.8,
+            stagger: 0.05,
             ease: "power2.out"
           });
         }
@@ -140,19 +160,20 @@ const IntroductionCatch = ({
           tl.to(titleRef.current, {
             y: 0,
             opacity: 1,
-            duration: 0.6,
+            duration: 1.2,
             ease: "power2.out"
           }, "-=0.4");
         }
 
-        // 説明文のアニメーション
+        // 説明文のアニメーション（段落ごとに左斜め下から）
         if (contentRef.current) {
           const contentLines = contentRef.current.querySelectorAll('p');
           tl.to(contentLines, {
+            x: 0,
             y: 0,
             opacity: 1,
-            duration: 0.4,
-            stagger: 0.1,
+            duration: 1,
+            stagger: 0.2,
             ease: "power2.out"
           }, "-=0.2");
         }
@@ -198,7 +219,15 @@ const IntroductionCatch = ({
       {/* コンテンツ */}
       <div className="relative z-10 max-w-[80vw] flex flex-col items-center py-5">
         {/* 小見出し */}
-        <h2 ref={subtitleRef} className="inline-block text-sm md:text-base font-bold uppercase underline underline-offset-4 scale-x-150" style={{ fontFamily: 'Prompt, sans-serif' }}>
+        <h2
+          ref={subtitleRef}
+          className="
+            relative inline-block font-bold uppercase scale-x-150
+            after:content-[''] after:absolute after:left-0 after:right-0
+            after:-bottom-0 after:h-[1.5px] after:bg-current
+          "
+          style={{ fontFamily: 'Prompt, sans-serif' }}
+        >
           Introduction
         </h2>
 

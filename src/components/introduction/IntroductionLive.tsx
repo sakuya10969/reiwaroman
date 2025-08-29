@@ -20,17 +20,18 @@ const IntroductionLive = () => {
     if (!container || !content || !title) return;
 
     const ctx = gsap.context(() => {
-      // 本文を初期状態で下に移動、透明にする
+      // 本文を初期状態で左斜め下に移動、透明にする
       gsap.set(content, {
-        y: 80,
+        x: -50,
+        y: 50,
         opacity: 0,
       });
 
-      // タイトルの各行を初期状態で左斜め上に移動、透明にする
+      // タイトルの各行を初期状態で左斜め下に移動、透明にする
       const titleLines = title.children;
       gsap.set(titleLines, {
-        x: 300,
-        y: -300,
+        x: -50,
+        y: 50,
         opacity: 0,
       });
 
@@ -44,23 +45,24 @@ const IntroductionLive = () => {
         },
       });
 
-      // タイトルから先にアニメーション（左斜め上から猛烈なスピードで飛び込み）
+      // タイトルから先にアニメーション（左斜め下から飛び込み）
       tl.to(titleLines, {
         x: 0,
         y: 0,
         opacity: 1,
-        duration: 1,
-        stagger: 0.1,
-        ease: "expo.out",
+        duration: 1.5,
+        stagger: 0.2,
+        ease: "power2.out",
       });
 
-      // その後、本文をアニメーション
+      // その後、本文をアニメーション（左斜め下から）
       tl.to(content, {
+        x: 0,
         y: 0,
         opacity: 1,
-        duration: 0.6,
+        duration: 1.5,
         ease: "power2.out",
-      }, "-=0.6");
+      }, "-=0.8");
 
     }, container);
 

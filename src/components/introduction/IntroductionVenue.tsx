@@ -24,12 +24,31 @@ const IntroductionVenue = () => {
 
     if (!container || !yoko || !karena || !yokohama || !hama) return;
 
+    // YOKOHAMAの各文字をspan要素に分割
+    if (yokohama) {
+      const text = "YOKOHAMA";
+      yokohama.innerHTML = "";
+      text.split("").forEach((char) => {
+        const span = document.createElement("span");
+        span.textContent = char;
+        span.className = "inline-block";
+        yokohama.appendChild(span);
+      });
+    }
+
     const ctx = gsap.context(() => {
-      // 横・浜・YOKOHAMAを初期状態で下に移動、透明にする
-      gsap.set([yoko, hama, yokohama], {
-        y: 100,
+      // 横・浜を初期状態で左斜め下に移動、透明にする
+      gsap.set([yoko, hama], {
+        x: -50,
+        y: 50,
         opacity: 0,
       });
+
+      // YOKOHAMAの各文字を初期状態で左斜め下に移動、透明にする
+      if (yokohama) {
+        const chars = yokohama.querySelectorAll('span');
+        gsap.set(chars, { x: -50, y: 50, opacity: 0 });
+      }
 
       // K ARENAを初期状態で上に移動、透明にする
       gsap.set(karena, {
@@ -47,21 +66,35 @@ const IntroductionVenue = () => {
         },
       });
 
-      // 横、YOKOHAMA、浜を同時に下からフェードイン
-      tl.to([yoko, yokohama, hama], {
+      // 横、浜を同時に左斜め下からフェードイン
+      tl.to([yoko, hama], {
+        x: 0,
         y: 0,
         opacity: 1,
-        duration: 0.6,
+        duration: 1.2,
         ease: "power2.out",
       });
+
+      // YOKOHAMAの文字を一文字ずつ左斜め下からアニメーション
+      if (yokohama) {
+        const chars = yokohama.querySelectorAll('span');
+        tl.to(chars, {
+          x: 0,
+          y: 0,
+          opacity: 1,
+          duration: 1,
+          stagger: 0.1,
+          ease: "power2.out"
+        }, "-=0.8");
+      }
 
       // K ARENAを上からフェードイン
       tl.to(karena, {
         y: 0,
         opacity: 1,
-        duration: 0.6,
+        duration: 1.2,
         ease: "expo.out",
-      }, "+=0.3");
+      }, "+=0.4");
 
     }, container);
 
