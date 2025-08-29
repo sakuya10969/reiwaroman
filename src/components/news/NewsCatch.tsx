@@ -26,6 +26,35 @@ const NewsCatch = ({
     const title = titleRef.current;
     if (!wrapper || !container || !circle) return;
 
+    // バッジテキストを一文字ずつspan要素に分割
+    if (badge) {
+      const badgeTextElement = badge.querySelector('p');
+      if (badgeTextElement) {
+        badgeTextElement.innerHTML = "";
+        badgeText.split("").forEach((char) => {
+          const span = document.createElement("span");
+          span.textContent = char;
+          span.className = "inline-block";
+          badgeTextElement.appendChild(span);
+        });
+      }
+    }
+
+    // タイトルの各行のテキストを一文字ずつspan要素に分割
+    if (title) {
+      const titleElements = title.children;
+      Array.from(titleElements).forEach((titleElement, lineIndex) => {
+        const text = titleLines[lineIndex];
+        titleElement.innerHTML = "";
+        text.split("").forEach((char) => {
+          const span = document.createElement("span");
+          span.textContent = char;
+          span.className = "inline-block";
+          titleElement.appendChild(span);
+        });
+      });
+    }
+
     // 画面を完全に覆うのに必要なスケールを算出（毎回リサイズで再計算）
     const computeCoverScale = () => {
       const vw = window.innerWidth;
@@ -46,20 +75,26 @@ const NewsCatch = ({
         force3D: true,
       });
 
-      // バッジを初期状態で下に移動、透明にする
+      // バッジの各文字を初期状態で左斜め下に移動、透明にする
       if (badge) {
-        gsap.set(badge, {
+        const badgeChars = badge.querySelectorAll('span');
+        gsap.set(badgeChars, {
+          x: -50,
           y: 50,
           opacity: 0,
         });
       }
 
-      // タイトルの各行を初期状態で下に移動、透明にする
+      // タイトルの各行の各文字を初期状態で左斜め下に移動、透明にする
       if (title) {
-        const titleLines = title.children;
-        gsap.set(titleLines, {
-          y: 80,
-          opacity: 0,
+        const titleElements = title.children;
+        Array.from(titleElements).forEach((titleElement) => {
+          const chars = titleElement.querySelectorAll('span');
+          gsap.set(chars, {
+            x: -50,
+            y: 50,
+            opacity: 0,
+          });
         });
       }
 
@@ -94,26 +129,36 @@ const NewsCatch = ({
         },
       });
 
-      // バッジから先にアニメーション
+      // バッジの文字を一文字ずつ左斜め下からアニメーション
       if (badge) {
-        textTl.to(badge, {
+        const badgeChars = badge.querySelectorAll('span');
+        textTl.to(badgeChars, {
+          x: 0,
           y: 0,
           opacity: 1,
-          duration: 0.6,
+          duration: 1,
+          stagger: 0.1,
           ease: "power2.out",
         });
       }
 
-      // その後、タイトル行を順番にアニメーション
+      // タイトル行の文字を同時に左斜め下からアニメーション
       if (title) {
-        const titleLines = title.children;
-        textTl.to(titleLines, {
+        const titleElements = title.children;
+        const allTitleChars: Element[] = [];
+        Array.from(titleElements).forEach((titleElement) => {
+          const chars = titleElement.querySelectorAll('span');
+          allTitleChars.push(...chars);
+        });
+        
+        textTl.to(allTitleChars, {
+          x: 0,
           y: 0,
           opacity: 1,
-          duration: 0.4,
-          stagger: 0.1,
+          duration: 1,
+          stagger: 0.05,
           ease: "power2.out",
-        }, "-=0.4");
+        }, "-=0.3");
       }
 
       // 画像読み込みやフォント適用後に正しく採寸するため
@@ -173,7 +218,8 @@ const NewsCatch = ({
           <div className="absolute inset-0 flex flex-col items-center justify-between text-center px-6 py-16">
             {/* BADGE - 上部 */}
             <div ref={badgeRef} className="text-sm md:text-lg lg:text-xl text-white/90 flex-shrink-0 relative -top-2">
-              <p className="inline-block font-bold underline underline-offset-4 scale-x-150 origin-center" style={{ fontFamily: 'Prompt, sans-serif' }}>
+              <p className="inline-block font-bold scale-x-150 origin-center after:content-[''] after:absolute after:left-0 after:right-0
+                after:-bottom-0 after:h-[1.5px] after:bg-current" style={{ fontFamily: 'Prompt, sans-serif' }}>
                 {badgeText}
               </p>
             </div>
