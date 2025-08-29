@@ -156,9 +156,9 @@ const NewsCatch = ({
           y: 0,
           opacity: 1,
           duration: 1,
-          stagger: 0.05,
+          stagger: 0.1,
           ease: "power2.out",
-        }, "-=0.3");
+        }, "-=0.4");
       }
 
       // 画像読み込みやフォント適用後に正しく採寸するため
