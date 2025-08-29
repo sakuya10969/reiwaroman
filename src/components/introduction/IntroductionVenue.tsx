@@ -94,7 +94,7 @@ const IntroductionVenue = () => {
         opacity: 1,
         duration: 1,
         ease: "expo.out",
-      }, "+=0.3");
+      }, "+=0.2");
 
     }, container);
 
