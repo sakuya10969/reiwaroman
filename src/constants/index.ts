@@ -10,9 +10,7 @@ export const NAV: NavItem[] = [
   { label: "GOODS",         href: "#goods",             sectionIds: ["goods"] },
 ];
 
-export const TOPS_CATCH_TITLE_LINES: string[] = [
-  "日本一の漫才師、限界突破へ。",
-];
+export const TOPS_CATCH_TITLE: string = "日本一の漫才、再び。";
 
 export const TOPS_CATCH_SUBTITLE: string[] = [
   "JAPAN'S TOP MANZAI COMEDIANS,", "BREAKING ALL LIMITS.",
