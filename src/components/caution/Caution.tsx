@@ -2,12 +2,11 @@ import { useLayoutEffect, useRef } from "react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { CAUTION_CONTENTS } from "@/constants";
-import BG from "@/assets/reiwa_12.png";
+import reiwa12 from "@/assets/reiwa_12.png";
 import type { CautionProps } from "@/types";
 
 gsap.registerPlugin(ScrollTrigger);
 
-const BackGroundImage = BG;
 const Caution = ({
   badgeText = "CAUTION",
 }: CautionProps) => {
@@ -22,17 +21,36 @@ const Caution = ({
     
     if (!container || !badge || !list) return;
 
-    const ctx = gsap.context(() => {
-      // バッジを初期状態で下に移動、透明にする
-      gsap.set(badge, {
-        y: 50,
-        opacity: 0,
-      });
+    // バッジテキストを一文字ずつspan要素に分割
+    if (badge) {
+      const badgeTextElement = badge.querySelector('p');
+      if (badgeTextElement) {
+        badgeTextElement.innerHTML = "";
+        badgeText.split("").forEach((char) => {
+          const span = document.createElement("span");
+          span.textContent = char;
+          span.className = "inline-block";
+          badgeTextElement.appendChild(span);
+        });
+      }
+    }
 
-      // リストの各アイテムを初期状態で下に移動、透明にする
+    const ctx = gsap.context(() => {
+      // バッジの各文字を初期状態で左斜め下に移動、透明にする
+      if (badge) {
+        const badgeChars = badge.querySelectorAll('p span');
+        gsap.set(badgeChars, {
+          x: -50,
+          y: 50,
+          opacity: 0,
+        });
+      }
+
+      // リストの各アイテムを初期状態で左斜め下に移動、透明にする
       const listItems = list.children;
       gsap.set(listItems, {
-        y: 80,
+        x: -50,
+        y: 50,
         opacity: 0,
       });
 
@@ -46,16 +64,22 @@ const Caution = ({
         },
       });
 
-      // バッジから先にアニメーション
-      tl.to(badge, {
-        y: 0,
-        opacity: 1,
-        duration: 0.6,
-        ease: "power2.out",
-      });
+      // バッジの文字を一文字ずつ左斜め下からアニメーション
+      if (badge) {
+        const badgeChars = badge.querySelectorAll('p span');
+        tl.to(badgeChars, {
+          x: 0,
+          y: 0,
+          opacity: 1,
+          duration: 0.6,
+          stagger: 0.1,
+          ease: "power2.out",
+        });
+      }
 
-      // その後、リストアイテムを順番にアニメーション
+      // その後、リストアイテムを順番に左斜め下からアニメーション
       tl.to(listItems, {
+        x: 0,
         y: 0,
         opacity: 1,
         duration: 0.4,
@@ -74,7 +98,7 @@ const Caution = ({
       <div
         className="absolute inset-0 bg-black -z-20"
         aria-hidden="true"
-        style = {{ backgroundImage:`url(${BackGroundImage})`}}
+        style = {{ backgroundImage:`url(${reiwa12})`}}
       />
 
       {/* 半透明赤のオーバーレイ */}
@@ -88,7 +112,8 @@ const Caution = ({
             className="text-sm text-white md:text-base font-bold transform scale-x-150"
             style={{ fontFamily: 'Prompt, sans-serif' }}
           >
-            <p className="inline-block uppercase underline underline-offset-4">
+            <p className="inline-block uppercase after:content-[''] after:absolute after:left-0 after:right-0
+                after:-bottom-0 after:h-[1.5px] after:bg-current">
               {badgeText}
             </p>
           </div>
