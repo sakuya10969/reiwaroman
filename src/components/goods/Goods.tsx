@@ -84,8 +84,8 @@ const Goods = ({
           x: 0,
           y: 0,
           opacity: 1,
-          duration: 0.6,
-          stagger: 0.1,
+          duration: 0.8,
+          stagger: 0.05,
           ease: "power2.out",
         });
       }
@@ -95,8 +95,8 @@ const Goods = ({
         x: 0,
         y: 0,
         opacity: 1,
-        duration: 0.4,
-        stagger: 0.1,
+        duration: 1,
+        stagger: 0.15,
         ease: "power2.out",
       }, "-=0.4");
 
@@ -105,7 +105,7 @@ const Goods = ({
         x: 0,
         y: 0,
         opacity: 1,
-        duration: 0.4,
+        duration: 0.6,
         stagger: 0.1,
         ease: "power2.out",
       }, "-=0.2");

@@ -136,8 +136,8 @@ const NewsCatch = ({
           x: 0,
           y: 0,
           opacity: 1,
-          duration: 1,
-          stagger: 0.1,
+          duration: 0.8,
+          stagger: 0.05,
           ease: "power2.out",
         });
       }
@@ -155,8 +155,8 @@ const NewsCatch = ({
           x: 0,
           y: 0,
           opacity: 1,
-          duration: 1,
-          stagger: 0.1,
+          duration: 0.8,
+          stagger: 0.05,
           ease: "power2.out",
         }, "-=0.4");
       }

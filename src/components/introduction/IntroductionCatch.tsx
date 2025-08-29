@@ -93,7 +93,7 @@ const IntroductionCatch = ({
 
     if (contentRef.current) {
       const contentLines = contentRef.current.querySelectorAll('p');
-      gsap.set(contentLines, { x: -50, y: 50, opacity: 0 });
+      gsap.set(contentLines, { y: 30, opacity: 0 });
     }
 
     if (isMobile) {
@@ -107,20 +107,20 @@ const IntroductionCatch = ({
           x: 0,
           y: 0,
           opacity: 1,
-          duration: 1,
+          duration: 0.6,
           stagger: 0.05,
           ease: "power2.out"
         });
       }
 
-      // IWAROMAN, メイン見出し（RE:以外の部分）, 説明文を同時スタート
+      // IWAROMAN, メイン見出し（RE:以外の部分）を同時スタート
       if (iwaromaRef.current) {
         const chars = iwaromaRef.current.querySelectorAll('span');
         tl.to(chars, {
           x: 0,
           y: 0,
           opacity: 1,
-          duration: 1,
+          duration: 0.8,
           stagger: 0.05,
           ease: "power2.out"
         }, "-=0.4");
@@ -130,21 +130,21 @@ const IntroductionCatch = ({
         tl.to(titleRef.current, {
           y: 0,
           opacity: 1,
-          duration: 1.2,
+          duration: 0.6,
           ease: "power2.out"
         }, "<"); // 同じタイミングでスタート
       }
 
+      // 説明文を1行ずつフェードイン
       if (contentRef.current) {
         const contentLines = contentRef.current.querySelectorAll('p');
         tl.to(contentLines, {
-          x: 0,
           y: 0,
           opacity: 1,
           duration: 1,
           stagger: 0.2,
           ease: "power2.out"
-        }, "<"); // 同じタイミングでスタート
+        }, "+=0.2");
       }
 
       // RE:のアニメーション（左から猛烈なスピードで飛び込み）
@@ -184,7 +184,7 @@ const IntroductionCatch = ({
           });
         }
 
-        // IWAROMAN, メイン見出し（RE:以外の部分）, 説明文を同時スタート
+        // IWAROMAN, メイン見出し（RE:以外の部分）を同時スタート
         if (iwaromaRef.current) {
           const chars = iwaromaRef.current.querySelectorAll('span');
           tl.to(chars, {
@@ -206,16 +206,16 @@ const IntroductionCatch = ({
           }, "<"); // 同じタイミングでスタート
         }
 
+        // 説明文を1行ずつフェードイン
         if (contentRef.current) {
           const contentLines = contentRef.current.querySelectorAll('p');
           tl.to(contentLines, {
-            x: 0,
             y: 0,
             opacity: 1,
-            duration: 1,
-            stagger: 0.1,
+            duration: 0.8,
+            stagger: 0.2,
             ease: "power2.out"
-          }, "<"); // 同じタイミングでスタート
+          }, "+=0.2");
         }
 
         // RE:のアニメーション（左から猛烈なスピードで飛び込み）
@@ -223,7 +223,7 @@ const IntroductionCatch = ({
           tl.to(rePrefixRef.current, {
             x: 0,
             opacity: 1,
-            duration: 0.2,
+            duration: 0.3,
             ease: "expo.out"
           }, "+=0.3");
         }

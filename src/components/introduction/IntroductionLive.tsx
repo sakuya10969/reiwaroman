@@ -1,4 +1,4 @@
-import { useLayoutEffect, useRef } from "react";
+import { useLayoutEffect, useRef, useState, useEffect } from "react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
@@ -11,6 +11,17 @@ const IntroductionLive = () => {
   const containerRef = useRef<HTMLDivElement>(null);
   const contentRef = useRef<HTMLDivElement>(null);
   const titleRef = useRef<HTMLDivElement>(null);
+  const [isMobile, setIsMobile] = useState<boolean>(false);
+
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth <= 768);
+    };
+
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
 
   useLayoutEffect(() => {
     const container = containerRef.current;
@@ -20,8 +31,9 @@ const IntroductionLive = () => {
     if (!container || !content || !title) return;
 
     const ctx = gsap.context(() => {
-      // 本文を初期状態で左斜め下に移動、透明にする
-      gsap.set(content, {
+      // 本文の各行を初期状態で左斜め下に移動、透明にする
+      const contentLines = content.querySelectorAll('p');
+      gsap.set(contentLines, {
         x: -50,
         y: 50,
         opacity: 0,
@@ -35,39 +47,65 @@ const IntroductionLive = () => {
         opacity: 0,
       });
 
-      // スクロールトリガーでアニメーション実行
-      const tl = gsap.timeline({
-        scrollTrigger: {
-          trigger: container,
-          start: "top 80%",
-          end: "bottom 20%",
-          toggleActions: "play none none reverse",
-        },
-      });
+      if (isMobile) {
+        // モバイル: アニメーション開始
+        const tl = gsap.timeline();
 
-      // タイトルから先にアニメーション（左斜め下から飛び込み）
-      tl.to(titleLines, {
-        x: 0,
-        y: 0,
-        opacity: 1,
-        duration: 1.5,
-        stagger: 0.2,
-        ease: "power2.out",
-      });
+        // タイトルの各行を一つずつアニメーション（左斜め下から飛び込み）
+        tl.to(titleLines, {
+          x: 0,
+          y: 0,
+          opacity: 1,
+          duration: 1,
+          stagger: 0.15,
+          ease: "power2.out",
+        });
 
-      // その後、本文をアニメーション（左斜め下から）
-      tl.to(content, {
-        x: 0,
-        y: 0,
-        opacity: 1,
-        duration: 1.5,
-        ease: "power2.out",
-      }, "-=0.8");
+        // その後、本文の各行をアニメーション（左斜め下から）
+        tl.to(contentLines, {
+          x: 0,
+          y: 0,
+          opacity: 1,
+          duration: 1,
+          stagger: 0.15,
+          ease: "power2.out",
+        }, "-=0.6");
+      } else {
+        // PC: スクロールトリガーでアニメーション実行
+        const tl = gsap.timeline({
+          scrollTrigger: {
+            trigger: container,
+            start: "top 80%",
+            end: "bottom 20%",
+            toggleActions: "play none none reverse",
+          },
+        });
+
+        // タイトルの各行を一つずつアニメーション（左斜め下から飛び込み）
+        tl.to(titleLines, {
+          x: 0,
+          y: 0,
+          opacity: 1,
+          duration: 1,
+          stagger: 0.15,
+          ease: "power2.out",
+        });
+
+        // その後、本文の各行をアニメーション（左斜め下から）
+        tl.to(contentLines, {
+          x: 0,
+          y: 0,
+          opacity: 1,
+          duration: 1,
+          stagger: 0.15,
+          ease: "power2.out",
+        }, "-=0.6");
+      }
 
     }, container);
 
     return () => ctx.revert();
-  }, []);
+  }, [isMobile]);
 
   return (
     <div ref={containerRef} className="relative w-full min-h-[50vh] lg:h-screen  landscape:h-screen text-white overflow-hidden py-6 md:py-8">

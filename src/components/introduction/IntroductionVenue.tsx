@@ -71,7 +71,7 @@ const IntroductionVenue = () => {
         x: 0,
         y: 0,
         opacity: 1,
-        duration: 1.2,
+        duration: 0.8,
         ease: "power2.out",
       });
 
@@ -82,8 +82,8 @@ const IntroductionVenue = () => {
           x: 0,
           y: 0,
           opacity: 1,
-          duration: 1,
-          stagger: 0.1,
+          duration: 0.8,
+          stagger: 0.05,
           ease: "power2.out"
         }, "-=0.8");
       }
@@ -92,7 +92,7 @@ const IntroductionVenue = () => {
       tl.to(karena, {
         y: 0,
         opacity: 1,
-        duration: 1.2,
+        duration: 1,
         ease: "expo.out",
       }, "+=0.3");
 
