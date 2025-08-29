@@ -2,13 +2,13 @@ import { useEffect, useLayoutEffect, useRef, useState } from "react";
 
 import type { Slide, TopsVisualProps } from "@/types";
 import reiwa2 from "@/assets/reiwa_2.png";
-import reiwa2_mobile from "@/assets/reiwa_2_mobile.png";
 import reiwa3 from "@/assets/reiwa_3.png";
-import reiwa3_mobile from "@/assets/reiwa_3_mobile.png";
+import tops_visual_1 from "@/assets/tops_visual_1.png";
+import tops_visual_2 from "@/assets/tops_visual_2.png";
 
 const slides: Slide[] = [
-  { srcDesktop: reiwa2, srcMobile: reiwa2_mobile, alt: "Top Visual" },
-  { srcDesktop: reiwa3, srcMobile: reiwa3_mobile, alt: "Top Performance" },
+  { srcDesktop: reiwa2, srcMobile: tops_visual_1, alt: "Top Visual" },
+  { srcDesktop: reiwa3, srcMobile: tops_visual_2, alt: "Top Performance" },
 ];
 
 const TopsVisual = ({ resetSignal = 0, active = true }: TopsVisualProps) => {
@@ -37,7 +37,7 @@ const TopsVisual = ({ resetSignal = 0, active = true }: TopsVisualProps) => {
     timeoutRef.current = window.setTimeout(() => {
       setIndex(1);
       timeoutRef.current = null;
-    }, 5000);
+    }, 7500);
     return () => {
       if (timeoutRef.current) window.clearTimeout(timeoutRef.current);
       timeoutRef.current = null;
@@ -47,7 +47,7 @@ const TopsVisual = ({ resetSignal = 0, active = true }: TopsVisualProps) => {
   return (
     <div
       className={[
-        "relative w-full bg-black h-[50vh] sm:h-[60vh] md:h-[70vh] lg:h-screen landscape:h-screen",
+        "relative w-full bg-black h-screen landscape:h-screen",
         primed ? "opacity-100" : "opacity-0",
         "transition-opacity duration-0",
       ].join(" ")}

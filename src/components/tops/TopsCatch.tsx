@@ -1,4 +1,4 @@
-import { TOPS_CATCH_TITLE_LINES, TOPS_CATCH_SUBTITLE } from "@/constants";
+import { TOPS_CATCH_TITLE } from "@/constants";
 
 const TopsCatch = () => {
   return (
@@ -6,29 +6,18 @@ const TopsCatch = () => {
       {/* テキストブロック */}
       <div className="w-[90vw] flex flex-col items-center justify-center">
         <div>
-          {TOPS_CATCH_TITLE_LINES.map((line, index) => (
-            <p
-              key={index}
-              className="mx-auto text-3xl md:text-5xl lg:text-6xl
-                         font-extrabold leading-[1.1] tracking-tighter whitespace-nowrap scale-x-80"
-              style={{ fontFamily: '"dnp-shuei-shogomincho-std", serif' }}
-            >
-              {line}
-            </p>
-          ))}
-        </div>
-
-        <div className="my-2">
-          {TOPS_CATCH_SUBTITLE.map((line, index) => (
-          <p
-            key={index}
-            className="text-sm md:text-base font-extrabold
-                       uppercase whitespace-nowrap scale-y-80"
-            style={{ fontFamily: 'Prompt, sans-serif' }}
+          <h1
+            className="mx-auto text-3xl md:text-5xl lg:text-6xl
+                       font-extrabold leading-[1.1] tracking-tighter whitespace-nowrap
+                       writing-mode-vertical-rl text-orientation-upright"
+            style={{ 
+              fontFamily: '"dnp-shuei-shogomincho-std", serif',
+              writingMode: 'vertical-rl',
+              textOrientation: 'upright'
+            }}
           >
-              {line}
-            </p>
-          ))}
+            {TOPS_CATCH_TITLE}
+          </h1>
         </div>
       </div>
     </div>

@@ -3,7 +3,7 @@ import { gsap } from "gsap";
 
 import TopsCatch from "@/components/tops/TopsCatch";
 import TopsVisual from "@/components/tops/TopsVisual";
-import logo5 from "@/assets/logo_5.png";
+import logo from "@/assets/logo.png";
 
 interface Slot {
   key: "catch" | "visual";
@@ -11,8 +11,8 @@ interface Slot {
 }
 
 const SLOTS: Slot[] = [
-  { key: "catch",  durationMs: 5000 },
-  { key: "visual", durationMs: 10000 },
+  { key: "catch",  durationMs: 7500 },
+  { key: "visual", durationMs: 15000 },
 ];
 
 const TopsRotator = () => {
@@ -29,11 +29,11 @@ const TopsRotator = () => {
         y: "-300%",
         opacity: 0,
         scale: 0.3,
-        rotation: -180,
+        rotation: -150,
       });
     }
 
-    // 2秒待ってからロゴアニメーション開始
+    // 1秒待ってからロゴアニメーション開始
     const timer = setTimeout(() => {
       if (logoRef.current) {
         gsap.to(logoRef.current, {
@@ -42,11 +42,11 @@ const TopsRotator = () => {
           opacity: 1,
           scale: 1,
           rotation: 0,
-          duration: 1.5,
+          duration: 1,
           ease: "expo.out",
         });
       }
-    }, 1500);
+    }, 1000);
 
     return () => clearTimeout(timer);
   }, []);
@@ -64,7 +64,7 @@ const TopsRotator = () => {
   const isVisual = current.key === "visual";
 
   return (
-    <div className="relative w-screen h-[50vh] sm:h-[60vh] md:h-[70vh] lg:h-screen landscape:h-screen">
+    <div className="relative w-screen h-screen landscape:h-screen">
       <div className={[ "absolute inset-0 transition-opacity duration-1500 ease-linear", isCatch ? "opacity-100" : "opacity-0"].join(" ")}>
         <TopsCatch />
       </div>
@@ -79,7 +79,7 @@ const TopsRotator = () => {
         className="absolute bottom-10 sm:bottom-15 md:bottom-20 lg:bottom-25 left-1/2 transform -translate-x-1/2 z-10"
       >
         <img
-          src={logo5}
+          src={logo}
           alt="Logo"
           className="h-18 w-40 md:h-20 md:w-48 lg:h-40 lg:w-80"
         />
