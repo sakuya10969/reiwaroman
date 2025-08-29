@@ -154,7 +154,7 @@ const IntroductionCatch = ({
           opacity: 1,
           duration: 0.3,
           ease: "expo.out"
-        }, "+=0.3");
+        }, "+=0.2");
       }
     } else {
       // PC: スクロールトリガーでアニメーション
