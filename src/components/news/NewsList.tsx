@@ -85,7 +85,7 @@ const NewsList = ({
         duration: 1,
         stagger: 0.1,
         ease: "power2.out",
-      }, "-=0.8");
+      }, "-=0.4");
 
     }, container);
 
