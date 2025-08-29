@@ -47,60 +47,35 @@ const IntroductionLive = () => {
         opacity: 0,
       });
 
-      if (isMobile) {
-        // モバイル: アニメーション開始
-        const tl = gsap.timeline();
+      // モバイル・PC共通でスクロールトリガーを使用
+      const tl = gsap.timeline({
+        scrollTrigger: {
+          trigger: container,
+          start: "top 80%",
+          end: "bottom 20%",
+          toggleActions: "play none none reverse",
+        },
+      });
 
-        // タイトルの各行を一つずつアニメーション（左斜め下から飛び込み）
-        tl.to(titleLines, {
-          x: 0,
-          y: 0,
-          opacity: 1,
-          duration: 1,
-          stagger: 0.15,
-          ease: "power2.out",
-        });
+      // タイトルの各行を一つずつアニメーション（左斜め下から飛び込み）
+      tl.to(titleLines, {
+        x: 0,
+        y: 0,
+        opacity: 1,
+        duration: 1,
+        stagger: 0.15,
+        ease: "power2.out",
+      });
 
-        // その後、本文の各行をアニメーション（左斜め下から）
-        tl.to(contentLines, {
-          x: 0,
-          y: 0,
-          opacity: 1,
-          duration: 1,
-          stagger: 0.15,
-          ease: "power2.out",
-        }, "-=0.6");
-      } else {
-        // PC: スクロールトリガーでアニメーション実行
-        const tl = gsap.timeline({
-          scrollTrigger: {
-            trigger: container,
-            start: "top 80%",
-            end: "bottom 20%",
-            toggleActions: "play none none reverse",
-          },
-        });
-
-        // タイトルの各行を一つずつアニメーション（左斜め下から飛び込み）
-        tl.to(titleLines, {
-          x: 0,
-          y: 0,
-          opacity: 1,
-          duration: 1,
-          stagger: 0.15,
-          ease: "power2.out",
-        });
-
-        // その後、本文の各行をアニメーション（左斜め下から）
-        tl.to(contentLines, {
-          x: 0,
-          y: 0,
-          opacity: 1,
-          duration: 1,
-          stagger: 0.15,
-          ease: "power2.out",
-        }, "-=0.6");
-      }
+      // その後、本文の各行をアニメーション（左斜め下から）
+      tl.to(contentLines, {
+        x: 0,
+        y: 0,
+        opacity: 1,
+        duration: 1,
+        stagger: 0.15,
+        ease: "power2.out",
+      }, "-=0.6");
 
     }, container);
 
