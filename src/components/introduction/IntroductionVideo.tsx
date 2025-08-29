@@ -89,9 +89,9 @@ const IntroductionVideo = ({ videoId = "S6hol1r6xSc" }: IntroductionVideoProps) 
         },
         events: {
           onReady: (e: any) => {
-            e.target.mute(); 
-            e.target.playVideo(); 
-            const iframe: HTMLIFrameElement = e.target.getIframe(); 
+            e.target.mute();
+            e.target.playVideo();
+            const iframe: HTMLIFrameElement = e.target.getIframe();
             iframe.style.pointerEvents = "none";
             iframe.style.width = "100%";
             iframe.style.height = "100%";
