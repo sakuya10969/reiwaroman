@@ -112,6 +112,22 @@ const Header = ({ nav = NAV, ticketHref = TICKET_URL }: HeaderProps) => {
             <ChevronRight size={20} />
           </a>
 
+          {/* モバイルTICKET */}
+          <a
+            href={ticketHref}
+            target="_blank"
+            rel="noopener noreferrer"
+            className={[
+              "md:hidden inline-flex items-center gap-3 rounded-full pl-5 pr-1 py-2 mt-2 text-xs uppercase font-bold whitespace-nowrap transition-colors focus-visible:outline-none focus-visible:ring-2",
+              ticketButtonClass(currentTheme),
+              ticketFocusRingClass(currentTheme),
+            ].join(" ")}
+            style={{ fontFamily: "Prompt, sans-serif" }}
+          >
+            <span className="inline-block origin-center scale-x-140">TICKET</span>
+            <ChevronRight size={16} />
+          </a>
+
           {/* モバイルメニューボタン */}
           <button
             onClick={toggleMobileMenu}
@@ -150,23 +166,6 @@ const Header = ({ nav = NAV, ticketHref = TICKET_URL }: HeaderProps) => {
               </a>
             );
           })}
-
-          {/* モバイルTICKET */}
-          <a
-            href={ticketHref}
-            target="_blank"
-            rel="noopener noreferrer"
-            onClick={() => setIsMobileMenuOpen(false)}
-            className={[
-              "inline-flex items-center gap-4 rounded-full pl-8 pr-2 py-1 mt-1 text-base uppercase font-bold whitespace-nowrap transition-colors focus-visible:outline-none focus-visible:ring-2",
-              ticketButtonClass(currentTheme),
-              ticketFocusRingClass(currentTheme),
-            ].join(" ")}
-            style={{ fontFamily: "Prompt, sans-serif" }}
-          >
-            <span className="inline-block origin-center scale-x-150">TICKET</span>
-            <ChevronRight size={20} />
-          </a>
         </nav>
       </div>
 
