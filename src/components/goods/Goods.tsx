@@ -26,24 +26,44 @@ const Goods = ({
 
     if (!container || !badge || !message || !goodsGrid) return;
 
+    // バッジテキストを一文字ずつspan要素に分割
+    if (badge) {
+      const badgeTextElement = badge.querySelector('span');
+      if (badgeTextElement) {
+        badgeTextElement.innerHTML = "";
+        badgeText.split("").forEach((char) => {
+          const span = document.createElement("span");
+          span.textContent = char;
+          span.className = "inline-block";
+          badgeTextElement.appendChild(span);
+        });
+      }
+    }
+
     const ctx = gsap.context(() => {
-      // バッジを初期状態で下に移動、透明にする
-      gsap.set(badge, {
+      // バッジの各文字を初期状態で左斜め下に移動、透明にする
+      if (badge) {
+        const badgeChars = badge.querySelectorAll('span span');
+        gsap.set(badgeChars, {
+          x: -50,
+          y: 50,
+          opacity: 0,
+        });
+      }
+
+      // メッセージ内の要素を初期状態で左斜め下に移動、透明にする
+      const messageElements = message.children;
+      gsap.set(messageElements, {
+        x: -50,
         y: 50,
         opacity: 0,
       });
 
-      // メッセージ内の要素を初期状態で下に移動、透明にする
-      const messageElements = message.children;
-      gsap.set(messageElements, {
-        y: 80,
-        opacity: 0,
-      });
-
-      // グッズ画像を初期状態で下に移動、透明にする
+      // グッズ画像を初期状態で左斜め下に移動、透明にする
       const goodsItems = goodsGrid.children;
       gsap.set(goodsItems, {
-        y: 60,
+        x: -50,
+        y: 50,
         opacity: 0,
       });
 
@@ -57,16 +77,22 @@ const Goods = ({
         },
       });
 
-      // バッジから先にアニメーション
-      tl.to(badge, {
-        y: 0,
-        opacity: 1,
-        duration: 0.6,
-        ease: "power2.out",
-      });
+      // バッジの文字を一文字ずつ左斜め下からアニメーション
+      if (badge) {
+        const badgeChars = badge.querySelectorAll('span span');
+        tl.to(badgeChars, {
+          x: 0,
+          y: 0,
+          opacity: 1,
+          duration: 0.6,
+          stagger: 0.1,
+          ease: "power2.out",
+        });
+      }
 
-      // その後、メッセージ要素を順番にアニメーション
+      // その後、メッセージ要素を順番に左斜め下からアニメーション
       tl.to(messageElements, {
+        x: 0,
         y: 0,
         opacity: 1,
         duration: 0.4,
@@ -74,8 +100,9 @@ const Goods = ({
         ease: "power2.out",
       }, "-=0.4");
 
-      // 最後にグッズ画像を順番にアニメーション
+      // 最後にグッズ画像を順番に左斜め下からアニメーション
       tl.to(goodsItems, {
+        x: 0,
         y: 0,
         opacity: 1,
         duration: 0.4,
@@ -107,7 +134,8 @@ const Goods = ({
             className="text-sm text-white md:text-base font-bold scale-x-150"
             style={{ fontFamily: 'Prompt, sans-serif' }}
           >
-            <span className="inline-block font-bold uppercase underline underline-offset-4">
+            <span className="inline-block font-bold uppercase after:content-[''] after:absolute after:left-0 after:right-0
+                after:-bottom-0 after:h-[1.5px] after:bg-current">
               {badgeText}
             </span>
           </div>
