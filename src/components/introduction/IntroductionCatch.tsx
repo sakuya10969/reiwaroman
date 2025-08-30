@@ -38,14 +38,10 @@ const IntroductionCatch = ({}: IntroductionCatchProps) => {
       // --- 初期状態のセットアップ ---
       const iwaromaChars = iwaroma.querySelectorAll('span');
 
-      gsap.set(subtitle, { y: -50, opacity: 0 }); // subtitle全体を対象に変更
+      gsap.set(subtitle, { y: -50, opacity: 0 });
       gsap.set(iwaromaChars, { y: -50, opacity: 0 });
       gsap.set(rePrefix, { x: -100, opacity: 0 });
-<<<<<<< HEAD
-      gsap.set(content, { y: -50, opacity: 0 });
-=======
-      gsap.set(content, { x: -100, opacity: 0 });
->>>>>>> 22ee7a22bab4ed6123e4795a9373d721bc12feb6
+      gsap.set(content, { y: -50, opacity: 0 }); // 説明文の初期位置をY軸（上）に設定
 
 
       // --- アニメーションのタイムラインを作成 ---
@@ -58,11 +54,10 @@ const IntroductionCatch = ({}: IntroductionCatchProps) => {
       });
 
       // 1. Introductionを塊で上からイン
-      tl.to(subtitle, { // ターゲットをsubtitleに変更
+      tl.to(subtitle, {
         y: 0,
         opacity: 1,
         duration: 0.8,
-        // stagger: 0.06, // staggerを削除
         ease: "power2.out",
       });
 
@@ -85,7 +80,7 @@ const IntroductionCatch = ({}: IntroductionCatchProps) => {
 
       // 4. 残りの文章は塊で上からイン
       tl.to(content, {
-        x: 0,
+        y: 0, // ★ x: 0 を y: 0 に修正
         opacity: 1,
         duration: 1.2,
         ease: "power2.out",
@@ -126,7 +121,7 @@ const IntroductionCatch = ({}: IntroductionCatchProps) => {
         </h1>
 
         {/* 説明文 */}
-        <div ref={contentRef} className="mt-4 md:mt-8 space-y-2 text-xs md:text-sm leading-[1] sm:leading-[1.2] text-white text-center" style={{ fontFamily: '"momochidori", serif', fontWeight: 500 }}>
+        <div ref={contentRef} className="mt-7 md:mt-8 space-y-2 text-xs md:text-sm leading-[1] sm:leading-[1.2] text-white text-center" style={{ fontFamily: '"momochidori", serif', fontWeight: 500 }}>
           {INTRODUCTION_CATCH_CONTENTS.map((content, i) => (
             <p key={i}>{content}</p>
           ))}
