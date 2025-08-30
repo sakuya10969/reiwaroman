@@ -1,159 +1,109 @@
-import { useLayoutEffect, useRef, useState, useEffect } from "react";
+import { useLayoutEffect, useRef } from "react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
 import type { IntroductionCatchProps } from "@/types";
 import { INTRODUCTION_CATCH_CONTENTS } from "@/constants";
 import Catch_1 from "@/assets/top1_IntroductionCatch1.jpg";
-// import Catch_2 from "@/assets/introductionCatch2.jpg";
+
 gsap.registerPlugin(ScrollTrigger);
 
 const IntroductionCatch = ({}: IntroductionCatchProps) => {
-  const [isMobile, setIsMobile] = useState<boolean>(false);
   const subtitleRef = useRef<HTMLHeadingElement>(null);
-  const titleRef = useRef<HTMLHeadingElement>(null);
   const rePrefixRef = useRef<HTMLSpanElement>(null);
   const iwaromaRef = useRef<HTMLSpanElement>(null);
   const contentRef = useRef<HTMLDivElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
 
-  useEffect(() => {
-    const checkMobile = () => {
-      setIsMobile(window.innerWidth <= 768);
-    };
-
-    checkMobile();
-    window.addEventListener('resize', checkMobile);
-    return () => window.removeEventListener('resize', checkMobile);
-  }, []);
-
-  useLayoutEffect(() => {
-    // Introductionの各文字をspan要素に分割
-    if (subtitleRef.current) {
-      const text = "Introduction";
-      subtitleRef.current.innerHTML = "";
-      text.split("").forEach((char) => {
-        const span = document.createElement("span");
-        span.textContent = char;
-        span.className = "inline-block";
-        subtitleRef.current?.appendChild(span);
-      });
-    }
-
-    // IWAROMANの各文字をspan要素に分割
-    if (iwaromaRef.current) {
-      const text = "IWAROMAN";
-      iwaromaRef.current.innerHTML = "";
-      text.split("").forEach((char) => {
-        const span = document.createElement("span");
-        span.textContent = char;
-        span.className = "inline-block";
-        iwaromaRef.current?.appendChild(span);
-      });
-    }
-
-    // 即座に要素を非表示にする
-    if (subtitleRef.current) {
-      const chars = subtitleRef.current.querySelectorAll('span');
-      gsap.set(chars, { x: -50, y: 50, opacity: 0 });
-    }
-
-    if (titleRef.current) {
-      gsap.set(titleRef.current, { y: 50, opacity: 0 });
-    }
-
-    if (rePrefixRef.current) {
-      gsap.set(rePrefixRef.current, { x: -300, opacity: 0 });
-    }
-
-    if (iwaromaRef.current) {
-      const chars = iwaromaRef.current.querySelectorAll('span');
-      gsap.set(chars, { x: -50, y: 50, opacity: 0 });
-    }
-
-    if (contentRef.current) {
-      const contentLines = contentRef.current.querySelectorAll('p');
-      gsap.set(contentLines, { y: 30, opacity: 0 });
-    }
-
-    // モバイル・PC共通: スクロールトリガーでアニメーション
+useLayoutEffect(() => {
     const container = containerRef.current;
-    if (!container) return;
+    const subtitle = subtitleRef.current;
+    const rePrefix = rePrefixRef.current;
+    const iwaroma = iwaromaRef.current;
+    const content = contentRef.current;
+
+    if (!container || !subtitle || !rePrefix || !iwaroma || !content) return;
+
+    // --- テキスト分割処理 ---
+    const introText = "Introduction";
+    subtitle.innerHTML = "";
+    introText.split("").forEach((char) => {
+      const span = document.createElement("span");
+      span.textContent = char;
+      span.className = "inline-block";
+      subtitle.appendChild(span);
+    });
+
+    const iwaromaText = "IWAROMAN";
+    iwaroma.innerHTML = "";
+    iwaromaText.split("").forEach((char) => {
+      const span = document.createElement("span");
+      span.textContent = char;
+      span.className = "inline-block";
+      iwaroma.appendChild(span);
+    });
 
     const ctx = gsap.context(() => {
+      // --- 初期状態のセットアップ ---
+      const introChars = subtitle.querySelectorAll('span');
+      const iwaromaChars = iwaroma.querySelectorAll('span');
+
+      gsap.set([introChars, iwaromaChars], { y: -50, opacity: 0 });
+      gsap.set(rePrefix, { x: -100, opacity: 0 });
+      gsap.set(content, { y: 50, opacity: 0 });
+
+
+      // --- アニメーションのタイムラインを作成 ---
       const tl = gsap.timeline({
         scrollTrigger: {
           trigger: container,
           start: "top 80%",
-          end: "bottom 20%",
           toggleActions: "play none none reverse",
         },
       });
 
-      // Introductionの文字を一文字ずつ左斜め下からアニメーション
-      if (subtitleRef.current) {
-        const chars = subtitleRef.current.querySelectorAll('span');
-        tl.to(chars, {
-          x: 0,
-          y: 0,
-          opacity: 1,
-          duration: 0.6,
-          stagger: 0.05,
-          ease: "power2.out"
-        });
-      }
+      // 1. Introductionを上から一文字ずつイン
+      tl.to(introChars, {
+        y: 0,
+        opacity: 1,
+        duration: 0.8,
+        stagger: 0.06,
+        ease: "power2.out",
+      });
 
-      // IWAROMAN, メイン見出し（RE:以外の部分）を同時スタート
-      if (iwaromaRef.current) {
-        const chars = iwaromaRef.current.querySelectorAll('span');
-        tl.to(chars, {
-          x: 0,
-          y: 0,
-          opacity: 1,
-          duration: 0.6,
-          stagger: 0.05,
-          ease: "power2.out"
-        }, "-=0.4");
-      }
+      // 2. IWAROMANを上から一文字ずつイン
+      tl.to(iwaromaChars, {
+        y: 0,
+        opacity: 1,
+        duration: 0.8,
+        stagger: 0.06,
+        ease: "power2.out",
+      }, "-=0.6"); // Introductionのアニメーションの途中から開始
 
-      if (titleRef.current) {
-        tl.to(titleRef.current, {
-          y: 0,
-          opacity: 1,
-          duration: 0.6,
-          ease: "power2.out"
-        }, "<"); // 同じタイミングでスタート
-      }
+      // 3. RE:を左から塊でイン
+      tl.to(rePrefix, {
+        x: 0,
+        opacity: 1,
+        duration: 0.8,
+        ease: "expo.out",
+      }, "-=0.5");
 
-      // 説明文を1行ずつフェードイン
-      if (contentRef.current) {
-        const contentLines = contentRef.current.querySelectorAll('p');
-        tl.to(contentLines, {
-          y: 0,
-          opacity: 1,
-          duration: 1,
-          stagger: 0.2,
-          ease: "power2.out"
-        }, "+=0.1");
-      }
+      // 4. 残りの文章は塊で上からイン
+      tl.to(content, {
+        y: 0,
+        opacity: 1,
+        duration: 1.2,
+        ease: "power2.out",
+      }, "+=0.2");
 
-      // RE:のアニメーション（左から猛烈なスピードで飛び込み）
-      if (rePrefixRef.current) {
-        tl.to(rePrefixRef.current, {
-          x: 0,
-          opacity: 1,
-          duration: 0.3,
-          ease: "expo.out"
-        }, "+=0.3");
-      }
     }, container);
 
     return () => ctx.revert();
-  }, [isMobile]);
+  }, []);
 
   return (
     <div ref={containerRef} className="relative w-full h-[60vh] md:h-screen landscape:h-screen flex items-center justify-center text-white overflow-hidden bg-black">
-      {/* 背景画像 - レスポンシブ対応 */}
+      {/* 背景画像 */}
       <img
         src={Catch_1}
         alt="Main Visual"
@@ -168,23 +118,20 @@ const IntroductionCatch = ({}: IntroductionCatchProps) => {
         {/* 小見出し */}
         <h2
           ref={subtitleRef}
-          className="
-            relative inline-block font-bold uppercase scale-x-150
-            after:content-[''] after:absolute after:left-0 after:right-0
-            after:-bottom-0 after:h-[1.5px] after:bg-current
-          "
+          className="relative inline-block font-bold uppercase scale-x-150 after:content-[''] after:absolute after:left-0 after:right-0 after:-bottom-0 after:h-[1.5px] after:bg-current"
           style={{ fontFamily: 'Prompt, sans-serif' }}
         >
-          Introduction
+          {/* JSで分割 */}
         </h2>
 
         {/* メイン見出し */}
-        <h1 ref={titleRef} className="mt-8 sm:mt-10 md:mt-15 text-3xl md:text-5xl leading-[0.9] md:leading-[1.05] font-extrabold scale-x-150 tracking-[0.03em] relative" style={{ fontFamily: 'Prompt, sans-serif' ,fontWeight:700}}>
-          <span ref={rePrefixRef} className="inline-block">RE:</span><span ref={iwaromaRef} className="inline-block">IWAROMAN</span>
+        <h1 className="mt-8 sm:mt-10 md:mt-15 text-3xl md:text-5xl leading-[0.9] md:leading-[1.05] font-extrabold scale-x-150 tracking-[0.03em] relative" style={{ fontFamily: 'Prompt, sans-serif', fontWeight: 700 }}>
+          <span ref={rePrefixRef} className="inline-block">RE:</span>
+          <span ref={iwaromaRef} className="inline-block">IWAROMAN</span>
         </h1>
 
         {/* 説明文 */}
-        <div ref={contentRef} className="mt-4 md:mt-8 space-y-2 text-xs md:text-sm leading-[1] sm:leading-[1.2] text-white text-center" style={{ fontFamily: '"momochidori", serif' ,fontWeight:500}}>
+        <div ref={contentRef} className="mt-4 md:mt-8 space-y-2 text-xs md:text-sm leading-[1] sm:leading-[1.2] text-white text-center" style={{ fontFamily: '"momochidori", serif', fontWeight: 500 }}>
           {INTRODUCTION_CATCH_CONTENTS.map((content, i) => (
             <p key={i}>{content}</p>
           ))}
