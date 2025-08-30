@@ -3,7 +3,7 @@ import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
 import reiwa6 from "@/assets/IntroductionLive.jpg";
-import reiwa7 from "@/assets/IntroductionVenue_NewsCatch.jpg"; // ここを使用します
+import reiwa7 from "@/assets/IntroductionVenue_NewsCatch.jpg";
 import { INTRODUCTION_LIVE_CONTENTS, INTRODUCTION_LIVE_TITLE_LINES } from "@/constants";
 
 gsap.registerPlugin(ScrollTrigger);
@@ -112,7 +112,7 @@ const IntroductionLive = () => {
 
       scrubTl.to([title, content], {
         opacity: 0,
-        duration: 0.6,
+        duration: 0.8,
         ease: "power2.inOut"
       }, 0);
 
@@ -128,28 +128,81 @@ const IntroductionLive = () => {
         duration: 0.3
       }, 0.5);
 
-      scrubTl.to([yoko, hama], {
-        y: 0,
-        opacity: 1,
-        duration: 0.6,
-        ease: "power2.out",
-      }, 0.6);
+      // Venue要素のアニメーション（スクロール速度に依存しない）
+      const playVenueAnimation = () => {
+        // スクロールを即座に停止
+        document.body.style.overflow = 'hidden';
 
-      scrubTl.to([karena, yokohama], {
-        x: 0,
-        opacity: 1,
-        duration: 0.6,
-        ease: "power2.out",
-      }, 0.8);
+        // 画面を強制的に中央に配置してからアニメーション開始
+        const currentScrollY = window.scrollY;
+        const wrapperRect = wrapper.getBoundingClientRect();
+        const wrapperTop = currentScrollY + wrapperRect.top;
+        const targetScrollY = wrapperTop + (wrapper.offsetHeight / 2) - (window.innerHeight / 2);
 
-      // --- 揺れるモーションを追加 ---
-      scrubTl.to([yoko, hama, karena, yokohama], {
-        rotation: 1,
-        yoyo: true,
-        repeat: 5,
-        duration: 0.1,
-        ease: "power1.inOut",
-      }, "=0.0"); // 前のアニメーションの終了と同時に開始
+        // スムーズに中央に移動してからアニメーション実行
+        gsap.to(window, {
+          scrollTo: { y: targetScrollY },
+          duration: 0.3,
+          ease: "power2.inOut",
+          onComplete: () => {
+            const venueTl = gsap.timeline({
+              onComplete: () => {
+                document.body.style.overflow = '';
+                // アニメーション完了後に少し下にスクロールして次のセクションを促す
+                window.scrollTo(window.scrollX, window.scrollY + 1);
+              }
+            });
+
+            // 横と浜を上から猛烈なスピードで入り、揺らす
+            venueTl.to([yoko, hama], {
+              y: 0,
+              opacity: 1,
+              duration: 0.6,
+              stagger: 0.1,
+              ease: "power4.out",
+            })
+            .to([yoko, hama], {
+              rotation: "+=3",
+              duration: 0.1,
+              ease: "power2.inOut"
+            })
+            .to([yoko, hama], {
+              rotation: "-=6",
+              duration: 0.2,
+              ease: "power2.inOut"
+            })
+            .to([yoko, hama], {
+              rotation: "+=3",
+              duration: 0.1,
+              ease: "power2.inOut"
+            });
+
+            // K ARENAとYOKOHAMAを左から猛烈なスピードで入り、揺らす
+            venueTl.to([karena, yokohama], {
+              x: 0,
+              opacity: 1,
+              duration: 0.6,
+              stagger: 0.1,
+              ease: "power4.out",
+            }, "-=0.4")
+            .to([karena, yokohama], {
+              rotation: "+=2",
+              duration: 0.1,
+              ease: "power2.inOut"
+            })
+            .to([karena, yokohama], {
+              rotation: "-=4",
+              duration: 0.2,
+              ease: "power2.inOut"
+            })
+            .to([karena, yokohama], {
+              rotation: "+=2",
+              duration: 0.1,
+              ease: "power2.inOut"
+            });
+          }
+        });
+      };
 
       // pinのためのScrollTrigger
       ScrollTrigger.create({
@@ -157,18 +210,18 @@ const IntroductionLive = () => {
         start: "top top",
         end: "bottom bottom-=1",
         pin: container,
+        onLeave: () => playVenueAnimation(),
         onEnterBack: () => {
           gsap.set(venueContent, { autoAlpha: 0 });
-          gsap.set([yoko, hama], { y: -100, opacity: 0 });
-          gsap.set([karena, yokohama], { x: -200, opacity: 0 });
-          // 背景画像も透明に戻す
-          gsap.set(venueBackground, { opacity: 0 });
+          gsap.set([yoko, hama], { y: -300, opacity: 0, rotation: 0 });
+          gsap.set([karena, yokohama], { x: -300, opacity: 0, rotation: 0 });
         },
       });
 
     }, wrapper);
 
     return () => {
+      document.body.style.overflow = '';
       ctx?.revert();
     };
   }, []);
