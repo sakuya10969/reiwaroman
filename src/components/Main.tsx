@@ -33,9 +33,9 @@ export default function Main() {
       </section>
 
       {/* INTRODUCTION - VENUE */}
-      <section id="introduction-venue" className="scroll-mt-[64px]">
+      {/* <section id="introduction-venue" className="scroll-mt-[64px]">
         <IntroductionVenue />
-      </section>
+      </section> */}
 
       {/* NEWS - CATCH */}
       <section id="news-catch" className="scroll-mt-[64px]">
