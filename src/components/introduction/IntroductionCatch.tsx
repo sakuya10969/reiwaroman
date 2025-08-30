@@ -4,9 +4,8 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 
 import type { IntroductionCatchProps } from "@/types";
 import { INTRODUCTION_CATCH_CONTENTS } from "@/constants";
-import reiwa4 from "@/assets/reiwa_4.png";
-import tops_visual_1 from "@/assets/tops_visual_1.png";
-
+import Catch_1 from "@/assets/top1_IntroductionCatch1.jpg";
+// import Catch_2 from "@/assets/introductionCatch2.jpg";
 gsap.registerPlugin(ScrollTrigger);
 
 const IntroductionCatch = ({}: IntroductionCatchProps) => {
@@ -155,15 +154,11 @@ const IntroductionCatch = ({}: IntroductionCatchProps) => {
   return (
     <div ref={containerRef} className="relative w-full h-[60vh] md:h-screen landscape:h-screen flex items-center justify-center text-white overflow-hidden bg-black">
       {/* 背景画像 - レスポンシブ対応 */}
-      <picture className="absolute inset-0">
-        {/* モバイル用画像切り替え閾値 */}
-        <source media="(max-width: 440px)" srcSet={tops_visual_1} />
-        <img
-          src={reiwa4} // デスクトップ・タブレット用
-          alt="Introduction Background"
-          className="absolute inset-0 w-full h-full object-cover object-center"
-        />
-      </picture>
+      <img
+        src={Catch_1}
+        alt="Main Visual"
+        className="absolute inset-0 w-full h-full object-cover object-center"
+      />
 
       {/* オーバーレイ */}
       <div className="absolute inset-0 bg-black/55" />

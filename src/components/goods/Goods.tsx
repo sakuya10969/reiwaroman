@@ -1,3 +1,5 @@
+/*
+
 // import { ChevronRight } from "lucide-react";
 import { useLayoutEffect, useRef } from "react";
 import { gsap } from "gsap";
@@ -120,15 +122,15 @@ const Goods = ({
 
   return (
     <div ref={containerRef} className="relative w-full isolate lg:min-h-screen">
-      {/* 背景 */}
+       背景
       <div
         className="absolute inset-0 bg-black -z-10"
         aria-hidden="true"
       />
 
-      {/* コンテンツ */}
+      コンテンツ
       <div className="max-w-6xl mx-auto py-16 px-4">
-        {/* 上部のバッジ */}
+        上部のバッジ
         <div ref={badgeRef} className="flex justify-center mb-8">
           <div
             className="text-sm text-white md:text-base font-bold scale-x-150"
@@ -141,7 +143,7 @@ const Goods = ({
           </div>
         </div>
 
-        {/* 準備中メッセージ */}
+        準備中メッセージ
         <div ref={messageRef} className="flex flex-col items-center justify-center pb-8">
           <div className="text-center max-w-2xl">
             <h2
@@ -153,7 +155,7 @@ const Goods = ({
           </div>
         </div>
 
-        {/* グッズ一覧 - モバイル: 横2×縦4、PC: 横4×縦2 */}
+        グッズ一覧 - モバイル: 横2×縦4、PC: 横4×縦2
         <div ref={goodsGridRef} className="grid grid-cols-2 md:grid-cols-4 gap-5 px-5 sm:px-3">
           {preparationImages.map((photo, index) => (
             <div key={index} className="text-center">
@@ -166,8 +168,8 @@ const Goods = ({
           ))}
         </div>
 
-        {/* 購入ボタン（コメントアウト） */}
-        {/* <div className="max-w-xl mx-auto mt-12 px-4 flex justify-center">
+        購入ボタン
+        <div className="max-w-xl mx-auto mt-12 px-4 flex justify-center">
           <a
             href={goodsPurchaseUrl}
             target="_blank"
@@ -186,10 +188,12 @@ const Goods = ({
             オンラインでの購入はこちら
             <ChevronRight size={24} />
           </a>
-        </div> */}
+        </div>
       </div>
     </div>
   );
 };
 
 export default Goods;
+
+*/

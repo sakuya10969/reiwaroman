@@ -2,7 +2,7 @@ import { useLayoutEffect, useRef } from "react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { CAUTION_CONTENTS } from "@/constants";
-import reiwa12 from "@/assets/reiwa_12.png";
+import reiwa12 from "@/assets/Caution.jpg";
 import type { CautionProps } from "@/types";
 
 gsap.registerPlugin(ScrollTrigger);
@@ -18,7 +18,7 @@ const Caution = ({
     const container = containerRef.current;
     const badge = badgeRef.current;
     const list = listRef.current;
-    
+
     if (!container || !badge || !list) return;
 
     // バッジテキストを一文字ずつspan要素に分割
@@ -102,7 +102,7 @@ const Caution = ({
       />
 
       {/* 半透明赤のオーバーレイ */}
-      <div className="absolute inset-0 bg-[#e12027]/50 -z-18" aria-hidden="true" />
+      <div className="absolute inset-0 bg-black/50 -z-18" aria-hidden="true" />
 
       {/* コンテンツ */}
       <div className="max-w-6xl mx-auto py-12 px-4 flex flex-col items-center">
@@ -128,7 +128,7 @@ const Caution = ({
           ))}
         </ul>
       </div>
-      
+
       {/* コピーライト */}
       <div className="w-full flex justify-center absolute bottom-3">
         <p className="text-white/80 text-sm tracking-wider" style={{fontFamily: 'momochidori, sans-serif', fontWeight: 700}}>&copy;RE:IWAROMAN制作委員会</p>

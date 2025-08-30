@@ -20,7 +20,7 @@ const NewsList = ({
     const container = containerRef.current;
     const heading = headingRef.current;
     const list = listRef.current;
-    
+
     if (!container || !heading || !list) return;
 
     // NEWSテキストを一文字ずつspan要素に分割
@@ -93,7 +93,7 @@ const NewsList = ({
   }, []);
 
   return (
-    <div 
+    <div
       ref={containerRef}
       className={`relative text-white w-full max-h-screen lg:h-screen flex items-center justify-center ${bgColorClass}`}
     >
@@ -114,7 +114,7 @@ const NewsList = ({
         {/* リスト */}
         <div ref={listRef} className="mt-4 md:mt-8 space-y-1 md:space-y-2">
           {NEWS.map((item, i) => (
-            <NewsRow key={`${item.title}-${i}`} item={item} />
+            <NewsRow key={`${item.title}-${i}`} item={item}/>
           ))}
         </div>
       </div>

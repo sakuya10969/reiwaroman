@@ -2,7 +2,7 @@ import { useLayoutEffect, useRef, useState, useEffect } from "react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
-import reiwa6 from "@/assets/reiwa_6.png";
+import reiwa6 from "@/assets/IntroductionLive.jpg";
 import { INTRODUCTION_LIVE_CONTENTS, INTRODUCTION_LIVE_TITLE_LINES } from "@/constants";
 
 gsap.registerPlugin(ScrollTrigger);

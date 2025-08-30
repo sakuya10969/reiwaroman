@@ -1,10 +1,10 @@
 import { useEffect, useLayoutEffect, useRef, useState } from "react";
 
 import type { Slide, TopsVisualProps } from "@/types";
-import reiwa2 from "@/assets/reiwa_2.png";
-import reiwa3 from "@/assets/reiwa_3.png";
-import tops_visual_1 from "@/assets/tops_visual_1.png";
-import tops_visual_2 from "@/assets/tops_visual_2.png";
+import reiwa2 from "@/assets/top1_IntroductionCatch1.jpg";
+import reiwa3 from "@/assets/top2.jpg";
+import tops_visual_1 from "@/assets/top1_mobile.jpg";
+import tops_visual_2 from "@/assets/top2_mobile.jpg";
 
 const slides: Slide[] = [
   { srcDesktop: reiwa2, srcMobile: tops_visual_1, alt: "Top Visual" },

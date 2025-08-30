@@ -5,10 +5,9 @@ import IntroductionVenue from "@/components/introduction/IntroductionVenue";
 import IntroductionVideo from "@/components/introduction/IntroductionVideo";
 import NewsCatch from "@/components/news/NewsCatch";
 // import Cast from "@/components/cast/Cast"
-import Goods from "@/components/goods/Goods"
+// import Goods from "@/components/goods/Goods"
 import Caution from "@/components/caution/Caution"
 // import Last from "@/components/last/Last"
-import NewsList from "@/components/news/NewsList";
 
 export default function Main() {
   return (
@@ -32,7 +31,7 @@ export default function Main() {
       <section id="introduction-video" className="scroll-mt-[64px]">
         <IntroductionVideo />
       </section>
-      
+
       {/* INTRODUCTION - VENUE */}
       <section id="introduction-venue" className="scroll-mt-[64px]">
         <IntroductionVenue />
@@ -43,10 +42,6 @@ export default function Main() {
         <NewsCatch />
       </section>
 
-      {/* NEWS - LIST */}
-      <section id="news-list" className="scroll-mt-[64px]">
-        <NewsList />
-      </section>
 
       {/* Cast */}
       {/* <section id="cast" className="scroll-mt-[64px]">
@@ -54,9 +49,9 @@ export default function Main() {
       </section> */}
 
       {/* Goods */}
-      <section id="goods" className="scroll-mt-[64px]">
+      {/* <section id="goods" className="scroll-mt-[64px]">
         <Goods />
-      </section>
+      </section>*/}
 
       {/* Caution */}
       <section id="caution" className="scroll-mt-[64px]">

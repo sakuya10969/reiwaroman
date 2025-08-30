@@ -2,7 +2,7 @@ import { useLayoutEffect, useRef } from "react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
-import reiwa6_blackwhite from "@/assets/reiwa_6_blackwhite.png";
+import reiwa6_blackwhite from "@/assets/IntroductionVenue_NewsCatch.jpg";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -37,22 +37,15 @@ const IntroductionVenue = () => {
     }
 
     const ctx = gsap.context(() => {
-      // 横・浜を初期状態で左斜め下に移動、透明にする
+      // 横・浜を初期状態で上方に移動、透明にする
       gsap.set([yoko, hama], {
-        x: -50,
-        y: 50,
+        y: -100, // 上方からスライドイン
         opacity: 0,
       });
 
-      // YOKOHAMAの各文字を初期状態で左斜め下に移動、透明にする
-      if (yokohama) {
-        const chars = yokohama.querySelectorAll('span');
-        gsap.set(chars, { x: -50, y: 50, opacity: 0 });
-      }
-
-      // K ARENAを初期状態で上に移動、透明にする
-      gsap.set(karena, {
-        y: -100,
+      // K ARENAとYOKOHAMAを初期状態で左方に移動、透明にする
+      gsap.set([karena, yokohama], {
+        x: -200, // 左方からスライドイン
         opacity: 0,
       });
 
@@ -66,35 +59,29 @@ const IntroductionVenue = () => {
         },
       });
 
-      // 横、浜を同時に左斜め下からフェードイン
+      // 横、浜を同時に上からスライドイン
       tl.to([yoko, hama], {
-        x: 0,
-        y: 0,
-        opacity: 1,
-        duration: 0.8,
-        ease: "power2.out",
-      });
-
-      // YOKOHAMAの文字を一文字ずつ左斜め下からアニメーション
-      if (yokohama) {
-        const chars = yokohama.querySelectorAll('span');
-        tl.to(chars, {
-          x: 0,
-          y: 0,
-          opacity: 1,
-          duration: 0.8,
-          stagger: 0.05,
-          ease: "power2.out"
-        }, "-=0.8");
-      }
-
-      // K ARENAを上からフェードイン
-      tl.to(karena, {
         y: 0,
         opacity: 1,
         duration: 1,
-        ease: "expo.out",
-      }, "+=0.2");
+        ease: "power2.out",
+      });
+
+      // K ARENAを左からスライドイン
+      tl.to(karena, {
+        x: 0,
+        opacity: 1,
+        duration: 1,
+        ease: "power2.out",
+      }, "+=0.2"); // 横・浜のアニメーションから少し遅らせて開始
+
+      // YOKOHAMAを左からスライドイン
+      tl.to(yokohama, {
+        x: 0,
+        opacity: 1,
+        duration: 1,
+        ease: "power2.out",
+      }, "+=0.2"); // K ARENAのアニメーションから少し遅らせて開始
 
     }, container);
 
