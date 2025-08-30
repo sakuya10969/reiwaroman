@@ -1,4 +1,4 @@
-import { useLayoutEffect, useRef, useState, useEffect } from "react";
+import { useLayoutEffect, useRef } from "react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
@@ -8,27 +8,42 @@ import { INTRODUCTION_LIVE_CONTENTS, INTRODUCTION_LIVE_TITLE_LINES } from "@/con
 gsap.registerPlugin(ScrollTrigger);
 
 const IntroductionLive = () => {
+  const wrapperRef = useRef<HTMLDivElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
   const contentRef = useRef<HTMLDivElement>(null);
   const titleRef = useRef<HTMLDivElement>(null);
-  const [isMobile, setIsMobile] = useState<boolean>(false);
-
-  useEffect(() => {
-    const checkMobile = () => {
-      setIsMobile(window.innerWidth <= 768);
-    };
-
-    checkMobile();
-    window.addEventListener('resize', checkMobile);
-    return () => window.removeEventListener('resize', checkMobile);
-  }, []);
+  const backgroundOverlayRef = useRef<HTMLDivElement>(null);
+  
+  // IntroductionVenue関連のrefs
+  const venueContentRef = useRef<HTMLDivElement>(null);
+  const yokoRef = useRef<HTMLParagraphElement>(null);
+  const karenaRef = useRef<HTMLParagraphElement>(null);
+  const yokohamaRef = useRef<HTMLParagraphElement>(null);
+  const hamaRef = useRef<HTMLParagraphElement>(null);
 
   useLayoutEffect(() => {
-    const container = containerRef.current;
-    const content = contentRef.current;
-    const title = titleRef.current;
+    const wrapper = wrapperRef.current!;
+    const container = containerRef.current!;
+    const content = contentRef.current!;
+    const title = titleRef.current!;
+    const backgroundOverlay = backgroundOverlayRef.current!;
+    const venueContent = venueContentRef.current!;
+    const yoko = yokoRef.current!;
+    const karena = karenaRef.current!;
+    const yokohama = yokohamaRef.current!;
+    const hama = hamaRef.current!;
 
-    if (!container || !content || !title) return;
+    // YOKOHAMAの各文字をspan要素に分割
+    if (yokohama) {
+      const text = "YOKOHAMA";
+      yokohama.innerHTML = "";
+      text.split("").forEach((char) => {
+        const span = document.createElement("span");
+        span.textContent = char;
+        span.className = "inline-block";
+        yokohama.appendChild(span);
+      });
+    }
 
     const ctx = gsap.context(() => {
       // 本文の各行を初期状態で左斜め下に移動、透明にする
@@ -47,18 +62,33 @@ const IntroductionLive = () => {
         opacity: 0,
       });
 
-      // モバイル・PC共通でスクロールトリガーを使用
-      const tl = gsap.timeline({
+      // 背景オーバーレイを初期状態で透明にする
+      gsap.set(backgroundOverlay, {
+        opacity: 0,
+      });
+
+      // IntroductionVenueの要素を初期状態で設定
+      gsap.set([yoko, hama], {
+        y: -100,
+        opacity: 0,
+      });
+      gsap.set([karena, yokohama], {
+        x: -200,
+        opacity: 0,
+      });
+      gsap.set(venueContent, { autoAlpha: 0 });
+
+      // モバイル・PC共通でスクロールトリガーを使用 (IntroductionLive用)
+      const liveTextTl = gsap.timeline({
         scrollTrigger: {
           trigger: container,
           start: "top 80%",
-          end: "bottom 20%",
           toggleActions: "play none none reverse",
         },
       });
 
       // タイトルの各行を一つずつアニメーション（左斜め下から飛び込み）
-      tl.to(titleLines, {
+      liveTextTl.to(titleLines, {
         x: 0,
         y: 0,
         opacity: 1,
@@ -68,7 +98,7 @@ const IntroductionLive = () => {
       });
 
       // その後、本文の各行をアニメーション（左斜め下から）
-      tl.to(contentLines, {
+      liveTextTl.to(contentLines, {
         x: 0,
         y: 0,
         opacity: 1,
@@ -77,81 +107,173 @@ const IntroductionLive = () => {
         ease: "power2.out",
       }, "-=0.6");
 
-    }, container);
+      // メインのスクラブアニメーション (文字透明化と背景黒化)
+      const scrubTl = gsap.timeline({
+        scrollTrigger: {
+          trigger: wrapper,
+          start: "top top",
+          end: "bottom bottom",
+          scrub: 1,
+        },
+      });
+      
+      // 文字の透明化（徐々に）
+      scrubTl.to([titleLines, contentLines], { 
+        opacity: 0,
+        duration: 0.6,
+        ease: "power2.inOut"
+      }, 0);
+      
+      // 背景オーバーレイの透明から黒への変化
+      scrubTl.to(backgroundOverlay, { 
+        opacity: 1,
+        duration: 0.8,
+        ease: "power2.inOut" 
+      }, 0.2);
 
-    return () => ctx.revert();
-  }, [isMobile]);
+      // IntroductionVenueの要素を同じ位置でフェードイン
+      scrubTl.to(venueContent, { 
+        autoAlpha: 1, 
+        duration: 0.3 
+      }, 0.5);
+
+      scrubTl.to([yoko, hama], {
+        y: 0,
+        opacity: 1,
+        duration: 0.6,
+        ease: "power2.out",
+      }, 0.6);
+
+      scrubTl.to([karena, yokohama], {
+        x: 0,
+        opacity: 1,
+        duration: 0.6,
+        ease: "power2.out",
+      }, 0.8);
+
+      // pinのためのScrollTrigger（onLeaveは削除し、scrub内でアニメーション完了）
+      ScrollTrigger.create({
+        trigger: wrapper,
+        start: "top top",
+        end: "bottom bottom-=1",
+        pin: container,
+        onEnterBack: () => {
+          // IntroductionVenueの要素をすべて初期状態に戻す
+          gsap.set(venueContent, { autoAlpha: 0 });
+          gsap.set([yoko, hama], { y: -100, opacity: 0 });
+          gsap.set([karena, yokohama], { x: -200, opacity: 0 });
+        },
+      });
+
+    }, wrapper);
+
+    return () => {
+      ctx?.revert();
+    };
+  }, []);
 
   return (
-    <div ref={containerRef} className="relative w-full min-h-[50vh] lg:h-screen  landscape:h-screen text-white overflow-hidden py-6 md:py-8">
-      {/* BG */}
-      <div
-        className="absolute inset-0 bg-top bg-cover"
-        style={{ backgroundImage: `url(${reiwa6})` }}
-        aria-hidden
-      />
-      <div className="absolute inset-0 bg-black/45" aria-hidden />
-      <div
-        className="absolute inset-0 mix-blend-multiply"
-        style={{ backgroundColor: "rgba(185,0,0,0.65)" }}
-        aria-hidden
-      />
-      <div
-        className="absolute inset-0 pointer-events-none"
-        style={{
-          background:
-            "radial-gradient(120% 120% at 50% 40%, rgba(0,0,0,0) 55%, rgba(0,0,0,0.55) 100%)",
-        }}
-        aria-hidden
-      />
+    <div ref={wrapperRef} className="w-full h-[350vh] relative">
+      <div ref={containerRef} className="w-full h-screen relative overflow-hidden">
+        
+        {/* IntroductionLiveのコンテンツ */}
+        <div className="relative w-full h-full text-white" style={{ zIndex: 2 }}>
+          {/* BG */}
+          <div
+            className="absolute inset-0 bg-top bg-cover"
+            style={{ backgroundImage: `url(${reiwa6})` }}
+            aria-hidden
+          />
+          <div className="absolute inset-0 bg-black/45" aria-hidden />
+          <div
+            className="absolute inset-0 mix-blend-multiply"
+            style={{ backgroundColor: "rgba(185,0,0,0.65)" }}
+            aria-hidden
+          />
+          <div
+            className="absolute inset-0 pointer-events-none"
+            style={{
+              background:
+                "radial-gradient(120% 120% at 50% 40%, rgba(0,0,0,0) 55%, rgba(0,0,0,0.55) 100%)",
+            }}
+            aria-hidden
+          />
 
-      {/* コンテンツ */}
-      <div className="relative z-10 w-full lg:h-screen  landscape:h-screen px-6 lg:px-10 lg:pr-16 py-4 md:py-16 lg:py-24 flex items-center md:items-center md:justify-end">
-        {/* PC: 横並び [本文][タイトル]、SP: 左寄せで縦並び（タイトルが上）、中央配置 */}
-        <div className="flex md:flex-row flex-col items-start md:justify-end gap-4 md:gap-6 lg:gap-10 text-left w-full md:w-[50vw] mr-10">
+          {/* 背景を徐々に黒にするためのオーバーレイ */}
+          <div 
+            ref={backgroundOverlayRef}
+            className="absolute inset-0 bg-black"
+            style={{ zIndex: 1 }}
+            aria-hidden
+          />
 
-          {/* 本文（左隣） */}
-          <div ref={contentRef} className="order-2 md:order-1 flex-shrink-0 self-start mt-3 md:mt-0">
-            <div
-              className="
-                min-w-[40vw] md:w-[45vw] lg:w-[50vw]
-                text-xs md:text-sm text-white/92
-                md:[writing-mode:vertical-rl] md:[text-orientation:upright]
-                leading-relaxed lg:leading-10 lg:tracking-wider
-              "
-              style={{ fontFamily: '"momochidori", serif'  , fontWeight:500}}
-            >
-              {INTRODUCTION_LIVE_CONTENTS.map((content, i) => (
-                <p key={i}>
-                  {content}
-                  {i < INTRODUCTION_LIVE_CONTENTS.length - 1 && <br />}
-                </p>
-              ))}
-            </div>
-          </div>
+          {/* コンテンツ */}
+          <div className="relative z-10 w-full h-full px-6 lg:px-10 lg:pr-16 py-4 md:py-16 lg:py-24 flex items-center md:items-center md:justify-end">
+            {/* PC: 横並び [本文][タイトル]、SP: 左寄せで縦並び（タイトルが上）、中央配置 */}
+            <div className="flex md:flex-row flex-col items-start md:justify-end gap-4 md:gap-6 lg:gap-10 text-left w-full md:w-[50vw] mr-10">
 
-          {/* タイトル（最右）— 各列を独立させて上端揃え */}
-          <div className="order-1 md:order-2 flex-shrink-0 self-start mt-8 md:mt-0">
-            <div ref={titleRef} className="flex flex-col md:flex-row-reverse items-start md:gap-3 lg:gap-4">
-              {INTRODUCTION_LIVE_TITLE_LINES.map((line, i) => (
-                <h1
-                  key={i}
+              {/* 本文（左隣） */}
+              <div ref={contentRef} className="order-2 md:order-1 flex-shrink-0 self-start mt-3 md:mt-0">
+                <div
                   className="
-                    font-extrabold text-white
-                    text-4xl md:text-5xl lg:text-7xl
+                    min-w-[40vw] md:w-[45vw] lg:w-[50vw]
+                    text-xs md:text-sm text-white/92
                     md:[writing-mode:vertical-rl] md:[text-orientation:upright]
-                    md: scale-y-80
-                    origin-top
-                    whitespace-nowrap
+                    leading-relaxed lg:leading-10 lg:tracking-wider
                   "
-                  style={{ fontFamily: '"dnp-shuei-shogomincho-std", serif', fontWeight: 900 }}
+                  style={{ fontFamily: '"momochidori", serif'  , fontWeight:500}}
                 >
-                  {line}
-                </h1>
-              ))}
+                  {INTRODUCTION_LIVE_CONTENTS.map((content, i) => (
+                    <p key={i}>
+                      {content}
+                      {i < INTRODUCTION_LIVE_CONTENTS.length - 1 && <br />}
+                    </p>
+                  ))}
+                </div>
+              </div>
+
+              {/* タイトル（最右）— 各列を独立させて上端揃え */}
+              <div className="order-1 md:order-2 flex-shrink-0 self-start mt-8 md:mt-0">
+                <div ref={titleRef} className="flex flex-col md:flex-row-reverse items-start md:gap-3 lg:gap-4">
+                  {INTRODUCTION_LIVE_TITLE_LINES.map((line, i) => (
+                    <h1
+                      key={i}
+                      className="
+                        font-extrabold text-white
+                        text-4xl md:text-5xl lg:text-7xl
+                        md:[writing-mode:vertical-rl] md:[text-orientation:upright]
+                        md: scale-y-80
+                        origin-top
+                        whitespace-nowrap
+                      "
+                      style={{ fontFamily: '"dnp-shuei-shogomincho-std", serif', fontWeight: 900 }}
+                    >
+                      {line}
+                    </h1>
+                  ))}
+                </div>
+              </div>
             </div>
           </div>
         </div>
+
+        {/* IntroductionVenueのコンテンツ (重ねて配置) */}
+        <div ref={venueContentRef} className="absolute inset-0 w-full h-full flex items-center justify-center text-white pointer-events-none bg-black" style={{ zIndex: 3 }}>
+          <div className="relative z-10 text-center max-w-[70vw] pointer-events-auto">
+            <h1 className="font-extrabold leading-[1.1] tracking-wide">
+              <p ref={yokoRef} className="block text-red-800 text-[clamp(48px,10vw,110px)] opacity-70 relative top-3 md:top-8 z-10 scale-x-130 origin-center" style={{ fontFamily: '"dnp-shuei-shogomincho-std", serif' }}>
+                横
+              </p>
+              <p ref={karenaRef} className="inline-block text-[clamp(36px,10vw,100px)] relative z-0 leading-none scale-x-140 origin-center" style={{ fontFamily: 'Prompt, sans-serif' }}>K ARENA</p>
+              <br />
+              <p ref={yokohamaRef} className="inline-block text-[clamp(36px,10vw,100px)] leading-none scale-x-140 origin-center" style={{ fontFamily: 'Prompt, sans-serif' }}>YOKOHAMA</p>
+              <p ref={hamaRef} className="block text-red-800 text-[clamp(48px,10vw,110px)] opacity-70 relative -top-5 md:-top-12 scale-x-130 origin-center" style={{ fontFamily: '"dnp-shuei-shogomincho-std", serif' }}>
+                浜
+              </p>
+            </h1>
+          </div>
+        </div>
+
       </div>
     </div>
   );
