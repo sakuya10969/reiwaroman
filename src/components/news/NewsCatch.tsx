@@ -21,15 +21,12 @@ const NewsCatch = ({
   pyClass = "py-16 md:py-24",
 }: CombinedNewsProps) => {
   // --- Refs ---
-  // NewsCatch関連
   const wrapperRef = useRef<HTMLDivElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
   const circleRef = useRef<HTMLDivElement>(null);
   const catchContentRef = useRef<HTMLDivElement>(null);
   const badgeRef = useRef<HTMLDivElement>(null);
   const titleRef = useRef<HTMLDivElement>(null);
-
-  // NewsList関連
   const listContentRef = useRef<HTMLDivElement>(null);
   const listHeadingRef = useRef<HTMLHeadingElement>(null);
   const listItemsRef = useRef<HTMLDivElement>(null);
@@ -45,42 +42,7 @@ const NewsCatch = ({
     const listHeading = listHeadingRef.current!;
     const listItems = listItemsRef.current!;
 
-    // --- テキスト分割処理 ---
-    if (badge) {
-      const badgeTextElement = badge.querySelector('p');
-      if (badgeTextElement) {
-        badgeTextElement.innerHTML = "";
-        badgeText.split("").forEach((char) => {
-          const span = document.createElement("span");
-          span.textContent = char;
-          span.className = "inline-block";
-          badgeTextElement.appendChild(span);
-        });
-      }
-    }
-    if (title) {
-      const titleElements = title.children;
-      Array.from(titleElements).forEach((titleElement, lineIndex) => {
-        const text = titleLines[lineIndex];
-        if (text) {
-          titleElement.innerHTML = "";
-          text.split("").forEach((char) => {
-            const span = document.createElement("span");
-            span.textContent = char;
-            span.className = "inline-block";
-            titleElement.appendChild(span);
-          });
-        }
-      });
-    }
-    const listHeadingText = "NEWS";
-    listHeading.innerHTML = "";
-    listHeadingText.split("").forEach((char) => {
-      const span = document.createElement("span");
-      span.textContent = char;
-      span.className = "inline-block";
-      listHeading.appendChild(span);
-    });
+    // --- テキスト分割処理をすべて削除 ---
 
     const computeCoverScale = () => {
       const vw = window.innerWidth;
@@ -94,13 +56,13 @@ const NewsCatch = ({
     const ctx = gsap.context(() => {
       // --- 初期状態のセットアップ ---
       gsap.set(circle, { transformOrigin: "50% 50%", willChange: "transform", force3D: true });
-      gsap.set(badge.querySelectorAll('span'), { x: -50, y: 50, opacity: 0 });
-      Array.from(title.children).forEach(el => {
-        gsap.set(el.querySelectorAll('span'), { x: -50, y: 50, opacity: 0 });
-      });
+      // NewsCatchの要素を上からスライドインするように変更
+      gsap.set(badge, { y: -50, opacity: 0 });
+      gsap.set(title.children, { y: -50, opacity: 0 });
+
       gsap.set(listContent, { autoAlpha: 0 });
-      gsap.set(listHeading.querySelectorAll('span'), { x: -50, y: 50, opacity: 0 });
-      gsap.set(listItems.children, { x: -50, y: 50, opacity: 0 });
+      gsap.set(listHeading, { y: -50, opacity: 0 });
+      gsap.set(listItems.children, { y: -50, opacity: 0 });
 
       // --- タイムラインの作成 ---
 
@@ -112,32 +74,26 @@ const NewsCatch = ({
           toggleActions: "play none none reverse",
         },
       });
-      textTl.to(badge.querySelectorAll('span'), { x: 0, y: 0, opacity: 1, stagger: 0.05, ease: "power2.out" });
-      const allTitleChars = Array.from(title.children).flatMap(el => Array.from(el.querySelectorAll('span')));
-      textTl.to(allTitleChars, { x: 0, y: 0, opacity: 1, stagger: 0.05, ease: "power2.out" }, "-=0.4");
+      // badgeとtitleを塊として上からスライドインさせるように変更
+      textTl.to(badge, { y: 0, opacity: 1, ease: "power2.out", duration: 0.8 });
+      textTl.to(title.children, { y: 0, opacity: 1, stagger: 0.2, ease: "power2.out", duration: 0.8 }, "-=0.6");
 
       // NewsListのアニメーションを再生する関数
       const playHoldAnimation = () => {
         document.body.style.overflow = 'hidden';
-
         const holdTl = gsap.timeline({
           onComplete: () => {
             document.body.style.overflow = '';
             window.scrollTo(window.scrollX, window.scrollY + 1);
           }
         });
-
         holdTl
           .to(listContent, { autoAlpha: 1, duration: 0.5 })
-          .to(listHeading.querySelectorAll('span'), {
-            x: 0, y: 0, opacity: 1, stagger: 0.05, ease: "power2.out", duration: 0.8
-          })
-          .to(listItems.children, {
-            x: 0, y: 0, opacity: 1, stagger: 0.15, ease: "power2.out", duration: 1
-          }, "-=0.4");
+          .to(listHeading, { y: 0, opacity: 1, ease: "power2.out", duration: 0.8 })
+          .to(listItems.children, { y: 0, opacity: 1, stagger: 0.1, ease: "power2.out", duration: 1 }, "-=0.4");
       };
 
-      // メインのスクラブアニメーション。円の拡大を担当。
+      // メインのスクラブアニメーション
       const scrubTl = gsap.timeline({
         scrollTrigger: {
           trigger: wrapper,
@@ -149,7 +105,7 @@ const NewsCatch = ({
       scrubTl.to(circle, { scale: computeCoverScale, ease: "none" })
              .to(catchContent, { autoAlpha: 0, ease: "none" }, "<");
 
-      // 待機アニメーションを起動するためだけのScrollTrigger。pinを担当。
+      // pinと待機アニメーションの起動
       ScrollTrigger.create({
         trigger: wrapper,
         start: "top top",
@@ -157,10 +113,9 @@ const NewsCatch = ({
         pin: container,
         onLeave: () => playHoldAnimation(),
         onEnterBack: () => {
-          // コンテナを非表示にするだけでなく、中身の要素もすべて初期状態に戻す
           gsap.set(listContent, { autoAlpha: 0 });
-          gsap.set(listHeading.querySelectorAll('span'), { x: -50, y: 50, opacity: 0 });
-          gsap.set(listItems.children, { x: -50, y: 50, opacity: 0 });
+          gsap.set(listHeading, { y: -50, opacity: 0 });
+          gsap.set(listItems.children, { y: -50, opacity: 0 });
         },
       });
 
@@ -175,7 +130,6 @@ const NewsCatch = ({
   return (
     <div ref={wrapperRef} className="w-full h-[330vh] relative">
       <div ref={containerRef} className="w-full h-screen relative overflow-hidden">
-
         {/* NewsCatchの背景と円 */}
         <div className="absolute inset-0 w-full h-full">
           <div className="absolute inset-0 bg-black bg-center bg-cover -z-10" style={{ backgroundImage: `url(${backgroundImageUrl})`, filter: "grayscale(100%)" }} />
@@ -216,7 +170,6 @@ const NewsCatch = ({
             </div>
           </div>
         </div>
-
       </div>
     </div>
   );

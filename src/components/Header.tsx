@@ -34,6 +34,11 @@ const Header = ({ nav = NAV, ticketHref = TICKET_URL }: HeaderProps) => {
     [nav, activeId]
   );
 
+  const nav_menu = [
+    ...NAV,
+    { label: "TICKET", href: ticketHref}
+  ];
+
   // アクティブIDのテーマ（存在しなければ undefined）
   const activeTheme = activeId ? SECTION_THEMES[activeId] : undefined;
 
@@ -63,7 +68,7 @@ const Header = ({ nav = NAV, ticketHref = TICKET_URL }: HeaderProps) => {
           <img
             src={logo}
             alt="REIWAROMAN"
-            className="h-14 w-28 lg:h-20 lg:w-40 object-contain object-left pointer-events-none select-none opacity-80"
+            className="h-14 w-34 md:h-16 w-40 lg:h-25 lg:w-55 object-contain object-left pointer-events-none select-none opacity-80"
           />
         </div>
 
@@ -141,12 +146,12 @@ const Header = ({ nav = NAV, ticketHref = TICKET_URL }: HeaderProps) => {
 
       {/* モバイルメニュー（右側スライドアウト） */}
       <div
-        className={`md:hidden fixed top-0 right-0 w-65 h-screen backdrop-blur-sm border-l border-white/10 transform transition-transform duration-300 ease-in-out z-40 ${
+        className={`md:hidden fixed top-0 right-0 w-full h-screen backdrop-blur-sm border-l border-white/10 transform transition-transform duration-300 ease-in-out z-40 ${
           isMobileMenuOpen ? "translate-x-0" : "translate-x-full"
         } ${currentTheme === "red" ? "bg-red-900" : "bg-black/50"}`}
       >
         <nav className="px-6 py-10">
-          {nav.map((item, idx) => {
+          {nav_menu.map((item, idx) => {
             const isThisActive = idx === activeNavIndex;
             const activeColorClass =
               isThisActive ? getActiveLinkClassesByTheme(activeTheme) : null;

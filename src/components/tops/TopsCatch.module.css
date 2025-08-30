@@ -1,0 +1,14 @@
+.forceWritingMode {
+  /* デフォルト（モバイルなど）では縦書き */
+  writing-mode: vertical-rl;
+  text-orientation: upright;
+  white-space: nowrap;
+}
+
+/* 画面幅が1024px以上になったら横書きに上書き */
+@media (min-width: 1024px) {
+  .forceWritingMode {
+    writing-mode: horizontal-tb;
+    white-space: normal;
+  }
+}

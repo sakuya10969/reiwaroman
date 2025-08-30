@@ -63,6 +63,9 @@ importers:
       tailwindcss:
         specifier: ^4.1.11
         version: 4.1.11
+      tailwindcss-writing-mode:
+        specifier: ^1.0.0
+        version: 1.0.0
       typescript:
         specifier: ~5.8.3
         version: 5.8.3
@@ -1261,6 +1264,9 @@ packages:
   supports-color@7.2.0:
     resolution: {integrity: sha512-qpCAvRl9stuOHveKsn7HncJRvv501qIacKzQlO/+Lwxc9+0q2wLyv4Dfvt80/DPn2pqOBsJdDiogXGR9+OvwRw==}
     engines: {node: '>=8'}
+
+  tailwindcss-writing-mode@1.0.0:
+    resolution: {integrity: sha512-w72adZDP4aCCut8gJzVp1Z2Ht55JlY1Q0ZgJULeAbCEUCfkHVJS+ZYlfMXOmflIDNqnOsGizgojXxq87R0kh7g==}
 
   tailwindcss@4.1.11:
     resolution: {integrity: sha512-2E9TBm6MDD/xKYe+dvJZAmg3yxIEDNRc0jwlNyDg/4Fil2QcSLjFKGVff0lAf1jjeaArlG/M75Ey/EYr/OJtBA==}
@@ -2469,6 +2475,8 @@ snapshots:
   supports-color@7.2.0:
     dependencies:
       has-flag: 4.0.0
+
+  tailwindcss-writing-mode@1.0.0: {}
 
   tailwindcss@4.1.11: {}
 

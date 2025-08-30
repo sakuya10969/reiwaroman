@@ -15,7 +15,7 @@ const IntroductionCatch = ({}: IntroductionCatchProps) => {
   const contentRef = useRef<HTMLDivElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
 
-useLayoutEffect(() => {
+  useLayoutEffect(() => {
     const container = containerRef.current;
     const subtitle = subtitleRef.current;
     const rePrefix = rePrefixRef.current;
@@ -24,16 +24,7 @@ useLayoutEffect(() => {
 
     if (!container || !subtitle || !rePrefix || !iwaroma || !content) return;
 
-    // --- テキスト分割処理 ---
-    const introText = "Introduction";
-    subtitle.innerHTML = "";
-    introText.split("").forEach((char) => {
-      const span = document.createElement("span");
-      span.textContent = char;
-      span.className = "inline-block";
-      subtitle.appendChild(span);
-    });
-
+    // --- テキスト分割処理 (IWAROMANのみ) ---
     const iwaromaText = "IWAROMAN";
     iwaroma.innerHTML = "";
     iwaromaText.split("").forEach((char) => {
@@ -45,12 +36,12 @@ useLayoutEffect(() => {
 
     const ctx = gsap.context(() => {
       // --- 初期状態のセットアップ ---
-      const introChars = subtitle.querySelectorAll('span');
       const iwaromaChars = iwaroma.querySelectorAll('span');
 
-      gsap.set([introChars, iwaromaChars], { y: -50, opacity: 0 });
+      gsap.set(subtitle, { y: -50, opacity: 0 }); // subtitle全体を対象に変更
+      gsap.set(iwaromaChars, { y: -50, opacity: 0 });
       gsap.set(rePrefix, { x: -100, opacity: 0 });
-      gsap.set(content, { y: 50, opacity: 0 });
+      gsap.set(content, { y: -50, opacity: 0 });
 
 
       // --- アニメーションのタイムラインを作成 ---
@@ -62,12 +53,12 @@ useLayoutEffect(() => {
         },
       });
 
-      // 1. Introductionを上から一文字ずつイン
-      tl.to(introChars, {
+      // 1. Introductionを塊で上からイン
+      tl.to(subtitle, { // ターゲットをsubtitleに変更
         y: 0,
         opacity: 1,
         duration: 0.8,
-        stagger: 0.06,
+        // stagger: 0.06, // staggerを削除
         ease: "power2.out",
       });
 
@@ -78,7 +69,7 @@ useLayoutEffect(() => {
         duration: 0.8,
         stagger: 0.06,
         ease: "power2.out",
-      }, "-=0.6"); // Introductionのアニメーションの途中から開始
+      }, "-=0.6");
 
       // 3. RE:を左から塊でイン
       tl.to(rePrefix, {
@@ -121,7 +112,7 @@ useLayoutEffect(() => {
           className="relative inline-block font-bold uppercase scale-x-150 after:content-[''] after:absolute after:left-0 after:right-0 after:-bottom-0 after:h-[1.5px] after:bg-current"
           style={{ fontFamily: 'Prompt, sans-serif' }}
         >
-          {/* JSで分割 */}
+          Introduction
         </h2>
 
         {/* メイン見出し */}

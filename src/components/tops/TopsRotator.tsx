@@ -3,7 +3,8 @@ import { gsap } from "gsap";
 
 import TopsCatch from "@/components/tops/TopsCatch";
 import TopsVisual from "@/components/tops/TopsVisual";
-import logo from "@/assets/logo.png";
+import logo_ja from "@/assets/logo_ja.png";
+import logo_en from "@/assets/logo_en.png";
 
 interface Slot {
   key: "catch" | "visual";
@@ -19,36 +20,74 @@ const TopsRotator = () => {
   const [idx, setIdx] = useState<number>(0);
   const [visualCycle, setVisualCycle] = useState<number>(0);
   const logoRef = useRef<HTMLDivElement>(null);
+  // 個別のロゴへの参照を追加
+  const logoJaRef = useRef<HTMLImageElement>(null);
+  const logoEnRef = useRef<HTMLImageElement>(null);
+
   const current = useMemo(() => SLOTS[idx], [idx]);
 
   useLayoutEffect(() => {
-    // ロゴを初期状態で画面外（左から）に配置
-    if (logoRef.current) {
-      gsap.set(logoRef.current, {
+    const logoContainer = logoRef.current;
+    const logoJa = logoJaRef.current;
+    const logoEn = logoEnRef.current;
+
+    if (!logoContainer || !logoJa || !logoEn) return;
+
+
+    const individualLogos = [logoEn, logoJa];
+
+    const ctx = gsap.context(() => {
+
+      gsap.set(logoContainer, {
         x: "-300%",
         y: "-300%",
         opacity: 0,
         scale: 0.3,
         rotation: -150,
       });
-    }
 
-    // 1秒待ってからロゴアニメーション開始
-    const timer = setTimeout(() => {
-      if (logoRef.current) {
-        gsap.to(logoRef.current, {
-          x: "0%",
-          y: "0%",
-          opacity: 1,
-          scale: 1,
-          rotation: 0,
-          duration: 1,
-          ease: "expo.out",
-        });
-      }
-    }, 1000);
+      gsap.set(individualLogos, { opacity: 0 });
 
-    return () => clearTimeout(timer);
+
+      const tl = gsap.timeline({
+        delay: 1,
+      });
+
+      tl.to(logoContainer, {
+        x: "0%",
+        y: "0%",
+        opacity: 1,
+        scale: 1,
+        rotation: 0,
+        duration: 1,
+        ease: "expo.out",
+      });
+
+      tl.to(logoEn, {
+        opacity: 1,
+        duration: 0.8,
+        ease: "power2.out",
+      }, "-=0.7");
+
+
+      tl.to(logoJa, {
+        opacity: 1,
+        y: -5,
+        duration: 0.5,
+        ease: "power3.out",
+      }, "-=0.2");
+
+      tl.to(logoJa, {
+        y: 0,
+        duration: 0.3,
+        ease: "bounce.out",
+        yoyo: true,
+        repeat: 1,
+      }, "<0.1");
+
+    }, logoContainer);
+
+    return () => ctx.revert();
   }, []);
 
   useEffect(() => {
@@ -79,9 +118,16 @@ const TopsRotator = () => {
         className="absolute bottom-10 sm:bottom-15 md:bottom-20 lg:bottom-25 left-1/2 transform -translate-x-1/2 z-10"
       >
         <img
-          src={logo}
-          alt="Logo"
-          className="h-18 w-40 md:h-20 md:w-48 lg:h-40 lg:w-80"
+          ref={logoEnRef} // refを追加
+          src={logo_en}
+          alt="Logo English"
+          className="absolute bottom-0 left-0 h-18 w-40 md:h-20 md:w-48 lg:h-40 lg:w-80"
+        />
+        <img
+          ref={logoJaRef} // refを追加
+          src={logo_ja}
+          alt="Logo Japanese"
+          className="relative mt-1 h-18 w-40 md:h-20 md:w-48 lg:h-40 lg:w-80"
         />
       </div>
     </div>
