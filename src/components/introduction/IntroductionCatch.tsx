@@ -41,7 +41,11 @@ const IntroductionCatch = ({}: IntroductionCatchProps) => {
       gsap.set(subtitle, { y: -50, opacity: 0 }); // subtitle全体を対象に変更
       gsap.set(iwaromaChars, { y: -50, opacity: 0 });
       gsap.set(rePrefix, { x: -100, opacity: 0 });
+<<<<<<< HEAD
       gsap.set(content, { y: -50, opacity: 0 });
+=======
+      gsap.set(content, { x: -100, opacity: 0 });
+>>>>>>> 22ee7a22bab4ed6123e4795a9373d721bc12feb6
 
 
       // --- アニメーションのタイムラインを作成 ---
@@ -81,7 +85,7 @@ const IntroductionCatch = ({}: IntroductionCatchProps) => {
 
       // 4. 残りの文章は塊で上からイン
       tl.to(content, {
-        y: 0,
+        x: 0,
         opacity: 1,
         duration: 1.2,
         ease: "power2.out",
