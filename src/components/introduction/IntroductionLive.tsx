@@ -69,11 +69,11 @@ const IntroductionLive = () => {
 
       // IntroductionVenueの要素を初期状態で設定
       gsap.set([yoko, hama], {
-        y: -100,
+        y: -300,
         opacity: 0,
       });
       gsap.set([karena, yokohama], {
-        x: -200,
+        x: -300,
         opacity: 0,
       });
       gsap.set(venueContent, { autoAlpha: 0 });
@@ -120,7 +120,7 @@ const IntroductionLive = () => {
       // 文字の透明化（徐々に）
       scrubTl.to([titleLines, contentLines], { 
         opacity: 0,
-        duration: 0.6,
+        duration: 0.8,
         ease: "power2.inOut"
       }, 0);
       
@@ -137,37 +137,101 @@ const IntroductionLive = () => {
         duration: 0.3 
       }, 0.5);
 
-      scrubTl.to([yoko, hama], {
-        y: 0,
-        opacity: 1,
-        duration: 0.6,
-        ease: "power2.out",
-      }, 0.6);
+      // Venue要素のアニメーション（スクロール速度に依存しない）
+      const playVenueAnimation = () => {
+        // スクロールを即座に停止
+        document.body.style.overflow = 'hidden';
+        
+        // 画面を強制的に中央に配置してからアニメーション開始
+        const currentScrollY = window.scrollY;
+        const wrapperRect = wrapper.getBoundingClientRect();
+        const wrapperTop = currentScrollY + wrapperRect.top;
+        const targetScrollY = wrapperTop + (wrapper.offsetHeight / 2) - (window.innerHeight / 2);
+        
+        // スムーズに中央に移動してからアニメーション実行
+        gsap.to(window, {
+          scrollTo: { y: targetScrollY },
+          duration: 0.3,
+          ease: "power2.inOut",
+          onComplete: () => {
+            const venueTl = gsap.timeline({
+              onComplete: () => {
+                document.body.style.overflow = '';
+                // アニメーション完了後に少し下にスクロールして次のセクションを促す
+                window.scrollTo(window.scrollX, window.scrollY + 1);
+              }
+            });
 
-      scrubTl.to([karena, yokohama], {
-        x: 0,
-        opacity: 1,
-        duration: 0.6,
-        ease: "power2.out",
-      }, 0.8);
+            // 横と浜を上から猛烈なスピードで入り、揺らす
+            venueTl.to([yoko, hama], {
+              y: 0,
+              opacity: 1,
+              duration: 0.6,
+              stagger: 0.1,
+              ease: "power4.out",
+            })
+            .to([yoko, hama], {
+              rotation: "+=3",
+              duration: 0.1,
+              ease: "power2.inOut"
+            })
+            .to([yoko, hama], {
+              rotation: "-=6",
+              duration: 0.2,
+              ease: "power2.inOut"
+            })
+            .to([yoko, hama], {
+              rotation: "+=3",
+              duration: 0.1,
+              ease: "power2.inOut"
+            });
 
-      // pinのためのScrollTrigger（onLeaveは削除し、scrub内でアニメーション完了）
+            // K ARENAとYOKOHAMAを左から猛烈なスピードで入り、揺らす
+            venueTl.to([karena, yokohama], {
+              x: 0,
+              opacity: 1,
+              duration: 0.6,
+              stagger: 0.1,
+              ease: "power4.out",
+            }, "-=0.4")
+            .to([karena, yokohama], {
+              rotation: "+=2",
+              duration: 0.1,
+              ease: "power2.inOut"
+            })
+            .to([karena, yokohama], {
+              rotation: "-=4",
+              duration: 0.2,
+              ease: "power2.inOut"
+            })
+            .to([karena, yokohama], {
+              rotation: "+=2",
+              duration: 0.1,
+              ease: "power2.inOut"
+            });
+          }
+        });
+      };
+
+      // pinのためのScrollTrigger
       ScrollTrigger.create({
         trigger: wrapper,
         start: "top top",
         end: "bottom bottom-=1",
         pin: container,
+        onLeave: () => playVenueAnimation(),
         onEnterBack: () => {
           // IntroductionVenueの要素をすべて初期状態に戻す
           gsap.set(venueContent, { autoAlpha: 0 });
-          gsap.set([yoko, hama], { y: -100, opacity: 0 });
-          gsap.set([karena, yokohama], { x: -200, opacity: 0 });
+          gsap.set([yoko, hama], { y: -300, opacity: 0, rotation: 0 });
+          gsap.set([karena, yokohama], { x: -300, opacity: 0, rotation: 0 });
         },
       });
 
     }, wrapper);
 
     return () => {
+      document.body.style.overflow = '';
       ctx?.revert();
     };
   }, []);
