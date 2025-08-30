@@ -3,6 +3,7 @@ import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
 import reiwa6 from "@/assets/IntroductionLive.jpg";
+import reiwa7 from "@/assets/IntroductionVenue_NewsCatch.jpg"; // ここを使用します
 import { INTRODUCTION_LIVE_CONTENTS, INTRODUCTION_LIVE_TITLE_LINES } from "@/constants";
 
 gsap.registerPlugin(ScrollTrigger);
@@ -12,8 +13,9 @@ const IntroductionLive = () => {
   const containerRef = useRef<HTMLDivElement>(null);
   const contentRef = useRef<HTMLDivElement>(null);
   const titleRef = useRef<HTMLDivElement>(null);
-  const backgroundOverlayRef = useRef<HTMLDivElement>(null);
-  
+  // backgroundOverlayRefは新しい背景画像用のRefになります
+  const venueBackgroundRef = useRef<HTMLDivElement>(null);
+
   // IntroductionVenue関連のrefs
   const venueContentRef = useRef<HTMLDivElement>(null);
   const yokoRef = useRef<HTMLParagraphElement>(null);
@@ -26,13 +28,28 @@ const IntroductionLive = () => {
     const container = containerRef.current!;
     const content = contentRef.current!;
     const title = titleRef.current!;
-    const backgroundOverlay = backgroundOverlayRef.current!;
+    // Refの名前も変更
+    const venueBackground = venueBackgroundRef.current!;
     const venueContent = venueContentRef.current!;
     const yoko = yokoRef.current!;
     const karena = karenaRef.current!;
     const yokohama = yokohamaRef.current!;
     const hama = hamaRef.current!;
 
+    // --- テキスト分割処理 ---
+    // タイトルの各行を文字単位でspanに分割
+    if (title) {
+      Array.from(title.children).forEach((lineElement, index) => {
+        const text = INTRODUCTION_LIVE_TITLE_LINES[index];
+        lineElement.innerHTML = "";
+        text.split("").forEach((char) => {
+          const span = document.createElement("span");
+          span.textContent = char;
+          span.className = "inline-block";
+          lineElement.appendChild(span);
+        });
+      });
+    }
     // YOKOHAMAの各文字をspan要素に分割
     if (yokohama) {
       const text = "YOKOHAMA";
@@ -46,39 +63,21 @@ const IntroductionLive = () => {
     }
 
     const ctx = gsap.context(() => {
-      // 本文の各行を初期状態で左斜め下に移動、透明にする
+      // --- 初期状態のセットアップ ---
       const contentLines = content.querySelectorAll('p');
-      gsap.set(contentLines, {
-        x: -50,
-        y: 50,
-        opacity: 0,
-      });
+      gsap.set(contentLines, { y: -50, opacity: 0 });
 
-      // タイトルの各行を初期状態で左斜め下に移動、透明にする
-      const titleLines = title.children;
-      gsap.set(titleLines, {
-        x: -50,
-        y: 50,
-        opacity: 0,
-      });
+      const titleChars = title.querySelectorAll('span');
+      gsap.set(titleChars, { y: -50, opacity: 0 });
 
-      // 背景オーバーレイを初期状態で透明にする
-      gsap.set(backgroundOverlay, {
-        opacity: 0,
-      });
+      // 新しい背景画像を初期状態で透明にする (オーバーレイは含まない)
+      gsap.set(venueBackground, { opacity: 0 });
 
-      // IntroductionVenueの要素を初期状態で設定
-      gsap.set([yoko, hama], {
-        y: -100,
-        opacity: 0,
-      });
-      gsap.set([karena, yokohama], {
-        x: -200,
-        opacity: 0,
-      });
+      gsap.set([yoko, hama], { y: -100, opacity: 0 });
+      gsap.set([karena, yokohama], { x: -200, opacity: 0 });
       gsap.set(venueContent, { autoAlpha: 0 });
 
-      // モバイル・PC共通でスクロールトリガーを使用 (IntroductionLive用)
+      // --- IntroductionLiveのアニメーション ---
       const liveTextTl = gsap.timeline({
         scrollTrigger: {
           trigger: container,
@@ -86,20 +85,14 @@ const IntroductionLive = () => {
           toggleActions: "play none none reverse",
         },
       });
-
-      // タイトルの各行を一つずつアニメーション（左斜め下から飛び込み）
-      liveTextTl.to(titleLines, {
-        x: 0,
+      liveTextTl.to(titleChars, {
         y: 0,
         opacity: 1,
-        duration: 1,
-        stagger: 0.15,
+        duration: 0.8,
+        stagger: 0.04,
         ease: "power2.out",
       });
-
-      // その後、本文の各行をアニメーション（左斜め下から）
       liveTextTl.to(contentLines, {
-        x: 0,
         y: 0,
         opacity: 1,
         duration: 1,
@@ -107,7 +100,7 @@ const IntroductionLive = () => {
         ease: "power2.out",
       }, "-=0.6");
 
-      // メインのスクラブアニメーション (文字透明化と背景黒化)
+      // --- メインのスクラブアニメーション ---
       const scrubTl = gsap.timeline({
         scrollTrigger: {
           trigger: wrapper,
@@ -116,25 +109,23 @@ const IntroductionLive = () => {
           scrub: 1,
         },
       });
-      
-      // 文字の透明化（徐々に）
-      scrubTl.to([titleLines, contentLines], { 
+
+      scrubTl.to([title, content], {
         opacity: 0,
         duration: 0.6,
         ease: "power2.inOut"
       }, 0);
-      
-      // 背景オーバーレイの透明から黒への変化
-      scrubTl.to(backgroundOverlay, { 
+
+      // 新しい背景画像（reiwa7 + オーバーレイ）をフェードインさせる
+      scrubTl.to(venueBackground, {
         opacity: 1,
         duration: 0.8,
-        ease: "power2.inOut" 
+        ease: "power2.inOut"
       }, 0.2);
 
-      // IntroductionVenueの要素を同じ位置でフェードイン
-      scrubTl.to(venueContent, { 
-        autoAlpha: 1, 
-        duration: 0.3 
+      scrubTl.to(venueContent, {
+        autoAlpha: 1,
+        duration: 0.3
       }, 0.5);
 
       scrubTl.to([yoko, hama], {
@@ -151,17 +142,27 @@ const IntroductionLive = () => {
         ease: "power2.out",
       }, 0.8);
 
-      // pinのためのScrollTrigger（onLeaveは削除し、scrub内でアニメーション完了）
+      // --- 揺れるモーションを追加 ---
+      scrubTl.to([yoko, hama, karena, yokohama], {
+        rotation: 1,
+        yoyo: true,
+        repeat: 5,
+        duration: 0.1,
+        ease: "power1.inOut",
+      }, "=0.0"); // 前のアニメーションの終了と同時に開始
+
+      // pinのためのScrollTrigger
       ScrollTrigger.create({
         trigger: wrapper,
         start: "top top",
         end: "bottom bottom-=1",
         pin: container,
         onEnterBack: () => {
-          // IntroductionVenueの要素をすべて初期状態に戻す
           gsap.set(venueContent, { autoAlpha: 0 });
           gsap.set([yoko, hama], { y: -100, opacity: 0 });
           gsap.set([karena, yokohama], { x: -200, opacity: 0 });
+          // 背景画像も透明に戻す
+          gsap.set(venueBackground, { opacity: 0 });
         },
       });
 
@@ -175,7 +176,7 @@ const IntroductionLive = () => {
   return (
     <div ref={wrapperRef} className="w-full h-[350vh] relative">
       <div ref={containerRef} className="w-full h-screen relative overflow-hidden">
-        
+
         {/* IntroductionLiveのコンテンツ */}
         <div className="relative w-full h-full text-white" style={{ zIndex: 2 }}>
           {/* BG */}
@@ -199,17 +200,22 @@ const IntroductionLive = () => {
             aria-hidden
           />
 
-          {/* 背景を徐々に黒にするためのオーバーレイ */}
-          <div 
-            ref={backgroundOverlayRef}
-            className="absolute inset-0 bg-black"
-            style={{ zIndex: 1 }}
+          {/* reiwa7を背景とし、その上に黒いオーバーレイを重ねるdiv */}
+          <div
+            ref={venueBackgroundRef}
+            className="absolute inset-0 bg-cover bg-center"
+            style={{
+              backgroundImage: `url(${reiwa7})`,
+              zIndex: 1
+            }}
             aria-hidden
-          />
+          >
+            {/* 黒いオーバーレイ用のdivを追加 */}
+            <div className="absolute inset-0 bg-black/55" aria-hidden />
+          </div>
 
           {/* コンテンツ */}
           <div className="relative z-10 w-full h-full px-6 lg:px-10 lg:pr-16 py-4 md:py-16 lg:py-24 flex items-center md:items-center md:justify-end">
-            {/* PC: 横並び [本文][タイトル]、SP: 左寄せで縦並び（タイトルが上）、中央配置 */}
             <div className="flex md:flex-row flex-col items-start md:justify-end gap-4 md:gap-6 lg:gap-10 text-left w-full md:w-[50vw] mr-10">
 
               {/* 本文（左隣） */}
@@ -232,7 +238,7 @@ const IntroductionLive = () => {
                 </div>
               </div>
 
-              {/* タイトル（最右）— 各列を独立させて上端揃え */}
+              {/* タイトル（最右）*/}
               <div className="order-1 md:order-2 flex-shrink-0 self-start mt-8 md:mt-0">
                 <div ref={titleRef} className="flex flex-col md:flex-row-reverse items-start md:gap-3 lg:gap-4">
                   {INTRODUCTION_LIVE_TITLE_LINES.map((line, i) => (
@@ -248,7 +254,7 @@ const IntroductionLive = () => {
                       "
                       style={{ fontFamily: '"dnp-shuei-shogomincho-std", serif', fontWeight: 900 }}
                     >
-                      {line}
+                      {/* JSで分割するため空にしておく */}
                     </h1>
                   ))}
                 </div>
@@ -258,7 +264,7 @@ const IntroductionLive = () => {
         </div>
 
         {/* IntroductionVenueのコンテンツ (重ねて配置) */}
-        <div ref={venueContentRef} className="absolute inset-0 w-full h-full flex items-center justify-center text-white pointer-events-none bg-black" style={{ zIndex: 3 }}>
+        <div ref={venueContentRef} className="absolute inset-0 w-full h-full flex items-center justify-center text-white pointer-events-none" style={{ zIndex: 3 }}>
           <div className="relative z-10 text-center max-w-[70vw] pointer-events-auto">
             <h1 className="font-extrabold leading-[1.1] tracking-wide">
               <p ref={yokoRef} className="block text-red-800 text-[clamp(48px,10vw,110px)] opacity-70 relative top-3 md:top-8 z-10 scale-x-130 origin-center" style={{ fontFamily: '"dnp-shuei-shogomincho-std", serif' }}>
