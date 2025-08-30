@@ -50,7 +50,7 @@ useLayoutEffect(() => {
 
       gsap.set([introChars, iwaromaChars], { y: -50, opacity: 0 });
       gsap.set(rePrefix, { x: -100, opacity: 0 });
-      gsap.set(content, { y: 50, opacity: 0 });
+      gsap.set(content, { x: -100, opacity: 0 });
 
 
       // --- アニメーションのタイムラインを作成 ---
@@ -90,7 +90,7 @@ useLayoutEffect(() => {
 
       // 4. 残りの文章は塊で上からイン
       tl.to(content, {
-        y: 0,
+        x: 0,
         opacity: 1,
         duration: 1.2,
         ease: "power2.out",
