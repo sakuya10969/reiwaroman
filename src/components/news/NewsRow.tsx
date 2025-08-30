@@ -10,6 +10,8 @@ const NewsRow = ({ item }: { item: NewsItem }) => {
   return (
     <Wrapper
       href={item.href}
+      target={item.href ? "_blank" : undefined}
+      rel={item.href ? "noopener noreferrer" : undefined}
       className={`group relative grid w-full items-center grid-cols-[auto_1fr_auto] gap-x-2 sm:gap-x-4 md:gap-x-8 rounded-lg px-2 sm:px-4 md:px-4 py-3 sm:py-3 md:py-3 transition-colors hover:bg-white/5 ${item.href ? 'cursor-pointer' : ''}`}
     >
       {/* 日付 */}
