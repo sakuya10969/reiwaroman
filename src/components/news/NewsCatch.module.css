@@ -1,0 +1,22 @@
+/* NewsCatch.module.css */
+
+/* 無限スクロールアニメーションの定義 */
+@keyframes scrollLeft {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%); /* テキスト1つ分を左に動かす */
+  }
+}
+
+/* アニメーションを適用するクラス */
+.marqueeContent {
+  /* アニメーションの適用 */
+  animation: scrollLeft 5s linear infinite;
+
+  /* レイアウトのためのスタイル */
+  display: flex;
+  flex-wrap: nowrap;
+  width: max-content;
+}

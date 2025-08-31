@@ -21,10 +21,15 @@ const Caution = ({
 
     if (!container || !badge || !list) return;
 
+    // ★★★ 変更点①：リストの各行（li）を取得 ★★★
+    const listItems = list.querySelectorAll('li');
+
     const ctx = gsap.context(() => {
-      // 【変更点①】バッジ全体とリスト全体を初期状態で上方に移動し、透明にする
-      gsap.set([badge, list], {
-        y: -50, // 上から表示させるため、yの初期値をマイナスに設定
+      // 初期状態のセットアップ
+      gsap.set(badge, { y: -50, opacity: 0 });
+      // ★★★ 変更点②：リスト全体ではなく、各行を非表示に ★★★
+      gsap.set(listItems, {
+        y: -50,
         opacity: 0,
       });
 
@@ -38,33 +43,34 @@ const Caution = ({
         },
       });
 
-      // 【変更点②】バッジ全体を塊としてアニメーション
+      // バッジ全体を塊としてアニメーション
       tl.to(badge, {
         y: 0,
         opacity: 1,
-        duration: 0.8, // durationを調整
+        duration: 0.8,
         ease: "power2.out",
       });
 
-      // 【変更点③】次に、リスト全体を塊としてアニメーション
-      tl.to(list, {
+      // ★★★ 変更点③：リストの各行を順番にアニメーション ★★★
+      tl.to(listItems, {
         y: 0,
         opacity: 1,
-        duration: 1, // durationを調整
+        duration: 0.8, // 各行のアニメーション時間
         ease: "power2.out",
-      }, "-=0.5"); // バッジのアニメーションが少し終わる前に開始
+        stagger: 0.15, // 0.15秒ずつずらして開始
+      }, "-=0.5");
 
     }, container);
 
     return () => ctx.revert();
-  }, []); // 依存配列は空のままでOK
+  }, []);
 
   return (
     // JSX部分は変更なし
-    <div ref={containerRef} className="relative w-full isolate lg:min-h-screen">
+    <div ref={containerRef} id="caution" className="relative w-full isolate lg:min-h-screen">
       {/* 背景 */}
       <div
-        className="absolute inset-0 bg-black -z-20"
+        className="absolute inset-0 bg-black -z-20 bg-cover bg-center"
         aria-hidden="true"
         style = {{ backgroundImage:`url(${reiwa12})`}}
       />
@@ -87,7 +93,7 @@ const Caution = ({
           </div>
         </div>
         {/* 注意事項リスト */}
-        <ul ref={listRef} className="mt-4 text-xs md:text-sm leading-relaxed scale-y-100 text-white wm-[70%]">
+        <ul ref={listRef} className="mt-4 text-xs md:text-sm leading-relaxed scale-y-100 text-white w-[70vw] max-w-2xl">
           {CAUTION_CONTENTS.map((line, i) => (
             <li key={i} className="relative pl-5 mb-1" style={{ fontFamily: '"momochidori", serif' ,fontWeight: 500}}>
               <span className="absolute left-0">※</span>

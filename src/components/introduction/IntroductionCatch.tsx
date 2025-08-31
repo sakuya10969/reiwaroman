@@ -37,11 +37,14 @@ const IntroductionCatch = ({}: IntroductionCatchProps) => {
     const ctx = gsap.context(() => {
       // --- 初期状態のセットアップ ---
       const iwaromaChars = iwaroma.querySelectorAll('span');
+      // ★★★ 変更点①: 説明文の各行（pタグ）を取得 ★★★
+      const contentLines = content.querySelectorAll('p');
 
       gsap.set(subtitle, { y: -50, opacity: 0 });
       gsap.set(iwaromaChars, { y: -50, opacity: 0 });
       gsap.set(rePrefix, { x: -100, opacity: 0 });
-      gsap.set(content, { x: -50, opacity: 0 });
+      // ★★★ 変更点②: 各行を非表示に ★★★
+      gsap.set(contentLines, { x: -50, opacity: 0 });
 
 
       // --- アニメーションのタイムラインを作成 ---
@@ -78,12 +81,13 @@ const IntroductionCatch = ({}: IntroductionCatchProps) => {
         ease: "expo.out",
       }, "-=0.5");
 
-      // 4. 残りの文章は塊で上からイン
-      tl.to(content, {
+      // ★★★ 変更点③: 残りの文章を一行ずつアニメーション ★★★
+      tl.to(contentLines, {
         x: 0,
         opacity: 1,
-        duration: 1.2,
+        duration: 0.8, // 各行のアニメーション時間
         ease: "power2.out",
+        stagger: 0.15, // 0.15秒ずつずらして開始
       }, "+=0.2");
 
     }, container);
@@ -92,7 +96,7 @@ const IntroductionCatch = ({}: IntroductionCatchProps) => {
   }, []);
 
   return (
-    <div ref={containerRef} className="relative w-full h-[60vh] md:h-screen landscape:h-screen flex items-center justify-center text-white overflow-hidden bg-black">
+    <div ref={containerRef} id="introduction-catch" className="relative w-full h-[60vh] md:h-screen landscape:h-screen flex items-center justify-center text-white overflow-hidden bg-black">
       {/* 背景画像 */}
       <img
         src={Catch_1}

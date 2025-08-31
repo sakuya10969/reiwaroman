@@ -1,14 +1,16 @@
 import { useLayoutEffect, useRef } from "react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { ScrollToPlugin } from "gsap/ScrollToPlugin";
 
+// (import部分は変更なし)
 import reiwa6_blackwhite from "@/assets/IntroductionVenue_NewsCatch.jpg";
 import NewsRow from "@/components/news/NewsRow";
 import { NEWS } from "@/constants";
 import type { NewsCatchProps, NewsListProps } from "@/types";
+// ★★★ ステップ2-1：CSSモジュールをインポート ★★★
+import styles from "./NewsCatch.module.css";
 
-gsap.registerPlugin(ScrollTrigger, ScrollToPlugin);
+gsap.registerPlugin(ScrollTrigger);
 
 type CombinedNewsProps = NewsCatchProps & NewsListProps;
 
@@ -40,7 +42,6 @@ const NewsCatch = ({
     const listContent = listContentRef.current!;
     const listHeading = listHeadingRef.current!;
     const listItems = listItemsRef.current!;
-    const marquee = marqueeRef.current!;
 
     const computeCoverScale = () => {
       const vw = window.innerWidth;
@@ -52,13 +53,7 @@ const NewsCatch = ({
     };
 
     const ctx = gsap.context(() => {
-      // ★★★ 対処法1：アニメーション要素にwill-changeを設定 ★★★
-      gsap.set([circle, catchContent, badge, title.children, listContent, listHeading, listItems.children], {
-        willChange: "transform, opacity"
-      });
-
-      // --- 初期状態のセットアップ ---
-      gsap.set(circle, { transformOrigin: "50% 50%", force3D: true });
+      gsap.set(circle, { transformOrigin: "50% 50%", willChange: "transform", force3D: true });
       gsap.set(badge, { y: -50, opacity: 0 });
       gsap.set(title.children, { y: -50, opacity: 0 });
       gsap.set(listContent, { autoAlpha: 0 });
@@ -76,26 +71,16 @@ const NewsCatch = ({
       textTl.to(title.children, { y: 0, opacity: 1, stagger: 0.2, ease: "power2.out", duration: 0.8 }, "-=0.6");
 
       const playHoldAnimation = () => {
-        const holdTl = gsap.timeline();
+        document.body.style.overflow = 'hidden';
+        const holdTl = gsap.timeline({
+          onComplete: () => {
+            document.body.style.overflow = '';
+          }
+        });
         holdTl
           .to(listContent, { autoAlpha: 1, duration: 0.5 })
           .to(listHeading, { y: 0, opacity: 1, ease: "power2.out", duration: 0.8 })
           .to(listItems.children, { y: 0, opacity: 1, stagger: 0.1, ease: "power2.out", duration: 1 }, "-=0.4");
-
-        const isMobile = window.matchMedia("(max-width: 767px)").matches;
-        if (isMobile) {
-          gsap.killTweensOf(marquee);
-          const firstText = marquee.children[0] as HTMLElement;
-          if (!firstText) return;
-          const distanceToMove = firstText.offsetWidth;
-          gsap.set(marquee, { x: 0 });
-          gsap.to(marquee, {
-            x: -distanceToMove,
-            duration: 5,
-            repeat: -1,
-            ease: "none",
-          });
-        }
       };
 
       const scrubTl = gsap.timeline({
@@ -114,32 +99,11 @@ const NewsCatch = ({
         start: "top top",
         end: "bottom bottom-=1",
         pin: container,
-        onLeave: (self) => {
-          document.body.style.overflow = 'hidden';
-          gsap.to(window, {
-            scrollTo: { y: self.end, autoKill: false },
-            duration: 0.01,
-            ease: "power1.inOut",
-          });
-
-          playHoldAnimation();
-
-          gsap.delayedCall(3, () => {
-            gsap.to(window, {
-              duration: 1.5,
-              ease: "power2.inOut",
-              scrollTo: { y: "#caution", offsetY: 0 },
-              onComplete: () => {
-                document.body.style.overflow = '';
-              }
-            });
-          });
-        },
+        onLeave: () => playHoldAnimation(),
         onEnterBack: () => {
           gsap.set(listContent, { autoAlpha: 0 });
           gsap.set(listHeading, { y: -50, opacity: 0 });
           gsap.set(listItems.children, { y: -50, opacity: 0 });
-          gsap.killTweensOf(marquee);
         },
       });
 
@@ -188,8 +152,10 @@ const NewsCatch = ({
               ))}
             </div>
           </div>
-          <div className="absolute bottom-2 left-0 w-full overflow-hidden">
-            <p ref={marqueeRef} className="text-xs text-white flex flex-nowrap w-max sm:hidden">
+
+          <div className="absolute bottom-2 left-0 w-full overflow-hidden sm:hidden">
+            {/* ★★★ ステップ2-2：クラス名を修正 ★★★ */}
+            <p ref={marqueeRef} className={`${styles.marqueeContent} text-xs text-white`}>
               <span className="inline-block mr-12">
                 NEW NEWS WILL BE UPDATED AS IT BECOMES AVAILABLE.
               </span>
