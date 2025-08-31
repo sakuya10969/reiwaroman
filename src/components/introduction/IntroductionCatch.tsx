@@ -41,7 +41,7 @@ const IntroductionCatch = ({}: IntroductionCatchProps) => {
       gsap.set(subtitle, { y: -50, opacity: 0 });
       gsap.set(iwaromaChars, { y: -50, opacity: 0 });
       gsap.set(rePrefix, { x: -100, opacity: 0 });
-      gsap.set(content, { y: -50, opacity: 0 }); // 説明文の初期位置をY軸（上）に設定
+      gsap.set(content, { x: -50, opacity: 0 });
 
 
       // --- アニメーションのタイムラインを作成 ---
@@ -80,7 +80,7 @@ const IntroductionCatch = ({}: IntroductionCatchProps) => {
 
       // 4. 残りの文章は塊で上からイン
       tl.to(content, {
-        y: 0, // ★ x: 0 を y: 0 に修正
+        x: 0,
         opacity: 1,
         duration: 1.2,
         ease: "power2.out",

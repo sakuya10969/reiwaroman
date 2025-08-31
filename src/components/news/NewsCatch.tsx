@@ -1,16 +1,15 @@
 import { useLayoutEffect, useRef } from "react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { ScrollToPlugin } from "gsap/ScrollToPlugin";
 
-// 必要なコンポーネントや定数をインポート
 import reiwa6_blackwhite from "@/assets/IntroductionVenue_NewsCatch.jpg";
 import NewsRow from "@/components/news/NewsRow";
 import { NEWS } from "@/constants";
 import type { NewsCatchProps, NewsListProps } from "@/types";
 
-gsap.registerPlugin(ScrollTrigger);
+gsap.registerPlugin(ScrollTrigger, ScrollToPlugin);
 
-// 2つのPropsを合成
 type CombinedNewsProps = NewsCatchProps & NewsListProps;
 
 const NewsCatch = ({
@@ -20,7 +19,6 @@ const NewsCatch = ({
   bgColorClass = "bg-red-900",
   pyClass = "py-16 md:py-24",
 }: CombinedNewsProps) => {
-  // --- Refs ---
   const wrapperRef = useRef<HTMLDivElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
   const circleRef = useRef<HTMLDivElement>(null);
@@ -30,6 +28,7 @@ const NewsCatch = ({
   const listContentRef = useRef<HTMLDivElement>(null);
   const listHeadingRef = useRef<HTMLHeadingElement>(null);
   const listItemsRef = useRef<HTMLDivElement>(null);
+  const marqueeRef = useRef<HTMLParagraphElement>(null);
 
   useLayoutEffect(() => {
     const wrapper = wrapperRef.current!;
@@ -41,8 +40,7 @@ const NewsCatch = ({
     const listContent = listContentRef.current!;
     const listHeading = listHeadingRef.current!;
     const listItems = listItemsRef.current!;
-
-    // --- テキスト分割処理をすべて削除 ---
+    const marquee = marqueeRef.current!;
 
     const computeCoverScale = () => {
       const vw = window.innerWidth;
@@ -54,19 +52,19 @@ const NewsCatch = ({
     };
 
     const ctx = gsap.context(() => {
+      // ★★★ 対処法1：アニメーション要素にwill-changeを設定 ★★★
+      gsap.set([circle, catchContent, badge, title.children, listContent, listHeading, listItems.children], {
+        willChange: "transform, opacity"
+      });
+
       // --- 初期状態のセットアップ ---
-      gsap.set(circle, { transformOrigin: "50% 50%", willChange: "transform", force3D: true });
-      // NewsCatchの要素を上からスライドインするように変更
+      gsap.set(circle, { transformOrigin: "50% 50%", force3D: true });
       gsap.set(badge, { y: -50, opacity: 0 });
       gsap.set(title.children, { y: -50, opacity: 0 });
-
       gsap.set(listContent, { autoAlpha: 0 });
       gsap.set(listHeading, { y: -50, opacity: 0 });
       gsap.set(listItems.children, { y: -50, opacity: 0 });
 
-      // --- タイムラインの作成 ---
-
-      // 最初にNewsCatchの文字が表示されるアニメーション
       const textTl = gsap.timeline({
         scrollTrigger: {
           trigger: container,
@@ -74,26 +72,32 @@ const NewsCatch = ({
           toggleActions: "play none none reverse",
         },
       });
-      // badgeとtitleを塊として上からスライドインさせるように変更
       textTl.to(badge, { y: 0, opacity: 1, ease: "power2.out", duration: 0.8 });
       textTl.to(title.children, { y: 0, opacity: 1, stagger: 0.2, ease: "power2.out", duration: 0.8 }, "-=0.6");
 
-      // NewsListのアニメーションを再生する関数
       const playHoldAnimation = () => {
-        document.body.style.overflow = 'hidden';
-        const holdTl = gsap.timeline({
-          onComplete: () => {
-            document.body.style.overflow = '';
-            window.scrollTo(window.scrollX, window.scrollY + 1);
-          }
-        });
+        const holdTl = gsap.timeline();
         holdTl
           .to(listContent, { autoAlpha: 1, duration: 0.5 })
           .to(listHeading, { y: 0, opacity: 1, ease: "power2.out", duration: 0.8 })
           .to(listItems.children, { y: 0, opacity: 1, stagger: 0.1, ease: "power2.out", duration: 1 }, "-=0.4");
+
+        const isMobile = window.matchMedia("(max-width: 767px)").matches;
+        if (isMobile) {
+          gsap.killTweensOf(marquee);
+          const firstText = marquee.children[0] as HTMLElement;
+          if (!firstText) return;
+          const distanceToMove = firstText.offsetWidth;
+          gsap.set(marquee, { x: 0 });
+          gsap.to(marquee, {
+            x: -distanceToMove,
+            duration: 5,
+            repeat: -1,
+            ease: "none",
+          });
+        }
       };
 
-      // メインのスクラブアニメーション
       const scrubTl = gsap.timeline({
         scrollTrigger: {
           trigger: wrapper,
@@ -105,17 +109,37 @@ const NewsCatch = ({
       scrubTl.to(circle, { scale: computeCoverScale, ease: "none" })
              .to(catchContent, { autoAlpha: 0, ease: "none" }, "<");
 
-      // pinと待機アニメーションの起動
       ScrollTrigger.create({
         trigger: wrapper,
         start: "top top",
         end: "bottom bottom-=1",
         pin: container,
-        onLeave: () => playHoldAnimation(),
+        onLeave: (self) => {
+          document.body.style.overflow = 'hidden';
+          gsap.to(window, {
+            scrollTo: { y: self.end, autoKill: false },
+            duration: 0.01,
+            ease: "power1.inOut",
+          });
+
+          playHoldAnimation();
+
+          gsap.delayedCall(3, () => {
+            gsap.to(window, {
+              duration: 1.5,
+              ease: "power2.inOut",
+              scrollTo: { y: "#caution", offsetY: 0 },
+              onComplete: () => {
+                document.body.style.overflow = '';
+              }
+            });
+          });
+        },
         onEnterBack: () => {
           gsap.set(listContent, { autoAlpha: 0 });
           gsap.set(listHeading, { y: -50, opacity: 0 });
           gsap.set(listItems.children, { y: -50, opacity: 0 });
+          gsap.killTweensOf(marquee);
         },
       });
 
@@ -130,14 +154,11 @@ const NewsCatch = ({
   return (
     <div ref={wrapperRef} className="w-full h-[330vh] relative">
       <div ref={containerRef} className="w-full h-screen relative overflow-hidden">
-        {/* NewsCatchの背景と円 */}
         <div className="absolute inset-0 w-full h-full">
           <div className="absolute inset-0 bg-black bg-center bg-cover -z-10" style={{ backgroundImage: `url(${backgroundImageUrl})`, filter: "grayscale(100%)" }} />
           <div className="absolute inset-0 bg-black/70 -z-10" />
           <div ref={circleRef} className="absolute top-1/2 left-1/2 w-70 h-70 md:w-80 md:h-80 lg:w-96 lg:h-96 -translate-x-1/2 -translate-y-1/2 rounded-full bg-red-900 origin-center" style={{ zIndex: 1 }} />
         </div>
-
-        {/* NewsCatchの文字コンテンツ */}
         <div ref={catchContentRef} className="absolute inset-0 w-full h-full flex items-center justify-center" style={{ zIndex: 2 }}>
           <div className="w-70 h-70 md:w-80 md:h-80 lg:w-96 lg:h-96 flex flex-col items-center justify-between text-center px-6 py-16">
             <div ref={badgeRef} className="text-sm md:text-lg lg:text-xl text-white/90 flex-shrink-0 relative -top-2">
@@ -154,10 +175,8 @@ const NewsCatch = ({
             </div>
           </div>
         </div>
-
-        {/* NewsListのコンテンツ (重ねて配置) */}
         <div ref={listContentRef} className={`absolute inset-0 w-full h-full flex items-center justify-center text-white pointer-events-none ${bgColorClass}`} style={{ zIndex: 3 }}>
-          <div className={`mx-auto max-w-[80vw] px-4 pointer-events-auto ${pyClass}`}>
+          <div className={`relative mx-auto max-w-[80vw] w-full h-full flex flex-col justify-center px-4 pointer-events-auto ${pyClass}`}>
             <div className="w-full text-center">
               <h1 ref={listHeadingRef} className="text-sm md:text-base font-bold inline-block relative scale-x-150 origin-center after:content-[''] after:absolute after:left-0 after:right-0 after:-bottom-0 after:h-[1.5px] after:bg-current" style={{ fontFamily: "Prompt, sans-serif" }}>
                 NEWS
@@ -168,6 +187,16 @@ const NewsCatch = ({
                 <NewsRow key={`${item.title}-${i}`} item={item}/>
               ))}
             </div>
+          </div>
+          <div className="absolute bottom-2 left-0 w-full overflow-hidden">
+            <p ref={marqueeRef} className="text-xs text-white flex flex-nowrap w-max sm:hidden">
+              <span className="inline-block mr-12">
+                NEW NEWS WILL BE UPDATED AS IT BECOMES AVAILABLE.
+              </span>
+              <span className="inline-block mr-12">
+                NEW NEWS WILL BE UPDATED AS IT BECOMES AVAILABLE.
+              </span>
+            </p>
           </div>
         </div>
       </div>

@@ -1,19 +1,19 @@
 import { useLayoutEffect, useRef } from "react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { ScrollToPlugin } from "gsap/ScrollToPlugin";
 
 import reiwa6 from "@/assets/IntroductionLive.jpg";
 import reiwa7 from "@/assets/IntroductionVenue_NewsCatch.jpg";
 import { INTRODUCTION_LIVE_CONTENTS, INTRODUCTION_LIVE_TITLE_LINES } from "@/constants";
 
-gsap.registerPlugin(ScrollTrigger);
+gsap.registerPlugin(ScrollTrigger, ScrollToPlugin);
 
 const IntroductionLive = () => {
   const wrapperRef = useRef<HTMLDivElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
   const contentRef = useRef<HTMLDivElement>(null);
   const titleRef = useRef<HTMLDivElement>(null);
-  // backgroundOverlayRefは新しい背景画像用のRefになります
   const venueBackgroundRef = useRef<HTMLDivElement>(null);
 
   // IntroductionVenue関連のrefs
@@ -28,7 +28,6 @@ const IntroductionLive = () => {
     const container = containerRef.current!;
     const content = contentRef.current!;
     const title = titleRef.current!;
-    // Refの名前も変更
     const venueBackground = venueBackgroundRef.current!;
     const venueContent = venueContentRef.current!;
     const yoko = yokoRef.current!;
@@ -37,7 +36,6 @@ const IntroductionLive = () => {
     const hama = hamaRef.current!;
 
     // --- テキスト分割処理 ---
-    // タイトルの各行を文字単位でspanに分割
     if (title) {
       Array.from(title.children).forEach((lineElement, index) => {
         const text = INTRODUCTION_LIVE_TITLE_LINES[index];
@@ -50,7 +48,6 @@ const IntroductionLive = () => {
         });
       });
     }
-    // YOKOHAMAの各文字をspan要素に分割
     if (yokohama) {
       const text = "YOKOHAMA";
       yokohama.innerHTML = "";
@@ -65,16 +62,14 @@ const IntroductionLive = () => {
     const ctx = gsap.context(() => {
       // --- 初期状態のセットアップ ---
       const contentLines = content.querySelectorAll('p');
-      gsap.set(contentLines, { y: -50, opacity: 0 });
+      gsap.set(contentLines, { y: -100, opacity: 0 });
 
       const titleChars = title.querySelectorAll('span');
-      gsap.set(titleChars, { y: -50, opacity: 0 });
+      gsap.set(titleChars, { y: -100, opacity: 0 });
 
-      // 新しい背景画像を初期状態で透明にする (オーバーレイは含まない)
       gsap.set(venueBackground, { opacity: 0 });
-
-      gsap.set([yoko, hama], { y: -100, opacity: 0 });
-      gsap.set([karena, yokohama], { x: -200, opacity: 0 });
+      gsap.set([yoko, hama], { y: -300, opacity: 0, rotation: 0 });
+      gsap.set([karena, yokohama], { x: -300, opacity: 0, rotation: 0 });
       gsap.set(venueContent, { autoAlpha: 0 });
 
       // --- IntroductionLiveのアニメーション ---
@@ -90,8 +85,7 @@ const IntroductionLive = () => {
         opacity: 1,
         duration: 0.8,
         stagger: 0.04,
-        ease: "power2.out",
-      });
+        ease: "power2.out"}, "+=0.5");
       liveTextTl.to(contentLines, {
         y: 0,
         opacity: 1,
@@ -116,7 +110,6 @@ const IntroductionLive = () => {
         ease: "power2.inOut"
       }, 0);
 
-      // 新しい背景画像（reiwa7 + オーバーレイ）をフェードインさせる
       scrubTl.to(venueBackground, {
         opacity: 1,
         duration: 0.8,
@@ -128,80 +121,36 @@ const IntroductionLive = () => {
         duration: 0.3
       }, 0.5);
 
-      // Venue要素のアニメーション（スクロール速度に依存しない）
+      // --- Venue要素のアニメーションを onLeave で発火させる ---
       const playVenueAnimation = () => {
-        // スクロールを即座に停止
         document.body.style.overflow = 'hidden';
-
-        // 画面を強制的に中央に配置してからアニメーション開始
-        const currentScrollY = window.scrollY;
-        const wrapperRect = wrapper.getBoundingClientRect();
-        const wrapperTop = currentScrollY + wrapperRect.top;
-        const targetScrollY = wrapperTop + (wrapper.offsetHeight / 2) - (window.innerHeight / 2);
-
-        // スムーズに中央に移動してからアニメーション実行
-        gsap.to(window, {
-          scrollTo: { y: targetScrollY },
-          duration: 0.3,
-          ease: "power2.inOut",
+        const venueTl = gsap.timeline({
           onComplete: () => {
-            const venueTl = gsap.timeline({
-              onComplete: () => {
-                document.body.style.overflow = '';
-                // アニメーション完了後に少し下にスクロールして次のセクションを促す
-                window.scrollTo(window.scrollX, window.scrollY + 1);
-              }
-            });
-
-            // 横と浜を上から猛烈なスピードで入り、揺らす
-            venueTl.to([yoko, hama], {
-              y: 0,
-              opacity: 1,
-              duration: 0.6,
-              stagger: 0.1,
-              ease: "power4.out",
-            })
-            .to([yoko, hama], {
-              rotation: "+=3",
-              duration: 0.1,
-              ease: "power2.inOut"
-            })
-            .to([yoko, hama], {
-              rotation: "-=6",
-              duration: 0.2,
-              ease: "power2.inOut"
-            })
-            .to([yoko, hama], {
-              rotation: "+=3",
-              duration: 0.1,
-              ease: "power2.inOut"
-            });
-
-            // K ARENAとYOKOHAMAを左から猛烈なスピードで入り、揺らす
-            venueTl.to([karena, yokohama], {
-              x: 0,
-              opacity: 1,
-              duration: 0.6,
-              stagger: 0.1,
-              ease: "power4.out",
-            }, "-=0.4")
-            .to([karena, yokohama], {
-              rotation: "+=2",
-              duration: 0.1,
-              ease: "power2.inOut"
-            })
-            .to([karena, yokohama], {
-              rotation: "-=4",
-              duration: 0.2,
-              ease: "power2.inOut"
-            })
-            .to([karena, yokohama], {
-              rotation: "+=2",
-              duration: 0.1,
-              ease: "power2.inOut"
-            });
+            document.body.style.overflow = '';
           }
         });
+
+        venueTl.to([yoko, hama], {
+          y: 0,
+          opacity: 1,
+          duration: 0.6,
+          stagger: 0.1,
+          ease: "power4.out",
+        })
+        .to([yoko, hama], { rotation: "+=3", duration: 0.1, ease: "power2.inOut" })
+        .to([yoko, hama], { rotation: "-=6", duration: 0.2, ease: "power2.inOut" })
+        .to([yoko, hama], { rotation: "+=3", duration: 0.1, ease: "power2.inOut" });
+
+        venueTl.to([karena, yokohama], {
+          x: 0,
+          opacity: 1,
+          duration: 0.6,
+          stagger: 0.1,
+          ease: "power4.out",
+        }, "-=0.4")
+        .to([karena, yokohama], { rotation: "+=2", duration: 0.1, ease: "power2.inOut" })
+        .to([karena, yokohama], { rotation: "-=4", duration: 0.2, ease: "power2.inOut" })
+        .to([karena, yokohama], { rotation: "+=2", duration: 0.1, ease: "power2.inOut" });
       };
 
       // pinのためのScrollTrigger
@@ -210,11 +159,21 @@ const IntroductionLive = () => {
         start: "top top",
         end: "bottom bottom-=1",
         pin: container,
-        onLeave: () => playVenueAnimation(),
+        onLeave: (self) => { // 'self'を受け取る
+          // ★★★ 慣性によるズレを補正する処理を追加 ★★★
+          gsap.to(window, {
+            scrollTo: { y: self.end, autoKill: false }, // トリガーの終着点に強制的に移動
+            duration: 0.01, // ごく短い時間で滑らかにスナップさせる
+            ease: "power1.inOut",
+          });
+
+          playVenueAnimation();
+        },
         onEnterBack: () => {
           gsap.set(venueContent, { autoAlpha: 0 });
           gsap.set([yoko, hama], { y: -300, opacity: 0, rotation: 0 });
           gsap.set([karena, yokohama], { x: -300, opacity: 0, rotation: 0 });
+          gsap.set(venueBackground, { opacity: 0 });
         },
       });
 
@@ -232,7 +191,6 @@ const IntroductionLive = () => {
 
         {/* IntroductionLiveのコンテンツ */}
         <div className="relative w-full h-full text-white" style={{ zIndex: 2 }}>
-          {/* BG */}
           <div
             className="absolute inset-0 bg-top bg-cover"
             style={{ backgroundImage: `url(${reiwa6})` }}
@@ -253,7 +211,6 @@ const IntroductionLive = () => {
             aria-hidden
           />
 
-          {/* reiwa7を背景とし、その上に黒いオーバーレイを重ねるdiv */}
           <div
             ref={venueBackgroundRef}
             className="absolute inset-0 bg-cover bg-center"
@@ -263,15 +220,12 @@ const IntroductionLive = () => {
             }}
             aria-hidden
           >
-            {/* 黒いオーバーレイ用のdivを追加 */}
             <div className="absolute inset-0 bg-black/55" aria-hidden />
           </div>
 
-          {/* コンテンツ */}
           <div className="relative z-10 w-full h-full px-6 lg:px-10 lg:pr-16 py-4 md:py-16 lg:py-24 flex items-center md:items-center md:justify-end">
             <div className="flex md:flex-row flex-col items-start md:justify-end gap-4 md:gap-6 lg:gap-10 text-left w-full md:w-[50vw] mr-10">
 
-              {/* 本文（左隣） */}
               <div ref={contentRef} className="order-2 md:order-1 flex-shrink-0 self-start mt-3 md:mt-0">
                 <div
                   className="
@@ -291,10 +245,9 @@ const IntroductionLive = () => {
                 </div>
               </div>
 
-              {/* タイトル（最右）*/}
               <div className="order-1 md:order-2 flex-shrink-0 self-start mt-8 md:mt-0">
                 <div ref={titleRef} className="flex flex-col md:flex-row-reverse items-start md:gap-3 lg:gap-4">
-                  {INTRODUCTION_LIVE_TITLE_LINES.map((line, i) => (
+                  {INTRODUCTION_LIVE_TITLE_LINES.map((_line, i) => (
                     <h1
                       key={i}
                       className="
@@ -316,7 +269,6 @@ const IntroductionLive = () => {
           </div>
         </div>
 
-        {/* IntroductionVenueのコンテンツ (重ねて配置) */}
         <div ref={venueContentRef} className="absolute inset-0 w-full h-full flex items-center justify-center text-white pointer-events-none" style={{ zIndex: 3 }}>
           <div className="relative z-10 text-center max-w-[70vw] pointer-events-auto">
             <h1 className="font-extrabold leading-[1.1] tracking-wide">

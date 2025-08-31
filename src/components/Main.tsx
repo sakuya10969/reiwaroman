@@ -7,7 +7,7 @@ import NewsCatch from "@/components/news/NewsCatch";
 // import Cast from "@/components/cast/Cast"
 // import Goods from "@/components/goods/Goods"
 import Caution from "@/components/caution/Caution"
-// import Last from "@/components/last/Last"
+import Last from "@/components/last/Last"
 
 export default function Main() {
   return (
@@ -59,9 +59,9 @@ export default function Main() {
       </section>
 
       {/* Last */}
-      {/* <section id="last" className="scroll-mt-[64px]">
+      <section id="last" className="scroll-mt-[64px]">
         <Last />
-      </section> */}
+      </section>
 
     </main>
 

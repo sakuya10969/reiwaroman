@@ -34,10 +34,6 @@ const Header = ({ nav = NAV, ticketHref = TICKET_URL }: HeaderProps) => {
     [nav, activeId]
   );
 
-  const nav_menu = [
-    ...NAV,
-    { label: "TICKET", href: ticketHref}
-  ];
 
   // アクティブIDのテーマ（存在しなければ undefined）
   const activeTheme = activeId ? SECTION_THEMES[activeId] : undefined;
@@ -146,12 +142,12 @@ const Header = ({ nav = NAV, ticketHref = TICKET_URL }: HeaderProps) => {
 
       {/* モバイルメニュー（右側スライドアウト） */}
       <div
-        className={`md:hidden fixed top-0 right-0 w-full h-screen backdrop-blur-sm border-l border-white/10 transform transition-transform duration-300 ease-in-out z-40 ${
+        className={`flex flex-col items-center justify-center md:hidden fixed top-0 right-0 w-full h-screen backdrop-blur-sm border-l border-white/10 transform transition-transform duration-300 ease-in-out z-40 ${
           isMobileMenuOpen ? "translate-x-0" : "translate-x-full"
         } ${currentTheme === "red" ? "bg-red-900" : "bg-black/50"}`}
       >
-        <nav className="px-6 py-10">
-          {nav_menu.map((item, idx) => {
+       <nav className="flex flex-col items-center">
+          {nav.map((item, idx) => {
             const isThisActive = idx === activeNavIndex;
             const activeColorClass =
               isThisActive ? getActiveLinkClassesByTheme(activeTheme) : null;
@@ -162,7 +158,7 @@ const Header = ({ nav = NAV, ticketHref = TICKET_URL }: HeaderProps) => {
                 href={item.href}
                 onClick={onNavClick}
                 className={[
-                  "block py-2 pl-2 text-base font-bold transition-colors origin-left scale-x-150",
+                  "block py-2 text-base font-bold transition-colors scale-x-150",
                   activeColorClass || linkInactiveColor,
                 ].join(" ")}
                 style={{ fontFamily: "Prompt, sans-serif" }}
@@ -171,6 +167,20 @@ const Header = ({ nav = NAV, ticketHref = TICKET_URL }: HeaderProps) => {
               </a>
             );
           })}
+          <a
+            href={ticketHref}
+            target="_blank"
+            rel="noopener noreferrer"
+            className={[
+              "inline-flex items-center gap-2 rounded-full pl-6 pr-2 py-1 mt-4 text-sm uppercase font-bold whitespace-nowrap transition-colors focus-visible:outline-none focus-visible:ring-2",
+              ticketButtonClass(currentTheme),
+              ticketFocusRingClass(currentTheme),
+            ].join(" ")}
+            style={{ fontFamily: "Prompt, sans-serif" }}
+          >
+            <span className="inline-block origin-center scale-x-140">TICKET</span>
+            <ChevronRight size={20} />
+          </a>
         </nav>
       </div>
 

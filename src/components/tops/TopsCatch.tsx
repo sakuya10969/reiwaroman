@@ -1,4 +1,4 @@
-import { TOPS_CATCH_TITLE } from "@/constants";
+import { TOPS_CATCH_TITLE,TOPS_CATCH_SUBTITLE } from "@/constants";
 import styles from "./TopsCatch.module.css";
 
 const TopsCatch = () => {
@@ -9,14 +9,15 @@ const TopsCatch = () => {
         <div>
           <h1
             className={`${styles.forceWritingMode}
-                       mx-auto text-3xl font-extrabold leading-[1.1] tracking-tighter
-                       md:text-5xl lg:text-6xl`} // テンプレートリテラルでクラスを結合
+                       mx-auto text-3xl font-extrabold leading-[1.1] tracking-tighter scale-y-125 mb-2 md:mb-5
+                       md:text-5xl lg:text-6xl`}
             style={{
               fontFamily: '"dnp-shuei-shogomincho-std", serif',
             }}
           >
             {TOPS_CATCH_TITLE}
           </h1>
+          <h3 className = "text-sm md:text-xl"style={{ fontFamily: "Prompt, sans-serif" }}>{TOPS_CATCH_SUBTITLE}</h3>
         </div>
       </div>
     </div>
