@@ -10,7 +10,7 @@ const Last = ({
     <div className="relative w-full min-h-screen md:min-h-[180vh] flex items-center">
       {/* 背景 */}
       <picture className="absolute inset-0 -z-10">
-        <source media="(max-width: 400px)" srcSet={last_mobile} />
+        <source media="(max-width: 430px)" srcSet={last_mobile} />
         <img
           src={backgroundImageUrl}
           alt=""

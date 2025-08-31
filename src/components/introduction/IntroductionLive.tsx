@@ -117,19 +117,12 @@ const IntroductionLive = () => {
       }, 0.5);
 
       const playVenueAnimation = () => {
+        // ★★★ 修正点 ★★★
+        // アニメーション完了時に次のセクションへスクロールする処理を削除し、
+        // bodyのoverflowを元に戻す処理のみ残す
         const venueTl = gsap.timeline({
           onComplete: () => {
-            gsap.to(window, {
-              duration: 1.5,
-              ease: "power2.inOut",
-              scrollTo: {
-                y: "#introduction-video",
-                offsetY: 64
-              },
-              onComplete: () => {
-                document.body.style.overflow = '';
-              }
-            });
+            document.body.style.overflow = '';
           }
         });
 
@@ -165,7 +158,7 @@ const IntroductionLive = () => {
           document.body.style.overflow = 'hidden';
           gsap.to(window, {
             scrollTo: { y: self.end, autoKill: false },
-            duration: 0.2,
+            duration: 0.01,
             ease: "power1.inOut",
           });
           playVenueAnimation();
@@ -253,7 +246,6 @@ const IntroductionLive = () => {
         <div ref={venueContentRef} className="absolute inset-0 w-full h-full flex items-center justify-center text-white pointer-events-none" style={{ zIndex: 3 }}>
           <div className="relative z-10 text-center max-w-[70vw] pointer-events-auto">
             <h1 className="font-extrabold leading-[1.1] tracking-wide">
-              {/* ★★★ 修正点 ★★★ */}
               <p ref={yokoRef} className="block text-red-800 text-[clamp(48px,10vw,110px)] opacity-70 relative top-3 md:top-8 z-10 scale-x-110 sm:scale-x-130 origin-center" style={{ fontFamily: '"dnp-shuei-shogomincho-std", serif' }}>
                 横
               </p>
