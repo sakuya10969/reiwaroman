@@ -60,7 +60,7 @@ const Header = ({ nav = NAV, ticketHref = TICKET_URL }: HeaderProps) => {
     <header className="fixed inset-x-0 top-0 z-50 bg-transparent w-screen">
       <div className="relative h-16 flex items-start justify-between">
         {/* 左：ロゴ */}
-        <div className="flex-shrink-0 ml-1">
+        <div className="flex-shrink-0">
           <img
             src={logo}
             alt="REIWAROMAN"
@@ -180,7 +180,7 @@ const Header = ({ nav = NAV, ticketHref = TICKET_URL }: HeaderProps) => {
             target="_blank"
             rel="noopener noreferrer"
             className={[
-              "inline-flex items-center gap-2 rounded-full pl-6 pr-2 py-1 mt-4 text-sm uppercase font-bold whitespace-nowrap transition-colors focus-visible:outline-none focus-visible:ring-2",
+              "inline-flex items-center gap-2 rounded-full pl-7 pr-3 py-2 mt-2 text-base uppercase font-bold whitespace-nowrap transition-colors focus-visible:outline-none focus-visible:ring-2",
               ticketButtonClass(currentTheme),
               ticketFocusRingClass(currentTheme),
             ].join(" ")}
