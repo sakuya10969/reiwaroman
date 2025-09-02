@@ -100,7 +100,6 @@ const Caution = ({ badgeText = "CAUTION" }: CautionProps) => {
             if (b.kind === "link") {
               return (
                 <li key={i} className="relative pl-5 mb-2" style={{ fontFamily: '"momochidori", serif' }}>
-                  <span className="absolute left-0">※</span>
                   <p>
                     {b.label}{"　"}
                     <a
