@@ -62,7 +62,7 @@ export default function Main() {
 
       {/* Stage */}
       <section id="stage" className="scroll-mt-[64px]">
-        <img src={Stage} alt="Stage" className="w-full h-full object-cover bg-red-900" />
+        <img src={Stage} alt="Stage" className="w-full h-auto max-h-screen object-contain bg-red-900" />
       </section>
 
       {/* Caution */}
