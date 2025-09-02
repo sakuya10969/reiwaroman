@@ -217,7 +217,7 @@ const IntroductionLive = () => {
               <div ref={contentRef} className="order-2 md:order-1 flex-shrink-0 self-start -mt-30 md:mt-0">
                 <div
                   className="min-w-[40vw] md:w-[45vw] lg:w-[50vw] text-xs md:text-sm text-white/92 md:[writing-mode:vertical-rl] md:[text-orientation:upright] leading-relaxed lg:leading-10 lg:tracking-wider"
-                  style={{ fontFamily: '"momochidori", serif' }}
+                  style={{ fontFamily: '"momochidori", serif', fontWeight: 500 }}
                 >
                   {INTRODUCTION_LIVE_CONTENTS.map((content, i) => (
                     <p key={i}>
