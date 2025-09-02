@@ -68,14 +68,14 @@ const Ticket = () => {
             <div className="grid grid-cols-12 border-b border-white/40">
               <div
                 className="col-span-5 p-4 text-xs font-medium"
-                style={{ fontFamily: '"momochidori", serif', fontWeight: 500 }}
+                style={{ fontFamily: '"momochidori", serif' }}
               >
                 チケット種類
                 <div className="text-xs text-white/80 mt-1">※全席指定（税込）</div>
               </div>
               <div
                 className="col-span-7 p-4 text-xs font-medium"
-                style={{ fontFamily: '"momochidori", serif', fontWeight: 500 }}
+                style={{ fontFamily: '"momochidori", serif' }}
               >
                 特典
               </div>
@@ -89,7 +89,7 @@ const Ticket = () => {
               >
                 {/* 左セル：券種・価格・注記 */}
                 <div className="col-span-5 p-4 border-r border-white/40">
-                  <div className="space-y-1" style={{ fontFamily: '"momochidori", serif', fontWeight: 500 }}>
+                  <div className="space-y-1" style={{ fontFamily: '"momochidori", serif' }}>
                     <div className="text-xs">
                       {p.name} <span className="ml-2 text-white/90">{p.price}</span>
                     </div>
@@ -105,7 +105,7 @@ const Ticket = () => {
                         <li
                           key={i}
                           className='before:content-["-"] before:mr-2 before:opacity-90 text-xs'
-                          style={{ fontFamily: '"momochidori", serif', fontWeight: 500 }}
+                          style={{ fontFamily: '"momochidori", serif' }}
                         >
                           {perk}
                         </li>
@@ -127,7 +127,7 @@ const Ticket = () => {
               <tr>
                 <th
                   className="w-[36%] border border-white/40 p-5 text-left align-middle"
-                  style={{ fontFamily: '"momochidori", serif', fontWeight: 500 }}
+                  style={{ fontFamily: '"momochidori", serif' }}
                 >
                   <div className="flex flex-col gap-1">
                     <span className="text-sm">チケット種類</span>
@@ -136,7 +136,7 @@ const Ticket = () => {
                 </th>
                 <th
                   className="w-[64%] border border-white/40 p-5 text-left align-middle"
-                  style={{ fontFamily: '"momochidori", serif', fontWeight: 500 }}
+                  style={{ fontFamily: '"momochidori", serif' }}
                 >
                   <span className="text-sm">特典</span>
                 </th>
@@ -146,7 +146,7 @@ const Ticket = () => {
               {TICKET_PLANS.map((p, idx) => (
                 <tr key={idx}>
                   <td className="border border-white/40 p-5 align-top">
-                    <div className="space-y-1" style={{ fontFamily: '"momochidori", serif', fontWeight: 500 }}>
+                    <div className="space-y-1" style={{ fontFamily: '"momochidori", serif' }}>
                       <div className="text-sm">
                         {p.name} <span className="ml-2 text-white/90">{p.price}</span>
                       </div>

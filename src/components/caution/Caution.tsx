@@ -95,7 +95,7 @@ gsap.registerPlugin(ScrollTrigger);
 //         {/* 注意事項リスト */}
 //         <ul ref={listRef} className="mt-4 text-xs md:text-sm leading-relaxed scale-y-100 text-white w-[70vw] max-w-2xl md:max-w-4xl lg:max-w-5xl">
 //           {CAUTION_CONTENTS.map((line, i) => (
-//             <li key={i} className="relative pl-5 mb-1" style={{ fontFamily: '"momochidori", serif' ,fontWeight: 500}}>
+//             <li key={i} className="relative pl-5 mb-1" style={{ fontFamily: '"momochidori", serif' }}>
 //               <span className="absolute left-0">※</span>
 //               {line}
 //             </li>
@@ -231,7 +231,7 @@ const Caution = ({ badgeText = "CAUTION" }: CautionProps) => {
           {blocks.map((b, i) => {
             if (b.kind === "note") {
               return (
-                <li key={i} className="relative pl-5 mb-1" style={{ fontFamily: '"momochidori", serif', fontWeight: 500 }}>
+                <li key={i} className="relative pl-5 mb-1" style={{ fontFamily: '"momochidori", serif' }}>
                   {/* <span className="absolute left-0">※</span> */}
                   <span className="absolute left-0">※</span>
                   {b.text}
@@ -247,7 +247,7 @@ const Caution = ({ badgeText = "CAUTION" }: CautionProps) => {
             }
             if (b.kind === "link") {
               return (
-                <li key={i} className="list-none mb-2" style={{ fontFamily: '"momochidori", serif', fontWeight: 500 }}>
+                <li key={i} className="list-none mb-2" style={{ fontFamily: '"momochidori", serif' }}>
                   <p>
                     ＜{b.label}＞{" "}
                     <a
@@ -274,7 +274,7 @@ const Caution = ({ badgeText = "CAUTION" }: CautionProps) => {
               <li key={i} className="list-none mb-2">
                 <ul className="list-disc pl-5 space-y-1">
                   {b.items.map((t, j) => (
-                    <li key={j} className="marker:text-white/70" style={{ fontFamily: '"momochidori", serif', fontWeight: 500 }}>
+                    <li key={j} className="marker:text-white/70" style={{ fontFamily: '"momochidori", serif' }}>
                       {t}
                     </li>
                   ))}

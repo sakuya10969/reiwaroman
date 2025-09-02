@@ -112,7 +112,7 @@
 //               />
 //               <p
 //                 className="mt-3 text-sm text-white/90"
-//                 style={{ fontFamily: 'momochidori, sans-serif' ,fontWeight: 500 }}
+//                 style={{ fontFamily: 'momochidori, sans-serif' }}
 //               >{castName[index]}</p>
 //             </div>
 //           ))}

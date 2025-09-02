@@ -178,7 +178,6 @@ const Goods = ({
             style={{
               backgroundColor: "#a01e22",
               fontFamily: 'momochidori, sans-serif',
-              fontWeight: 500,
               borderRadius: "30px",
               fontSize: "1.1em",
             }}
