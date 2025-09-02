@@ -1,28 +1,17 @@
-import { useEffect, useLayoutEffect, useRef, useState } from "react";
+import { useLayoutEffect, useRef, useState } from "react";
 
-import type { Slide, TopsVisualProps } from "@/types";
+import type { TopsVisualProps } from "@/types";
 import reiwa2 from "@/assets/top1.jpg";
-// import reiwa2 from "@/assets/top1_IntroductionCatch1.jpg";
-// import reiwa3 from "@/assets/top2.jpg";
 import tops_visual_1 from "@/assets/top1_mobile.jpg";
-// import tops_visual_2 from "@/assets/top2_mobile.jpg";
-
-const slides: Slide[] = [
-  { srcDesktop: reiwa2, srcMobile: tops_visual_1, alt: "Top Visual" },
-  // { srcDesktop: reiwa3, srcMobile: tops_visual_2, alt: "Top Performance" },
-];
 
 const TopsVisual = ({ resetSignal = 0, active = true }: TopsVisualProps) => {
-  const [index, setIndex] = useState<number>(0);
   const [primed, setPrimed] = useState<boolean>(false);
-  const timeoutRef = useRef<number | null>(null);
   const raf1 = useRef<number | null>(null);
   const raf2 = useRef<number | null>(null);
 
   useLayoutEffect(() => {
     if (!active) return;
     setPrimed(false);
-    setIndex(0);
     raf1.current = window.requestAnimationFrame(() => {
       raf2.current = window.requestAnimationFrame(() => setPrimed(true));
     });
@@ -33,18 +22,6 @@ const TopsVisual = ({ resetSignal = 0, active = true }: TopsVisualProps) => {
     };
   }, [resetSignal, active]);
 
-  useEffect(() => {
-    if (!active || !primed) return;
-    timeoutRef.current = window.setTimeout(() => {
-      setIndex(1);
-      timeoutRef.current = null;
-    }, 3000);
-    return () => {
-      if (timeoutRef.current) window.clearTimeout(timeoutRef.current);
-      timeoutRef.current = null;
-    };
-  }, [active, primed]);
-
   return (
     <div
       className={[
@@ -53,26 +30,18 @@ const TopsVisual = ({ resetSignal = 0, active = true }: TopsVisualProps) => {
         "transition-opacity duration-0",
       ].join(" ")}
     >
-      {/* 1) ヘッダーと重ならないための 64px スペーサー（黒帯） */}
-      {/* <div className="w-full h-2 bg-black" aria-hidden /> */}
-
-      {/* 2) 画像ステージ（ここから画像が始まる） */}
+      {/* 画像ステージ */}
       <div className="relative w-full h-full">
-        {/* 背景画像をステージ全面に敷く */}
+        {/* 背景画像 */}
         <div className="absolute inset-0 z-0">
-          {slides.map((s, i) => (
-            <picture key={i} className="absolute inset-0">
-              <source media="(max-width: 440px)" srcSet={s.srcMobile ?? s.srcDesktop} />
-              <img
-                src={s.srcDesktop}
-                alt={s.alt}
-                className={[
-                  "w-full h-full transition-opacity duration-1000 ease-linear object-cover",
-                  i === index ? "opacity-100" : "opacity-0",
-                ].join(" ")}
-              />
-            </picture>
-          ))}
+          <picture className="absolute inset-0">
+            <source media="(max-width: 440px)" srcSet={tops_visual_1} />
+            <img
+              src={reiwa2}
+              alt="Top Visual"
+              className="w-full h-full object-cover"
+            />
+          </picture>
         </div>
       </div>
     </div>

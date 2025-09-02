@@ -13,7 +13,7 @@ interface Slot {
 
 const SLOTS: Slot[] = [
   { key: "catch",  durationMs: 7500 },
-  { key: "visual", durationMs: 15000 },
+  { key: "visual", durationMs: 7500 },
 ];
 
 const TopsRotator = () => {
