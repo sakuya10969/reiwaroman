@@ -9,6 +9,7 @@ import NewsCatch from "@/components/news/NewsCatch";
 import Ticket from "@/components/ticket/Ticket"
 import Caution from "@/components/caution/Caution"
 import Last from "@/components/last/Last"
+import Stage from "@/assets/Stage.png"
 
 export default function Main() {
   return (
@@ -54,9 +55,14 @@ export default function Main() {
         <Goods />
       </section>*/}
 
-      {/* Caution */}
+      {/* Ticket */}
       <section id="ticket" className="scroll-mt-[64px]">
         <Ticket />
+      </section>
+
+      {/* Stage */}
+      <section id="stage" className="scroll-mt-[64px]">
+        <img src={Stage} alt="Stage" className="w-full h-full object-cover" />
       </section>
 
       {/* Caution */}
@@ -68,7 +74,6 @@ export default function Main() {
       <section id="last" className="scroll-mt-[64px]">
         <Last />
       </section>
-
     </main>
 
   );
