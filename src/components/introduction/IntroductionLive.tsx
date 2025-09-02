@@ -117,14 +117,7 @@ const IntroductionLive = () => {
       }, 0.5);
 
       const playVenueAnimation = () => {
-        // ★★★ 修正点 ★★★
-        // アニメーション完了時に次のセクションへスクロールする処理を削除し、
-        // bodyのoverflowを元に戻す処理のみ残す
-        const venueTl = gsap.timeline({
-          onComplete: () => {
-            document.body.style.overflow = '';
-          }
-        });
+        const venueTl = gsap.timeline();
 
         venueTl.to([yoko, hama], {
           y: 0,
@@ -155,7 +148,6 @@ const IntroductionLive = () => {
         end: "bottom bottom-=1",
         pin: container,
         onLeave: (self) => {
-          document.body.style.overflow = 'hidden';
           gsap.to(window, {
             scrollTo: { y: self.end, autoKill: false },
             duration: 0.01,
@@ -173,14 +165,11 @@ const IntroductionLive = () => {
 
     }, wrapper);
 
-    return () => {
-      document.body.style.overflow = '';
-      ctx?.revert();
-    };
+    return () => ctx?.revert();
   }, []);
 
   return (
-    <div ref={wrapperRef} id="introduction-live" className="w-full h-[350vh] relative">
+    <div ref={wrapperRef} id="introduction-live" className="w-full h-[350svh] relative">
       <div ref={containerRef} className="w-full h-screen relative overflow-hidden">
         <div className="relative w-full h-full text-white" style={{ zIndex: 2 }}>
           <div
