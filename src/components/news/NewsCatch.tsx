@@ -7,8 +7,7 @@ import reiwa6_blackwhite from "@/assets/IntroductionVenue_NewsCatch.jpg";
 import NewsRow from "@/components/news/NewsRow";
 import { NEWS } from "@/constants";
 import type { NewsCatchProps, NewsListProps } from "@/types";
-// ★★★ ステップ2-1：CSSモジュールをインポート ★★★
-import styles from "./NewsCatch.module.css";
+import styles from "@/components/news/NewsCatch.module.css";
 
 gsap.registerPlugin(ScrollTrigger);
 
