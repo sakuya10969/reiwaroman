@@ -2,7 +2,6 @@ import { useLayoutEffect, useRef } from "react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
-// (import部分は変更なし)
 import reiwa6_blackwhite from "@/assets/IntroductionVenue_NewsCatch.jpg";
 import NewsRow from "@/components/news/NewsRow";
 import { NEWS } from "@/constants";
