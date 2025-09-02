@@ -101,7 +101,7 @@ const Caution = ({ badgeText = "CAUTION" }: CautionProps) => {
               return (
                 <li key={i} className="list-none mb-2" style={{ fontFamily: '"momochidori", serif' }}>
                   <p>
-                    ＜{b.label}＞{" "}
+                    {b.label}{"　"}
                     <a
                       href={b.href}
                       target="_blank"

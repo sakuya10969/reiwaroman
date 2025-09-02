@@ -21,11 +21,15 @@ export const toBlocks = (lines: string[]): Block[] => {
       continue;
     }
 
-    // ＜ラベル＞ URL
-    const linkMatch = raw.match(/^＜(.+?)＞\s*(https?:\/\/\S+)/);
-    if (linkMatch) {
-      out.push({ kind: "link", label: linkMatch[1], href: linkMatch[2] });
-      continue;
+    // httpsが含まれていればリンクとして処理
+    if (raw.includes("https://")) {
+      const urlMatch = raw.match(/(https?:\/\/\S+)/);
+      if (urlMatch) {
+        const url = urlMatch[1];
+        const label = raw.replace(url, "").trim();
+        out.push({ kind: "link", label: label || url, href: url });
+        continue;
+      }
     }
 
     // 小見出し → 直後の「・」を束ねて sublist に
@@ -44,8 +48,6 @@ export const toBlocks = (lines: string[]): Block[] => {
     }
 
     // 通常の注意行（先頭の ※ は描画側で付けるため除去）
-    // out.push({ kind: "note", text: raw });
-
     out.push({ kind: "note", text: raw.replace(/^※\s*/, "") });
   }
   return out;
