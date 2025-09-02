@@ -1,6 +1,7 @@
 import type { HeaderTheme } from "@/types";
 import type { NavItem } from "@/types";
 import type { NewsItem } from "@/types";
+import type { TicketPlan } from "@/types";
 
 export const NAV: NavItem[] = [
   { label: "TOPS",          href: "#tops",         sectionIds: ["tops"] },
@@ -118,3 +119,29 @@ export const CAUTION_CONTENTS: string[] = [
 ];
 
 export const TICKET_URL: string = "https://eplus.jp/rereiwaroman/";
+
+export const TICKET_PLANS: TicketPlan[] = [
+  {
+    name: "SSロマン",
+    price: "¥100,000",
+    note: "※アリーナ前方確約",
+    perks: [
+      "リハーサル観覧パス",
+      "お見送り＆写真撮影",
+      "撮りおろし限定アクスタ",
+      "プレミアムステッカー",
+      "ロマンフィギュア",
+      "ロマンデザインTシャツ",
+      "RE:IWAROMANオリジナルタオル",
+      "RE:IWAROMANオリジナルキーホルダー",
+    ],
+  },
+  {
+    name: "Sロマン",
+    price: "¥30,000",
+    note: "※アリーナ確約",
+    perks: ["リハーサル観覧パス", "撮りおろし限定アクスタ", "プレミアムステッカー", "ロマンデザインTシャツ"],
+  },
+  { name: "Aロマン", price: "¥15,000", note: "※ロアーミドルスタンド", perks: [] },
+  { name: "ロマン", price: "¥10,000", note: "※アッパースタンド", perks: [] },
+];

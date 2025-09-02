@@ -73,3 +73,10 @@ export interface LastProps {
   backgroundImageUrl?: string;
   FooterText?: string;
 }
+
+export interface TicketPlan {
+  name: string;
+  price: string;
+  note?: string;
+  perks?: string[];
+};
