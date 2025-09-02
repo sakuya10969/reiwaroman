@@ -1,14 +1,15 @@
 import { useEffect, useLayoutEffect, useRef, useState } from "react";
 
 import type { Slide, TopsVisualProps } from "@/types";
-import reiwa2 from "@/assets/top1_IntroductionCatch1.jpg";
-import reiwa3 from "@/assets/top2.jpg";
+import reiwa2 from "@/assets/top1.jpg";
+// import reiwa2 from "@/assets/top1_IntroductionCatch1.jpg";
+// import reiwa3 from "@/assets/top2.jpg";
 import tops_visual_1 from "@/assets/top1_mobile.jpg";
-import tops_visual_2 from "@/assets/top2_mobile.jpg";
+// import tops_visual_2 from "@/assets/top2_mobile.jpg";
 
 const slides: Slide[] = [
   { srcDesktop: reiwa2, srcMobile: tops_visual_1, alt: "Top Visual" },
-  { srcDesktop: reiwa3, srcMobile: tops_visual_2, alt: "Top Performance" },
+  // { srcDesktop: reiwa3, srcMobile: tops_visual_2, alt: "Top Performance" },
 ];
 
 const TopsVisual = ({ resetSignal = 0, active = true }: TopsVisualProps) => {
@@ -37,7 +38,7 @@ const TopsVisual = ({ resetSignal = 0, active = true }: TopsVisualProps) => {
     timeoutRef.current = window.setTimeout(() => {
       setIndex(1);
       timeoutRef.current = null;
-    }, 7500);
+    }, 3000);
     return () => {
       if (timeoutRef.current) window.clearTimeout(timeoutRef.current);
       timeoutRef.current = null;
@@ -66,7 +67,7 @@ const TopsVisual = ({ resetSignal = 0, active = true }: TopsVisualProps) => {
                 src={s.srcDesktop}
                 alt={s.alt}
                 className={[
-                  "w-full h-full transition-opacity duration-1500 ease-linear object-cover",
+                  "w-full h-full transition-opacity duration-1000 ease-linear object-cover",
                   i === index ? "opacity-100" : "opacity-0",
                 ].join(" ")}
               />

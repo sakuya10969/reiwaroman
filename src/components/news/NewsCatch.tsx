@@ -69,7 +69,7 @@ const NewsCatch = ({
       });
       textTl.to(badge, { y: 0, opacity: 1, ease: "power2.out", duration: 0.8 });
       textTl.to(title.children, { y: 0, opacity: 1, stagger: 0.2, ease: "power2.out", duration: 0.8 }, "-=0.6");
-
+      
       const playHoldAnimation = () => {
         document.body.style.overflow = 'hidden';
         const holdTl = gsap.timeline({

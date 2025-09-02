@@ -101,7 +101,7 @@ const IntroductionLive = () => {
 
       scrubTl.to([title, content], {
         opacity: 0,
-        duration: 0.8,
+        duration: 1.0,
         ease: "power2.inOut"
       }, 0);
 
@@ -212,12 +212,12 @@ const IntroductionLive = () => {
           >
             <div className="absolute inset-0 bg-black/55" aria-hidden />
           </div>
-          <div className="relative z-10 w-full h-full px-6 lg:px-10 lg:pr-16 py-4 md:py-16 lg:py-24 flex items-center md:items-center md:justify-end">
-            <div className="flex md:flex-row flex-col items-start md:justify-end gap-4 md:gap-6 lg:gap-10 text-left w-full md:w-[50vw] mr-10">
-              <div ref={contentRef} className="order-2 md:order-1 flex-shrink-0 self-start mt-3 md:mt-0">
+          <div className="relative z-10 w-full h-full px-6 lg:px-10 lg:pr-16 py-4 pt-0 md:py-16 lg:py-24 flex items-center md:items-center md:justify-end">
+            <div className="flex md:flex-row flex-col items-start justify-end gap-0 md:gap-6 lg:gap-10 text-left w-full md:w-[50vw] mr-10 pt-30">
+              <div ref={contentRef} className="order-2 md:order-1 flex-shrink-0 self-start -mt-30 md:mt-0">
                 <div
                   className="min-w-[40vw] md:w-[45vw] lg:w-[50vw] text-xs md:text-sm text-white/92 md:[writing-mode:vertical-rl] md:[text-orientation:upright] leading-relaxed lg:leading-10 lg:tracking-wider"
-                  style={{ fontFamily: '"momochidori", serif'  , fontWeight:500}}
+                  style={{ fontFamily: '"momochidori", serif', fontWeight: 500 }}
                 >
                   {INTRODUCTION_LIVE_CONTENTS.map((content, i) => (
                     <p key={i}>
@@ -227,12 +227,12 @@ const IntroductionLive = () => {
                   ))}
                 </div>
               </div>
-              <div className="order-1 md:order-2 flex-shrink-0 self-start mt-8 md:mt-0">
-                <div ref={titleRef} className="flex flex-col md:flex-row-reverse items-start md:gap-3 lg:gap-4">
+              <div className="order-1 flex-shrink-0 self-start mt-8 w-full md:order-2 md:mt-0 md:w-auto">
+                <div ref={titleRef} className="flex flex-col flex-row-reverse items-start md:gap-3 lg:gap-4">
                   {INTRODUCTION_LIVE_TITLE_LINES.map((_line, i) => (
                     <h1
                       key={i}
-                      className="font-extrabold text-white text-4xl md:text-5xl lg:text-7xl md:[writing-mode:vertical-rl] md:[text-orientation:upright] md: scale-y-80 origin-top whitespace-nowrap"
+                      className="font-extrabold text-white text-4xl md:text-5xl lg:text-7xl [writing-mode:vertical-rl] [text-orientation:upright] scale-y-[0.8] origin-top whitespace-nowrap"
                       style={{ fontFamily: '"dnp-shuei-shogomincho-std", serif', fontWeight: 900 }}
                     >
                       {/* JSで分割するため空にしておく */}

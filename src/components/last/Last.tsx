@@ -4,7 +4,7 @@ import type { LastProps } from "@/types";
 
 const Last = ({
   backgroundImageUrl = last,
-  FooterText = "RE:IWAROMAN作成委員会",
+  FooterText = "RE:IWAROMAN製作委員会",
 }: LastProps) => {
   return (
     <div className="relative w-full min-h-screen md:min-h-[180vh] flex items-center">

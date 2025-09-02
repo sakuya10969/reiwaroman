@@ -132,7 +132,15 @@ const Header = ({ nav = NAV, ticketHref = TICKET_URL }: HeaderProps) => {
           {/* モバイルメニューボタン */}
           <button
             onClick={toggleMobileMenu}
-            className="md:hidden pt-2 pr-2 transition-colors hover:text-gray-300 relative z-50"
+            className={[
+              "md:hidden pt-2 pr-2 relative z-50",
+              "text-white",
+              "!bg-transparent hover:!bg-transparent",
+              "focus:!bg-transparent active:!bg-transparent",
+              "appearance-none border-0 outline-none", 
+              "[-webkit-tap-highlight-color:transparent]" 
+            ].join(" ")}
+            style={{ backgroundColor: "transparent" }} 
             aria-label="メニューを開く"
           >
             {isMobileMenuOpen ? <X size={32} /> : <Menu size={32} />}

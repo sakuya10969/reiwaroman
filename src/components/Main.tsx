@@ -6,6 +6,7 @@ import IntroductionVideo from "@/components/introduction/IntroductionVideo";
 import NewsCatch from "@/components/news/NewsCatch";
 // import Cast from "@/components/cast/Cast"
 // import Goods from "@/components/goods/Goods"
+import Ticket from "@/components/ticket/Ticket"
 import Caution from "@/components/caution/Caution"
 import Last from "@/components/last/Last"
 
@@ -52,6 +53,11 @@ export default function Main() {
       {/* <section id="goods" className="scroll-mt-[64px]">
         <Goods />
       </section>*/}
+
+      {/* Caution */}
+      <section id="ticket" className="scroll-mt-[64px]">
+        <Ticket />
+      </section>
 
       {/* Caution */}
       <section id="caution" className="scroll-mt-[64px]">
