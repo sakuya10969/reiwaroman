@@ -93,7 +93,7 @@
 //         {/* 上部のバッジ */}
 //         <div ref={badgeRef} className="flex justify-center mb-10">
 //           <div
-//             className="text-sm text-white/90 md:text-base font-bold transform scale-x-150"
+//             className="text-sm text-white/90 md:text-base font-bold transform scale-x-140"
 //             style={{ fontFamily: 'Prompt, sans-serif' }}
 //           >
 //             <span className="inline-block uppercase underline underline-offset-4">

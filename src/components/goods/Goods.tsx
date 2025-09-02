@@ -133,7 +133,7 @@ const Goods = ({
         上部のバッジ
         <div ref={badgeRef} className="flex justify-center mb-8">
           <div
-            className="text-sm text-white md:text-base font-bold scale-x-150"
+            className="text-sm text-white md:text-base font-bold scale-x-140"
             style={{ fontFamily: 'Prompt, sans-serif' }}
           >
             <span className="inline-block font-bold uppercase after:content-[''] after:absolute after:left-0 after:right-0

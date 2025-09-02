@@ -17,7 +17,7 @@ const TopsCatch = () => {
           >
             {TOPS_CATCH_TITLE}
           </h1>
-          <h3 className = "text-sm md:text-xl mt-4 scale-x-150" style={{ fontFamily: "Prompt, sans-serif", fontWeight: 700 }}>{TOPS_CATCH_SUBTITLE}</h3>
+          <h3 className = "text-sm md:text-xl mt-4 scale-x-140" style={{ fontFamily: "Prompt, sans-serif", fontWeight: 700 }}>{TOPS_CATCH_SUBTITLE}</h3>
         </div>
       </div>
     </div>

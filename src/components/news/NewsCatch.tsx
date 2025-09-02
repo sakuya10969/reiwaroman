@@ -125,13 +125,13 @@ const NewsCatch = ({
         <div ref={catchContentRef} className="absolute inset-0 w-full h-full flex items-center justify-center" style={{ zIndex: 2 }}>
           <div className="w-70 h-70 md:w-80 md:h-80 lg:w-96 lg:h-96 flex flex-col items-center justify-between text-center px-6 py-16">
             <div ref={badgeRef} className="text-sm md:text-lg lg:text-xl text-white/90 flex-shrink-0 relative -top-2">
-              <p className="inline-block font-bold scale-x-150 origin-center after:content-[''] after:absolute after:left-0 after:right-0 after:-bottom-0 after:h-[1.5px] after:bg-current" style={{ fontFamily: 'Prompt, sans-serif' }}>
+              <p className="inline-block font-bold scale-x-140 origin-center after:content-[''] after:absolute after:left-0 after:right-0 after:-bottom-0 after:h-[1.5px] after:bg-current" style={{ fontFamily: 'Prompt, sans-serif' }}>
                 {badgeText}
               </p>
             </div>
             <div ref={titleRef} className="leading-none flex-grow flex flex-col items-center justify-center">
               {titleLines.map((line, idx) => (
-                <h1 key={idx} className="block font-bold uppercase text-white text-4xl md:text-5xl scale-x-150 origin-center" style={{ fontFamily: 'Prompt, sans-serif' }}>
+                <h1 key={idx} className="block font-bold uppercase text-white text-4xl md:text-5xl scale-x-140 origin-center" style={{ fontFamily: 'Prompt, sans-serif' }}>
                   {line}
                 </h1>
               ))}
@@ -141,7 +141,7 @@ const NewsCatch = ({
         <div ref={listContentRef} className={`absolute inset-0 w-full h-full flex items-center justify-center text-white pointer-events-none ${bgColorClass}`} style={{ zIndex: 3 }}>
           <div className={`relative mx-auto max-w-[80vw] w-full h-full flex flex-col justify-center px-4 pointer-events-auto ${pyClass}`}>
             <div className="w-full text-center">
-              <h1 ref={listHeadingRef} className="text-sm md:text-base font-bold inline-block relative scale-x-150 origin-center after:content-[''] after:absolute after:left-0 after:right-0 after:-bottom-0 after:h-[1.5px] after:bg-current" style={{ fontFamily: "Prompt, sans-serif" }}>
+              <h1 ref={listHeadingRef} className="text-sm md:text-base font-bold inline-block relative scale-x-140 origin-center after:content-[''] after:absolute after:left-0 after:right-0 after:-bottom-0 after:h-[1.5px] after:bg-current" style={{ fontFamily: "Prompt, sans-serif" }}>
                 NEWS
               </h1>
             </div>

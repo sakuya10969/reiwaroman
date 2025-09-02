@@ -66,7 +66,7 @@ const Caution = ({ badgeText = "CAUTION" }: CautionProps) => {
         {/* バッジ */}
         <div ref={badgeRef} className="flex justify-center mb-6">
           <div
-            className="text-sm text-white md:text-base font-bold transform scale-x-150"
+            className="text-sm text-white md:text-base font-bold transform scale-x-140"
             style={{ fontFamily: 'Prompt, sans-serif' }}
           >
             <p className="relative inline-block uppercase after:content-[''] after:absolute after:left-0 after:right-0 after:-bottom-0 after:h-[1.5px] after:bg-current">

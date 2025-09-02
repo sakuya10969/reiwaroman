@@ -166,7 +166,7 @@ const Header = ({ nav = NAV, ticketHref = TICKET_URL }: HeaderProps) => {
                 href={item.href}
                 onClick={onNavClick}
                 className={[
-                  "block py-2 text-base font-bold transition-colors scale-x-150",
+                  "block py-2 text-base font-bold transition-colors scale-x-140",
                   activeColorClass || linkInactiveColor,
                 ].join(" ")}
                 style={{ fontFamily: "Prompt, sans-serif" }}

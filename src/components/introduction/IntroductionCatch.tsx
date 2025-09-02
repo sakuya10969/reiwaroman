@@ -112,14 +112,14 @@ const IntroductionCatch = ({}: IntroductionCatchProps) => {
         {/* 小見出し */}
         <h2
           ref={subtitleRef}
-          className="relative inline-block font-bold uppercase scale-x-150 after:content-[''] after:absolute after:left-0 after:right-0 after:-bottom-0 after:h-[1.5px] after:bg-current"
+          className="relative inline-block font-bold uppercase scale-x-140 after:content-[''] after:absolute after:left-0 after:right-0 after:-bottom-0 after:h-[1.5px] after:bg-current"
           style={{ fontFamily: 'Prompt, sans-serif' }}
         >
           Introduction
         </h2>
 
         {/* メイン見出し */}
-        <h1 className="mt-8 sm:mt-10 md:mt-15 text-3xl md:text-5xl leading-[0.9] md:leading-[1.05] font-extrabold scale-x-150 tracking-[0.03em] relative" style={{ fontFamily: 'Prompt, sans-serif', fontWeight: 700 }}>
+        <h1 className="mt-8 sm:mt-10 md:mt-15 text-3xl md:text-5xl leading-[0.9] md:leading-[1.05] font-extrabold scale-x-140 tracking-[0.03em] relative" style={{ fontFamily: 'Prompt, sans-serif', fontWeight: 700 }}>
           <span ref={rePrefixRef} className="inline-block">RE:</span>
           <span ref={iwaromaRef} className="inline-block">IWAROMAN</span>
         </h1>
