@@ -40,14 +40,14 @@ const Caution = ({ badgeText = "CAUTION" }: CautionProps) => {
         .to(listItems, {
           y: 0,
           opacity: 1,
-          duration: 0.8,
+          duration: 0.4,
           ease: "power2.out",
           stagger: 0.15,
         }, "-=0.5");
     }, container);
 
     return () => ctx.revert();
-  }, []);            // 直後の「・」箇条書き
+  }, []);
 
   const blocks = toBlocks(CAUTION_CONTENTS);
 

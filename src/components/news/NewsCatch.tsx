@@ -41,17 +41,15 @@ const NewsCatch = ({
     const listHeading = listHeadingRef.current!;
     const listItems = listItemsRef.current!;
 
-    const computeCoverScale = () => {
-      const vw = window.innerWidth;
-      const vh = window.innerHeight;
-      const diag = Math.hypot(vw, vh);
-      const r = circle.getBoundingClientRect();
-      const d = Math.max(r.width, r.height);
-      return (diag / d) * 1.1;
-    };
+    // ▼▼▼▼▼ 変更点：computeCoverScale関数は不要になったため削除 ▼▼▼▼▼
+    // const computeCoverScale = () => { ... };
+    // ▲▲▲▲▲ 変更点 ▲▲▲▲▲
 
     const ctx = gsap.context(() => {
-      gsap.set(circle, { transformOrigin: "50% 50%", willChange: "transform", force3D: true });
+      // ▼▼▼▼▼ 変更点：willChangeの対象をclip-pathに変更 ▼▼▼▼▼
+      gsap.set(circle, { willChange: "clip-path" });
+      // ▲▲▲▲▲ 変更点 ▲▲▲▲▲
+
       gsap.set(badge, { y: -50, opacity: 0 });
       gsap.set(title.children, { y: -50, opacity: 0 });
       gsap.set(listContent, { autoAlpha: 0 });
@@ -67,7 +65,7 @@ const NewsCatch = ({
       });
       textTl.to(badge, { y: 0, opacity: 1, ease: "power2.out", duration: 0.8 });
       textTl.to(title.children, { y: 0, opacity: 1, stagger: 0.2, ease: "power2.out", duration: 0.8 }, "-=0.6");
-      
+
       const playHoldAnimation = () => {
         document.body.style.overflow = 'hidden';
         const holdTl = gsap.timeline({
@@ -89,14 +87,27 @@ const NewsCatch = ({
           scrub: 1,
         },
       });
-      scrubTl.to(circle, { scale: computeCoverScale, ease: "none" })
-             .to(catchContent, { autoAlpha: 0, ease: "none" }, "<");
+
+      // ▼▼▼▼▼ 変更点：scaleの代わりにclipPathをアニメーション ▼▼▼▼▼
+      scrubTl.to(circle, {
+        clipPath: "circle(75% at 50% 50%)",
+        ease: "none"
+      })
+      .to(catchContent, { autoAlpha: 0, ease: "none" }, "<");
+
 
       ScrollTrigger.create({
         trigger: wrapper,
         start: "top top",
-        end: "bottom bottom-=1",
+        end: "bottom bottom",
         pin: container,
+
+        snap: {
+          snapTo: 1,
+          duration: 0.5,
+          ease: "power2.inOut",
+        },
+
         onLeave: () => playHoldAnimation(),
         onEnterBack: () => {
           gsap.set(listContent, { autoAlpha: 0 });
@@ -119,7 +130,17 @@ const NewsCatch = ({
         <div className="absolute inset-0 w-full h-full">
           <div className="absolute inset-0 bg-black bg-center bg-cover -z-10" style={{ backgroundImage: `url(${backgroundImageUrl})`, filter: "grayscale(100%)" }} />
           <div className="absolute inset-0 bg-black/70 -z-10" />
-          <div ref={circleRef} className="absolute top-1/2 left-1/2 w-70 h-70 md:w-80 md:h-80 lg:w-96 lg:h-96 -translate-x-1/2 -translate-y-1/2 rounded-full bg-red-900 origin-center" style={{ zIndex: 1 }} />
+
+          {/* ▼▼▼▼▼ 変更点：このdivを全画面表示＋clip-pathに変更 ▼▼▼▼▼ */}
+          <div
+            ref={circleRef}
+            className={`absolute inset-0 w-full h-full ${bgColorClass}`}
+            style={{
+              zIndex: 1,
+              clipPath: "circle(15% at 50% 50%)"
+            }}
+          />
+
         </div>
         <div ref={catchContentRef} className="absolute inset-0 w-full h-full flex items-center justify-center" style={{ zIndex: 2 }}>
           <div className="w-70 h-70 md:w-80 md:h-80 lg:w-96 lg:h-96 flex flex-col items-center justify-between text-center px-6 py-16">
@@ -152,7 +173,6 @@ const NewsCatch = ({
           </div>
 
           <div className="absolute bottom-2 left-0 w-full overflow-hidden sm:hidden">
-            {/* ★★★ ステップ2-2：クラス名を修正 ★★★ */}
             <p ref={marqueeRef} className={`${styles.marqueeContent} text-xs text-white`}>
               <span className="inline-block mr-12">
                 NEW NEWS WILL BE UPDATED AS IT BECOMES AVAILABLE.

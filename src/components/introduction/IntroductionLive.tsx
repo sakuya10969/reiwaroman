@@ -34,30 +34,19 @@ const IntroductionLive = () => {
     const yokohama = yokohamaRef.current!;
     const hama = hamaRef.current!;
 
-    if (title) {
-      Array.from(title.children).forEach((lineElement, index) => {
-        const text = INTRODUCTION_LIVE_TITLE_LINES[index];
-        lineElement.innerHTML = "";
-        text.split("").forEach((char) => {
-          const span = document.createElement("span");
-          span.textContent = char;
-          span.className = "inline-block";
-          lineElement.appendChild(span);
-        });
-      });
-    }
-    if (yokohama) {
-      const text = "YOKOHAMA";
-      yokohama.innerHTML = "";
-      text.split("").forEach((char) => {
-        const span = document.createElement("span");
-        span.textContent = char;
-        span.className = "inline-block";
-        yokohama.appendChild(span);
-      });
-    }
-
     const ctx = gsap.context(() => {
+      const animatedElements = [
+        ...Array.from(content.querySelectorAll('p')),
+        ...Array.from(title.querySelectorAll('span')),
+        venueBackground,
+        yoko, hama, karena, yokohama,
+        venueContent,
+        title, content
+      ];
+
+      gsap.set(animatedElements, { willChange: "transform, opacity" });
+
+
       const contentLines = content.querySelectorAll('p');
       gsap.set(contentLines, { y: -100, opacity: 0 });
 
@@ -117,12 +106,20 @@ const IntroductionLive = () => {
       }, 0.5);
 
       const playVenueAnimation = () => {
-        const venueTl = gsap.timeline();
+        const venueTl = gsap.timeline({
+
+          onStart: () => {
+            gsap.set("body", { overflow: "hidden" });
+          },
+          onComplete: () => {
+            gsap.set("body", { overflow: "auto" });
+          }
+        });
 
         venueTl.to([yoko, hama], {
           y: 0,
           opacity: 1,
-          duration: 0.6,
+          duration: 0.2,
           stagger: 0.1,
           ease: "power4.out",
         })
@@ -133,7 +130,7 @@ const IntroductionLive = () => {
         venueTl.to([karena, yokohama], {
           x: 0,
           opacity: 1,
-          duration: 0.6,
+          duration: 0.2,
           stagger: 0.1,
           ease: "power4.out",
         }, "-=0.4")
@@ -145,17 +142,19 @@ const IntroductionLive = () => {
       ScrollTrigger.create({
         trigger: wrapper,
         start: "top top",
-        end: "bottom bottom-=1",
+        end: "bottom bottom",
         pin: container,
-        onLeave: (self) => {
-          gsap.to(window, {
-            scrollTo: { y: self.end, autoKill: false },
-            duration: 0.01,
-            ease: "power1.inOut",
-          });
-          playVenueAnimation();
+        snap: {
+          snapTo: 1,
+          duration: 0.7,
+          ease: "power2.inOut",
         },
-        onEnterBack: () => {
+        onLeave: (self) => {
+          if (self.direction === 1) {
+            playVenueAnimation();
+          }
+        },
+        onEnter: () => {
           gsap.set(venueContent, { autoAlpha: 0 });
           gsap.set([yoko, hama], { y: -300, opacity: 0, rotation: 0 });
           gsap.set([karena, yokohama], { x: -300, opacity: 0, rotation: 0 });
@@ -218,13 +217,17 @@ const IntroductionLive = () => {
               </div>
               <div className="order-1 flex-shrink-0 self-start mt-8 w-full md:order-2 md:mt-0 md:w-auto">
                 <div ref={titleRef} className="flex flex-col flex-row-reverse items-start md:gap-3 lg:gap-4">
-                  {INTRODUCTION_LIVE_TITLE_LINES.map((_line, i) => (
+                  {INTRODUCTION_LIVE_TITLE_LINES.map((line, i) => (
                     <h1
                       key={i}
                       className="font-extrabold text-white text-4xl md:text-5xl lg:text-7xl [writing-mode:vertical-rl] [text-orientation:upright] scale-y-[0.8] origin-top whitespace-nowrap"
                       style={{ fontFamily: '"dnp-shuei-shogomincho-std", serif', fontWeight: 900 }}
                     >
-                      {/* JSで分割するため空にしておく */}
+                      {line.split('').map((char, j) => (
+                        <span key={j} className="inline-block">
+                          {char}
+                        </span>
+                      ))}
                     </h1>
                   ))}
                 </div>
@@ -240,7 +243,13 @@ const IntroductionLive = () => {
               </p>
               <p ref={karenaRef} className="inline-block text-[clamp(36px,10vw,100px)] relative z-0 leading-none scale-x-120 sm:scale-x-140 origin-center" style={{ fontFamily: 'Prompt, sans-serif' }}>K ARENA</p>
               <br />
-              <p ref={yokohamaRef} className="inline-block text-[clamp(36px,10vw,100px)] leading-none scale-x-120 sm:scale-x-140 origin-center" style={{ fontFamily: 'Prompt, sans-serif' }}>YOKOHAMA</p>
+              <p ref={yokohamaRef} className="inline-block text-[clamp(36px,10vw,100px)] leading-none scale-x-120 sm:scale-x-140 origin-center" style={{ fontFamily: 'Prompt, sans-serif' }}>
+                {"YOKOHAMA".split('').map((char, i) => (
+                  <span key={i} className="inline-block">
+                    {char}
+                  </span>
+                ))}
+              </p>
               <p ref={hamaRef} className="block text-red-800 text-[clamp(48px,10vw,110px)] opacity-70 relative -top-5 md:-top-12 scale-x-110 sm:scale-x-130 origin-center" style={{ fontFamily: '"dnp-shuei-shogomincho-std", serif' }}>
                 浜
               </p>
