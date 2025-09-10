@@ -81,9 +81,14 @@ export interface TicketPlan {
   perks?: string[];
 };
 
+export interface ContactProps {
+  badgeText?: string;
+};
+
+
 export type Block =
     | { kind: "note"; text: string }                     // 先頭「※」系
     | { kind: "separator" }                              // 罫線
     | { kind: "link"; label: string; href: string }      // ＜ラベル＞ URL
     | { kind: "subheading"; text: string }               // ＜車椅子スペースについて＞
-    | { kind: "sublist"; items: string[] }; 
+    | { kind: "sublist"; items: string[] }

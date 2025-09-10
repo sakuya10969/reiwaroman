@@ -144,3 +144,15 @@ export const TICKET_PLANS: TicketPlan[] = [
   { name: "Aロマン", price: "¥15,000", note: "※ロアーミドルスタンド", perks: [] },
   { name: "ロマン", price: "¥10,000", note: "※アッパースタンド", perks: [] },
 ];
+
+export const CONTACT_CONTENTS = [
+  {
+    comment: [
+      "「RE:IWAROMAN」はコンセプト“Re”の通り、再スタート、再チャレンジする令和ロマンの挑戦の物語です。",
+      "「RE:IWAROMAN」とともに新たなチャレンジをしたい企業様や商品などございましたらぜひご連絡ください。",
+      "コラボやタイアップ絶賛募集。",
+      "本イベントの企画の趣旨と合わない場合にはお返事できな場合もございますのであらかじめご了承ください。"
+    ],
+    mailAddress : "rereiwaroman@gmail.com"
+  }
+];

@@ -7,9 +7,11 @@ import NewsCatch from "@/components/news/NewsCatch";
 // import Cast from "@/components/cast/Cast"
 // import Goods from "@/components/goods/Goods"
 import Ticket from "@/components/ticket/Ticket"
+import Stage from "@/assets/Stage.png"
+import Contact from "@/components/contact/Contact"
 import Caution from "@/components/caution/Caution"
 import Last from "@/components/last/Last"
-import Stage from "@/assets/Stage.png"
+
 
 export default function Main() {
   return (
@@ -63,6 +65,11 @@ export default function Main() {
       {/* Stage */}
       <section id="stage" className="scroll-mt-[64px]">
         <img src={Stage} alt="Stage" className="w-full h-auto max-h-screen object-contain bg-red-900" />
+      </section>
+
+      {/* Contact */}
+      <section id="contact" className="scroll-mt-[64px]">
+        <Contact />
       </section>
 
       {/* Caution */}
