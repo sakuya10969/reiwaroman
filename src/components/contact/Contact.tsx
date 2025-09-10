@@ -77,7 +77,7 @@ const Contact = ({ badgeText = "CANTACT" }: ContactProps) => {
         {/* 注意事項（拡張描画） */}
         <ul
           ref={listRef}
-          className="flex flex-col text-center mt-4 text-xs md:text-sm leading-relaxed scale-y-100 text-white w-[100vw] max-w-2xl md:max-w-4xl lg:max-w-5xl mb-2"
+          className="flex flex-col text-center mt-4 text-xs md:text-sm leading-relaxed scale-y-100 text-white w-[80vw] max-w-2xl md:max-w-4xl lg:max-w-5xl mb-2"
         >
           {blocks.map((b, i) => {
             if (b.kind === "note") {
