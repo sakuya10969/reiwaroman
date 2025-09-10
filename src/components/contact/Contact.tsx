@@ -49,7 +49,7 @@ const Contact = ({ badgeText = "CANTACT" }: ContactProps) => {
     return () => ctx.revert();
   }, []);
 
-  const blocks = toBlocks(CONTACT_CONTENTS[0].comment);
+  const blocks = toBlocks(CONTACT_CONTENTS);
 
   return (
     <div ref={containerRef} id="contact" className="relative w-full isolate">
@@ -77,14 +77,14 @@ const Contact = ({ badgeText = "CANTACT" }: ContactProps) => {
         {/* 注意事項（拡張描画） */}
         <ul
           ref={listRef}
-          className="flex flex-col text-center mt-4 text-xs md:text-sm leading-relaxed scale-y-100 text-white w-[80vw] max-w-2xl md:max-w-4xl lg:max-w-5xl mb-2"
+          className="flex flex-col text-center mt-4 text-xs md:text-sm leading-relaxed scale-y-100 text-white w-[85vw] max-w-2xl md:max-w-4xl lg:max-w-5xl mb-2"
         >
           {blocks.map((b, i) => {
             if (b.kind === "note") {
               return (
                 <li
                   key={i}
-                  className={`relative mb-2 ${i === 3 ? "pl-5" : ""}`}
+                  className={`relative mb-2 ${i === 3 ? "pl-5 pb-3" : ""}`}
                   style={{ fontFamily: '"momochidori", serif' }}
                 >
                   {i === 3 && <span className="mr-2">※</span>}
@@ -94,9 +94,6 @@ const Contact = ({ badgeText = "CANTACT" }: ContactProps) => {
             }
           })}
         </ul>
-        <div className = "w-[100vw] flex justify-center">
-          <p className = "text-xs md:text-sm leading-relaxed scale-y-100 text-white" style={{ fontFamily: '"momochidori", serif' }}>{CONTACT_CONTENTS[0].mailAddress}</p>
-        </div>
       </div>
     </div>
   );
