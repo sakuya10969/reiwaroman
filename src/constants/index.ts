@@ -7,6 +7,7 @@ export const NAV: NavItem[] = [
   { label: "TOPS",          href: "#tops",         sectionIds: ["tops"] },
   { label: "INTRODUCTION",  href: "#introduction-catch", sectionIds: ["introduction-catch", "introduction-live", "introduction-venue"] },
   { label: "NEWS",          href: "#news-catch",        sectionIds: ["news-catch", "news-list"] },
+  { label: "CONTACT",       href: "#contact", sectionIds:["contact"]},
   // { label: "CAST",          href: "#cast",              sectionIds: ["cast"] },
   // { label: "GOODS",         href: "#goods",             sectionIds: ["goods"] },
 ];
@@ -31,6 +32,7 @@ export const SECTION_THEMES: Record<string, HeaderTheme> = {
   "cast": "dark",
   "goods": "dark",
   "caution": "dark",
+  "contact": "red",
   "last": "dark",
 };
 

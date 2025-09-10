@@ -67,14 +67,14 @@ export default function Main() {
         <img src={Stage} alt="Stage" className="w-full h-auto max-h-screen object-contain bg-red-900" />
       </section>
 
-      {/* Contact */}
-      <section id="contact" className="scroll-mt-[64px]">
-        <Contact />
-      </section>
-
       {/* Caution */}
       <section id="caution" className="scroll-mt-[64px]">
         <Caution />
+      </section>
+
+      {/* Contact */}
+      <section id="contact" className="scroll-mt-[64px]">
+        <Contact />
       </section>
 
       {/* Last */}

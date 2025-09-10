@@ -55,11 +55,10 @@ const Caution = ({ badgeText = "CAUTION" }: CautionProps) => {
     <div ref={containerRef} id="caution" className="relative w-full isolate lg:min-h-screen">
       {/* 背景 */}
       <div
-        className="absolute inset-0 bg-red-900 -z-20 bg-cover bg-center"
+        className="absolute inset-0 bg-black-900  -z-20 bg-cover bg-center"
         aria-hidden="true"
         style={{ backgroundImage: `url(${reiwa12})` }}
       />
-      <div className="absolute inset-0 bg-red-900/50 -z-18" aria-hidden="true" />
 
       {/* コンテンツ */}
       <div className="max-w-6xl mx-auto py-12 px-4 flex flex-col items-center">
